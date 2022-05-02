@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "node ./build/deploy.js"
   },
   "dependencies": {
     "@vueuse/core": "^7.5.5",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",
+    "shelljs": "^0.8.5",
     "typescript": "^4.4.4",
     "vite": "^2.7.2",
     "vue-tsc": "^0.29.8"
