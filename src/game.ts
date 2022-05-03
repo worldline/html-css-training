@@ -1,4 +1,4 @@
-import {Level, levels} from "./levels";
+import {Chapter2Level, chapter2Levels} from "./chapters/chapter2";
 import {clamp} from "./utils";
 import {createTooltip, hideAllPoppers} from "floating-vue";
 import {nextTick, reactive} from "vue";
@@ -7,7 +7,7 @@ import progress from "./progress";
 export const state = reactive({
     progress: progress,
     currentLevel: 0,
-    level: levels[0], // Holds current level info
+    level: chapter2Levels[0], // Holds current level info
     levelTimeout: 1000, // Delay between levels after completing
     menuOpened: false
 })
@@ -118,7 +118,7 @@ function checkResults(matches: Element[], solutionMatches: Element[]){
 }
 
 export function changeLevel(n: number){
-    state.progress.currentLevel = clamp(n, 1, levels.length)
+    state.progress.currentLevel = clamp(n, 1, chapter2Levels.length)
     hideAllPoppers()
     loadLevel();
     closeMenu();
@@ -126,8 +126,8 @@ export function changeLevel(n: number){
 
 export function loadLevel(){
     // Make sure we don't load a level we don't have
-    state.progress.currentLevel = clamp(state.progress.currentLevel, 1, levels.length)
-    state.level = levels[state.progress.currentLevel-1] as Level;
+    state.progress.currentLevel = clamp(state.progress.currentLevel, 1, chapter2Levels.length)
+    state.level = chapter2Levels[state.progress.currentLevel-1] as Chapter2Level;
     state.progress.save()
     document.querySelector("input")?.focus();
     nextTick(() => addBoardElementsTooltips()).then()

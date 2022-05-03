@@ -1,5 +1,6 @@
-export interface Level {
-    selectorName?: string;
+import {Level} from "./level";
+
+export interface Chapter2Level extends Level {
     doThis: string;
     selector: string;
     syntax?: string;
@@ -9,10 +10,10 @@ export interface Level {
     boardMarkup: string;
 }
 
-export const levels: Level[] = [
+export const chapter2Levels: Chapter2Level[] = [
     {
+        name : "Type Selector",
         helpTitle : "Select elements by their type",
-        selectorName : "Type Selector",
         doThis : "Select the plates",
         selector : "plate",
         syntax : "tagname",
@@ -29,11 +30,11 @@ export const levels: Level[] = [
     `
     },
     {
+        name : "Type Selector",
         doThis : "Select the bento boxes",
         selector : "bento",
         syntax : "tagname",
         helpTitle : "Select elements by their type",
-        selectorName : "Type Selector",
         help : "Selects all elements of a type. Type refers to the type of tag, so <tag>div</tag>, <tag>p</tag> and <tag>ul</tag> are all different element types.",
         examples : [
             '<strong>div</strong> selects all <tag>div</tag> elements.',
@@ -48,9 +49,9 @@ export const levels: Level[] = [
     `
     },
     {
+        name: "ID Selector",
         doThis : "Select the fancy plate",
         selector : "#fancy",
-        selectorName: "ID Selector",
         helpTitle: "Select elements with an ID",
         syntax: "#id",
         help : 'Selects the element with a specific <strong>id</strong>. You can also combine the ID selector with the type selector.',
@@ -65,9 +66,9 @@ export const levels: Level[] = [
     `
     },
     {
+        name: "Class Selector",
         doThis : "Select the small apples",
         selector : ".small",
-        selectorName: "Class Selector",
         helpTitle: "Select elements by their class",
         syntax: ".classname",
         help : 'The class selector selects all elements with that class attribute. Elements can only have one ID, but many classes.',
@@ -84,6 +85,7 @@ export const levels: Level[] = [
     `
     },
     {
+        name: "Class Selector #2",
         doThis : "Select the small oranges",
         selector : "orange.small",
         helpTitle: "Combine the Class Selector",
@@ -107,8 +109,8 @@ export const levels: Level[] = [
     </plate>`
     },
     {
+        name : "Descendant Selector",
         helpTitle: "Select an element inside another element",
-        selectorName : "Descendant Selector",
         doThis : "Select the apple on the plate",
         selector : "plate apple",
         syntax: "A B",
@@ -126,6 +128,7 @@ export const levels: Level[] = [
     `
     },
     {
+        name: "Descendant & ID",
         doThis : "Select the pickle on the fancy plate",
         selector : "#fancy pickle",
         helpTitle: "Combine the Descendant & ID Selectors",
@@ -147,9 +150,9 @@ export const levels: Level[] = [
     `
     },
     {
+        name: "Challenge #1",
         doThis : "Select the small oranges in the bentos",
         selector : "bento orange.small",
-        selectorName: "Challenge #1",
         helpTitle: "You can do it...",
         help : 'Combine what you learned in the last few levels to solve this one!',
         boardMarkup : `
@@ -171,7 +174,7 @@ export const levels: Level[] = [
     {
         doThis : "Select all the plates and bentos",
         selector : "plate,bento",
-        selectorName : "Comma Combinator",
+        name : "Comma Combinator",
         helpTitle: "Combine, selectors, with... commas!",
         syntax : "A, B, C",
         help : 'Commas can be used to combine several selectors. You can combine any number of selectors this way.',
@@ -196,7 +199,7 @@ export const levels: Level[] = [
     {
         doThis : "Select all the things!",
         selector : "*",
-        selectorName:  "The Universal Selector",
+        name:  "The Universal Selector",
         helpTitle: "You can select everything!",
         syntax : "*",
         help : 'You can select all elements with the universal selector! ',
@@ -218,6 +221,7 @@ export const levels: Level[] = [
     `
     },
     {
+        name: "Universal Selector #2",
         doThis : "Select everything on a plate",
         selector : "plate *",
         syntax : "A  *",
@@ -243,7 +247,7 @@ export const levels: Level[] = [
         doThis : "Select every apple that are just to the right of a plate",
         selector : "plate + apple",
         helpTitle: "Select an element that directly follows another element",
-        selectorName: "Adjacent Sibling Selector",
+        name: "Adjacent Sibling Selector",
         syntax : "A + B",
         help : "This selects all <strong>B</strong> elements that directly follow <strong>A</strong>. Elements that follow one another are called siblings. They're on the same level, or depth. <br/><br/>In the HTML markup for this level, elements that have the same indentation are siblings.",
         examples : [
@@ -263,7 +267,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "General Sibling Selector",
+        name: "General Sibling Selector",
         helpTitle: "Select elements that follows another element",
         syntax: "A ~ B",
         doThis : "Select all the pickles to the right of the bento",
@@ -288,7 +292,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Child Selector",
+        name: "Child Selector",
         syntax: "A > B ",
         doThis : "Select the apple directly on a plate",
         selector : "plate > apple",
@@ -312,7 +316,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "First Child Pseudo-selector",
+        name: "First Child Pseudo-selector",
         helpTitle: "Select a first child element inside of another element",
         doThis : "Select the top orange",
         selector : "plate :first-child",
@@ -336,7 +340,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Only Child Pseudo-selector",
+        name: "Only Child Pseudo-selector",
         helpTitle: "Select an element that are the only element inside of another one.",
         doThis : "Select the items alone on a plate",
         selector : "plate :only-child",
@@ -364,7 +368,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Last Child Pseudo-selector",
+        name: "Last Child Pseudo-selector",
         helpTitle: "Select the last element inside of another element",
         doThis : "Select the last pickle",
         selector : "pickle:last-child",
@@ -387,7 +391,7 @@ export const levels: Level[] = [
     <pickle class="small"></pickle>`
     },
     {
-        selectorName: "Nth Child Pseudo-selector",
+        name: "Nth Child Pseudo-selector",
         helpTitle: "Select an element by its order in another element",
         doThis : "Select the 3rd plate",
         selector : ":nth-child(3)",
@@ -405,7 +409,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Nth Last Child Selector",
+        name: "Nth Last Child Selector",
         helpTitle: "Select an element by its order in another element, counting from the back",
         doThis : "Select the 1st bento",
         selector : "bento:nth-last-child(3)",
@@ -426,7 +430,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "First of Type Selector",
+        name: "First of Type Selector",
         helpTitle: "Select the first element of a specific type",
         doThis : "Select first apple",
         selector : "apple:first-of-type",
@@ -443,7 +447,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Nth of Type Selector",
+        name: "Nth of Type Selector",
         doThis: "Select all even plates",
         selector: "plate:nth-of-type(even)",
         syntax: ":nth-of-type(A)",
@@ -462,7 +466,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Nth-of-type Selector with Formula",
+        name: "Nth-of-type Selector with Formula",
         doThis: "Select every 2nd plate, starting from the 3rd",
         selector: "plate:nth-of-type(2n+3)",
         syntax: ":nth-of-type(An+B)",
@@ -489,7 +493,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Only of Type Selector",
+        name: "Only of Type Selector",
         helpTitle: "Select elements that are the only ones of their type within their parent element",
         selector : "plate *:only-of-type",
         syntax: ":only-of-type",
@@ -513,7 +517,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Last of Type Selector",
+        name: "Last of Type Selector",
         helpTitle: "Select the last element of a specific type",
         doThis : "Select the last pickle",
         selector : "pickle:last-of-type",
@@ -533,7 +537,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Empty Selector",
+        name: "Empty Selector",
         helpTitle: "Select elements that don't have children",
         doThis : "Select the empty bentos",
         selector : "bento:empty",
@@ -551,7 +555,7 @@ export const levels: Level[] = [
     <bento></bento>`
     },
     {
-        selectorName: "Negation Pseudo-class",
+        name: "Negation Pseudo-class",
         helpTitle: "Select all elements that don't match the negation selector",
         doThis : "Select the big apples",
         selector : "apple:not(.small)",
@@ -577,7 +581,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Attribute Selector",
+        name: "Attribute Selector",
         helpTitle: "Select all elements that have a specific attribute",
         doThis : "Select the items for someone",
         selector : "[for]",
@@ -595,7 +599,7 @@ export const levels: Level[] = [
     <pickle></pickle>`
     },
     {
-        selectorName: "Attribute Selector",
+        name: "Attribute Selector",
         helpTitle: "Select all elements that have a specific attribute",
         doThis : "Select the plates for someone",
         selector : "plate[for]",
@@ -613,7 +617,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Attribute Value Selector",
+        name: "Attribute Value Selector",
         helpTitle: "Select all elements that have a specific attribute value",
         doThis : "Select Vitaly's meal",
         selector : "[for=Vitaly]",
@@ -630,7 +634,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Attribute Starts With Selector",
+        name: "Attribute Starts With Selector",
         helpTitle: "Select all elements with an attribute value that starts with specific characters",
         doThis : "Select the items for names that start with 'Sa'",
         selector : '[for^="Sa"]',
@@ -646,7 +650,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Attribute Ends With Selector",
+        name: "Attribute Ends With Selector",
         helpTitle: "Select all elements with an attribute value that ends with specific characters",
         doThis : "Select the items for names that end with 'ato'",
         selector : '[for$="ato"]',
@@ -664,7 +668,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Attribute Wildcard Selector",
+        name: "Attribute Wildcard Selector",
         helpTitle: "Select all elements with an attribute value that contains specific characters anywhere",
         syntax: '[attribute*="value"]',
         doThis : "Select the meals for names that contain 'obb'",
@@ -681,7 +685,7 @@ export const levels: Level[] = [
     `
     },
     {
-        selectorName: "Final Challenge",
+        name: "Final Challenge",
         helpTitle: "You can do it...",
         help : 'Combine all what you learned to solve this one!',
         doThis : "Select the empty plates except the one for Timmy",

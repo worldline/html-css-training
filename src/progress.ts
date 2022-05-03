@@ -1,10 +1,11 @@
 import {state} from "./game";
-import {levels} from "./levels";
+import {chapter2Levels} from "./chapters/chapter2";
 
 const STORAGE_KEY = `html_css_training_progress`
 
 const progress = {
     completed: [] as number[],
+    currentChapter: 1 as number,
     currentLevel: 1 as number,
     hasCompleted(levelNumber: number): boolean {
         return this.completed.includes(levelNumber)
@@ -17,10 +18,10 @@ const progress = {
         }
     },
     getPercentCompleted(): number{
-      return this.completed.length / levels.length * 100
+      return this.completed.length / chapter2Levels.length * 100
     },
     hasFinished(): boolean {
-      return this.completed.length >= levels.length
+      return this.completed.length >= chapter2Levels.length
     },
     load(){
         try {
@@ -34,7 +35,8 @@ const progress = {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
     },
     reset(){
-        this.currentLevel = 1
+        this.currentChapter = 1;
+        this.currentLevel = 1;
         this.completed = [];
         this.save();
     }

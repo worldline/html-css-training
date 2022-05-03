@@ -1,6 +1,7 @@
 <template>
   <div class="right-col" :class="{ 'menu-open': state.menuOpened }">
-    <div class="help-wrapper">
+    <div class="doc-wrapper">
+      <ChapterHeader />
       <LevelHeader />
       <DisplayHelp />
     </div>
@@ -9,9 +10,9 @@
 </template>
 
 <script setup>
-import DisplayHelp from "./DisplayHelp.vue"
-
 import {state} from "../game";
+import DisplayHelp from "./DisplayHelp.vue"
+import ChapterHeader from "./ChapterHeader.vue";
 import LevelHeader from "./LevelHeader.vue";
 import LevelMenu from "./LevelMenu.vue";
 </script>
@@ -31,7 +32,7 @@ import LevelMenu from "./LevelMenu.vue";
   overflow: hidden;
 }
 
-.right-col .help-wrapper {
+.right-col .doc-wrapper {
   padding: 20px;
   height: 100%;
   background: rgba(0,0,0,.2);

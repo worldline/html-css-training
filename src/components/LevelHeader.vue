@@ -1,10 +1,10 @@
 <template>
-  <h1 class="level-header" :class="{ completed: state.progress.hasCompleted(state.progress.currentLevel) }">
+  <h2 class="level-header" :class="{ completed: state.progress.hasCompleted(state.progress.currentLevel) }">
         <span class="level-text">
-          Level {{state.progress.currentLevel}} of {{levels.length}}
+          Level {{ state.progress.currentLevel }} of {{ chapter2Levels.length }}
         </span>
     <span class="checkmark"></span>
-  </h1>
+  </h2>
 
   <div class="level-nav">
     <a class="previous" href="#" @click.prevent="navigateLevel('previous', $event)"></a>
@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { levels } from "../levels";
+import { chapter2Levels } from "../chapters/chapter2";
 import {changeLevel, state} from "../game";
 
 function navigateLevel(direction="next", event){

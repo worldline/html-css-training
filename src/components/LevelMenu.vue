@@ -1,15 +1,35 @@
 <template>
   <div class="level-menu">
     <h2>Choose a level</h2>
-    <div class="levels">
-      <a v-for="(level, i) in levels" :key="i+level.doThis"
-         :class="{ current: (i+1) === state.progress.currentLevel, completed: state.progress.hasCompleted(i+1) }"
-         @click="changeLevel(i+1)"
-      >
-        <span class='checkmark'></span>
-        <span class='level-number'>{{i+1}}</span>
-        {{level.syntax || level.selectorName}}
-      </a>
+    <div class="chapters-list">
+      <ul class="chapters">
+        <li v-for="(chapter, ci) in chapters" :key="'chapter_'+chapter.name">
+          <a :class="{
+              current: (ci+1) === state.progress.currentChapter,
+              opened: (ci+1) === openedChapter
+             }"
+             class="chapter-name"
+             @click="toggleChapter(ci+1)">
+            <span class="chapter-number">{{ci+1}}</span> {{chapter.name}}
+            <div class="chapter-toggle"></div>
+          </a>
+          <ul class="levels" v-if="(ci+1) === openedChapter">
+            <li v-for="(level, i) in chapter.levels" :key="'level_'+level.name">
+              <a
+                 :class="{
+                   current: (i+1) === state.progress.currentLevel,
+                   completed: state.progress.hasCompleted(i+1)
+                 }"
+                 @click="changeLevel(i+1)"
+              >
+                <span class='checkmark'></span>
+                <span class='level-number'>{{i+1}}</span>
+                {{level.name}}
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
     <a class="reset-progress" href="#" @click.prevent="resetProgress">Reset Progress</a>
   </div>
@@ -19,9 +39,20 @@
   </div>
 </template>
 
-<script setup>
-import {levels} from "../levels";
+<script setup lang="ts">
+import {ref} from "vue";
+import {chapters} from "../chapters/chapters";
 import {changeLevel, state, resetProgress} from "../game";
+
+const openedChapter = ref(state.progress.currentChapter)
+
+function toggleChapter(chapterNumber: number){
+  if(chapterNumber === openedChapter.value){
+    openedChapter.value = 0
+  } else {
+    openedChapter.value = chapterNumber
+  }
+}
 
 function toggleLevelMenu(){
   state.menuOpened = !state.menuOpened
@@ -29,14 +60,12 @@ function toggleLevelMenu(){
 </script>
 
 <style scoped>
-
 .level-menu {
   position: absolute;
   top: 0;
   bottom: 0;
   overflow-y: hidden;
   transition: all .15s ease-in-out;
-  background: rgba(0,0,0,1);
   background: #1b1813;
   left: 500px;
   padding: 0;
@@ -45,9 +74,27 @@ function toggleLevelMenu(){
   flex-direction: column;
 }
 
-.levels {
+.chapters-list {
   overflow-y: auto;
-  padding-bottom: 100px;
+  padding-bottom: 60px;
+  position: relative;
+  flex: 1;
+}
+
+.level-menu::after {
+  content: "";
+  position: absolute;
+  bottom: 38px;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(to top, rgba(27,24,19,1), rgba(0,0,0,0));
+}
+
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .level-menu h2 {
@@ -59,20 +106,27 @@ function toggleLevelMenu(){
   padding: 23px 0 14px 16px;
 }
 
-
-.level-menu .levels a {
+.level-menu .chapters a {
   display: block;
   cursor: pointer;
   padding: 5px 12px 5px 22px;
   color: #777;
 }
 
-.level-menu .level-syntax {
+.chapter-name {
+  display: block;
+  background-color: #2e2a23;
+  font-size: 120%;
+  border-top: 1px solid #3e392f;
   position: relative;
-  display: inline-block;
+  user-select: none;
 }
 
-.level-menu .levels a .checkmark {
+.chapter-name:hover {
+  background-color: #3e392f;
+}
+
+.levels a .checkmark {
   position: relative;
   display: inline-block;
   margin-right: 14px;
@@ -86,27 +140,57 @@ function toggleLevelMenu(){
   transform: rotate(40deg);
 }
 
-.level-menu .levels a.completed .checkmark {
+.levels a.completed .checkmark {
   opacity: 0.5;
   border: solid 3px #4cbb4a;
   border-top-width: 0;
   border-left-width: 0;
 }
 
-.level-menu .levels a.current {
+.levels a.current {
   font-weight: bold;
   color: #AAA;
   background: rgba(255,255,255,.07);
 }
 
-.level-menu .levels a:hover {
+.levels a:hover {
   background: rgba(255,255,255,.05);
 }
 
-.level-menu .level-number {
+.chapter-number,
+.level-number{
   opacity: .6;
   min-width: 24px;
   display: inline-block;
+}
+
+.chapter-toggle {
+  height: 8px;
+  width: 8px;
+  transition: transform .15s ease-out;
+  cursor: pointer;
+  position: absolute;
+  top: 14px;
+  left: 4px;
+  border-width: 1px 1px 0 0;
+  border-color: rgba(255,255,255,0.35);
+  border-style: solid;
+  transform: rotateZ(45deg);
+  transform-origin: 6px 2px;
+}
+
+.opened .chapter-toggle {
+  transform: rotateZ(135deg);
+}
+
+.level-menu-toggle {
+  height: 2px;
+  width: 27px;
+  background: rgba(255,255,255,1);
+  transition: all .15s ease-out;
+  cursor: pointer;
+  position: relative;
+  top: 10px;
 }
 
 .level-menu-toggle-wrapper {
