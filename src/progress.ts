@@ -1,27 +1,28 @@
 import {state} from "./game";
 import {chapter2Levels} from "./chapters/chapter2";
+import {chapters} from "./chapters/chapters";
 
 const STORAGE_KEY = `html_css_training_progress`
 
 const progress = {
-    completed: [] as number[],
+    completed: {} as { [chapter: number]: number[] },
     currentChapter: 1 as number,
     currentLevel: 1 as number,
-    hasCompleted(levelNumber: number): boolean {
-        return this.completed.includes(levelNumber)
+    hasCompleted(chapterNumber: number, levelNumber: number): boolean {
+        return Array.isArray(this.completed[chapterNumber]) && this.completed[chapterNumber].includes(levelNumber)
     },
     completeLevel(){
+        const chapterNumber = this.currentChapter
         const levelNumber = this.currentLevel
-        if(!this.hasCompleted(levelNumber)){
-            this.completed.push(levelNumber)
+        if(!this.hasCompleted(chapterNumber, levelNumber)){
+            if(!this.completed.hasOwnProperty(chapterNumber)) this.completed[chapterNumber] = []
+            this.completed[chapterNumber].push(levelNumber)
             this.save()
         }
     },
-    getPercentCompleted(): number{
-      return this.completed.length / chapter2Levels.length * 100
-    },
-    hasFinished(): boolean {
-      return this.completed.length >= chapter2Levels.length
+    getPercentCompleted(chapterNumber: number): number{
+      if(!Array.isArray(this.completed[chapterNumber])) return 0
+      return this.completed[chapterNumber].length / chapters[chapterNumber-1].levels.length * 100
     },
     load(){
         try {
@@ -37,7 +38,7 @@ const progress = {
     reset(){
         this.currentChapter = 1;
         this.currentLevel = 1;
-        this.completed = [];
+        this.completed = {};
         this.save();
     }
 }

@@ -3,18 +3,21 @@
     <div class="doc-wrapper">
       <ChapterHeader />
       <LevelHeader />
-      <DisplayHelp />
+      <component :is="rightPanelComponent" />
     </div>
     <LevelMenu />
   </div>
 </template>
 
 <script setup>
+import {computed} from "vue";
 import {state} from "../game";
-import DisplayHelp from "./DisplayHelp.vue"
 import ChapterHeader from "./ChapterHeader.vue";
 import LevelHeader from "./LevelHeader.vue";
 import LevelMenu from "./LevelMenu.vue";
+import {currentChapter} from "../chapters/chapters";
+
+const rightPanelComponent = computed(() => currentChapter.value.rightPanelComponent)
 </script>
 
 <style scoped>

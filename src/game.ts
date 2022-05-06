@@ -3,6 +3,7 @@ import {clamp} from "./utils";
 import {createTooltip, hideAllPoppers} from "floating-vue";
 import {nextTick, reactive} from "vue";
 import progress from "./progress";
+import {chapters, currentChapter} from "./chapters/chapters";
 
 export const state = reactive({
     progress: progress,
@@ -92,12 +93,11 @@ export function fireRule(rule: string) {
 
         //$(".input-wrapper").css("opacity",.2);
         state.progress.completeLevel();
-        if(!state.progress.hasFinished()){
-            setTimeout(function(){
-                state.progress.currentLevel++;
-                loadLevel();
-            }, state.levelTimeout);
-        }
+
+        setTimeout(function(){
+            changeLevel(state.progress.currentChapter, state.progress.currentLevel+1)
+        }, state.levelTimeout);
+
     } else {
         matches.forEach(el => {
             el.classList.remove("strobe");
@@ -117,8 +117,21 @@ function checkResults(matches: Element[], solutionMatches: Element[]){
     && matches.every(el => solutionMatches.includes(el))
 }
 
-export function changeLevel(n: number){
-    state.progress.currentLevel = clamp(n, 1, chapter2Levels.length)
+export function changeLevel(chapterNumber: number, levelNumber: number){
+    const chapter = chapters[chapterNumber-1]
+    if(levelNumber > chapter.levels.length) {
+        chapterNumber++;
+        if(chapterNumber > chapters.length){
+            chapterNumber = 1
+        }
+        levelNumber = 1;
+    } else if(levelNumber < 1){
+        chapterNumber = Math.max(1, chapterNumber-1)
+        levelNumber = chapters[chapterNumber-1].levels.length
+    }
+
+    state.progress.currentChapter = clamp(chapterNumber, 1, chapters.length)
+    state.progress.currentLevel = clamp(levelNumber, 1, chapters[chapterNumber-1].levels.length)
     hideAllPoppers()
     loadLevel();
     closeMenu();

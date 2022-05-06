@@ -1,4 +1,5 @@
 <template>
+  <h2 class="order">{{ state.level.doThis }}</h2>
   <div class="game-container">
     <div class="game-wrapper">
       <div class="table-wrapper">
@@ -13,11 +14,13 @@
       </div>
     </div>
   </div>
+  <Editor />
 </template>
 
 <script setup lang="ts">
-import {Ref, ref} from "vue"
-import {state} from "../game"
+import {Ref, ref} from "vue";
+import Editor from "./Editor.vue";
+import {state} from "../game";
 
 const surface: Ref<HTMLElement | null> = ref(null)
 const edge: Ref<HTMLElement | null> = ref(null)
@@ -25,6 +28,31 @@ const board: Ref<HTMLElement | null> = ref(null)
 </script>
 
 <style scoped>
+
+.order {
+  color: rgba(255,255,255,.5);
+  font-size: 45px;
+  margin: 0;
+  font-weight: 400;
+  text-align: center;
+  padding: 20px 30px;
+}
+
+.helper {
+  position: absolute;
+  background: white;
+  padding: 10px 15px 12px 15px;
+  z-index: 1000;
+  font-size: 18px;
+  color: #666;
+  border-bottom: solid 2px #BBB;
+  box-shadow: 0 5px 0 rgba(0,0,0,.2);
+  display: none;
+  transform: rotateX(20deg);
+  outline: solid 1px transparent;
+  white-space: nowrap;
+}
+
 .game-wrapper {
   -webkit-perspective: 400px;
   transform: translate3d(0,0,0);

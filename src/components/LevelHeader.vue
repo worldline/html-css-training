@@ -1,5 +1,5 @@
 <template>
-  <h2 class="level-header" :class="{ completed: state.progress.hasCompleted(state.progress.currentLevel) }">
+  <h2 class="level-header" :class="{ completed: state.progress.hasCompleted(state.progress.currentChapter, state.progress.currentLevel) }">
         <span class="level-text">
           Level {{ state.progress.currentLevel }} of {{ chapter2Levels.length }}
         </span>
@@ -12,7 +12,7 @@
   </div>
 
   <div class="level-progress">
-    <div class="progress" :style="{ width: state.progress.getPercentCompleted()+'%' }"></div>
+    <div class="progress" :style="{ width: state.progress.getPercentCompleted(state.progress.currentChapter)+'%' }"></div>
   </div>
 </template>
 
@@ -26,9 +26,9 @@ function navigateLevel(direction="next", event){
   setTimeout(() => { el.classList.remove("link-jiggle"); }, 1000)
 
   if(direction === "next") {
-    changeLevel(state.progress.currentLevel + 1)
+    changeLevel(state.progress.currentChapter, state.progress.currentLevel + 1)
   } else {
-    changeLevel(state.progress.currentLevel - 1)
+    changeLevel(state.progress.currentChapter, state.progress.currentLevel - 1)
   }
 }
 </script>

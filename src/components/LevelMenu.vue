@@ -14,16 +14,16 @@
             <div class="chapter-toggle"></div>
           </a>
           <ul class="levels" v-if="(ci+1) === openedChapter">
-            <li v-for="(level, i) in chapter.levels" :key="'level_'+level.name">
+            <li v-for="(level, li) in chapter.levels" :key="'level_'+level.name">
               <a
                  :class="{
-                   current: (i+1) === state.progress.currentLevel,
-                   completed: state.progress.hasCompleted(i+1)
+                   current: (li+1) === state.progress.currentLevel,
+                   completed: state.progress.hasCompleted(ci+1, li+1)
                  }"
-                 @click="changeLevel(i+1)"
+                 @click="changeLevel(ci+1, li+1)"
               >
                 <span class='checkmark'></span>
-                <span class='level-number'>{{i+1}}</span>
+                <span class='level-number'>{{li+1}}</span>
                 {{level.name}}
               </a>
             </li>
