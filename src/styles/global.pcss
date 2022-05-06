@@ -12,12 +12,34 @@ html,body {
 body {
     background: #2e2a23 radial-gradient(20% 40%, #3e392f, #221e17) no-repeat;
     position: relative;
-    color: #777;
+    color: #888;
     font-family: "Exo 2", "Lato", "Helvetica Neue", sans-serif;
 }
 
 h1, h2, h3, h4, h5 {
     font-weight: 600;
+    color: #999;
+}
+
+button, input[type="button"]{
+    background: transparent;
+    border: 3px solid #777;
+    color: #888;
+    border-radius: 1em;
+    font-size: 1.2rem;
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #777;
+        color: black;
+    }
+}
+
+hr {
+    height: 1px;
+    background-color: rgba(128,128,128,0.5);
+    border: none;
 }
 
 /*

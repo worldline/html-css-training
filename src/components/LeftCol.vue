@@ -26,6 +26,7 @@ const leftPanelComponent = computed(() => currentChapter.value.leftPanelComponen
 
 .left-panel {
   min-height: calc(100vh - 150px);
+  position: relative;
 }
 
 </style>

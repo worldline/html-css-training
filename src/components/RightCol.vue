@@ -39,6 +39,8 @@ const rightPanelComponent = computed(() => currentChapter.value.rightPanelCompon
   padding: 20px;
   height: 100%;
   background: rgba(0,0,0,.2);
+  display: flex;
+  flex-direction: column;
 }
 
 .menu-open ::v-deep(.level-menu) {

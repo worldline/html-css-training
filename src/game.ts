@@ -1,14 +1,16 @@
-import {Chapter2Level, chapter2Levels} from "./chapters/chapter2";
 import {clamp} from "./utils";
 import {createTooltip, hideAllPoppers} from "floating-vue";
 import {nextTick, reactive} from "vue";
 import progress from "./progress";
-import {chapters, currentChapter} from "./chapters/chapters";
+import {chapters} from "./chapters/chapters";
+import {Level} from "./chapters/level";
+import {chapter1Levels} from "./chapters/chapter1";
+import {Chapter2Level} from "./chapters/chapter2";
 
 export const state = reactive({
     progress: progress,
     currentLevel: 0,
-    level: chapter2Levels[0], // Holds current level info
+    level: chapter1Levels[0] as Level, // Holds current level info
     levelTimeout: 1000, // Delay between levels after completing
     menuOpened: false
 })
@@ -53,6 +55,7 @@ export function resetProgress(){
 }
 
 export function fireRule(rule: string) {
+    const level = state.level as Chapter2Level;
 
     Array.from(document.querySelectorAll(".shake, .strobe"))
         .forEach(el => el.classList.remove("shake","strobe"));
@@ -70,7 +73,7 @@ export function fireRule(rule: string) {
     }
 
     const matches = rule ? Array.from(baseTable.querySelectorAll(rule)) : []; // What the person finds
-    const solutionMatches = Array.from(baseTable.querySelectorAll(state.level.selector)) // What the correct rule finds
+    const solutionMatches = Array.from(baseTable.querySelectorAll(level.selector)) // What the correct rule finds
 
     let win = false;
 
@@ -139,8 +142,9 @@ export function changeLevel(chapterNumber: number, levelNumber: number){
 
 export function loadLevel(){
     // Make sure we don't load a level we don't have
-    state.progress.currentLevel = clamp(state.progress.currentLevel, 1, chapter2Levels.length)
-    state.level = chapter2Levels[state.progress.currentLevel-1] as Chapter2Level;
+    const levels = chapters[state.progress.currentChapter-1].levels
+    state.progress.currentLevel = clamp(state.progress.currentLevel, 1, levels.length)
+    state.level = levels[state.progress.currentLevel-1] as Level;
     state.progress.save()
     document.querySelector("input")?.focus();
     nextTick(() => addBoardElementsTooltips()).then()
