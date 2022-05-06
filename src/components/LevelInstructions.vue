@@ -1,16 +1,15 @@
 <template>
-    <div v-html="state.level.instructions" class="instructions"></div>
+    <div class="instructions">
+      <h3>{{ state.level.name }}</h3>
+      <div v-html="state.level.instructions"></div>
+    </div>
     <div class="actions">
-      <button @click="goToNextLevel">Next</button>
+      <button @click="completeLevel" v-if="!state.level.selector">Next</button>
     </div>
 </template>
 
-<script setup>
-import {changeLevel, state} from "../game"
-
-function goToNextLevel(){
-  changeLevel(state.progress.currentChapter, state.progress.currentLevel + 1)
-}
+<script setup lang="ts">
+import {completeLevel, state} from "../game"
 </script>
 
 <style scoped>
@@ -26,6 +25,17 @@ function goToNextLevel(){
 .instructions ::v-deep(img){
   display: block;
   margin: 0.5em auto;
+}
+
+.instructions ::v-deep(.syntax) {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 200;
+  opacity: .8;
+  background: rgba(255,255,255,.05);
+  display: inline-block;
+  padding: 5px 8px;
+  border-bottom: solid 2px rgba(255,255,255,.1);
 }
 
 .actions {

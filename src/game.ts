@@ -95,11 +95,9 @@ export function fireRule(rule: string) {
         editorInput.value = ""
 
         //$(".input-wrapper").css("opacity",.2);
-        state.progress.completeLevel();
-
         setTimeout(function(){
-            changeLevel(state.progress.currentChapter, state.progress.currentLevel+1)
-        }, state.levelTimeout);
+            completeLevel()
+        }, state.levelTimeout ?? 0);
 
     } else {
         matches.forEach(el => {
@@ -120,6 +118,11 @@ function checkResults(matches: Element[], solutionMatches: Element[]){
     && matches.every(el => solutionMatches.includes(el))
 }
 
+export function completeLevel(){
+    state.progress.completeLevel();
+    changeLevel(state.progress.currentChapter, state.progress.currentLevel+1)        
+}
+
 export function changeLevel(chapterNumber: number, levelNumber: number){
     const chapter = chapters[chapterNumber-1]
     if(levelNumber > chapter.levels.length) {
@@ -128,7 +131,7 @@ export function changeLevel(chapterNumber: number, levelNumber: number){
             chapterNumber = 1
         }
         levelNumber = 1;
-    } else if(levelNumber < 1){
+    } else if(levelNumber < 1 && chapterNumber > 1){
         chapterNumber = Math.max(1, chapterNumber-1)
         levelNumber = chapters[chapterNumber-1].levels.length
     }

@@ -1,17 +1,18 @@
 <template>
-  <iframe :src="level.page" ref="iframe"></iframe>
-  <button @click="toggleView" id="button-3d">{{is3D ? '2D' : '3D'}}</button>
+  <iframe src="demo/chapter1.html" ref="iframe"></iframe>
+  <button @click="toggleView" id="button-3d" v-if="shouldShow3DButton">{{is3D ? '2D' : '3D'}}</button>
 </template>
 
 <script setup lang="ts">
 import { Chapter1Level } from "../chapters/chapter1";
 import {state} from "../game";
 import { toggle3D } from "../dom-viewer";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 const level = state.level as Chapter1Level;
 const is3D = ref(false)
 const iframe = ref(null)
+const shouldShow3DButton = computed(() => state.progress.currentLevel > 1)
 
 function toggleView(){
   if(!iframe.value) return;

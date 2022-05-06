@@ -1,4 +1,5 @@
 export interface Level {
     name: string;
-    instructions: string;
+    instructions?: string;
+    selector?: string;
 }

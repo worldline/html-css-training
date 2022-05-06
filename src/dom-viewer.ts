@@ -29,8 +29,8 @@ export function toggle3D(iframe: HTMLIFrameElement) {
                 .set("transform-origin", ["left", "top"])
                 .set("background", color)
                 .set("width", `${width}px`)
-                .set("height", `${height}px`)
-                .set("backface-visibility", "visible")
+                .set("height", `${height}px`)                
+                .set("opacity", "0.8")
                 .set("transform", `translate3d(${x}px, ${y}px, ${z}px) rotateX(270deg) rotateY(${rotateYDeg}deg)`)
                 .forEach((value, key) => template.style[key] = Array.isArray(value) ? value.join(" ") : value);
 
@@ -51,8 +51,7 @@ export function toggle3D(iframe: HTMLIFrameElement) {
                 if (childNode.nodeType === Node.ELEMENT_NODE) {
                     childNode.style.overflow = "visible";
                     childNode.style.transformStyle = "preserve-3d";
-                    childNode.style.transform = `translateZ(${(step + (length - i) * stepDelta).toFixed(3)}px)`;
-                    childNode.style.background = `rgba(255,255,255,0.2)`;
+                    childNode.style.transform = `translateZ(${(step + (length - i) * stepDelta).toFixed(3)}px)`;                    
 
                     let elementBodyOffsetLeft = offsetLeft;
                     let elementBodyOffsetTop = offsetTop;
@@ -122,16 +121,8 @@ export function toggle3D(iframe: HTMLIFrameElement) {
 
         traverse(body, 0, 0, 0);
 
-        const Modes = {
-            DISABLED: -1,
-            NO_FACES: 0,
-            FACES: 1
-        };
-        let mode = Modes.NO_FACES;
-
         _document.addEventListener("mousemove", event => {
-
-            if (mode !== Modes.DISABLED) {
+            if (!event.ctrlKey) {
                 const xRel = event.clientX / _window.innerWidth;
                 const yRel = 1 - (event.clientY / _window.innerHeight);
                 const amplitude = 120;
@@ -140,33 +131,18 @@ export function toggle3D(iframe: HTMLIFrameElement) {
             }
         }, true);
 
-        /*
-        const faces = _document.createElement(DIV);
-        faces.style.display = "none";
+        
+        const faces = _document.createElement(DIV);        
         faces.style.position = "absolute";
-        faces.style.top = 0;
+        faces.style.transformStyle = "preserve-3d";
+        faces.style.top = "0";
         faces.innerHTML = facesHTML;
         body.appendChild(faces);
 
-        _document.addEventListener("mouseup", () => {
-            switch (mode) {
 
-                case Modes.NO_FACES: {
-                    mode = Modes.FACES;
-                    faces.style.display = "";
-                    break;
-                }
+        body.style.transition = "transform 400ms ease-in-out";
+        body.style.transform = `rotateX(-22.5deg) rotateY(12.5deg)`;
+        setTimeout(() => { body.style.transition = "" }, 400)
 
-                case Modes.FACES: {
-                    mode = Modes.NO_FACES;
-                    faces.style.display = "none";
-                    break;
-                }
-
-                default: {
-                    throw new RangeError("Incorrect faces mode");
-                }
-            }
-        }, true);*/
-    })(50, 500);
+    })(50, 5000);
 }

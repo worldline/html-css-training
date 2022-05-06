@@ -7,13 +7,17 @@
 html,body {
     margin: 0;
     padding: 0;
+
+    --bg-primary: #2e2a23;
+    --bg-secondary: #221e18;
 }
 
 body {
-    background: #2e2a23 radial-gradient(20% 40%, #3e392f, #221e17) no-repeat;
+    background: var(--bg-secondary) radial-gradient(20% 40%, #3e392f, #221e17) no-repeat;
     position: relative;
     color: #888;
     font-family: "Exo 2", "Lato", "Helvetica Neue", sans-serif;
+    min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5 {
@@ -21,8 +25,25 @@ h1, h2, h3, h4, h5 {
     color: #999;
 }
 
+b {
+    color: orange;
+}
+
+a {
+    color: #ab3b2e;
+}
+
+a:visited {
+    color: #8d3126;
+}
+
+strong {
+    color: #ccc;
+    font-weight: bold;
+}
+
 button, input[type="button"]{
-    background: transparent;
+    background: var(--bg-primary);
     border: 3px solid #777;
     color: #888;
     border-radius: 1em;

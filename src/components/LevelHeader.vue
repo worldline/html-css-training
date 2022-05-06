@@ -1,7 +1,7 @@
 <template>
   <h2 class="level-header" :class="{ completed: state.progress.hasCompleted(state.progress.currentChapter, state.progress.currentLevel) }">
         <span class="level-text">
-          Level {{ state.progress.currentLevel }} of {{ chapter2Levels.length }}
+          Level {{ state.progress.currentLevel }} of {{ levels.length }}
         </span>
     <span class="checkmark"></span>
   </h2>
@@ -16,9 +16,12 @@
   </div>
 </template>
 
-<script setup>
-import { chapter2Levels } from "../chapters/chapter2";
+<script setup lang="ts">
+import { computed } from "vue";
+import { currentChapter } from "../chapters/chapters";
 import {changeLevel, state} from "../game";
+
+const levels = computed(() => currentChapter.value.levels)
 
 function navigateLevel(direction="next", event){
   const el = event.target;
