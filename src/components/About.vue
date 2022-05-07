@@ -1,19 +1,19 @@
 <template>
-  <div class="what-is-this">
-    <p>
-      Credits: <a href="http://www.twitter.com/flukeout">@flukeout</a>
-    </p>
+  <div class="credits" v-if="credits">
+    <p v-html="credits"></p>
   </div>
 </template>
 
-<script>
-export default {
-}
+<script setup lang="ts">
+import { computed } from 'vue';
+import { currentChapter } from '../chapters/chapters';
+
+const credits = computed(() => currentChapter.value.credits)
 </script>
 
 <style scoped>
 
-.what-is-this {
+.credits {
   text-align: center;
   padding: 20px 0;
   width: 725px;
@@ -23,19 +23,14 @@ export default {
   font-weight: 400;
 }
 
-.what-is-this h2 {
-  font-weight: 400;
-  font-size: 20px;
-  color: #888;
-}
 
-.what-is-this a {
+.credits ::v-deep(a) {
   color: white;
   opacity: .5;
   text-decoration: none;
 }
 
-.what-is-this a:hover {
+.credits ::v-deep(a:hover) {
   opacity: .7;
 }
 </style>

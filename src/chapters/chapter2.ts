@@ -1,4 +1,68 @@
+import { state, completeLevel } from "../game";
+import { cleanupEffects, shake } from "../utils";
 import {Level} from "./level";
+
+export function fireRule(rule: string) {
+  const level = state.level as Chapter2Level;
+
+  cleanupEffects()
+
+  // var baseTable = $('.table-wrapper > .table, .table-wrapper > .nametags, .table-wrapper > .table-surface');
+  const baseTable = document.querySelector('#board')!;
+
+  // Check if selector will throw an error trying the mystery rule
+  // If it errors out, change the rule to null so the wrong-guess animation will work
+  try {
+      baseTable.querySelectorAll(rule)
+  }
+  catch(err) {
+      rule = "";
+  }
+
+  const matches = rule ? Array.from(baseTable.querySelectorAll(rule)) : []; // What the person finds
+  const solutionMatches = Array.from(baseTable.querySelectorAll(level.selector)) // What the correct rule finds
+
+  let win = false;
+
+  // If nothing is selected
+  if(matches.length == 0) {
+      shake(".editor")
+  }
+
+  if(matches.length === solutionMatches.length && matches.length > 0){
+      win = checkResults(matches, solutionMatches);
+  }
+
+  if(win){
+      matches.forEach(el => {
+          el.classList.remove("strobe")
+          el.classList.add("clean")
+      });
+      const editorInput = document.querySelector(".editor input") as HTMLInputElement
+      editorInput.value = ""
+
+      //$(".input-wrapper").css("opacity",.2);
+      setTimeout(function(){
+          completeLevel()
+      }, state.levelTimeout ?? 0);
+
+  } else {
+      matches.forEach(el => {
+          el.classList.remove("strobe");
+          el.classList.add("shake")
+      })
+
+      setTimeout(function(){
+        cleanupEffects()
+        solutionMatches.forEach(el => { el.classList.add("strobe"); })
+      }, 500);
+  }
+}
+
+function checkResults(matches: Element[], solutionMatches: Element[]){
+  return matches.length === solutionMatches.length
+  && matches.every(el => solutionMatches.includes(el))
+}
 
 export interface Chapter2Level extends Level {
     doThis: string;

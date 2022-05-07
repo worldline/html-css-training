@@ -22,7 +22,7 @@
                  }"
                  @click="changeLevel(ci+1, li+1)"
               >
-                <span class='checkmark'></span>
+                <span class='checkmark'>✔️</span>
                 <span class='level-number'>{{li+1}}</span>
                 {{level.name}}
               </a>
@@ -106,6 +106,16 @@ ul, li {
   padding: 23px 0 14px 16px;
 }
 
+.level-menu .checkmark {
+  opacity: 0;
+  margin-right: 6px;
+  margin-left: -16px;
+}
+
+.level-menu .completed .checkmark {
+  opacity: 0.7;
+}
+
 .level-menu .chapters a {
   display: block;
   cursor: pointer;
@@ -124,27 +134,6 @@ ul, li {
 
 .chapter-name:hover {
   background-color: #3e392f;
-}
-
-.levels a .checkmark {
-  position: relative;
-  display: inline-block;
-  margin-right: 14px;
-  width: 8px;
-  height: 13px;
-  border: solid 3px white;
-  border-top-width: 0;
-  border-left-width: 0;
-  opacity: .05;
-  top: -1px;
-  transform: rotate(40deg);
-}
-
-.levels a.completed .checkmark {
-  opacity: 0.5;
-  border: solid 3px #4cbb4a;
-  border-top-width: 0;
-  border-left-width: 0;
 }
 
 .levels a.current {

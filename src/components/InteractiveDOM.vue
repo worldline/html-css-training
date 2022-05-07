@@ -1,18 +1,23 @@
 <template>
+  <h2 class="order" :style="{ opacity: level.order && !hasWon ? 1 : 0 }">{{level.order || 'Chapter 1'}}</h2>  
   <iframe src="demo/chapter1.html" ref="iframe"></iframe>
+  <p v-if="level.order && level.selector">Use the <b>3D</b> view and the <b>Ctrl</b> key to select elements in the DOM.</p>
   <button @click="toggleView" id="button-3d" v-if="shouldShow3DButton">{{is3D ? '2D' : '3D'}}</button>
 </template>
 
 <script setup lang="ts">
 import { Chapter1Level } from "../chapters/chapter1";
-import {state} from "../game";
+import {completeLevel, state} from "../game";
 import { toggle3D } from "../dom-viewer";
 import {computed, ref} from "vue";
+import { useEventListener } from "@vueuse/core";
+import { shake } from "../utils";
 
-const level = state.level as Chapter1Level;
+const level = computed(() => state.level as Chapter1Level);
 const is3D = ref(false)
 const iframe = ref(null)
 const shouldShow3DButton = computed(() => state.progress.currentLevel > 1)
+const hasWon = ref(false)
 
 function toggleView(){
   if(!iframe.value) return;
@@ -25,6 +30,21 @@ function toggleView(){
     is3D.value = true;
   }
 }
+
+useEventListener("message", message => {
+  if(message.data.type === "elementClick"){
+    const tag = message.data.tag
+    if(tag == null || !state.level.selector) return;
+    if(tag === state.level.selector){
+      hasWon.value = true;
+      setTimeout(() => {
+        hasWon.value = false;
+        completeLevel()
+      }, 600) 
+    } 
+    else shake("iframe")
+  }
+})
 </script>
 
 <style scoped>
@@ -39,5 +59,10 @@ iframe {
   position: absolute;
   right: 1rem;
   top: 1rem;
+  font-size: 200%;
+}
+
+.order {
+  transition: opacity 500ms linear;
 }
 </style>

@@ -1,7 +1,12 @@
+import { state, completeLevel } from "../game";
+import { shake } from "../utils";
 import {Level} from "./level";
+import InteractiveDOM from "../components/InteractiveDOM.vue";
+import LevelInstructions from "../components/LevelInstructions.vue";
 
 export interface Chapter1Level extends Level {
     instructions: string;
+    order?: string;
 }
 
 export const chapter1Levels: Chapter1Level[] = [
@@ -36,18 +41,17 @@ export const chapter1Levels: Chapter1Level[] = [
     },
     {
         name: "Content sections: <main>",
+        order: "Click on <main> element",
         selector: "main",
         instructions: `
         <p>Properly describing the different sections of a web document helps for accessibility tools and for the indexability by search engines.</p>
         <h3 class="syntax">&lt;main&gt;</h3>
-        <p>Dominant section of content, related to the central topic of the document</p>
-        <hr>
-        <p>Click on the <tag>main</tag> element of the restaurant website.</p>
-        <p>Use the <b>3D</b> view and the <b>Ctrl</b> key to select elements at the top of the DOM hierarchy.</p>
+        <p>Dominant section of content, related to the central topic of the document</p>        
         `
     },
     {
         name: "Content sections: <aside>",
+        order: "Click on <aside> element",
         selector: "aside",
         instructions: `
         <p>Properly describing the different sections of a web document helps for accessibility tools and for the indexability by search engines.</p>
@@ -60,6 +64,7 @@ export const chapter1Levels: Chapter1Level[] = [
     },
     {
         name: "Content sections: <header>",
+        order: "Click on <header> element",
         selector: "header",
         instructions: `
         <p>Properly describing the different sections of a web document helps for accessibility tools and for the indexability by search engines.</p>
@@ -71,3 +76,10 @@ export const chapter1Levels: Chapter1Level[] = [
         `
     },
 ]
+
+export const chapter1: Chapter = {
+    name: "HTML - Semantics",
+    levels: chapter1Levels,
+    leftPanelComponent: InteractiveDOM,
+    rightPanelComponent: LevelInstructions
+}

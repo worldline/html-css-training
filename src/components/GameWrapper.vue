@@ -28,16 +28,6 @@ const board: Ref<HTMLElement | null> = ref(null)
 </script>
 
 <style scoped>
-
-.order {
-  color: rgba(255,255,255,.5);
-  font-size: 45px;
-  margin: 0;
-  font-weight: 400;
-  text-align: center;
-  padding: 20px 30px;
-}
-
 .helper {
   position: absolute;
   background: white;

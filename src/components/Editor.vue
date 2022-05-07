@@ -40,7 +40,8 @@
 <script setup lang="ts">
 import {ref, Ref} from "vue"
 import HTMLMarkup from "./HTMLMarkup.vue";
-import {fireRule, loadLevel, state} from "../game";
+import {state} from "../game";
+import { fireRule } from "../chapters/chapter2";
 
 let inputValue="";
 const enterButton: Ref<HTMLElement | null> = ref(null)

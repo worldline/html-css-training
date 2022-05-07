@@ -11,6 +11,7 @@
   "dependencies": {
     "@vueuse/core": "^7.5.5",
     "floating-vue": "^2.0.0-beta.15",
+    "nanoid": "^3.3.4",
     "vue": "^3.2.25"
   },
   "devDependencies": {

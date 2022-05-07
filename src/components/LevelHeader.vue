@@ -3,7 +3,7 @@
         <span class="level-text">
           Level {{ state.progress.currentLevel }} of {{ levels.length }}
         </span>
-    <span class="checkmark"></span>
+    <span class="checkmark" v-if="state.progress.hasCompleted(state.progress.currentChapter, state.progress.currentLevel)">✔️</span>
   </h2>
 
   <div class="level-nav">
@@ -22,9 +22,10 @@ import { currentChapter } from "../chapters/chapters";
 import {changeLevel, state} from "../game";
 
 const levels = computed(() => currentChapter.value.levels)
+const completed = computed(() => state.progress.hasCompleted(state.progress.currentChapter, state.progress.currentLevel))
 
-function navigateLevel(direction="next", event){
-  const el = event.target;
+function navigateLevel(direction="next", event: Event){
+  const el = event.target as HTMLElement;
   el.classList.add("link-jiggle");
   setTimeout(() => { el.classList.remove("link-jiggle"); }, 1000)
 
@@ -42,27 +43,6 @@ function navigateLevel(direction="next", event){
   margin: 0;
   padding: 0 0 10px 0;
   color: #777;
-}
-
-.level-header .checkmark {
-  position: relative;
-  display: inline-block;
-  margin-left: 8px;
-  width: 12px;
-  height: 20px;
-  border: solid 4px white;
-  border-top-width: 0;
-  border-left-width: 0;
-  opacity: 0;
-  top: -3px;
-  transform: rotate(40deg);
-}
-
-.level-header.completed .checkmark {
-  opacity: .7;
-  border: solid 4px #4cbb4a;
-  border-top-width: 0;
-  border-left-width: 0;
 }
 
 .level-progress {

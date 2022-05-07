@@ -1,32 +1,21 @@
-import {Level} from "./level";
-import {chapter1Levels} from "./chapter1";
 import {chapter2Levels} from "./chapter2";
-import {Component, computed, Ref} from "vue";
-import InteractiveDOM from "../components/InteractiveDOM.vue";
+import {computed, Ref} from "vue";
+
 import GameWrapper from "../components/GameWrapper.vue"
-import LevelInstructions from "../components/LevelInstructions.vue";
+
 import Chapter2LevelInstructions from "../components/Chapter2LevelInstructions.vue";
 import {state} from "../game";
+import { Chapter } from "./chapter";
+import { chapter1 } from "./chapter1";
 
 
-interface Chapter {
-    name: string;
-    levels: Level[];
-    rightPanelComponent: Component
-    leftPanelComponent: Component
-}
 
-const chapter1: Chapter = {
-    name: "HTML - Semantics",
-    levels: chapter1Levels,
-    leftPanelComponent: InteractiveDOM,
-    rightPanelComponent: LevelInstructions
-}
 const chapter2: Chapter = {
     name: "CSS - Selectors",
     levels: chapter2Levels,
     leftPanelComponent: GameWrapper,
-    rightPanelComponent: Chapter2LevelInstructions
+    rightPanelComponent: Chapter2LevelInstructions,
+    credits: `Credits: <a href="http://www.twitter.com/flukeout">@flukeout</a>`
 }
 
 export const chapters: Chapter[] = [

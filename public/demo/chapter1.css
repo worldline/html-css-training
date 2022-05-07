@@ -67,3 +67,8 @@ form button {
     display: block;
     margin: 0.5em auto;
 }
+
+.hovered {
+    /*filter: brightness(1.5)*/
+    box-shadow: 0 0 15px white;
+}

@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 export function toggle3D(iframe: HTMLIFrameElement) {
     const _document = iframe.contentDocument!;
     const _window = iframe.contentWindow!;
@@ -20,9 +22,10 @@ export function toggle3D(iframe: HTMLIFrameElement) {
             return COLORS[depth % (COLORS.length - 1)];
         }
 
-        function getFaceHTML(x: number, y: number, z: number, width: number, height: number, rotateYDeg: number, color: string) {
+        function getFaceHTML(x: number, y: number, z: number, width: number, height: number, rotateYDeg: number, color: string, nodeId: string) {
 
             const template = _document!.createElement(DIV);
+            template.dataset.faceFor = nodeId
 
             new Map()
                 .set("position", "absolute")
@@ -49,6 +52,8 @@ export function toggle3D(iframe: HTMLIFrameElement) {
                 const childNode = childNodes[i] as HTMLElement;
 
                 if (childNode.nodeType === Node.ELEMENT_NODE) {
+                    const nodeId = nanoid()
+                    childNode.dataset.uid = nodeId
                     childNode.style.overflow = "visible";
                     childNode.style.transformStyle = "preserve-3d";
                     childNode.style.transform = `translateZ(${(step + (length - i) * stepDelta).toFixed(3)}px)`;                    
@@ -74,7 +79,8 @@ export function toggle3D(iframe: HTMLIFrameElement) {
                         childNode.offsetWidth,
                         step,
                         0,
-                        color);
+                        color,
+                        nodeId);
 
                     // Right
                     facesHTML += getFaceHTML(
@@ -84,7 +90,8 @@ export function toggle3D(iframe: HTMLIFrameElement) {
                         childNode.offsetHeight,
                         step,
                         270,
-                        color);
+                        color,
+                        nodeId);
 
                     // Bottom
                     facesHTML += getFaceHTML(
@@ -94,7 +101,8 @@ export function toggle3D(iframe: HTMLIFrameElement) {
                         childNode.offsetWidth,
                         step,
                         0,
-                        color);
+                        color,
+                        nodeId);
 
                     // Left
                     facesHTML += getFaceHTML(
@@ -104,7 +112,8 @@ export function toggle3D(iframe: HTMLIFrameElement) {
                         childNode.offsetHeight,
                         step,
                         270,
-                        color);
+                        color,
+                        nodeId);
                 }
             }
         }
@@ -130,7 +139,37 @@ export function toggle3D(iframe: HTMLIFrameElement) {
                 body.style.transform = `rotateX(${relToDegAsString(yRel)}deg) rotateY(${relToDegAsString(xRel)}deg)`;
             }
         }, true);
+        
+        _document.addEventListener("mouseover", event => {
+            if(event.ctrlKey){
+                const target = event.target as HTMLElement
+                const uid = target.dataset.uid || target.dataset.faceFor
+                document.querySelectorAll
+                if(target.dataset.faceFor){
+                    Array.from(_document.querySelectorAll(`[data-uid="${uid}"], [data-face-for="${uid}"]`))
+                        .forEach(elem => elem.classList.add("hovered"))
+                }
 
+            }
+        })
+
+        _document.addEventListener("mouseleave", event => {
+            _document.querySelectorAll(".hovered").forEach(el => el.classList.remove("hovered"))
+        })
+
+        _document.addEventListener("mouseout", event => {
+            const target = event.target as HTMLElement
+            const uid = target.dataset.uid || target.dataset.faceFor
+            Array.from(_document.querySelectorAll(`[data-uid="${uid}"], [data-face-for="${uid}"]`))
+                        .forEach(elem => elem.classList.remove("hovered"))
+        })
+
+        _document.addEventListener("click", event => {
+            let element = event.target as HTMLElement
+            if(element.dataset.faceFor) element = _document.querySelector(`[data-uid="${element.dataset.faceFor}"]`)!
+            if(!element) return;
+            _window.top?.postMessage({ type: "elementClick", tag: element.tagName.toLowerCase() })
+        })
         
         const faces = _document.createElement(DIV);        
         faces.style.position = "absolute";
