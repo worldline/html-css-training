@@ -1,8 +1,8 @@
 <template>
-  <h2 class="order" :style="{ opacity: level.order && !hasWon ? 1 : 0 }">{{level.order || 'Chapter 1'}}</h2>  
+  <p class="order" :style="{ opacity: level.order && !hasWon ? 1 : 0 }">{{level.order || '&nbsp;'}}</p>
   <iframe src="demo/chapter1.html" ref="iframe"></iframe>
   <p v-if="level.order && level.selector">Use the <b>3D</b> view and the <b>Ctrl</b> key to select elements in the DOM.</p>
-  <button @click="toggleView" id="button-3d" v-if="shouldShow3DButton">{{is3D ? '2D' : '3D'}}</button>
+  <button @click="toggleView" id="button-3d">{{is3D ? '2D' : '3D'}}</button>
 </template>
 
 <script setup lang="ts">
@@ -16,7 +16,6 @@ import { shake } from "../utils";
 const level = computed(() => state.level as Chapter1Level);
 const is3D = ref(false)
 const iframe = ref(null)
-const shouldShow3DButton = computed(() => state.progress.currentLevel > 1)
 const hasWon = ref(false)
 
 function toggleView(){

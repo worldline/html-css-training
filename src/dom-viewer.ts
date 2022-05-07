@@ -174,7 +174,9 @@ export function toggle3D(iframe: HTMLIFrameElement) {
         const faces = _document.createElement(DIV);        
         faces.style.position = "absolute";
         faces.style.transformStyle = "preserve-3d";
-        faces.style.top = "0";
+        const { marginTop, marginLeft } = getComputedStyle(body)
+        faces.style.top = `-${marginTop}`;
+        faces.style.left = `-${marginLeft}`;
         faces.innerHTML = facesHTML;
         body.appendChild(faces);
 

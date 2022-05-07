@@ -1,8 +1,7 @@
-import { state, completeLevel } from "../game";
-import { shake } from "../utils";
-import {Level} from "./level";
 import InteractiveDOM from "../components/InteractiveDOM.vue";
 import LevelInstructions from "../components/LevelInstructions.vue";
+import {Level} from "./level";
+import { Chapter } from "./chapter";
 
 export interface Chapter1Level extends Level {
     instructions: string;
@@ -11,14 +10,10 @@ export interface Chapter1Level extends Level {
 
 export const chapter1Levels: Chapter1Level[] = [
     {
-        name: "Welcome to this training session !",
+        name: "HTML and the DOM",
         instructions: `<img src="img/chef.png" style="width: 88px; margin-right: 0 auto"/>
         <p>During this training, we will be working on the website of Chef Nakamura's brand new restaurant.</p>
-        <p>You can see the homepage on the left. It's basic, but it's a start !</p>`
-    },
-    {
-        name: "HTML & DOM",
-        instructions: `
+        <p>You can see the homepage on the left. It's basic, but it's a start !</p>
         <p>All the content on this page is actually composed of HTML elements grouped in a tree structure called the <strong>DOM</strong>, for Document Object Model</p>
         <p>Click on the <b>3D</b> button on top right to see a 3D representation of this tree structure.</p>
         <p>Move the mouse around to observe the structure. Holding the <b>Ctrl</b> key stops the camera movement.</p>`
@@ -79,6 +74,10 @@ export const chapter1Levels: Chapter1Level[] = [
 
 export const chapter1: Chapter = {
     name: "HTML - Semantics",
+    description: "Why semantics matter",
+    intro: `
+    <p>HTML is the markup language that describes the <strong>content</strong> of web pages.</p>
+    <p>In this chapter, we will look at the different elements available in HTML and why understanding the purpose of each of them is important for you and your visitors.</p>`,
     levels: chapter1Levels,
     leftPanelComponent: InteractiveDOM,
     rightPanelComponent: LevelInstructions

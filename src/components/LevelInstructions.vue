@@ -1,6 +1,6 @@
 <template>
     <div class="instructions">
-      <h3>{{ state.level.name }}</h3>
+      <h3 class="title">{{ state.level.name }}</h3>
       <div v-html="state.level.instructions"></div>
     </div>
     <div class="actions">
@@ -13,11 +13,6 @@ import {completeLevel, state} from "../game"
 </script>
 
 <style scoped>
-.instructions-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
 .instructions {
   flex: 1;
 }

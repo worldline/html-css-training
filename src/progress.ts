@@ -1,13 +1,13 @@
 import {state} from "./game";
-import {chapter2Levels} from "./chapters/chapter2";
 import {chapters} from "./chapters/chapters";
+import { clamp } from "./utils";
 
 const STORAGE_KEY = `html_css_training_progress`
 
 const progress = {
     completed: {} as { [chapter: number]: number[] },
     currentChapter: 1 as number,
-    currentLevel: 1 as number,
+    currentLevel: 0 as number,
     hasCompleted(chapterNumber: number, levelNumber: number): boolean {
         return Array.isArray(this.completed[chapterNumber]) && this.completed[chapterNumber].includes(levelNumber)
     },
@@ -22,7 +22,7 @@ const progress = {
     },
     getPercentCompleted(chapterNumber: number): number{
       if(!Array.isArray(this.completed[chapterNumber])) return 0
-      return this.completed[chapterNumber].length / chapters[chapterNumber-1].levels.length * 100
+      return clamp(this.completed[chapterNumber].length / chapters[chapterNumber-1].levels.length * 100, 0, 100)
     },
     load(){
         try {
@@ -37,7 +37,7 @@ const progress = {
     },
     reset(){
         this.currentChapter = 1;
-        this.currentLevel = 1;
+        this.currentLevel = 0;
         this.completed = {};
         this.save();
     }

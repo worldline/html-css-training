@@ -109,7 +109,7 @@ ul, li {
 .level-menu .checkmark {
   opacity: 0;
   margin-right: 6px;
-  margin-left: -16px;
+  margin-left: -16px;  
 }
 
 .level-menu .completed .checkmark {

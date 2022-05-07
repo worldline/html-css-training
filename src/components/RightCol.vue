@@ -9,15 +9,19 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {computed} from "vue";
 import {state} from "../game";
 import ChapterHeader from "./ChapterHeader.vue";
 import LevelHeader from "./LevelHeader.vue";
 import LevelMenu from "./LevelMenu.vue";
+import ChapterInstructions from "./ChapterInstructions.vue";
 import {currentChapter} from "../chapters/chapters";
 
-const rightPanelComponent = computed(() => currentChapter.value.rightPanelComponent)
+const rightPanelComponent = computed(() => {
+  if(state.progress.currentLevel === 0) return ChapterInstructions
+  else return currentChapter.value.rightPanelComponent
+})
 </script>
 
 <style scoped>
@@ -41,6 +45,12 @@ const rightPanelComponent = computed(() => currentChapter.value.rightPanelCompon
   background: rgba(0,0,0,.2);
   display: flex;
   flex-direction: column;
+}
+
+.right-col ::v-deep(.title) {
+  font-size: 18px;  
+  font-weight: 300;
+  opacity: .7;
 }
 
 .menu-open ::v-deep(.level-menu) {

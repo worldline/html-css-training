@@ -8,13 +8,18 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import About from "./About.vue";
 import Header from "./Header.vue";
+import ChapterIntro from "./ChapterIntro.vue";
 import {computed} from "vue";
 import {currentChapter} from "../chapters/chapters";
+import { state } from "../game";
 
-const leftPanelComponent = computed(() => currentChapter.value.leftPanelComponent)
+const leftPanelComponent = computed(() => {
+  if(state.progress.currentLevel === 0) return ChapterIntro
+  else return currentChapter.value.leftPanelComponent
+})
 </script>
 
 <style scoped>

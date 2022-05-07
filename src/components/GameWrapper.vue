@@ -1,5 +1,5 @@
 <template>
-  <h2 class="order">{{ state.level.doThis }}</h2>
+  <p class="order">{{ state.level.doThis }}</p>
   <div class="game-container">
     <div class="game-wrapper">
       <div class="table-wrapper">

@@ -1,8 +1,7 @@
 <template>
-  <div class="display-help" v-if="state.level">
-    <h3 class="selector-name">{{ state.level.selectorName }}</h3>
-    <h2 class="title">{{ state.level.helpTitle }}</h2>
-    <h3 class="syntax" v-if="state.level.syntax">{{ state.level.syntax }}</h3>
+  <div class="display-help" v-if="state.level">    
+    <h3 class="title">{{ state.level.helpTitle }}</h3>
+    <p class="syntax" v-if="state.level.syntax">{{ state.level.syntax }}</p>
     <div class="hint" v-html="state.level.help"></div>
     <h4 class="examples-title" v-if="state.level.examples?.length > 0">Examples</h4>
     <div class="examples">
@@ -18,20 +17,12 @@ import { state } from "../game"
 <style scoped>
 .display-help {
   font-size: 15px;
-  margin: 30px auto 0 auto;
   color: rgba(255,255,255,.6);
 }
 
 .display-help .selector-name {
   font-size: 18px;
   margin: 0 0 4px 0 ;
-}
-
-.display-help .title {
-  font-size: 18px;
-  margin: 0 0 15px 0;
-  font-weight: 300;
-  opacity: .7;
 }
 
 .display-help .syntax {

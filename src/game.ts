@@ -61,19 +61,16 @@ export function completeLevel(){
 
 export function changeLevel(chapterNumber: number, levelNumber: number){
     const chapter = chapters[chapterNumber-1]
-    if(levelNumber > chapter.levels.length) {
+    if(levelNumber > chapter.levels.length && chapterNumber < chapters.length) {
         chapterNumber++;
-        if(chapterNumber > chapters.length){
-            chapterNumber = 1
-        }
-        levelNumber = 1;
-    } else if(levelNumber < 1 && chapterNumber > 1){
+        levelNumber = 0;
+    } else if(levelNumber < 0 && chapterNumber > 1){
         chapterNumber = Math.max(1, chapterNumber-1)
         levelNumber = chapters[chapterNumber-1].levels.length
     }
 
     state.progress.currentChapter = clamp(chapterNumber, 1, chapters.length)
-    state.progress.currentLevel = clamp(levelNumber, 1, chapters[chapterNumber-1].levels.length)
+    state.progress.currentLevel = clamp(levelNumber, 0, chapters[chapterNumber-1].levels.length)
     hideAllPoppers()
     loadLevel();
     closeMenu();
@@ -82,7 +79,7 @@ export function changeLevel(chapterNumber: number, levelNumber: number){
 export function loadLevel(){
     // Make sure we don't load a level we don't have
     const levels = chapters[state.progress.currentChapter-1].levels
-    state.progress.currentLevel = clamp(state.progress.currentLevel, 1, levels.length)
+    state.progress.currentLevel = clamp(state.progress.currentLevel, 0, levels.length)
     state.level = levels[state.progress.currentLevel-1] as Level;
     state.progress.save()
     document.querySelector("input")?.focus();

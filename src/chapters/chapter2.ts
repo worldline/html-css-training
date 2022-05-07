@@ -2,6 +2,9 @@ import { state, completeLevel } from "../game";
 import { cleanupEffects, shake } from "../utils";
 import {Level} from "./level";
 
+import GameWrapper from "../components/GameWrapper.vue"
+import Chapter2LevelInstructions from "../components/Chapter2LevelInstructions.vue";
+
 export function fireRule(rule: string) {
   const level = state.level as Chapter2Level;
 
@@ -763,3 +766,11 @@ export const chapter2Levels: Chapter2Level[] = [
     `
     }
 ];
+
+export const chapter2: Chapter = {
+  name: "CSS - Selectors",
+  levels: chapter2Levels,
+  leftPanelComponent: GameWrapper,
+  rightPanelComponent: Chapter2LevelInstructions,
+  credits: `Credits: <a href="http://www.twitter.com/flukeout">@flukeout</a>`
+}

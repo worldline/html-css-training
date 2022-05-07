@@ -1,5 +1,6 @@
 <template>
-  <h2 class="level-header" :class="{ completed: state.progress.hasCompleted(state.progress.currentChapter, state.progress.currentLevel) }">
+  <h2 class="level-header" :class="{ completed: state.progress.hasCompleted(state.progress.currentChapter, state.progress.currentLevel) }"
+      v-if="state.progress.currentLevel > 0" >
         <span class="level-text">
           Level {{ state.progress.currentLevel }} of {{ levels.length }}
         </span>
@@ -11,7 +12,7 @@
     <a class="next" href="#" @click.prevent="navigateLevel('next', $event)"></a>
   </div>
 
-  <div class="level-progress">
+  <div class="level-progress" v-if="state.progress.currentLevel > 0" >
     <div class="progress" :style="{ width: state.progress.getPercentCompleted(state.progress.currentChapter)+'%' }"></div>
   </div>
 </template>
@@ -69,6 +70,9 @@ function navigateLevel(direction="next", event: Event){
   border-radius: 5px;
 }
 
+.checkmark {
+  font-size: 80%;
+}
 
 /* Previous and next level navigation */
 
