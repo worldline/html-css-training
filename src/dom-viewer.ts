@@ -166,9 +166,14 @@ export function toggle3D(iframe: HTMLIFrameElement) {
 
         _document.addEventListener("click", event => {
             let element = event.target as HTMLElement
+            if(element.nodeName === 'A') event.preventDefault() // disable links on 3D View
             if(element.dataset.faceFor) element = _document.querySelector(`[data-uid="${element.dataset.faceFor}"]`)!
             if(!element) return;
-            _window.top?.postMessage({ type: "elementClick", tag: element.tagName.toLowerCase() })
+            _window.top?.postMessage({ 
+                event: "elementClick", 
+                tag: element.tagName.toLowerCase(),
+                type: element.getAttribute("type")
+             })
         })
         
         const faces = _document.createElement(DIV);        

@@ -33,6 +33,10 @@ import {completeLevel, state} from "../game"
   border-bottom: solid 2px rgba(255,255,255,.1);
 }
 
+.instructions ::v-deep(ul){
+  padding-left: 20px;
+}
+
 .actions {
   display: flex;
   justify-content: flex-end;

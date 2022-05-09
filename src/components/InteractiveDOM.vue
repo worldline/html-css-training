@@ -1,6 +1,6 @@
 <template>
   <p class="order" :style="{ opacity: level.order && !hasWon ? 1 : 0 }">{{level.order || '&nbsp;'}}</p>
-  <iframe src="demo/chapter1.html" ref="iframe"></iframe>
+  <iframe src="demo/chapter1.html" ref="iframe" scrolling="no"></iframe>
   <p v-if="level.order && level.selector">Use the <b>3D</b> view and the <b>Ctrl</b> key to select elements in the DOM.</p>
   <button @click="toggleView" id="button-3d">{{is3D ? '2D' : '3D'}}</button>
 </template>
@@ -31,10 +31,12 @@ function toggleView(){
 }
 
 useEventListener("message", message => {
-  if(message.data.type === "elementClick"){
+  if(message.data.event === "elementClick"){
     const tag = message.data.tag
     if(tag == null || !state.level.selector) return;
-    if(tag === state.level.selector){
+    let clicked = tag;
+    if(message.data.type != null) clicked += `[type="${message.data.type}"]`
+    if(clicked === state.level.selector){
       hasWon.value = true;
       setTimeout(() => {
         hasWon.value = false;

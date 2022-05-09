@@ -656,7 +656,7 @@ export const chapter2Levels: Chapter2Level[] = [
         help : 'Attributes appear inside the opening tag of an element, like this: <tag>span attribute="value"</tag>. An attribute does not always have a value, it can be blank!',
         examples : [
             '<strong>[value]</strong> selects all elements that have a <strong>value="anything"</strong> attribute.',
-            '<strong>[type]</strong> selects all elements that have a <strong>type="anything"</strong>. attribute'
+            '<strong>[type]</strong> selects all elements that have a <strong>type="anything"</strong> attribute.'
         ],
         boardMarkup:`
     <bento><apple class="small"/></bento>
