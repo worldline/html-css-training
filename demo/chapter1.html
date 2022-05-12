@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <title>Chef Nakamura's Restaurant</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Chef Nakamura will be delighted to welcome you to his brand new Japanese restaurant." />
+    <link rel="stylesheet" href="chapter1.css" />
+</head>
+
+<body>
+<header>
+    <img class="logo" src="logo.png" alt="" />
+    <div>
+        <h1>Chef Nakamura's Restaurant</h1>
+        <p>Best Sushis in town</p>
+    </div>
+    <nav>
+        <a href="#/photos">Photos</a>
+        <a href="tel:573-757-2740">Call us now</a>
+        <a href="http://miam.com">Leave a review</a>
+    </nav>
+</header>
+<main>
+    <p>Chef Nakamura will be delighted to welcome you to his brand new Japanese restaurant.</p>
+    <article>
+        <h2>Menu</h2>
+        <ul>
+            <li class="dish">
+                <img src="bento.jpg" alt="Veggie bento">
+                <h3>Veggie bento</h3>
+                <p>A bento with vegetarian sumomaki, veggie bomb, inari, wakame, edamame beans, tempura vegetables (sweet potato, cauliflower, green bean), ponzu sauce.</p>
+                <p class="price">$16,00</p>
+            </li>
+            <li class="dish">
+                <img src="ramen.jpg" alt="Ramen soup">
+                <h3>Ramen soup</h3>
+                <p>A ramen soup with pork belly, fresh baby spinach leaves, eggs, spring onions and shallots and sweet corn kernels.</p>
+                <p class="price">$14,50</p>
+            </li>
+        </ul>
+    </article>
+</main>
+<aside>
+    <section id="info">
+        <h2>Informations</h2>
+        <dl>
+            <dt>Opening days</dt><dd>Tuesday to Sunday</dd>
+            <dt>Opening hours:</dt>
+            <dd>
+                <time datetime="11:00">11 a.m.</time> to 
+                <time datetime="23:00">11 p.m.</time>
+            </dd>
+        </dl>
+        <address>
+            Chef Nakamura's Restaurant<br>
+            2597 Mandan Road, Missouri<br>
+            Phone: 573-757-2740
+        </address>
+    </section>
+
+    <section id="booking">
+        <h2>Book a table</h2>
+        <form>
+            <label for="book_name">Name</label>
+            <input type="text" id="book_name" />
+            <br/>
+            <label for="book_phone">Phone</label>
+            <input type="tel" id="book_phone" />
+            <br/>
+            <label for="book_date">Date</label>
+            <input type="date" id="book_date" />
+            <br/>
+            <button type="submit">Book now</button>
+        </form>
+    </section>
+</aside>
+
+</body>
+</html>

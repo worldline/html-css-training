@@ -1,0 +1,102 @@
+
+body {
+    color: white;
+    font-family: "Exo 2", "Lato", "Helvetica Neue", sans-serif;
+    background-color: #3f0f0a;
+    display: grid;
+    grid-template-areas: "header header" "main aside";
+    grid-template-columns: 1fr 320px;
+    grid-template-rows: min-content 1fr;
+}
+
+a {
+    color: #cc8800;
+}
+
+a:hover {
+    color: #f0b020;
+}
+
+header {
+    grid-area: header;
+    background-color: #711c12;
+    display: flex;
+    align-items: center;
+}
+
+header * {
+    flex: 1;
+}
+
+header img {
+    flex: 0;
+}
+
+header nav {
+    flex: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0.5em;
+    margin-right: 1em;
+}
+
+nav a {
+    flex: 0;
+    white-space: nowrap;
+}
+
+h1:first-child, h2:first-child {
+    margin-top: 0;
+}
+
+main {
+    grid-area: main;
+}
+
+article {
+    background: #711c12;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+}
+
+article img {
+    max-width: 30%;
+    float: left;
+    margin: 0 1em 1em 0;
+    box-shadow: 5px 5px 10px rgb(0 0 0 / 50%);
+}
+
+ul, li {
+    list-style: none;
+    padding: 0;
+}
+
+aside {
+    grid-area: aside;
+}
+
+section {
+    background: #711c12;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+}
+
+dt, .price {
+   color: #aaa;
+}
+
+form label {
+    display: inline-block;
+    width: 20%;
+}
+
+form button {
+    display: block;
+    margin: 0.5em auto;
+}
+
+.hovered {    
+    box-shadow: 0 0 25px white;
+}
