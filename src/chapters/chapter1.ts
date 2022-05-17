@@ -286,7 +286,7 @@ export const chapter1Levels: Chapter1Level[] = [
         <p>Depending on their <b>type</b> attribute, their UI and behavior will change to receive various types of input: 
         <b>text</b>, <b>password</b>, <b>checkbox</b>, <b>color</b>...</p>
         <p>The complete list of standard input types can be found <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#input_types" target="_blank">here</a>.</p>
-        <p>For example, an <tag>input type="date"</tag> will open a datepicker UI that matches the device and operating system of the user. Try it on the restaurant website !</p>
+        <p>For example, an <tag>input type="datetime-local"</tag> will open a date and time picker UI that matches the device and operating system of the user. Try it on the restaurant website !</p>
         `
     },
 ]
