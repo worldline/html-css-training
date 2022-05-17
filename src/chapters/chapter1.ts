@@ -3,9 +3,23 @@ import LevelInstructions from "../components/LevelInstructions.vue";
 import {Level} from "./level";
 import { Chapter } from "./chapter";
 
+export interface ElementClickedData {
+    tag: string;
+    type: string;
+}
+
+export function checkElementClicked(messageData: ElementClickedData, level: Chapter1Level){
+    return (
+        (!level.tag || messageData.tag === level.tag)
+        && (!level.type || messageData.type === level.type)
+    )
+}
+
 export interface Chapter1Level extends Level {
     instructions: string;
     order?: string;
+    tag?: string;
+    type?: string;
 }
 
 export const chapter1Levels: Chapter1Level[] = [
@@ -37,7 +51,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Sectionning: <main>",
         order: "Click on a <main> element",
-        selector: "main",
+        tag: "main",
         instructions: `
         <p>Properly describing the different sections of a web document helps for accessibility tools and for the indexability by search engines crawlers.</p>
         <h3 class="syntax">&lt;main&gt;</h3>
@@ -50,7 +64,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Sectionning: <aside>",
         order: "Click on a <aside> element",
-        selector: "aside",
+        tag: "aside",
         instructions: `
         <p>Properly describing the different sections of a web document helps for accessibility tools and for the indexability by search engines crawlers.</p>
 
@@ -61,7 +75,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Sectionning: <header>",
         order: "Click on a <header> element",
-        selector: "header",
+        tag: "header",
         instructions: `
         <p>Properly describing the different sections of a web document helps for accessibility tools and for the indexability by search engines crawlers.</p>
 
@@ -72,7 +86,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Sectionning: <nav>",
         order: "Click on a <nav> element",
-        selector: "nav",
+        tag: "nav",
         instructions: `
         <p>Properly describing the different sections of a web document helps for accessibility tools and for the indexability by search engines crawlers.</p>
 
@@ -84,7 +98,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Sectionning: <article>",
         order: "Click on a <article> element",
-        selector: "article",
+        tag: "article",
         instructions: `
         <p>Properly describing the different sections of a web document helps for accessibility tools and for the indexability by search engines crawlers.</p>
 
@@ -97,7 +111,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Sectionning: <section>",
         order: "Click on a <section> element",
-        selector: "section",
+        tag: "section",
         instructions: `
         <p>Properly describing the different sections of a web document helps for accessibility tools and for the indexability by search engines crawlers.</p>
 
@@ -109,7 +123,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Sectionning: Headings",
         order: "Click on a <h1> element",
-        selector: "h1",
+        tag: "h1",
         instructions: `
         <p>Text on a web document can benefit from being placed in appropriate tags that have predefined styles provided by the browser.</p>
 
@@ -122,7 +136,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Sectionning: Headings #2",
         order: "Click on a <h2> element",
-        selector: "h2",
+        tag: "h2",
         instructions: `
         <p>Text on a web document can benefit from being placed in appropriate tags that have predefined styles provided by the browser.</p>
 
@@ -134,7 +148,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Text semantics: Paragraphs",
         order: "Click on a <p> element",
-        selector: "p",
+        tag: "p",
         instructions: `
         <p>Text on a web document can benefit from being placed in appropriate tags that have predefined styles provided by the browser.</p>
 
@@ -147,7 +161,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Text semantics: Lists",
         order: "Click on a <ul> element",
-        selector: "ul",
+        tag: "ul",
         instructions: `
         <p>Text on a web document can benefit from being placed in appropriate tags that have predefined styles provided by the browser.</p>
 
@@ -160,7 +174,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Text semantics: Lists items",
         order: "Click on a <li> element",
-        selector: "li",
+        tag: "li",
         instructions: `
         <p>Text on a web document can benefit from being placed in appropriate tags that have predefined styles provided by the browser.</p>
 
@@ -173,7 +187,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Text semantics: Descriptions Lists",
         order: "Click on a <dl> element",
-        selector: "dl",
+        tag: "dl",
         instructions: `
         <p>Text on a web document can benefit from being placed in appropriate tags that have predefined styles provided by the browser.</p>
 
@@ -185,7 +199,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Text semantics: Description Term",
         order: "Click on a <dt> element",
-        selector: "dt",
+        tag: "dt",
         instructions: `
         <p>Text on a web document can benefit from being placed in appropriate tags that have predefined styles provided by the browser.</p>
 
@@ -197,7 +211,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Text semantics: Description Details",
         order: "Click on a <dd> element",
-        selector: "dd",
+        tag: "dd",
         instructions: `
         <p>Text on a web document can benefit from being placed in appropriate tags that have predefined styles provided by the browser.</p>
 
@@ -209,7 +223,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Text semantics: Time and dates",
         order: "Click on a <time> element",
-        selector: "time",
+        tag: "time",
         instructions: `
         <p>Text on a web document can benefit from being placed in appropriate tags that have predefined styles provided by the browser.</p>
 
@@ -221,7 +235,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Text semantics: Address",
         order: "Click on a <address> element",
-        selector: "address",
+        tag: "address",
         instructions: `
         <p>Properly describing the different sections of a web document helps for accessibility tools and for the indexability by search engines crawlers.</p>
 
@@ -233,7 +247,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Interactions: Links",
         order: "Click on a <a> element",
-        selector: "a",
+        tag: "a",
         instructions: `
         <p>Some elements are used for user interaction on the document. Again, picking the right element can make these interactions more convenient for your users.</p>
 
@@ -252,7 +266,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Interactions: Forms",
         order: "Click on a <form> element",
-        selector: "form",
+        tag: "form",
         instructions: `
         <p>Some elements are used for user interaction on the document. Again, picking the right element can make these interactions more convenient for your users.</p>
 
@@ -265,7 +279,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Interactions: Buttons",
         order: "Click on a <button> element",
-        selector: "button",
+        tag: 'button',
         instructions: `
         <p>Some elements are used for user interaction on the document. Again, picking the right element can make these interactions more convenient for your users.</p>
 
@@ -277,7 +291,8 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "Interactions: Inputs",
         order: `Click on a <input type="tel"> element`,
-        selector: 'input[type="tel"]',
+        tag: 'input',
+        type: "tel",
         instructions: `
         <p>Some elements are used for user interaction on the document. Again, picking the right element can make these interactions more convenient for your users.</p>
 

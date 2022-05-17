@@ -2,7 +2,7 @@
   <h1 class="chapter-header">Chapter {{state.progress.currentChapter}}: {{chapter.name}}</h1>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {state} from "../game";
 import {computed} from "vue";
 import {chapters} from "../chapters/chapters";

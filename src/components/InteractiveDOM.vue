@@ -1,12 +1,12 @@
 <template>
   <p class="order" :style="{ opacity: level.order && !hasWon ? 1 : 0 }">{{level.order || '&nbsp;'}}</p>
   <iframe src="demo/chapter1.html" ref="iframe" scrolling="no"></iframe>
-  <p v-if="level.order && level.selector">Use the <b>3D</b> view and the <b>Ctrl</b> key to select elements in the DOM.</p>
+  <p v-if="level.order && level.tag">Use the <b>3D</b> view and the <b>Ctrl</b> key to select elements in the DOM.</p>
   <button @click="toggleView" id="button-3d">{{is3D ? '2D' : '3D'}}</button>
 </template>
 
 <script setup lang="ts">
-import { Chapter1Level } from "../chapters/chapter1";
+import { Chapter1Level, checkElementClicked, ElementClickedData } from "../chapters/chapter1";
 import {completeLevel, state} from "../game";
 import { toggle3D } from "../dom-viewer";
 import {computed, ref} from "vue";
@@ -32,11 +32,12 @@ function toggleView(){
 
 useEventListener("message", message => {
   if(message.data.event === "elementClick"){
-    const tag = message.data.tag
-    if(tag == null || !state.level.selector) return;
-    let clicked = tag;
-    if(message.data.type != null) clicked += `[type="${message.data.type}"]`
-    if(clicked === state.level.selector){
+    const messageData = message.data as ElementClickedData
+    const tag = messageData.tag
+    const level = state.level as Chapter1Level    
+    if(tag == null || !level.tag) return;
+
+    if(checkElementClicked(messageData, level)){
       hasWon.value = true;
       setTimeout(() => {
         hasWon.value = false;

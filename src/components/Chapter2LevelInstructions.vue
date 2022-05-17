@@ -5,7 +5,7 @@
     <div class="hint" v-html="state.level.help"></div>
     <h4 class="examples-title" v-if="state.level.examples?.length > 0">Examples</h4>
     <div class="examples">
-      <div class='example' v-for="example in state.level.examples" v-html="example"></div>
+      <div class='example' v-for="example in state.level.examples" :key="example" v-html="example"></div>
     </div>
   </div>
 </template>

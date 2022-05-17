@@ -4,6 +4,7 @@ import { Level } from "./level";
 
 import GameWrapper from "../components/GameWrapper.vue";
 import Chapter2LevelInstructions from "../components/Chapter2LevelInstructions.vue";
+import { Chapter } from "./chapter";
 
 export function fireRule(rule: string) {
   const level = state.level as Chapter2Level;
