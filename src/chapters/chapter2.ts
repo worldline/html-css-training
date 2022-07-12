@@ -2,7 +2,7 @@ import { state, completeLevel } from "../game";
 import { cleanupEffects, shake } from "../utils";
 import {Level} from "./level";
 
-import GameWrapper from "../components/GameWrapper.vue"
+import GameWrapper from "../components/SelectorGame.vue"
 import Chapter2LevelInstructions from "../components/Chapter2LevelInstructions.vue";
 import { Chapter } from "./chapter";
 
@@ -12,7 +12,7 @@ export function fireRule(rule: string) {
   cleanupEffects()
 
   // var baseTable = $('.table-wrapper > .table, .table-wrapper > .nametags, .table-wrapper > .table-surface');
-  const baseTable = document.querySelector('#board')!;
+  const baseTable = document.querySelector('.table-board')!;
 
   // Check if selector will throw an error trying the mystery rule
   // If it errors out, change the rule to null so the wrong-guess animation will work
@@ -773,5 +773,8 @@ export const chapter2: Chapter = {
   levels: chapter2Levels,
   leftPanelComponent: GameWrapper,
   rightPanelComponent: Chapter2LevelInstructions,
-  credits: `Credits: <a href="http://www.twitter.com/flukeout">@flukeout</a>`
+  credits: `Credits: <a href="http://www.twitter.com/flukeout">@flukeout</a>`,
+  intro: `
+    <p>To apply CSS to an element you need to select this element with a <b>selector</b>.</p>
+    <p>CSS provides you with a number of different ways to do this, and you can explore them in this chapter.</p>`,
 }

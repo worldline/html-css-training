@@ -9,17 +9,17 @@
     "deploy": "node ./build/deploy.js"
   },
   "dependencies": {
-    "@vueuse/core": "^7.5.5",
-    "floating-vue": "^2.0.0-beta.15",
-    "nanoid": "^3.3.4",
-    "vue": "^3.2.25"
+    "@vueuse/core": "^8.9.1",
+    "floating-vue": "^2.0.0-beta.17",
+    "nanoid": "^4.0.0",
+    "vue": "^3.2.37"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.0.0",
-    "postcss": "^8.4.13",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "postcss": "^8.4.14",
     "postcss-nested": "^5.0.6",
     "shelljs": "^0.8.5",
-    "typescript": "^4.4.4",
-    "vite": "^2.7.2"
+    "typescript": "^4.7.4",
+    "vite": "^2.9.14"
   }
 }

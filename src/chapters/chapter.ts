@@ -3,7 +3,7 @@ import { Level } from "./level";
 
 export interface Chapter {
     name: string;
-    description: string;
+    description?: string;
     intro: string;
     levels: Level[];
     rightPanelComponent: Component

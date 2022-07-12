@@ -4,8 +4,7 @@ import {nextTick, reactive} from "vue";
 import progress from "./progress";
 import {chapters} from "./chapters/chapters";
 import {Level} from "./chapters/level";
-import {chapter1Levels, onElementClick} from "./chapters/chapter1";
-import {Chapter2Level} from "./chapters/chapter2";
+import {chapter1Levels} from "./chapters/chapter1";
 
 export const state = reactive({
     progress: progress,
@@ -22,7 +21,7 @@ export function closeMenu(){
 }
 
 export function addBoardElementsTooltips(){
-    const elements = Array.from(document.querySelectorAll("#board *"))
+    const elements = Array.from(document.querySelectorAll(".table-board *"))
     elements.forEach(el => {
         createTooltip(el, {
             triggers: ["hover"],

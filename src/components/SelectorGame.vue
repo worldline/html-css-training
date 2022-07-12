@@ -2,29 +2,17 @@
   <p class="order">{{ state.level.doThis }}</p>
   <div class="game-container">
     <div class="game-wrapper">
-      <div class="table-wrapper">
-        <div class="table-surface" ref="surface"></div>
-        <div class="table">
-          <div v-html="state.level.boardMarkup" ref="board" id="board"></div>
-        </div>
-      </div>
-      <div class="table-edge" ref="edge">
-        <div class="table-leg"></div>
-        <div class="table-leg"></div>
-      </div>
+      <Table :content="state.level.boardMarkup"></Table>
     </div>
   </div>
   <Editor />
 </template>
 
 <script setup lang="ts">
-import {Ref, ref} from "vue";
 import Editor from "./Editor.vue";
 import {state} from "../game";
+import Table from "./Table.vue"
 
-const surface: Ref<HTMLElement | null> = ref(null)
-const edge: Ref<HTMLElement | null> = ref(null)
-const board: Ref<HTMLElement | null> = ref(null)
 </script>
 
 <style scoped>
