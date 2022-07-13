@@ -29,7 +29,7 @@ export default {
   z-index: 9999;
   position: relative;
   margin: 10px 20px 0 20px;
-  width: 180px;
+  width: auto;
 }
 
 .table {

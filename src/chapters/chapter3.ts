@@ -2,21 +2,36 @@ import SpecificityGame from "../components/SpecificityGame.vue";
 import LevelInstructions from "../components/LevelInstructions.vue";
 import {Level} from "./level";
 import { Chapter } from "./chapter";
+import Table from "../components/Table.vue";
+
+interface Customer {
+    selector: string;
+    request: string;
+    meal: string;
+}
 
 export interface Chapter3Level extends Level {
-    instructions: string;
-    order?: string;
-    tag?: string;
-    type?: string;
+    customers: Customer[];
+    solution: string[]
+    tableMarkup: string;
 }
 
 export const chapter3Levels: Chapter3Level[] = [
     {
         name: "Specificity game 1",
         instructions: `
-        <p>Your clients have specific requests for their table. The more specific they are, the more important is their request.</>
-        <p>Pick the appropriate colors for each table according to the requests of the customers.</p>
-        <p>You can change the color of a table by clicking on it.</p>`
+        <p>Your customers have ordered a meal, but with conflicting instructions. <b>The more specific the request, the higher the priority should be.</b></p>
+        <p>Select the appropriate meal for each customer. You can change the meal by clicking on the plate.</p>`,
+        tableMarkup: `
+            <bento><plate></plate></bento>
+            <bento><plate id="fancy"></plate></bento>
+            <bento><plate></plate></bento>
+        `,
+        customers: [
+            { selector: "plate", meal: "sushi", request: "Put sushis on every plate" },
+            { selector: "#fancy", meal: "apple", request: "Put an apple on the fancy plate"}
+        ],
+        solution: ["sushi", "apple", "sushi"]
     }
 ]
 

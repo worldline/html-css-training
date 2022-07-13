@@ -17,7 +17,7 @@ const credits = computed(() => currentChapter.value.credits)
   text-align: center;
   padding: 20px 0;
   width: 725px;
-  color: rgba(255,255,255,.3);
+  color: #777;
   font-size: 15px;
   margin: 0 auto;
   font-weight: 400;

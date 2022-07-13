@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [vue({
     template: {
       compilerOptions: {
-        isCustomElement: tag => ['plate','bento','apple','orange'].includes(tag)
+        isCustomElement: tag => ['plate','bento','apple','orange','pickle','sushi', 'toast'].includes(tag)
       }
     }
   })]

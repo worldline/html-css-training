@@ -121,16 +121,18 @@ orange,apple,pickle {
     height: 60px;
 }
 
-carrot {
+toast {
     width: 60px;
     height: 60px;
     display: inline-block;
     box-shadow: 0 5px 0 rgba(0,0,0,.15);
     background: #f9e4ac;
+    background-image: radial-gradient(#e6d092 15%, transparent 16%),radial-gradient(#e6d092 15%, transparent 16%);
+    background-size: 10px 10px;
+    background-position: 0 0, 3px 3px;
     border-style: solid;
     border-color: #88611e;
-    border-width: 2px 2px 12px 2px;
-    -webkit-border-radius: 15px 15px 6px 6px;
+    border-width: 2px 2px 8px 2px;
     border-radius: 15px 15px 6px 6px;
     margin: 20px 10px;
 }
@@ -235,6 +237,24 @@ bento > pickle.small:only-child {
     z-index: 99999;
 }
 
+plate > sushi:only-child,
+bento > sushi:only-child {
+    top: 50%;
+    left: calc(50% - 27px);
+    z-index: 99999;
+    margin: 0;
+    position: absolute;
+}
+
+plate > toast:only-child,
+bento > toast:only-child {
+    top: 20%;
+    left: calc(50% - 30px);
+    z-index: 99999;
+    margin: 0;
+    position: absolute;
+}
+
 /* Fancy orange stacking */
 plate apple,
 plate orange {
@@ -264,4 +284,30 @@ plate orange:nth-last-child(4)
 {
     top: -105px;
     z-index: 600;
+}
+
+sushi {
+    display: inline-block;
+    margin: 0 10px;
+    width: 56px;
+    height: 34px;
+    position: relative;
+    border: 4px solid #2C3527;
+    background: #2C3527;
+    z-index: 0;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+
+}
+sushi::after {
+    content: "";
+    display: block;
+    background: radial-gradient(#be4b5b, #be4b5b 40%, #F1EEEA 41%, #F1EEEA);
+    width: 48px;
+    height: 44px;
+    border-radius: 24px;
+    border: 4px solid #2C3527;
+    position: absolute;
+    top: -36px;
+    left: -4px;
 }

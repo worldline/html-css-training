@@ -1,21 +1,23 @@
 <template>
   <div class="customer-wrapper">
-    <div class="customer-speech-bubble"></div>
+    <div class="customer-speech-bubble">{{ request }}</div>
     <div class="customer-head"></div>
     <div class="customer-body">
       <div class="code">
-        <pre>table {
-  color: brown
+        <pre>{{ selector }} {
+  meal: {{ meal }}
 }</pre>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "Customer"
-}
+<script setup>
+defineProps({
+  request: String,
+  selector: String,
+  meal: String
+})
 </script>
 
 <style scoped>
@@ -33,10 +35,13 @@ export default {
   top: -80px;
   height: 100px;
   width: 180px;
-  background-color: antiquewhite;
+  background-color: white;
   color: black;
   border-radius: 50%;
   border: 4px solid black;
+  padding: 1.1em;
+  display: flex;
+  align-items: center;
 }
 
 .customer-speech-bubble::after {
@@ -45,7 +50,7 @@ export default {
   width: 0;
   height: 0;
   color: black;
-  border-top: 20px solid antiquewhite;
+  border-top: 20px solid white;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   position: absolute;
@@ -59,7 +64,7 @@ export default {
   left: 30px;
   top: 30px;
   border-radius: 50%;
-  background: white;
+  background: linear-gradient(135deg, #fff, #ddd);
   width: 100px;
   height: 100px;
   border: 4px solid black;
@@ -72,7 +77,7 @@ export default {
   top: 100px;
   padding-top: 40px;
   border-radius: 80px 80px 0 0;
-  background: white;
+  background: linear-gradient(135deg, #fff, #ddd);
   width: 160px;
   height: 140px;
   border: 4px solid black;
@@ -85,6 +90,6 @@ export default {
   text-align: left;
   line-height: 150%;
   padding: 0;
-  margin: .5em;
+  margin: .5em 1em;
 }
 </style>

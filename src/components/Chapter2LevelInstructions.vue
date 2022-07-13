@@ -17,7 +17,7 @@ import { state } from "../game"
 <style scoped>
 .display-help {
   font-size: 15px;
-  color: rgba(255,255,255,.6);
+  color: #999;
 }
 
 .display-help .selector-name {
@@ -29,7 +29,6 @@ import { state } from "../game"
   font-size: 24px;
   margin: 0 0 18px 0;
   font-weight: 200;
-  opacity: .8;
   background: rgba(255,255,255,.05);
   display: inline-block;
   padding: 5px 8px;
@@ -48,7 +47,7 @@ import { state } from "../game"
 
 .display-help .hint,
 .display-help .example {
-  color: #888;
+  color: #999;
   font-size: 15px;
 }
 
@@ -78,7 +77,7 @@ import { state } from "../game"
 }
 
 .display-help .selector-wrapper {
-  color: #777;
+  color: #888;
 }
 
 .display-help .selector {
@@ -89,7 +88,7 @@ import { state } from "../game"
   border: solid 1px #DDD;
   font-family: menlo, monospace;
   display: none;
-  color: #666;
+  color: #777;
   position: relative;
 }
 

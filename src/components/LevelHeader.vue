@@ -43,7 +43,7 @@ function navigateLevel(direction="next", event: Event){
   font-size: 25px;
   margin: 0;
   padding: 0 0 10px 0;
-  color: #777;
+  color: #999;
 }
 
 .level-progress {

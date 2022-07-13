@@ -14,7 +14,7 @@
 <style scoped>
 header {
   padding: 12px 15px 11px 35px;
-  color: rgba(255,255,255,.3);
+  color: #888;
   text-align: left;
 }
 
@@ -24,7 +24,7 @@ header {
   position: absolute;
   top: 12px;
   left: 10px;
-  color: rgba(255,255,255,.4);
+  color: #888;
 }
 
 .share-menu {

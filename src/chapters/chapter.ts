@@ -9,4 +9,5 @@ export interface Chapter {
     rightPanelComponent: Component
     leftPanelComponent: Component
     credits?: string;
+    onLevelStart?: Function;
 }

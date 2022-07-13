@@ -1,6 +1,6 @@
 import {clamp} from "./utils";
-import {createTooltip, hideAllPoppers} from "floating-vue";
-import {nextTick, reactive} from "vue";
+import {hideAllPoppers} from "floating-vue";
+import {reactive} from "vue";
 import progress from "./progress";
 import {chapters} from "./chapters/chapters";
 import {Level} from "./chapters/level";
@@ -18,26 +18,6 @@ state.progress.load()
 
 export function closeMenu(){
     state.menuOpened = false;
-}
-
-export function addBoardElementsTooltips(){
-    const elements = Array.from(document.querySelectorAll(".table-board *"))
-    elements.forEach(el => {
-        createTooltip(el, {
-            triggers: ["hover"],
-            content: getTooltipContent(el),
-            delay: 0
-        }, null)
-        el.addEventListener("mouseover", (e) => e.stopPropagation())
-        el.addEventListener("mouseenter", (e) => e.stopPropagation())
-    })
-}
-
-function getTooltipContent(el: Element) {
-    const tagName = el.tagName.toLowerCase()
-    const elClass = el.getAttribute("class")
-    const elId = el.getAttribute("id")
-    return `<${tagName}${elId ? ` id="${elId}"` : ''}${elClass ? ` class="${elClass}"` : ''}>`
 }
 
 // Reset all progress
@@ -77,10 +57,10 @@ export function changeLevel(chapterNumber: number, levelNumber: number){
 
 export function loadLevel(){
     // Make sure we don't load a level we don't have
-    const levels = chapters[state.progress.currentChapter-1].levels
+    const chapter = chapters[state.progress.currentChapter-1]
+    const levels = chapter.levels
     state.progress.currentLevel = clamp(state.progress.currentLevel, 0, levels.length)
     state.level = levels[state.progress.currentLevel-1] as Level;
     state.progress.save()
-    document.querySelector("input")?.focus();
-    nextTick(() => addBoardElementsTooltips())
+    if(chapter.onLevelStart) chapter.onLevelStart(state.level)
 }

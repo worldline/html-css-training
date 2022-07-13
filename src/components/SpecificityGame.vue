@@ -1,11 +1,9 @@
 <template>
   <div class="game-container">
     <div class="game-wrapper">
-      <Table v-for="n in 4">
-        <bento :class="tableColors[n-1]"/>
-      </Table>
+      <Table :content="state.level.tableMarkup" @click="onTableClick"></Table>
       <div class="customers">
-        <Customer v-for="n in 4" />
+        <Customer v-for="customer in state.level.customers" v-bind="customer"/>
       </div>
 
     </div>
@@ -16,7 +14,20 @@
 import Table from "./Table.vue";
 import Customer from "./Customer.vue"
 
-const tableColors = ["red","blue","green","yellow"]
+import {state} from "../game";
+
+function onTableClick(event: Event){
+  const plate = (event.target as HTMLElement).closest("plate")
+  if(plate) toggleMeal(plate as HTMLElement)
+}
+
+const meals = ["sushi","apple","orange","pickle", "toast"]
+function toggleMeal(plate: HTMLElement){
+  const child = plate.firstChild as (HTMLElement | null)
+  const nextMeal = meals[meals.indexOf(child?.tagName?.toLowerCase() ?? "soup") + 1] || "sushi"
+  if(child == null) plate.appendChild(document.createElement(nextMeal))
+  else plate.replaceChild(document.createElement(nextMeal), child)
+}
 </script>
 
 <style scoped>
@@ -46,4 +57,7 @@ const tableColors = ["red","blue","green","yellow"]
   display: inline-block;
 }
 
+.game-wrapper ::v-deep(plate){
+  cursor: pointer;
+}
 </style>

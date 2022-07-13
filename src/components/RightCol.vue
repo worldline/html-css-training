@@ -50,7 +50,6 @@ const rightPanelComponent = computed(() => {
 .right-col ::v-deep(.title) {
   font-size: 18px;  
   font-weight: 300;
-  opacity: .7;
 }
 
 .menu-open ::v-deep(.level-menu) {

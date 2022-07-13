@@ -52,7 +52,7 @@ function getMarkup(el, ignoreRoot){
 }
 
 .markup * {
-  color: rgba(255,255,255,.3);
+  color: rgba(255,255,255,.75);
 }
 
 .markup div {
