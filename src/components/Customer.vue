@@ -5,14 +5,14 @@
     <div class="customer-body">
       <div class="code">
         <pre>{{ selector }} {
-  meal: {{ meal }}
+  meal: {{ meal }};
 }</pre>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineProps({
   request: String,
   selector: String,
@@ -24,9 +24,9 @@ defineProps({
 .customer-wrapper{
   position: relative;
   display: inline-block;
-  margin: 150px 50px 50px 50px;
+  margin: 100px 10px 0 10px;
   width: 200px;
-  height: 300px;
+  height: 250px;
 }
 
 .customer-speech-bubble {
@@ -55,7 +55,7 @@ defineProps({
   border-right: 20px solid transparent;
   position: absolute;
   top: 80px;
-  left: 35px;
+  left: 45px;
   transform: rotate(20deg);
 }
 
@@ -64,7 +64,7 @@ defineProps({
   left: 30px;
   top: 30px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #fff, #ddd);
+  background: linear-gradient(135deg, #fff, #ccc);
   width: 100px;
   height: 100px;
   border: 4px solid black;
@@ -75,11 +75,11 @@ defineProps({
   position: absolute;
   left: 0;
   top: 100px;
-  padding-top: 40px;
-  border-radius: 80px 80px 0 0;
-  background: linear-gradient(135deg, #fff, #ddd);
+  padding-top: 20px;
+  border-radius: 50px 50px 0 0;
+  background: linear-gradient(135deg, #fff, #ccc);
   width: 160px;
-  height: 140px;
+  height: 120px;
   border: 4px solid black;
 
 }
@@ -90,6 +90,7 @@ defineProps({
   text-align: left;
   line-height: 150%;
   padding: 0;
-  margin: .5em 1em;
+  margin: .5em;
+  color: #666;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div class="markup">
-  <div ref="markup"></div>
+  <div ref="container"></div>
 </div>
 </template>
 
@@ -11,29 +11,31 @@ const props = defineProps({
   markup: String
 })
 
-const markup = ref(null)
+const container = ref<HTMLElement | null>(null)
 onMounted(updateMarkup)
 
 watch(() => props.markup, updateMarkup)
 
 function updateMarkup(){
-  const el = document.createElement("div")
-  el.innerHTML = props.markup
+  const el = document.createElement("div");
+  el.innerHTML = props.markup ?? "";
   console.log(props.markup, el)
-  markup.value.innerHTML = getMarkup(el, true).innerHTML
+  if(container.value){
+    container.value.innerHTML = getMarkup(el, true).innerHTML
+  }
 }
 
-function getMarkup(el, ignoreRoot){
+function getMarkup(el: Element, ignoreRoot: boolean){
   const elName = el.tagName.toLowerCase();
   const wrapperEl = document.createElement("div")
   const attributeString = el.getAttributeNames()
       .map(attr => `${attr}="${el.getAttribute(attr)}"`)
       .join(" ")
 
-  const children = [...el.children]
+  const children = Array.from(el.children)
   if(children.length > 0) {
     if(!ignoreRoot) wrapperEl.textContent = `<${elName}${attributeString?" "+attributeString:''}>`;
-    children.forEach(child => wrapperEl.appendChild(getMarkup(child)));
+    children.forEach(child => wrapperEl.appendChild(getMarkup(child, false)));
     if(!ignoreRoot)  wrapperEl.appendChild(document.createTextNode(`</${elName}>`))
   } else {
     wrapperEl.textContent = `<${elName}${attributeString?" "+attributeString:''} />`;
@@ -49,6 +51,7 @@ function getMarkup(el, ignoreRoot){
   line-height: 150%;
   font-family: menlo, sans-serif;
   z-index: 1;
+  margin-bottom: -5px;
 }
 
 .markup * {

@@ -1,20 +1,33 @@
 <template>
   <div class="game-container">
     <div class="game-wrapper">
-      <Table :content="state.level.tableMarkup" @click="onTableClick"></Table>
-      <div class="customers">
-        <Customer v-for="customer in state.level.customers" v-bind="customer"/>
+      <Table :content="level.tableMarkup" @click="onTableClick" ref="table"></Table>
+      <div class="actions">
+        <button @click="submitSolution" id="submit-button">Validate</button>
       </div>
-
+      <div class="customers">
+        <Customer v-for="customer in level.customers" v-bind="customer"/>
+      </div>
+      <div class="editor" >
+        <EditorPane title="HTML Viewer" fileName="table.html" lang="html">
+          <HTMLMarkup :markup="level.tableMarkup" />
+        </EditorPane>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Table from "./Table.vue";
-import Customer from "./Customer.vue"
+import HTMLMarkup from "./HTMLMarkup.vue";
+import EditorPane from "./EditorPane.vue";
+import Customer from "./Customer.vue";
 
 import {state} from "../game";
+import { Chapter3Level, trySolution } from "../chapters/chapter3";
+import { computed, ref } from "vue";
+
+const level = computed(() => state.level as Chapter3Level) 
 
 function onTableClick(event: Event){
   const plate = (event.target as HTMLElement).closest("plate")
@@ -28,6 +41,14 @@ function toggleMeal(plate: HTMLElement){
   if(child == null) plate.appendChild(document.createElement(nextMeal))
   else plate.replaceChild(document.createElement(nextMeal), child)
 }
+
+const table = ref<InstanceType<typeof Table> | null>(null)
+function submitSolution(){
+  const plates = table.value.$el.querySelectorAll("plate") 
+  const items = [...plates].map((el: HTMLElement) => el.firstElementChild ? el.firstElementChild.tagName.toLowerCase() : "")
+  trySolution(items)
+}
+
 </script>
 
 <style scoped>
@@ -47,17 +68,25 @@ function toggleMeal(plate: HTMLElement){
 }
 
 .game-wrapper {
-  -webkit-perspective: 400px;
   transform: translate3d(0,0,0);
-  perspective: 400px;
+  perspective: 500px;
   text-align: center;
   position: relative;
   padding-top: 15px;
   margin-bottom: 50px;
   display: inline-block;
+  perspective: 1500px;
 }
 
 .game-wrapper ::v-deep(plate){
   cursor: pointer;
+}
+
+.game-wrapper ::v-deep(.table-wrapper){
+  user-select: none;
+}
+
+.actions {
+  margin-top: 1rem;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <p class="order">{{ state.level.doThis }}</p>
+  <p class="order">{{ level.doThis }}</p>
   <div class="game-container">
     <div class="game-wrapper">
-      <Table :content="state.level.tableMarkup"></Table>
+      <Table :content="level.tableMarkup"></Table>
     </div>
   </div>
   <Editor />
@@ -12,7 +12,10 @@
 import Editor from "./Editor.vue";
 import {state} from "../game";
 import Table from "./Table.vue"
+import { computed } from "vue";
+import { Chapter2Level } from "../chapters/chapter2";
 
+const level = computed(() => state.level as Chapter2Level)
 </script>
 
 <style scoped>
@@ -32,9 +35,8 @@ import Table from "./Table.vue"
 }
 
 .game-wrapper {
-  -webkit-perspective: 400px;
   transform: translate3d(0,0,0);
-  perspective: 400px;
+  perspective: 500px;
   text-align: center;
   position: relative;
   padding-top: 15px;

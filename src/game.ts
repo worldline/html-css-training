@@ -2,13 +2,12 @@ import {clamp} from "./utils";
 import {hideAllPoppers} from "floating-vue";
 import {reactive} from "vue";
 import progress from "./progress";
-import {chapters} from "./chapters/chapters";
+import {chapters, currentChapter} from "./chapters/chapters";
 import {Level} from "./chapters/level";
 import {chapter1Levels} from "./chapters/chapter1";
 
 export const state = reactive({
     progress: progress,
-    currentLevel: 0,
     level: chapter1Levels[0] as Level, // Holds current level info
     levelTimeout: 1000, // Delay between levels after completing
     menuOpened: false
@@ -57,7 +56,7 @@ export function changeLevel(chapterNumber: number, levelNumber: number){
 
 export function loadLevel(){
     // Make sure we don't load a level we don't have
-    const chapter = chapters[state.progress.currentChapter-1]
+    const chapter = currentChapter.value
     const levels = chapter.levels
     state.progress.currentLevel = clamp(state.progress.currentLevel, 0, levels.length)
     state.level = levels[state.progress.currentLevel-1] as Level;

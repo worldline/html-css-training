@@ -6,7 +6,7 @@ import GameWrapper from "../components/SelectorGame.vue";
 import Chapter2LevelInstructions from "../components/Chapter2LevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
-import {createTooltip} from "floating-vue";
+import {createTooltip, hideAllPoppers} from "floating-vue";
 
 export function fireRule(rule: string) {
   const level = state.level as Chapter2Level;
@@ -841,8 +841,8 @@ export function addBoardElementsTooltips(){
       content: getTooltipContent(el),
       delay: 0
     }, null)
-    el.addEventListener("mouseover", (e) => e.stopPropagation())
-    el.addEventListener("mouseenter", (e) => e.stopPropagation())
+    el.addEventListener("mouseover", (e) => { e.stopPropagation(); hideAllPoppers(); })
+    el.addEventListener("mouseenter", (e) => { e.stopPropagation(); hideAllPoppers(); })
   })
 }
 

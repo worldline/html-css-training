@@ -5,6 +5,7 @@ export interface Chapter {
     name: string;
     description?: string;
     intro: string;
+    instructions?: string;
     levels: Level[];
     rightPanelComponent: Component
     leftPanelComponent: Component

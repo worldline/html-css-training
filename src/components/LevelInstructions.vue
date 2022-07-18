@@ -1,15 +1,21 @@
 <template>
     <div class="instructions">
-      <h3 class="title">{{ state.level.name }}</h3>
+      <h3 class="title">{{ level.name }}</h3>
+      <div v-if="currentChapter.instructions" v-html="currentChapter.instructions"></div>
       <div v-html="state.level.instructions"></div>
     </div>
     <div class="actions">
-      <button @click="completeLevel" v-if="!state.level.selector">Next</button>
+      <button @click="completeLevel" v-if="!level.selector">Next</button>
     </div>
 </template>
 
 <script setup lang="ts">
 import {completeLevel, state} from "../game"
+import { currentChapter } from "../chapters/chapters";
+import { computed } from "vue";
+import { Chapter2Level } from "../chapters/chapter2";
+
+const level = computed(() => state.level as Chapter2Level)
 </script>
 
 <style scoped>

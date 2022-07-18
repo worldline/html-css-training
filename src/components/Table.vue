@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "Table",
   props: ["content"]
@@ -28,7 +28,7 @@ export default {
   transform-origin: bottom;
   z-index: 9999;
   position: relative;
-  margin: 10px 20px 0 20px;
+  margin: 10px 20px 30px 20px;
   width: auto;
 }
 
