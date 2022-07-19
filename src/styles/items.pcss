@@ -17,11 +17,11 @@ plate {
     height: 100px;
 }
 
-plate [data-hovered] {
-    box-shadow: 0 0 0 6px rgba(0,0,0,.3);
+plate.square {
+    border-radius: 2px;
 }
 
-plate:before {
+plate::before {
     content: "";
     display: block;
     position: absolute;
@@ -33,6 +33,23 @@ plate:before {
     border-top: solid 6px #CCC;
     opacity: .4;
     background: rgba(255,255,255,1);
+}
+
+plate.square::before {
+    border-radius: 2px;
+}
+
+plate[for]::after,
+bento[for]::after {
+    content: attr(for);
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #eee;
+    color: black;
+    padding: 0 2px;
+    font-size: 12px;
 }
 
 plate#fancy {

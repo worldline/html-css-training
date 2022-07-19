@@ -1,7 +1,6 @@
 <template>
   <div class="customer-wrapper">
     <div class="customer-speech-bubble">{{ request }}</div>
-    <div class="customer-head"></div>
     <div class="customer-body">
       <div class="code">
         <pre>{{ selector }} {
@@ -25,13 +24,13 @@ defineProps({
   position: relative;
   display: inline-block;
   margin: 100px 10px 0 10px;
-  width: 200px;
+  min-width: 200px;
   height: 250px;
 }
 
 .customer-speech-bubble {
   position: absolute;
-  left: 20px;
+  left: 30%;
   top: -80px;
   height: 100px;
   width: 180px;
@@ -59,29 +58,28 @@ defineProps({
   transform: rotate(20deg);
 }
 
-.customer-head {
+.customer-body {
+  display: inline-block;
+  margin-top: 100px;
+  padding-top: 20px;
+  border-radius: 50px 50px 0 0;
+  background: linear-gradient(135deg, #fff, #ccc);
+  min-width: 160px;
+  height: 120px;
+  border: 4px solid black;
+}
+
+.customer-body::before {
+  content: "";
   position: absolute;
-  left: 30px;
-  top: 30px;
+  left: calc(50% - 55px);
+  top: 25px;
   border-radius: 50%;
   background: linear-gradient(135deg, #fff, #ccc);
   width: 100px;
   height: 100px;
   border: 4px solid black;
   z-index: 2;
-}
-
-.customer-body {
-  position: absolute;
-  left: 0;
-  top: 100px;
-  padding-top: 20px;
-  border-radius: 50px 50px 0 0;
-  background: linear-gradient(135deg, #fff, #ccc);
-  width: 160px;
-  height: 120px;
-  border: 4px solid black;
-
 }
 
 .code {

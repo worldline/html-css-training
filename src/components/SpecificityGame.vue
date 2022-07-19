@@ -34,7 +34,7 @@ function onTableClick(event: Event){
   if(plate) toggleMeal(plate as HTMLElement)
 }
 
-const meals = ["sushi","apple","orange","pickle", "toast"]
+const meals = ["sushi", "toast", "apple", "pickle"]
 function toggleMeal(plate: HTMLElement){
   const child = plate.firstChild as (HTMLElement | null)
   const nextMeal = meals[meals.indexOf(child?.tagName?.toLowerCase() ?? "soup") + 1] || "sushi"

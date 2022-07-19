@@ -1,7 +1,9 @@
 <template>
     <div class="instructions">
+      <template v-if="currentChapter.instructions">
+        <div v-html="currentChapter.instructions"></div><hr/>
+      </template>
       <h3 class="title">{{ level.name }}</h3>
-      <div v-if="currentChapter.instructions" v-html="currentChapter.instructions"></div>
       <div v-html="state.level.instructions"></div>
     </div>
     <div class="actions">
