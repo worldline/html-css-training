@@ -9,7 +9,6 @@ import {chapter1Levels} from "./chapters/chapter1";
 export const state = reactive({
     progress: progress,
     level: chapter1Levels[0] as Level, // Holds current level info
-    levelTimeout: 1000, // Delay between levels after completing
     menuOpened: false
 })
 
@@ -47,17 +46,21 @@ export function changeLevel(chapterNumber: number, levelNumber: number){
         levelNumber = chapters[chapterNumber-1].levels.length
     }
 
-    state.progress.currentChapter = clamp(chapterNumber, 1, chapters.length)
-    state.progress.currentLevel = clamp(levelNumber, 0, chapters[chapterNumber-1].levels.length)
-    hideAllPoppers()
-    loadLevel();
-    closeMenu();
+    const newChapter = clamp(chapterNumber, 1, chapters.length)
+    const newLevel = clamp(levelNumber, 0, chapters[chapterNumber-1].levels.length)
+    if(newLevel !== state.progress.currentLevel || newChapter !== state.progress.currentChapter){
+        state.progress.currentChapter = newChapter
+        state.progress.currentLevel = newLevel
+        hideAllPoppers()
+        loadLevel();
+        closeMenu();
+    }
 }
 
 export function loadLevel(){
-    // Make sure we don't load a level we don't have
     const chapter = currentChapter.value
     const levels = chapter.levels
+    // Make sure we don't load a level we don't    
     state.progress.currentLevel = clamp(state.progress.currentLevel, 0, levels.length)
     state.level = levels[state.progress.currentLevel-1] as Level;
     state.progress.save()

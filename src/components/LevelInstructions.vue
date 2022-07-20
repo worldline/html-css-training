@@ -7,7 +7,7 @@
       <div v-html="state.level.instructions"></div>
     </div>
     <div class="actions">
-      <button @click="completeLevel" v-if="!level.selector">Next</button>
+      <button @click="completeLevel" v-if="level.skippable">Next</button>
     </div>
 </template>
 
@@ -15,9 +15,9 @@
 import {completeLevel, state} from "../game"
 import { currentChapter } from "../chapters/chapters";
 import { computed } from "vue";
-import { Chapter2Level } from "../chapters/chapter2";
+import { Level } from "../chapters/level";
 
-const level = computed(() => state.level as Chapter2Level)
+const level = computed(() => state.level as Level)
 </script>
 
 <style scoped>

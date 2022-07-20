@@ -49,7 +49,7 @@ defineProps({
 
 .editor .css-view .file-window {
   background: #efefef;
-  color: #AAA;
+  color: #888;
 
 }
 
@@ -80,56 +80,5 @@ defineProps({
 
 .html-view .file-window {
   background: rgba(0,0,0,.3);
-}
-
-
-.enter-button {
-  background: #ddd;
-  display: block;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  padding: 2px 7px 2px 7px;
-  color: #666;
-  border: solid 1px #999;
-  border-bottom-width: 6px;
-  position: absolute;
-  font-size: 9px;
-  cursor: pointer;
-  top: 7px;
-  right: 7px;
-  z-index: 999;
-}
-
-.enterhit {
-  animation: enterhit .1s 1;
-}
-
-@keyframes enterhit {
-  50% {
-    border-width: 1px 1px 2px 1px;
-    top: 12px;
-  }
-}
-
-input {
-  font-family: menlo, monospace;
-  color: #333;
-  border: none;
-  width: calc(100% - 44px);
-  background: none  ;
-}
-
-input.input-strobe {
-  background: rgba(62,203,255,.3);
-  animation: input .5s infinite;  
-}
-
-@keyframes input {
-  50% { background:none ; }
-}
-
-input:focus {
-  outline: none;
-  border-color: #555;
 }
 </style>

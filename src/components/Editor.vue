@@ -1,21 +1,18 @@
 <template>
   <div class="editor" @click="inputElement?.focus()">
     <EditorPane title="CSS Editor" fileName="style.css" lang="css">
-      <input class="input-strobe" type="text"
+      <slot name="code-before" />
+      <input id="editor-input" class="input-strobe" type="text"
                ref="inputElement"
                @keydown.enter.prevent="enterHit"
                @keyup.prevent="onInputKeyup"
-               placeholder="Type in a CSS selector"/>
+               :placeholder="placeholder"/>
         <span class="plus">+</span>
         <div class="enter-button" @click="enterHit" ref="enterButton">enter</div>
-        <div>
-          {<br/>
-          /* Styles would go here. */<br/>
-          }
-        </div>
+        <slot name="code-after" />
     </EditorPane>
     <EditorPane title="HTML Viewer" fileName="table.html" lang="html"> 
-      <HTMLMarkup :markup="level.tableMarkup" />
+      <HTMLMarkup :markup="level.markup" />
     </EditorPane>
   </div>
 </template>
@@ -26,13 +23,18 @@ import HTMLMarkup from "./HTMLMarkup.vue";
 import {computed, ref, Ref} from "vue"
 
 import {state} from "../game";
-import { Chapter2Level, fireRule } from "../chapters/chapter2";
+
+defineProps({
+  placeholder: String
+});
+
+const emit = defineEmits([ "input" ])
 
 let inputValue="";
 const enterButton: Ref<HTMLElement | null> = ref(null)
 const inputElement: Ref<HTMLElement | null> = ref(null)
 
-const level = computed(() => state.level as Chapter2Level)
+const level = computed(() => state.level)
 
 //Animate the enter button
 function enterHit(){
@@ -46,7 +48,7 @@ function enterHit(){
 function handleInput(text: string){
   const input = inputElement.value as HTMLInputElement;
   inputValue = input.value
-  fireRule(text);
+  emit("input", text)
 }
 
 function onInputKeyup(){
@@ -56,7 +58,7 @@ function onInputKeyup(){
 }
 </script>
 
-<style>
+<style scoped>
 .editor {
   position: relative;
   text-align: left;
@@ -69,5 +71,53 @@ function onInputKeyup(){
   font-family: menlo,monospace;
   font-size: 14px;
   line-height: 150%;
+}
+
+.enter-button {
+  background: #ddd;
+  display: inline-block;
+  border-radius: 2px;
+  padding: 2px 7px 2px 7px;
+  color: #666;
+  border: solid 1px #999;
+  border-bottom-width: 6px;
+  position: relative;
+  font-size: 9px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.enterhit {
+  animation: enterhit .1s 1;
+}
+
+@keyframes enterhit {
+  50% {
+    border-width: 1px 1px 2px 1px;
+    top: 12px;
+  }
+}
+
+#editor-input {
+  font-family: menlo, monospace;
+  color: #333;
+  border: none;
+  width: calc(100% - 64px);
+  background: none;
+  margin-left: 1em;
+}
+
+#editor-input.input-strobe {
+  background: rgba(62,203,255,.3);
+  animation: input .5s infinite;  
+}
+
+@keyframes input {
+  50% { background:none ; }
+}
+
+input:focus {
+  outline: none;
+  border-color: #555;
 }
 </style>

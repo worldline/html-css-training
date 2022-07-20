@@ -2,11 +2,12 @@ import {state, completeLevel} from "../game";
 import { cleanupEffects, shake } from "../utils";
 import { Level } from "./level";
 
-import GameWrapper from "../components/SelectorGame.vue";
+import SelectorGame from "../components/SelectorGame.vue";
 import Chapter2LevelInstructions from "../components/Chapter2LevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
-import {createTooltip, hideAllPoppers} from "floating-vue";
+import { addBoardElementsTooltips } from "../tooltip";
+import { currentChapter } from "./chapters";
 
 export function fireRule(rule: string) {
   const level = state.level as Chapter2Level;
@@ -24,7 +25,7 @@ export function fireRule(rule: string) {
     rule = "";
   }
 
-  const matches = rule ? Array.from(baseTable.querySelectorAll(rule)) : []; // What the person finds
+  const matches = rule ? Array.from(baseTable.querySelectorAll(rule)) as HTMLElement[] : []; // What the person finds
   const solutionMatches = Array.from(
     baseTable.querySelectorAll(level.selector)
   ); // What the correct rule finds
@@ -33,7 +34,7 @@ export function fireRule(rule: string) {
 
   // If nothing is selected
   if (matches.length == 0) {
-    shake(".editor");
+    shake(document.querySelector(".editor")!);
   }
 
   if (matches.length === solutionMatches.length && matches.length > 0) {
@@ -53,11 +54,11 @@ export function fireRule(rule: string) {
     //$(".input-wrapper").css("opacity",.2);
     setTimeout(function () {
       completeLevel();
-    }, state.levelTimeout ?? 0);
+    }, 1000);
   } else {
     matches.forEach((el) => {
       el.classList.remove("strobe");
-      el.classList.add("shake");
+      shake(el)
     });
 
     setTimeout(function () {
@@ -83,7 +84,6 @@ export interface Chapter2Level extends Level {
   help?: string;
   helpTitle?: string;
   examples?: string[];
-  tableMarkup: string;
 }
 
 export const chapter2Levels: Chapter2Level[] = [
@@ -98,7 +98,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>div</strong> selects all <tag>div</tag> elements.",
       "<strong>p</strong> selects all <tag>p</tag> elements.",
     ],
-    tableMarkup: `
+    markup: `
 <plate></plate>
 <plate></plate>
 <bento></bento>
@@ -116,7 +116,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>div</strong> selects all <tag>div</tag> elements.",
       "<strong>p</strong> selects all <tag>p</tag> elements.",
     ],
-    tableMarkup: `
+    markup: `
     <bento></bento>
     <bento><sushi/></bento>
     <plate>
@@ -135,7 +135,7 @@ export const chapter2Levels: Chapter2Level[] = [
       '<strong>#cool</strong> selects any element with <strong>id="cool"</strong>',
       '<strong>ul#long</strong> selects <tag>ul id="long"</tag>',
     ],
-    tableMarkup: `
+    markup: `
     <plate></plate>
     <plate id="fancy"></plate>
     <plate></plate>
@@ -152,7 +152,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       '<strong>.neato</strong> selects all elements with <strong>class="neato"</strong>',
     ],
-    tableMarkup: `
+    markup: `
     <apple></apple>
     <apple class="small"></apple>
     <plate>
@@ -172,7 +172,7 @@ export const chapter2Levels: Chapter2Level[] = [
       '<strong>ul.important</strong> selects all <tag>ul</tag> elements that have <strong>class="important"</strong>',
       '<strong>#big.wide</strong> selects all elements with <strong>id="big"</strong> that also have <strong>class="wide"</strong>',
     ],
-    tableMarkup: `
+    markup: `
     <apple></apple>
     <apple class="small"></apple>
     <bento>
@@ -196,7 +196,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>p  strong</strong> selects all <tag>strong</tag> elements that are inside of any <tag>p</tag>",
       '<strong>#fancy  span</strong> selects any <tag>span</tag> elements that are inside of the element with <strong>id="fancy"</strong>',
     ],
-    tableMarkup: `
+    markup: `
     <bento></bento>
     <plate>
       <sushi />
@@ -214,7 +214,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       '<strong>#cool span</strong> selects all <tag>span</tag> elements that are inside of elements with <strong>id="cool"</strong>',
     ],
-    tableMarkup: `
+    markup: `
     <bento>
     <sushi/>
     </bento>
@@ -232,7 +232,7 @@ export const chapter2Levels: Chapter2Level[] = [
     selector: "bento orange.small",
     helpTitle: "You can do it...",
     help: "Combine what you learned in the last few levels to solve this one!",
-    tableMarkup: `
+    markup: `
     <bento>
       <orange/>
     </bento>
@@ -259,7 +259,7 @@ export const chapter2Levels: Chapter2Level[] = [
       '<strong>p, .fun</strong> selects all <tag>p</tag> elements as well as all elements with <strong>class="fun"</strong>',
       "<strong>a, p, div</strong> selects all <tag>a</tag>, <tag>p</tag> and <tag>div</tag> elements",
     ],
-    tableMarkup: `
+    markup: `
     <pickle class="small"></pickle>
     <orange></orange>
     <plate>
@@ -283,7 +283,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       "<strong>p *</strong> selects any element inside all <tag>p</tag> elements.",
     ],
-    tableMarkup: `
+    markup: `
     <apple></apple>
     <plate>
       <orange class="small" />
@@ -308,7 +308,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>p *</strong> selects every element inside all <tag>p</tag> elements.",
       '<strong>ul.fancy *</strong> selects every element inside all <tag>ul class="fancy"</tag> elements.',
     ],
-    tableMarkup: `
+    markup: `
     <plate id="fancy">
       <orange class="small"/>
     </plate>
@@ -334,7 +334,7 @@ export const chapter2Levels: Chapter2Level[] = [
       '<strong>p + .intro</strong> selects every element with <strong>class="intro"</strong> that directly follows a <tag>p</tag>',
       "<strong>div + a</strong> selects every <tag>a</tag> element that directly follows a <tag>div</tag>",
     ],
-    tableMarkup: `
+    markup: `
     <bento>
       <apple class="small"></apple>
     </bento>
@@ -356,7 +356,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       "<strong>A ~ B</strong> selects all <strong>B</strong> that follow a <strong>A</strong>",
     ],
-    tableMarkup: `
+    markup: `
     <pickle></pickle>
     <bento>
       <sushi />
@@ -381,7 +381,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       "<strong>A > B</strong> selects all <strong>B</strong> that are a direct children <strong>A</strong>",
     ],
-    tableMarkup: `
+    markup: `
     <plate>
       <bento>
         <apple class="small"></apple>
@@ -408,7 +408,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>p:first-child</strong> selects all first child <tag>p</tag> elements.",
       "<strong>div p:first-child</strong> selects all first child <tag>p</tag> elements that are in a <tag>div</tag>.",
     ],
-    tableMarkup: `
+    markup: `
     <bento></bento>
     <plate></plate>
     <plate>
@@ -431,7 +431,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>span:only-child</strong> selects the <tag>span</tag> elements that are the only child of some other element.",
       "<strong>ul li:only-child</strong> selects the only <tag>li</tag> element that are in a <tag>ul</tag>.",
     ],
-    tableMarkup: `
+    markup: `
     <plate>
       <toast></toast>
     </plate>
@@ -460,7 +460,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>span:last-child</strong> selects all last-child <tag>span</tag> elements.",
       "<strong>ul li:last-child</strong> selects the last <tag>li</tag> elements inside of any <tag>ul</tag>.",
     ],
-    tableMarkup: `
+    markup: `
     <plate id="fancy">
       <pickle></pickle>
       <apple class="small"></apple>
@@ -482,7 +482,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>:nth-child(8)</strong> selects every element that is the 8th child of another element.",
       "<strong>div p:nth-child(2)</strong> selects the second <strong>p</strong> in every <strong>div</strong>",
     ],
-    tableMarkup: `
+    markup: `
     <plate><toast /></plate>
     <plate><toast /></plate>
     <plate><toast /></plate>
@@ -500,7 +500,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       "<strong>:nth-last-child(2)</strong> selects all second-to-last child elements.",
     ],
-    tableMarkup: `
+    markup: `
     <bento></bento>
     <bento><sushi /></bento>
     <bento>
@@ -519,7 +519,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       "<strong>span:first-of-type</strong> selects the first <tag>span</tag> in any element.",
     ],
-    tableMarkup: `
+    markup: `
     <orange class="small"></orange>
     <apple></apple>
     <apple class="small"></apple>
@@ -536,7 +536,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>div:nth-of-type(2)</strong> selects the second instance of a div.",
       "<strong>.example:nth-of-type(odd)</strong> selects all odd instances of a the example class.",
     ],
-    tableMarkup: `
+    markup: `
     <plate></plate>
     <plate></plate>
     <plate></plate>
@@ -554,7 +554,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       "<strong>span:nth-of-type(6n+2)</strong> selects every 6th instance of a <tag>span</tag>, starting from (and including) the second instance.",
     ],
-    tableMarkup: `
+    markup: `
     <plate></plate>
     <plate>
       <sushi />
@@ -583,7 +583,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       "<strong>p span:only-of-type</strong> selects a <tag>span</tag> within any <tag>p</tag> if it is the only <tag>span</tag> in there.",
     ],
-    tableMarkup: `
+    markup: `
     <plate>
       <sushi />
     </plate>
@@ -612,7 +612,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>div:last-of-type</strong> selects the last <tag>div</tag> in every element.",
       "<strong>p span:last-of-type</strong> selects the last <tag>span</tag> in every <tag>p</tag>.",
     ],
-    tableMarkup: `
+    markup: `
     <orange class="small"></orange>
     <pickle></pickle>
     <apple class="small"></apple>
@@ -632,7 +632,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       "<strong>div:empty</strong> selects all empty <tag>div</tag> elements.",
     ],
-    tableMarkup: `
+    markup: `
     <bento></bento>
     <bento>
       <sushi></sushi>
@@ -652,7 +652,7 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>div:not(:first-child)</strong> selects every <tag>div</tag> that is not a first child.",
       '<strong>:not(.big, .medium)</strong> selects all elements that do not have <strong>class="big"</strong> or <strong>class="medium"</strong>.',
     ],
-    tableMarkup: `
+    markup: `
     <plate id="fancy">
       <apple class="small"></apple>
     </plate>
@@ -678,7 +678,7 @@ export const chapter2Levels: Chapter2Level[] = [
       '<strong>p:has(img)</strong> selects every <tag>p</tag> that contains an image.',
       "<strong>form:has(input:invalid)</strong> selects forms that have some inputs in invalid state.",
     ],
-    tableMarkup: `
+    markup: `
     <plate>
       <orange></orange>
     </plate>
@@ -705,7 +705,7 @@ export const chapter2Levels: Chapter2Level[] = [
       '<strong>[value]</strong> selects all elements that have a <strong>value="anything"</strong> attribute.',
       '<strong>[type]</strong> selects all elements that have a <strong>type="anything"</strong> attribute.',
     ],
-    tableMarkup: `
+    markup: `
     <bento><apple class="small"/></bento>
     <apple for="Ethan"></apple>
     <plate for="Alice"><toast /></plate>
@@ -723,7 +723,7 @@ export const chapter2Levels: Chapter2Level[] = [
       '<strong>a[href]</strong> selects all <tag>a</tag> elements that have a <strong>href="anything"</strong> attribute.',
       "<strong>input[disabled]</strong> selects all <tag>input</tag> elements with the <strong>disabled</strong> attribute",
     ],
-    tableMarkup: `
+    markup: `
     <plate for="Sarah"><sushi/></plate>
     <plate for="Luke"><apple/></plate>
     <plate></plate>
@@ -740,7 +740,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       '<strong>input[type="checkbox"]</strong> selects all checkbox input elements.',
     ],
-    tableMarkup: `
+    markup: `
     <apple for="Alexei"></apple>
     <bento for="Albina"><orange /></bento>
     <bento for="Vitaly"><sushi /></bento>
@@ -758,7 +758,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       '<strong>.toy[category^="Swim"]</strong> selects elements with class <strong>toy</strong> and either <strong>category="Swimwear"</strong> or <strong>category="Swimming"</strong>.',
     ],
-    tableMarkup: `
+    markup: `
     <plate for="Sam"><sushi /></plate>
     <bento for="Sarah"><apple class="small"/></bento>
     <bento for="Mary"><sushi/></bento>
@@ -775,7 +775,7 @@ export const chapter2Levels: Chapter2Level[] = [
     examples: [
       '<strong>img[src$=".jpg"]</strong> selects all images display a <strong>.jpg</strong> image.',
     ],
-    tableMarkup: `
+    markup: `
     <apple class="small"></apple>
     <bento for="Hayato"><sushi /></bento>
     <apple for="Ryota"></apple>
@@ -795,7 +795,7 @@ export const chapter2Levels: Chapter2Level[] = [
       '<strong>img[src*="/thumbnails/"]</strong> selects all image elements that show images from the "thumbnails" folder.',
       '<strong>[class*="heading"]</strong> selects all elements with "heading" in their class, like <strong>class="main-heading"</strong> and <strong>class="sub-heading"</strong>',
     ],
-    tableMarkup: `
+    markup: `
     <bento for="Robbie"><apple /></bento>
     <bento for="Timmy"><sushi /></bento>
     <bento for="Bobby"><orange /></bento>
@@ -807,7 +807,7 @@ export const chapter2Levels: Chapter2Level[] = [
     help: "Combine all what you learned to solve this one!",
     doThis: "Select the empty plates except the one for Timmy",
     selector: 'plate:empty:not([for="Timmy"])',
-    tableMarkup: `
+    markup: `
     <bento></bento>
     <plate><apple /></plate>
     <plate for="Timmy"></plate>
@@ -820,9 +820,9 @@ export const chapter2Levels: Chapter2Level[] = [
 export const chapter2: Chapter = {
   name: "CSS - Selectors",
   levels: chapter2Levels,
-  leftPanelComponent: GameWrapper,
+  leftPanelComponent: SelectorGame,
   rightPanelComponent: Chapter2LevelInstructions,
-  credits: `Credits: <a href="http://www.twitter.com/flukeout">@flukeout</a>`,
+  credits: `Credits: <a href="http://www.twitter.com/flukeout">@flukeout</a> for his work on <a href="https://flukeout.github.io/" target="_blank">CSS diner</a> that served as the foundation for this website`,
   intro: `
     <p>To apply CSS to an element you need to select this element with a <b>selector</b>.</p>
     <p>CSS provides you with a number of different ways to do this, and you can explore them in this chapter.</p>`,
@@ -830,25 +830,4 @@ export const chapter2: Chapter = {
     document.querySelector("input")?.focus();
     nextTick(() => addBoardElementsTooltips())
   }
-}
-
-
-export function addBoardElementsTooltips(){
-  const elements = Array.from(document.querySelectorAll(".table-board *"))
-  elements.forEach(el => {
-    createTooltip(el, {
-      triggers: ["hover"],
-      content: getTooltipContent(el),
-      delay: 0
-    }, null)
-    el.addEventListener("mouseover", (e) => { e.stopPropagation(); hideAllPoppers(); })
-    el.addEventListener("mouseenter", (e) => { e.stopPropagation(); hideAllPoppers(); })
-  })
-}
-
-function getTooltipContent(el: Element) {
-  const tagName = el.tagName.toLowerCase()
-  const elClass = el.getAttribute("class")
-  const elId = el.getAttribute("id")
-  return `<${tagName}${elId ? ` id="${elId}"` : ''}${elClass ? ` class="${elClass}"` : ''}>`
 }

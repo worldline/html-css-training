@@ -6,9 +6,9 @@ export function cleanupEffects(){
       .forEach(el => el.classList.remove("shake","strobe"));
 }
 
-export const shake = (selector: string) => {
-    document.querySelector(selector)!.classList.add("shake");
+export const shake = (el: HTMLElement) => {
+    el.classList.add("shake");
     setTimeout(() => {
-        document.querySelector(selector)!.classList.remove("shake");
+        el.classList.remove("shake");
     }, 500)
 }

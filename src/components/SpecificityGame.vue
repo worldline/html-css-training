@@ -1,7 +1,7 @@
 <template>
   <div class="game-container">
     <div class="game-wrapper">
-      <Table :content="level.tableMarkup" @click="onTableClick" ref="table"></Table>
+      <Table :content="level.markup" @click="onTableClick" ref="table"></Table>
       <div class="actions">
         <button @click="submitSolution" id="submit-button">Validate</button>
       </div>
@@ -10,7 +10,7 @@
       </div>
       <div class="editor" >
         <EditorPane title="HTML Viewer" fileName="table.html" lang="html">
-          <HTMLMarkup :markup="level.tableMarkup" />
+          <HTMLMarkup :markup="level.markup" />
         </EditorPane>
       </div>
     </div>
@@ -52,6 +52,19 @@ function submitSolution(){
 </script>
 
 <style scoped>
+.editor {
+  position: relative;
+  text-align: left;
+  width: 90%;
+  margin: 0 auto;
+  border: solid 10px rgba(0,0,0,.35);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  font-family: menlo,monospace;
+  font-size: 14px;
+  line-height: 150%;
+}
 .helper {
   position: absolute;
   background: white;

@@ -44,7 +44,7 @@ useEventListener("message", message => {
         completeLevel()
       }, 600) 
     } 
-    else shake("iframe")
+    else shake(document.querySelector("iframe")!)
   }
 })
 </script>

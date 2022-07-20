@@ -25,6 +25,7 @@ export interface Chapter1Level extends Level {
 export const chapter1Levels: Chapter1Level[] = [
     {
         name: "HTML and the DOM",
+        skippable: true,
         instructions: `<img src="img/chef.png" style="width: 88px; margin-right: 0 auto"/>
         <p>During this training, we will be working on the website of Chef Nakamura's brand new restaurant.</p>
         <p>You can see the homepage on the left. It's basic, but it's a start !</p>
@@ -34,6 +35,7 @@ export const chapter1Levels: Chapter1Level[] = [
     },
     {
         name: "Main root tags",
+        skippable: true,
         instructions: `
         <p>HTML5 has around <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" target="_blank">a hundred of different tags</a>. 
         Each tag has a specific purpose to describe something in a web document.</p>

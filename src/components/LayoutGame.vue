@@ -5,14 +5,15 @@
       <Table :content="level.markup"></Table>
     </div>
   </div>
-  <Editor placeholder="Type in a CSS selector" @input="fireRule">
+  <Editor placeholder="Type styles here" @input="applyStyle(level.selector, $event)">
+    <template v-slot:code-before>
+        {{level.selector}} {
+        <pre v-if="level.existingStyles">{{ level.existingStyles}}</pre>
+    </template>
     <template v-slot:code-after>
-        <br/>{<br/>
-        /* Styles would go here. */<br/>
-        }
+        <br/>}
     </template>
   </Editor>
-
 </template>
 
 <script setup lang="ts">
@@ -20,9 +21,9 @@ import Editor from "./Editor.vue";
 import {state} from "../game";
 import Table from "./Table.vue"
 import { computed } from "vue";
-import { Chapter2Level, fireRule } from "../chapters/chapter2";
+import { Chapter4Level, applyStyle } from "../chapters/chapter4";
 
-const level = computed(() => state.level as Chapter2Level)
+const level = computed(() => state.level as Chapter4Level)
 </script>
 
 <style scoped>
@@ -34,5 +35,9 @@ const level = computed(() => state.level as Chapter2Level)
   padding-top: 15px;
   margin-bottom: 50px;
   display: inline-block;
+}
+
+pre {
+  margin: 0;
 }
 </style>

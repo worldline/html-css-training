@@ -2,10 +2,10 @@ import SpecificityGame from "../components/SpecificityGame.vue";
 import LevelInstructions from "../components/LevelInstructions.vue";
 import {Level} from "./level";
 import { Chapter } from "./chapter";
-import { cleanupEffects } from "../utils";
+import { cleanupEffects, shake } from "../utils";
 import { completeLevel, state } from "../game";
 import { nextTick } from "vue";
-import { addBoardElementsTooltips } from "./chapter2";
+import { addBoardElementsTooltips } from "../tooltip";
 
 interface Customer {
     selector: string;
@@ -16,7 +16,7 @@ interface Customer {
 export interface Chapter3Level extends Level {
     customers: Customer[];
     solution: string[]
-    tableMarkup: string;
+    markup: string;
 }
 
 export function trySolution(items: string[]) {
@@ -35,12 +35,12 @@ export function trySolution(items: string[]) {
 
       setTimeout(function () {
         completeLevel();
-      }, state.levelTimeout ?? 0);
+      }, 1000);
     } else {
         items.forEach((item,i) => {
             if(level.solution[i] !== item){
-                const el = plates[i]
-                setTimeout(() => { el.classList.add("shake"); }, 0)
+                const el = plates[i] as HTMLElement
+                shake(el)
             }
         })
     }
@@ -49,7 +49,7 @@ export function trySolution(items: string[]) {
 export const chapter3Levels: Chapter3Level[] = [
     {
         name: "ID vs tag",
-        tableMarkup: `
+        markup: `
             <bento><plate></plate></bento>
             <bento><plate id="fancy"></plate></bento>
             <bento><plate></plate></bento>
@@ -63,7 +63,7 @@ export const chapter3Levels: Chapter3Level[] = [
     },
     {
         name: "ID vs class vs tag",
-        tableMarkup: `
+        markup: `
             <bento><plate></plate></bento>
             <bento><plate class="square"></plate></bento>
             <bento><plate id="fancy" class="square"></plate></bento>
@@ -78,7 +78,7 @@ export const chapter3Levels: Chapter3Level[] = [
     },
     {
         name: "Universal selector",
-        tableMarkup: `
+        markup: `
             <bento><plate></plate></bento>
             <bento><plate></plate></bento>
             <bento><plate class="square"></plate></bento>
@@ -93,7 +93,7 @@ export const chapter3Levels: Chapter3Level[] = [
     },
     {
         name: "Descendants calculation",
-        tableMarkup: `
+        markup: `
             <bento class="red"><plate></plate></bento>
             <bento class="green"><plate class="square"></plate></bento>
             <bento class="red"><plate class="square"></plate></bento>
@@ -110,7 +110,7 @@ export const chapter3Levels: Chapter3Level[] = [
     },
     {
         name: "Attribute selectors",
-        tableMarkup: `
+        markup: `
             <bento><plate class="square"for="John"></plate></bento>
             <bento><plate class="square" for="Jim"></plate></bento>
             <bento><plate for="Jane"></plate></bento>
@@ -127,7 +127,7 @@ export const chapter3Levels: Chapter3Level[] = [
     },
     {
         name: "Pseudo-classes specificity",
-        tableMarkup: `
+        markup: `
             <bento><plate></plate></bento>
             <bento><plate class="square" for="Bob"></plate></bento>
             <bento><plate class="square"></plate></bento>
@@ -145,7 +145,7 @@ export const chapter3Levels: Chapter3Level[] = [
     },
     {
         name: "Siblings calculation",
-        tableMarkup: `
+        markup: `
             <bento class="red">
                 <plate></plate>
                 <plate></plate>
@@ -167,7 +167,7 @@ export const chapter3Levels: Chapter3Level[] = [
     },
     {
         name: "!important",
-        tableMarkup: `
+        markup: `
             <bento><plate class="square"></plate></bento>
             <bento class="blue"><plate class="square"></plate></bento>
             <bento class="blue"><plate class="square" for="James"></plate></bento>
@@ -184,7 +184,7 @@ export const chapter3Levels: Chapter3Level[] = [
     },
     {
         name: "Final Challenge",
-        tableMarkup: `
+        markup: `
             <bento class="green">
                 <plate class="square" id="fancy"></plate>
                 <plate></plate>

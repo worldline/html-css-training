@@ -1,17 +1,21 @@
 <template>
-  <div class="display-help" v-if="state.level">    
-    <h3 class="title">{{ state.level.helpTitle }}</h3>
-    <p class="syntax" v-if="state.level.syntax">{{ state.level.syntax }}</p>
-    <div class="hint" v-html="state.level.help"></div>
-    <h4 class="examples-title" v-if="state.level.examples?.length > 0">Examples</h4>
+  <div class="display-help">    
+    <h3 class="title">{{ level.helpTitle || level.name }}</h3>
+    <p class="syntax" v-if="level.syntax"><pre>{{ level.syntax }}</pre></p>
+    <div class="hint" v-html="level.help"></div>
+    <h4 class="examples-title" v-if="level.examples && level.examples.length > 0">Examples</h4>
     <div class="examples">
-      <div class='example' v-for="example in state.level.examples" :key="example" v-html="example"></div>
+      <div class='example' v-for="example in level.examples" :key="example" v-html="example"></div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import { Chapter2Level } from "../chapters/chapter2";
 import { state } from "../game"
+
+const level = computed(() => state.level as Chapter2Level)
 </script>
 
 <style scoped>
@@ -33,6 +37,10 @@ import { state } from "../game"
   display: inline-block;
   padding: 5px 8px;
   border-bottom: solid 2px rgba(255,255,255,.1);
+}
+
+.display-help pre {
+  margin: 0;
 }
 
 .display-help .hint {
