@@ -37,7 +37,7 @@ export function applyStyle(selector: string, rules: string) {
   } else {
     targets.forEach((el) => {
       el.classList.remove("strobe");
-      shake(el)
+      shake(document.querySelector(".table")!)
     });
   }
 }
@@ -61,13 +61,46 @@ export interface Chapter4Level extends Level {
   existingStyles?: string;
   tableStyles?: string;
   check: [string, string][];
+  hintMarkup?: string;
 }
 
 export const chapter4Levels: Chapter4Level[] = [
   {
-    name: "Box Model: margins",
-    doThis: "Add a 50px right margin to bentos",
+    name: "Block display and line breaking",
+    doThis: "Put the bentos vertically on top of each other",
     selector: "bento",
+    tableStyles: `width: 600px; height: 600px`,
+    syntax: "display: block",
+    help: `<p>Block is the default display mode of paragraphs and sectionning elements like <tag>div</tag>, <tag>main</tag>, <tag>article</tag> etc.</p>
+    <p>If an element has a display type of <code>block</code>, then:
+    <ul>
+    <li><b>The box will break onto a new line.</b></li>
+    <li>The box will, by default, extend in the inline direction to fill the space available in its container (<b>width: 100%</b>).</li>
+    <li>...</li>
+    </ul>
+    </p>`,
+    markup: `
+    <bento>
+    <plate></plate>
+  </bento>
+  <bento>
+    <plate></plate>
+    <plate></plate>
+  </bento>
+  <bento>
+    <plate></plate>
+  </bento>
+    `,
+    check: [
+      ["display","block"]
+    ]
+  },
+  {
+    name: "Box Model: margins",
+    doThis: "Add a 20px bottom margin to bentos",
+    selector: "bento",
+    tableStyles: `width: 600px; height: 600px`,
+    existingStyles: "  display: block;",
     syntax: `margin: <val><unit>
 margin-<dir>: <val><unit>`,
     examples: [
@@ -75,8 +108,15 @@ margin-<dir>: <val><unit>`,
       `<code>margin: 0 20px</code> adds a 20px horizontal margin and zero vertical margin`,
       `<code>margin-top: 10px</code> adds a 10px margin at the top of the element`
     ],
-    help: `<p>Margins are used to add space <b>outside</b> the element.</p>
-    <img src="img/boxmodel.png" alt="Box Model" />`,
+    help: `<p>If an element has a display type of <code>block</code>, then:
+    <ul>
+    <li>It will break onto a new line.</li>
+    <li>It will, by default, extend in the inline direction to fill the space available in its container (width: 100%).</li>
+    <li>It will follow the <b>box model</b>: <img src="img/boxmodel.png" alt="Box Model" /></li>
+    </ul>
+    </p>    
+    <p>Margins are used to add space <b>outside</b> the element.</p>
+    `,
     markup: `
     <bento>
       <plate></plate>
@@ -90,7 +130,7 @@ margin-<dir>: <val><unit>`,
     </bento>
     `,
     check: [
-      ["marginRight","50px"]
+      ["marginBottom","20px"]
     ]
   },
   {
@@ -98,14 +138,16 @@ margin-<dir>: <val><unit>`,
     doThis: "Add a 20px padding to bentos",
     selector: "bento",
     syntax: "padding: <val><unit>",
-    existingStyles: "  margin-right: 50px;",
+    tableStyles: `width: 600px; height: 600px`,
+    existingStyles: `  display: block;
+  margin-bottom: 20px;`,
     examples: [
       `<code>padding: 1em</code> adds a 1em padding on all sides of the element`,      
       `<code>padding: 0 20px</code> adds a 20px horizontal padding and zero vertical padding`,
       `<code>padding-top: 10px</code> adds a 10px padding at the top of the element`
     ],
-    help: `<p>Padding is used to add internal margins and have space between the border of the element and its content.</p>
-    <img src="img/boxmodel.png" alt="Box Model" />`,
+    help: `<p>Box model: <img src="img/boxmodel.png" alt="Box Model" /></p>
+    <p>Padding is used to add internal margins and have space between the border of the element and its content.</p>`,
     markup: `
     <bento>
       <plate></plate>
@@ -127,7 +169,9 @@ margin-<dir>: <val><unit>`,
     doThis: "Extend the border width of bentos to 10px",
     selector: "bento",
     syntax: "border-width: <val><unit>",
-    existingStyles: `  margin-right: 50px;
+    tableStyles: `width: 600px; height: 600px`,
+    existingStyles: `  display: block;
+  margin-bottom: 20px;
   padding: 20px;`,
     examples: [
       `<code>border: 1px solid black</code> adds a 1 pixel width black solid border`,
@@ -151,40 +195,87 @@ margin-<dir>: <val><unit>`,
     check: [
       ["borderWidth","10px"]
     ]
-  },
+  },  
   {
-    name: "Block display and line breaking",
-    doThis: "Put the plates vertically",
-    selector: "plate",
-    tableStyles: `width: 500px; height: 500px`,
-    syntax: "display: block",
+    name: "Width and height",
+    helpTitle: "Dimensioning a block element",
+    doThis: "Make all the bentos 300px wide",
+    selector: "bento",    
+    tableStyles: `width: 600px; height: 600px`,
+    existingStyles: `  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-width: 10px;`,
+    syntax: "width: <value><unit>;",
     help: `<p>If an element has a display type of <code>block</code>, then:
     <ul>
-    <li><b>The box will break onto a new line.</b></li>
+    <li>The box will break onto a new line.</li>
+    <li>Padding, margin and border will cause other elements to be pushed away from the box.</li>
+    <li>You can set fixed <code>width</code> and <code>height</code> properties.</b></li>
     </ul>
     </p>`,
     markup: `
-<plate></plate>
-<plate></plate>
-<plate></plate>
-<plate></plate>
+    <bento>
+    <plate></plate>
+  </bento>
+  <bento>
+    <plate></plate>
+    <plate></plate>
+  </bento>
+  <bento>
+    <plate></plate>
+  </bento>
     `,
     check: [
-      ["display","block"]
+      ["width","300px"]
+    ]
+  },
+  {
+    name: "Auto margins",    
+    doThis: "Set all margins to auto",
+    selector: "bento",    
+    tableStyles: `width: 600px; height: 600px`,
+    existingStyles: `  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-width: 10px;
+  width: 300px;`,
+    syntax: "margin: auto;",
+    help: `<p>For <b>block</b> elements, margins with <code>auto</code> value are computed differently between top/bottom and left/right.</p>
+    <p>For <b>left and right margins</b>, auto makes the margin <b>fill all the available space</b>. This only works if the element has a specified width lower than its parent container width, so that there is space for margins.</p>
+    <p>For <b>top and bottom margins</b>, auto is resolved as <b>zero</b>. In fact, the nature of document flow and element height calculation algorithms make it impossible to use margins for centering an element vertically inside its parent. Whenever a vertical margin's value is changed, it will trigger a parent element height re-calculation (re-flow), which would in turn trigger a re-center of the original element... making it an infinite loop.`,
+    markup: `
+    <bento>
+    <plate></plate>
+  </bento>
+  <bento>
+    <plate></plate>
+    <plate></plate>
+  </bento>
+  <bento>
+    <plate></plate>
+  </bento>
+    `,
+    check: [
+      ["margin","auto"]
     ]
   },
   {
     name: "Margins with block elements",    
-    doThis: "Add a 20px margin between plates and center them horizontally on the table",
-    selector: "plate",
-    tableStyles: `width: 500px; height: 500px`,
-    existingStyles: `  display: block;`,
+    doThis: "Add a 20px vertical margin between bentos and center them horizontally on the table",
+    selector: "bento",
+    tableStyles: `width: 600px; height: 600px`,
+    existingStyles: `  display: block;
+  padding: 20px;
+  border-width: 10px;
+  width: 300px;`,
     syntax: `margin: <top and bottom> 
         <right and left>`,
     help: `<p>If an element has a display type of <code>block</code>, then:
     <ul>
     <li>The box will break onto a new line.</li>
     <li><b>Padding, margin and border will cause other elements to be pushed away from the box.</b></li>
+    <li>...</li>
     </ul>
     </p>`,
     examples:  [
@@ -192,68 +283,29 @@ margin-<dir>: <val><unit>`,
       '<strong>margin: 0 auto</strong> removes the vertical margin and make horizontal margins auto-fill the available space around the box.</strong>',
     ],
     markup: `
-<plate></plate>
-<plate></plate>
-<plate></plate>
-<plate></plate>
+    <bento>
+    <plate></plate>
+  </bento>
+  <bento>
+    <plate></plate>
+    <plate></plate>
+  </bento>
+  <bento>
+    <plate></plate>
+  </bento>
     `,
     check: [
       ["margin","20px auto"]
     ]
   },
   {
-    name: "Width and height",
-    helpTitle: "Dimensioning a block element",
-    doThis: "Make all the plates 100px wide",
-    selector: "plate",    
-    existingStyles: `  display: block;
-  height: 100px;
-  width: auto;`,
-    syntax: "width: <value><unit>;",
-    help: `<p>If an element has a display type of <code>block</code>, then:
-    <ul>
-    <li>The box will break onto a new line.</li>
-    <li>Padding, margin and border will cause other elements to be pushed away from the box.</li>
-    <li>You can set fixed <code>width</code> and <code>height</code> properties. If not specified, the box will extend in the inline direction to fill the space available in its container (width: 100%).</b></li>
-    </ul>
-    </p>`,
-    markup: `
-<bento style="width:200px; height: 150px;"><plate></plate></bento>
-<bento style="width:300px; height: 200px;"><plate></plate></bento>
-<bento style="width:400px; height: 300px;"><plate></plate></bento>
-    `,
-    check: [
-      ["width","100px"]
-    ]
-  },
-  {
-    name: "Auto margins",    
-    doThis: "Set all margins to auto",
-    selector: "plate",
-    existingStyles: `  display: block;
-  height: 100px;
-  width: 100px;`,
-    syntax: "margin: auto;",
-    help: `<p>For <b>block</b> elements, margins with <code>auto</code> value are computed differently between top/bottom and left/right.</p>
-    <p>For <b>left and right margins</b>, auto makes the margin <b>fill all the available space</b>. This only works if the element has a specified width lower than its parent container width, so that there is space for margins.</p>
-    <p>For <b>top and bottom margins</b>, auto is resolved as <b>zero</b>. In fact, the nature of document flow and element height calculation algorithms make it impossible to use margins for centering an element vertically inside its parent. Whenever a vertical margin's value is changed, it will trigger a parent element height re-calculation (re-flow), which would in turn trigger a re-center of the original element... making it an infinite loop.`,
-    markup: `
-    <bento style="width:200px; height: 150px;"><plate></plate></bento>
-    <bento style="width:300px; height: 200px;"><plate></plate></bento>
-    <bento style="width:400px; height: 300px;"><plate></plate></bento>
-    `,
-    check: [
-      ["margin","auto"]
-    ]
-  },
-  {
     name: "Inline block display",    
     doThis: "Align the bentos at the top side of the table",
     selector: "plate",
+    tableStyles: `width: 600px; height: 300px`,
     existingStyles: `  display: block;
   height: 100px;
-  width: 100px;
-  margin: auto;`,
+  width: 100px;`,
     syntax: `display: inline-block;`,
     help: `<p>If an element has a display type of <code>inline-block</code>, then it has a behavior in between <code>inline</code> and <code>block</code>:
 <ul>
@@ -268,18 +320,22 @@ margin-<dir>: <val><unit>`,
 <img src="img/baseline2.png" alt="Baseline with inline-block elements without text" />
 <p>In this example, <tag>bento</tag> elements are already <code>inline-block</code>, but plates being <code>block</code> change the baseline to the bottom edge.`,
     markup: `
-    <bento style="width:200px; height: 150px;"><plate></plate></bento>
-    <bento style="width:300px; height: 200px;"><plate></plate></bento>
-    <bento style="width:400px; height: 300px;"><plate></plate></bento>
+    <bento style="height: 150px;"><plate></plate></bento>
+    <bento style="height: 300px;">
+      <plate></plate>
+      <plate></plate>
+    </bento>
+    <bento style="height: 200px;"><plate></plate></bento>
     `,
     check: [
-      ["margin","auto"]
+      ["display","inline-block"]
     ]
   },
   {
     name: "Inline block vertical align",    
-    doThis: "Align the bentos at the middle of the table",
+    doThis: "Align vertically the bentos at the middle of the table",
     selector: "bento",
+    tableStyles: `width: 600px; height: 300px`,
     existingStyles: `  display: inline-block;`,
     syntax: `vertical-align: <align>;`,
     help: `<p>The <code>vertical-align</code> changes the way an inline-block element is vertically aligned relatively to the baseline. It can take the following values:</p>    
@@ -291,15 +347,394 @@ margin-<dir>: <val><unit>`,
   <li><code>middle</code>: aligns the middle of the element with the middle of the line height added to the baseline</li>
   <li>a custom length or percentage</li>
 </ul>
-</p>
+<p>It only works for <b>inline-block</b> elements !</p>
 `,
     markup: `
-    <bento style="width:200px; height: 150px;"><plate></plate></bento>
-    <bento style="width:300px; height: 200px;"><plate></plate></bento>
-    <bento style="width:400px; height: 300px;"><plate></plate></bento>
+    <bento style="height: 150px;"><plate></plate></bento>
+    <bento style="height: 300px;">
+      <plate></plate>
+      <plate></plate>
+    </bento>
+    <bento style="height: 200px;"><plate></plate></bento>
     `,
     check: [
       ["verticalAlign","middle"]
+    ]
+  },
+  {
+    name: "Flex display",    
+    doThis: "Put the sushis on the plates",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    syntax: `display: flex;`,
+    help: `<p><code>flex</code> is another display mode for elements that is more powerful than <b>block</b>. Flex is used to specify <b>how the children of an element should occupy the space </b> they have in that element.</p>
+    <p>Flex layouts should be used when you want to distribute elements along one axis, be it horizontal or vertical.</p>
+    <p>By default, flex elements have this behavior:
+    <ul>
+    <li>The items display in a row: <code>flex-direction: row</code></li>
+    <li>The items start from the start edge of the main axis: <code>justify-content: flex-start</code></li>
+    <li>The items do not stretch on the main axis by default, but can shrink if necessary: <code>flex: 1 0 auto</code></li>
+    <li>The items will, by default, stretch to fill the size of the cross axis: <code>align-items: stretch</code></li>
+    </ul></p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper">
+      <plate></plate><plate></plate><plate></plate>
+    </div>`,
+    check: [
+      ["display","flex"]
+    ]
+  },
+  {
+    name: "Flex: justify-content 1/4",    
+    doThis: "Put the sushis on the plates",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    existingStyles: "  display: flex;",
+    syntax: `justify-content: <value>;`,
+    help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
+    <p>It can take the following values:
+    <ul>
+    <li><code>flex-start</code> : items align on the start of the flex axis (left by default)</li>
+    <li><code>flex-end</code> : items align on the end of the flex axis (right by default)</li>
+    <li><code>center</code> : items align on the center of the container</li>
+    <li><code>space-between</code> : items are displayed with equal space between them</li>
+    <li><code>space-around</code> : items are displayed with equal space between <b>and around</b> them.</li>
+    </ul></p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="justify-content: flex-end">
+      <plate></plate><plate></plate><plate></plate>
+    </div>`,
+    check: [
+      ["justifyContent","flex-end"]
+    ]
+  },
+  {
+    name: "Flex: justify-content 2/4",    
+    doThis: "Put the sushis on the plates",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    existingStyles: "  display: flex;",
+    syntax: `justify-content: <value>;`,
+    help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
+    <p>It can take the following values:
+    <ul>
+    <li><code>flex-start</code> : items align on the start of the flex axis (left by default)</li>
+    <li><code>flex-end</code> : items align on the end of the flex axis (right by default)</li>
+    <li><code>center</code> : items align on the center of the container</li>
+    <li><code>space-between</code> : items are displayed with equal space between them</li>
+    <li><code>space-around</code> : items are displayed with equal space between <b>and around</b> them.</li>
+    </ul></p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="justify-content: center">
+      <plate></plate><plate></plate><plate></plate>
+    </div>`,
+    check: [
+      ["justifyContent","center"]
+    ]
+  },
+  {
+    name: "Flex: justify-content 3/4",    
+    doThis: "Put the sushis on the plates",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    existingStyles: "  display: flex;",
+    syntax: `justify-content: <value>;`,
+    help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
+    <p>It can take the following values:
+    <ul>
+    <li><code>flex-start</code> : items align on the start of the flex axis (left by default)</li>
+    <li><code>flex-end</code> : items align on the end of the flex axis (right by default)</li>
+    <li><code>center</code> : items align on the center of the container</li>
+    <li><code>space-between</code> : items are displayed with equal space between them</li>
+    <li><code>space-around</code> : items are displayed with equal space between <b>and around</b> them.</li>
+    </ul></p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="justify-content: space-around">
+      <plate></plate><plate></plate><plate></plate>
+    </div>`,
+    check: [
+      ["justifyContent","space-around"]
+    ]
+  },
+  {
+    name: "Flex: justify-content 4/4",    
+    doThis: "Put the sushis on the plates",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    existingStyles: "  display: flex;",
+    syntax: `justify-content: <value>;`,
+    help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
+    <p>It can take the following values:
+    <ul>
+    <li><code>flex-start</code> : items align on the start of the flex axis (left by default)</li>
+    <li><code>flex-end</code> : items align on the end of the flex axis (right by default)</li>
+    <li><code>center</code> : items align on the center of the container</li>
+    <li><code>space-between</code> : items are displayed with equal space between them</li>
+    <li><code>space-around</code> : items are displayed with equal space between <b>and around</b> them.</li>
+    </ul></p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="justify-content: space-between">
+      <plate></plate><plate></plate><plate></plate>
+    </div>`,
+    check: [
+      ["justifyContent","space-between"]
+    ]
+  },
+  {
+    name: "Flex: align-items",    
+    doThis: "Put the sushis on the plates",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    existingStyles: "  display: flex;",
+    syntax: `align-items: <value>;`,
+    help: `<p><code>align-items</code> let you choose how items are aligned relatively to the cross axis (the vertical axis by default in English language)</p>
+    <p>It can take the following values:
+    <ul>
+    <li><code>flex-start</code> : items align on the start of the cross axis (top by default)</li>
+    <li><code>flex-end</code> : items align on the end of the cross axis (bottom by default)</li>
+    <li><code>center</code> : items align on the center of the container</li>
+    <li><code>space-between</code> : items are displayed with equal space between them</li>
+    <li><code>space-around</code> : items are displayed with equal space between <b>and around</b> them.</li>
+    </ul></p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="align-items: flex-end">
+      <plate></plate><plate></plate><plate></plate>
+    </div>`,
+    check: [
+      ["alignItems","flex-end"]
+    ]
+  },
+  {
+    name: "Flex positionning 1/2",    
+    doThis: "Put the sushis on the plates",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    existingStyles: "  display: flex;",
+    syntax: `justify-content: <value>;
+align-items: <value>;`,
+    help: `<p>Combine <code>justify-content</code> and <code>align-items</code> properties to position your items !</p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="justify-content: center; align-items: center;">
+      <plate></plate><plate></plate><plate></plate>
+    </div>`,
+    inputLinesNumber: 2,
+    check: [
+      ["justifyContent", "center"],
+      ["alignItems", "center"]
+    ]
+  },
+  {
+    name: "Flex positionning 2/2",    
+    doThis: "Put the sushis on the plates",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    existingStyles: "  display: flex;",
+    syntax: `justify-content: <value>;
+align-items: <value>;`,
+    help: `<p>Combine <code>justify-content</code> and <code>align-items</code> properties to position your items !</p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="justify-content: space-between; align-items: flex-end;">
+      <plate></plate><plate></plate><plate></plate>
+    </div>`,
+    inputLinesNumber: 2,
+    check: [
+      ["justifyContent", "center"],
+      ["alignItems", "center"]
+    ]
+  },
+  {
+    name: "Flex direction 1/5",    
+    doThis: "Put the sushis on the plates according to their color",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    existingStyles: "  display: flex;",
+    syntax: `flex-direction: <value>;`,
+    help: `<p><code>flex-direction</code> let you change the main axis of the flex layout, and its direction (left to right by default in English language)</p>
+    <p>It can take the following values:
+    <ul>
+    <li><code>row</code> : same direction than text in the user language</li>
+    <li><code>row-reverse</code> : opposite direction than text in the user language</li>
+    <li><code>column</code> : perpendicular to text direction, following the reading direction</li>
+    <li><code>column-reverse</code> : perpendicular to text direction, opposite to the reading direction</li>
+    </ul></p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi class="salmon"></sushi>
+      <sushi class="egg"></sushi>
+      <sushi class="avocado"></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="flex-direction: row-reverse">
+      <plate class="salmon"></plate>
+      <plate class="egg"></plate>
+      <plate class="avocado"></plate>
+    </div>`,
+    check: [
+      ["flexDirection","row-reverse"]
+    ]
+  },
+  {
+    name: "Flex direction 2/5",    
+    doThis: "Put the sushis on the plates according to their color",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    existingStyles: "  display: flex;",
+    syntax: `flex-direction: <value>;`,
+    help: `<p><code>flex-direction</code> let you change the main axis of the flex layout, and its direction (left to right by default in English language)</p>
+    <p>It can take the following values:
+    <ul>
+    <li><code>row</code> : same direction than text in the user language</li>
+    <li><code>row-reverse</code> : opposite direction than text in the user language</li>
+    <li><code>column</code> : perpendicular to text direction, following the reading direction</li>
+    <li><code>column-reverse</code> : perpendicular to text direction, opposite to the reading direction</li>
+    </ul></p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi class="salmon"></sushi>
+      <sushi class="egg"></sushi>
+      <sushi class="avocado"></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="flex-direction: column">
+      <plate class="salmon"></plate>
+      <plate class="egg"></plate>
+      <plate class="avocado"></plate>
+    </div>`,
+    check: [
+      ["flexDirection","column"]
+    ]
+  },
+  {
+    name: "Flex direction 3/5",    
+    doThis: "Put the sushis on the plates according to their color",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 360px`,
+    existingStyles: "  display: flex;",
+    syntax: `flex-direction
+justify-content`,
+    help: `<p>Combine what you learned with <code>flex-direction</code> and <code>justify-content</code> to position the items !</p>`,
+    inputLinesNumber: 2,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi class="salmon"></sushi>
+      <sushi class="egg"></sushi>
+      <sushi class="avocado"></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="flex-direction: row-reverse; justify-content: flex-end;">
+      <plate class="salmon"></plate>
+      <plate class="egg"></plate>
+      <plate class="avocado"></plate>
+    </div>`,
+    check: [
+      ["flexDirection","row-reverse"],
+      ["justifyContent","flex-end"],
+    ]
+  },
+  {
+    name: "Flex direction 4/5",    
+    doThis: "Put the sushis on the plates according to their color",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 400px`,
+    existingStyles: "  display: flex;",
+    syntax: `flex-direction
+justify-content
+align-items`,
+    help: `<p>Combine what you learned with <code>flex-direction</code>, <code>justify-content</code> and <code>align-items</code> to position the items !</p>`,
+    inputLinesNumber: 3,
+    markup: `
+    <bento style="width: 700px; height: 400px">
+      <sushi class="salmon"></sushi>
+      <sushi class="egg"></sushi>
+      <sushi class="avocado"></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="flex-direction: column-reverse; justify-content: space-between; align-items: center;">
+      <plate class="salmon"></plate>
+      <plate class="egg"></plate>
+      <plate class="avocado"></plate>
+    </div>`,
+    check: [
+      ["flexDirection","column-reverse"],
+      ["justifyContent","space-between"],
+      ["alignItems","center"],
+    ]
+  },
+  {
+    name: "Flex direction 5/5",    
+    doThis: "Put the sushis on the plates according to their color",
+    selector: "bento",
+    tableStyles: `width: 720px; height: 400px`,
+    existingStyles: "  display: flex;",
+    syntax: `flex-direction
+justify-content
+align-items`,
+    help: `<p>Combine what you learned with <code>flex-direction</code>, <code>justify-content</code> and <code>align-items</code> to position the items !</p>`,
+    inputLinesNumber: 3,
+    markup: `
+    <bento style="width: 700px; height: 400px">
+      <sushi class="salmon"></sushi>
+      <sushi class="egg"></sushi>
+      <sushi class="avocado"></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="flex-direction: row-reverse; justify-content: center; align-items: flex-end;">
+      <plate class="salmon"></plate>
+      <plate class="egg"></plate>
+      <plate class="avocado"></plate>
+    </div>`,
+    check: [
+      ["flexDirection","row-reverse"],
+      ["justifyContent","center"],
+      ["alignItems","flex-end"],
     ]
   },
 ];
@@ -317,10 +752,8 @@ export const chapter4: Chapter = {
     nextTick(() => {
       addBoardElementsTooltips()
 
-      const editorInput = document.querySelector(
-        ".editor input"
-      ) as HTMLInputElement;
-      editorInput.value = "";
+      const editorInput = document.querySelector(".editor input");
+      if(editorInput instanceof HTMLTextAreaElement) editorInput.value = "";
 
       const table = document.querySelector('.table-board');
       if(!table) return;

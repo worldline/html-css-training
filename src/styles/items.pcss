@@ -347,7 +347,6 @@ sushi {
     position: relative;
     border: 4px solid #2C3527;
     background: #2C3527;
-    z-index: 0;
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
 
@@ -368,4 +367,31 @@ sushi::after {
     position: absolute;
     top: -36px;
     left: -4px;
+}
+
+sushi.egg::after {
+    background-image: radial-gradient(#ffd963 35%, #fffcec 36%);
+    background-position: 0 0;
+    background-size: 100% 100%;
+}
+
+sushi.avocado::after {
+    background-image: none;
+    background-color: #6b8c21;
+    box-shadow: inset 0 0 2px 8px #F1EEDA;
+}
+
+plate.salmon {
+    background-color: #ec645a;
+    border-color: #e7a8a3;
+}
+
+plate.egg {
+    background-color: #ffd963;
+    border-color: #fdf3bb;
+}
+
+plate.avocado {
+    background-color: #6b8c21;
+    border-color: #958d54;
 }

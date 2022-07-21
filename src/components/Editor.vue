@@ -2,11 +2,12 @@
   <div class="editor" @click="inputElement?.focus()">
     <EditorPane title="CSS Editor" fileName="style.css" lang="css">
       <slot name="code-before" />
-      <input id="editor-input" class="input-strobe" type="text"
+      <textarea id="editor-input" class="input-strobe" type="text"
                ref="inputElement"
-               @keydown.enter.prevent="enterHit"
+               @keydown.enter="enterHit"
                @keyup.prevent="onInputKeyup"
-               :placeholder="placeholder"/>
+               :placeholder="placeholder"
+               :style="inputStyle"/>
         <span class="plus">+</span>
         <div class="enter-button" @click="enterHit" ref="enterButton">enter</div>
         <slot name="code-after" />
@@ -30,31 +31,30 @@ defineProps({
 
 const emit = defineEmits([ "input" ])
 
-let inputValue="";
+const getInputValue = () => inputElement.value ? inputElement.value.value : "";
 const enterButton: Ref<HTMLElement | null> = ref(null)
-const inputElement: Ref<HTMLElement | null> = ref(null)
+const inputElement: Ref<HTMLTextAreaElement | null> = ref(null)
 
 const level = computed(() => state.level)
 
-//Animate the enter button
-function enterHit(){
-  const button = enterButton.value as HTMLElement;
-  button.classList.remove("enterhit")
-  setTimeout(() => button.classList.add("enterhit"), 0)
-  handleInput(inputValue);
-}
+const inputStyle = computed(() => ({
+  height: (state.level.inputLinesNumber ?? 1) * 1.4 + "em"
+}))
 
-//Parses text from the input field
-function handleInput(text: string){
-  const input = inputElement.value as HTMLInputElement;
-  inputValue = input.value
-  emit("input", text)
+//Animate the enter button
+function enterHit(event: Event){
+  if(getInputValue().split("\n").length >= (level.value.inputLinesNumber ?? 1)){
+    event.preventDefault()
+    const button = enterButton.value as HTMLElement;
+    button.classList.remove("enterhit")
+    setTimeout(() => button.classList.add("enterhit"), 0)    
+  }
+  emit("input", getInputValue())
 }
 
 function onInputKeyup(){
-  const input = inputElement.value as HTMLInputElement;
-  inputValue = input.value
-  input.classList.toggle("input-strobe", inputValue.length > 0)
+  const input = inputElement.value as HTMLTextAreaElement;
+  input.classList.toggle("input-strobe", input.value.length > 0)
 }
 </script>
 
@@ -100,11 +100,16 @@ function onInputKeyup(){
 
 #editor-input {
   font-family: menlo, monospace;
+  font-size: 14px;
   color: #333;
   border: none;
   width: calc(100% - 64px);
   background: none;
   margin-left: 1em;
+  outline: none;
+  resize: none;
+  overflow: auto;
+  height: 1.4em;
 }
 
 #editor-input.input-strobe {

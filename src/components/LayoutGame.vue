@@ -2,7 +2,7 @@
   <p class="order">{{ level.doThis }}</p>
   <div class="game-container">
     <div class="game-wrapper">
-      <Table :content="level.markup" :key="level.name"></Table>
+      <Table :content="level.markup" :hintContent="level.hintMarkup" :key="level.name"></Table>
     </div>
   </div>
   <Editor placeholder="Type styles here" @input="applyStyle(level.selector, $event)">
@@ -24,11 +24,12 @@ import { computed } from "vue";
 import { Chapter4Level, applyStyle } from "../chapters/chapter4";
 
 const level = computed(() => state.level as Chapter4Level)
+
 </script>
 
 <style scoped>
 .game-wrapper {
-  transform: translate3d(0,0,0);
+  transform: translate3d(0,-50px,0);
   perspective: 500px;
   text-align: center;
   position: relative;
@@ -39,5 +40,9 @@ const level = computed(() => state.level as Chapter4Level)
 
 pre {
   margin: 0;
+}
+
+.game-wrapper ::v-deep(.table-board sushi) {
+  margin: 32px;
 }
 </style>

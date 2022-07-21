@@ -2,6 +2,7 @@
   <div class="table-wrapper">
     <div class="table-surface" ref="surface"></div>
     <div class="table">
+      <div class="hint-content" v-if="hintContent" v-html="hintContent"></div>
       <div v-if="content" v-html="content" ref="board" class="table-board"></div>
       <div v-else ref="board" class="table-board"><slot /></div>
     </div>
@@ -15,12 +16,11 @@
 <script lang="ts">
 export default {
   name: "Table",
-  props: ["content"]
+  props: ["content", "hintContent"]
 }
 </script>
 
 <style scoped>
-
 .table-wrapper {
   display: inline-block;
   transform: rotateX(20deg);
@@ -43,6 +43,20 @@ export default {
   white-space: nowrap;
 }
 
+.hint-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.hint-content ::v-deep(.hint-wrapper){
+  display: flex; 
+  margin: 24px 26px; 
+  height: calc(100% - 52px); 
+}
+
 .table-surface {
   box-shadow: 0 40px 10px rgba(0,0,0,.2);
   background: #dd992d;
@@ -54,9 +68,14 @@ export default {
   width: 100%;
 }
 
-.table plate {
-  z-index: 99999;
+.table-board ::v-deep(sushi) {
+  z-index: 100;
 }
+
+.table .hint-content ::v-deep(plate, sushi){
+  z-index: 1;
+}
+
 
 .table-edge  {
   width: 100%;

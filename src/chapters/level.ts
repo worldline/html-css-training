@@ -3,4 +3,5 @@ export interface Level {
     instructions?: string;
     markup?: string;
     skippable?: boolean;
+    inputLinesNumber?: number;
 }
