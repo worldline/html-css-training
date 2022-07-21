@@ -24,6 +24,10 @@ const level = computed(() => state.level as Chapter2Level)
   color: #999;
 }
 
+.display-help ::v-deep(img) {
+  width: 100%;
+}
+
 .display-help .selector-name {
   font-size: 18px;
   margin: 0 0 4px 0 ;

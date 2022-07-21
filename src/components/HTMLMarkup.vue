@@ -19,7 +19,6 @@ watch(() => props.markup, updateMarkup)
 function updateMarkup(){
   const el = document.createElement("div");
   el.innerHTML = props.markup ?? "";
-  console.log(props.markup, el)
   if(container.value){
     container.value.innerHTML = getMarkup(el, true).innerHTML
   }

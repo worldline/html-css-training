@@ -2,7 +2,7 @@
   <p class="order">{{ level.doThis }}</p>
   <div class="game-container">
     <div class="game-wrapper">
-      <Table :content="level.markup"></Table>
+      <Table :content="level.markup" :key="level.name"></Table>
     </div>
   </div>
   <Editor placeholder="Type styles here" @input="applyStyle(level.selector, $event)">
