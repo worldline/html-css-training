@@ -42,7 +42,7 @@ defineProps({
 }
 
 .editor .file-window {
-  padding: 10px 10px 10px 46px;
+  padding: 10px 10px 2px 46px;
   position: relative;
   height: 100%;
 }

@@ -4,4 +4,5 @@ export interface Level {
     markup?: string;
     skippable?: boolean;
     inputLinesNumber?: number;
+    wrapperClass?: string;
 }

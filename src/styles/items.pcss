@@ -1,11 +1,16 @@
-orange, apple, pickle, bento, plate {
+.table-board * {
     transition: transform ease-out .2s;
+}
+
+.table-board > * {
+    vertical-align: middle;
+    margin: 0 10px;
 }
 
 bento, plate {
     box-shadow: 2px 3px 0 rgba(0,0,0,.1);
     display: inline-block;
-    margin: 0 10px;
+    margin: 0;
     position: relative;
 }
 
@@ -15,6 +20,13 @@ plate {
     border-radius: 50%;
     width: 100px;
     height: 100px;
+    padding: 20px;
+    z-index: 1;
+}
+
+plate > * {
+    position: relative;
+    z-index: 10;
 }
 
 plate.square {
@@ -33,6 +45,7 @@ plate::before {
     border-top: solid 6px #CCC;
     opacity: .4;
     background: rgba(255,255,255,1);
+    z-index: 2;
 }
 
 plate.square::before {
@@ -75,6 +88,15 @@ bento {
     min-height: 100px;
 }
 
+bento:before {
+    content:"";
+    position: absolute;
+    width: calc(100%);
+    top: 0;
+    left:0;
+    border-top: solid 10px rgba(0,0,0,.1);
+}
+
 bento.green {
     background: green;
     border-color: darkgreen;
@@ -95,14 +117,16 @@ bento.red {
     border-color: crimson;
 }
 
+bento plate {
+    margin: 0 10px;
+}
+
 plate bento {
-    height: 74px;
-    width: 74px;
+    height: 80px;
+    width: 80px;
     min-width: 0;
     min-height: 0;
-    position: absolute;
-    top: 10px;
-    left:4px;
+    margin: -10px;
 
 }
 
@@ -111,18 +135,11 @@ plate plate {
     top: 3px;
 }
 
-plate > bento > apple:only-child,
-plate > bento > orange:only-child {
-    top: 50%;
-}
-
-bento:before {
-    content:"";
-    position: absolute;
-    width: calc(100%);
-    top: 0;
-    left:0;
-    border-top: solid 10px rgba(0,0,0,.1);
+orange, apple, pickle, toast, sushi {
+    box-shadow: 0 5px 7px rgba(0,0,0,.3);
+    display: inline-block;
+    margin: 0 auto;
+    height: 60px;
 }
 
 apple {
@@ -134,30 +151,6 @@ orange {
     background: orange;
     border-color: #bd6e07;
 }
-
-orange, apple, pickle, toast, sushi {
-    box-shadow: 0 5px 7px rgba(0,0,0,.3);
-    display: inline-block;
-    margin: 0 10px;
-    height: 60px;
-}
-
-toast {
-    width: 60px;
-    height: 60px;
-    display: inline-block;
-    box-shadow: 0 5px 0 rgba(0,0,0,.15);
-    background: #f9e4ac;
-    background-image: radial-gradient(#e6d092 15%, transparent 16%),radial-gradient(#e6d092 15%, transparent 16%);
-    background-size: 10px 10px;
-    background-position: 0 0, 3px 3px;
-    border-style: solid;
-    border-color: #88611e;
-    border-width: 2px 2px 8px 2px;
-    border-radius: 15px 15px 6px 6px;
-    margin: 20px 10px;
-}
-
 
 orange, apple {    
     border-radius: 100px;
@@ -182,13 +175,13 @@ pickle {
     background-image: radial-gradient(#16a909 1px, transparent 1px), radial-gradient(#16a909 1px, #1f911f 1px);
     background-size: 10px 10px;
     background-position: 0 0, 5px 5px;
-    width: 25px;
+    width: 30px;
     border-radius: 30px;
     display: inline-block;
     position: relative;
     border: solid 2px #025a18;
     border-bottom-width: 9px;
-    margin: 20px 10px;
+    margin: 0 15px;
 }
 
 pickle.small {
@@ -240,7 +233,92 @@ apple::after {
 
 }
 
-/*FRUITS ON A PLATTER*/
+toast {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    box-shadow: 0 5px 0 rgba(0,0,0,.15);
+    background: #f9e4ac;
+    background-image: radial-gradient(#e6d092 15%, transparent 16%),radial-gradient(#e6d092 15%, transparent 16%);
+    background-size: 10px 10px;
+    background-position: 0 0, 3px 3px;
+    border-style: solid;
+    border-color: #88611e;
+    border-width: 2px 2px 8px 2px;
+    border-radius: 15px 15px 6px 6px;
+}
+
+sushi {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    position: relative;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;  
+}
+
+sushi::before {
+    content: "";
+    display: block;
+    width: 52px;
+    height: 28px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 4px solid #2C3527;
+    background: #2C3527;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+sushi::after {
+    content: "";
+    display: block;
+    background-color: #FA8072;
+    background-image:  linear-gradient(135deg, #ec645a 25%, transparent 25%), linear-gradient(225deg, #ec645a 25%, transparent 25%), linear-gradient(45deg, #ec645a 25%, transparent 25%), linear-gradient(315deg, #ec645a 25%, #FA8072 25%);
+    background-position: 5px 0, 5px 0, 0 0, 0 0;
+    background-size: 10px 10px;
+    background-repeat: repeat;
+    box-shadow: inset 0 0 2px 5px #F1EEDA;
+    width: 52px;
+    height: 44px;
+    border-radius: 24px;
+    border: 4px solid #2C3527;
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+}
+
+sushi.egg::after {
+    background-image: radial-gradient(#ffd963 35%, #fffcec 36%);
+    background-position: 0 0;
+    background-size: 100% 100%;
+}
+
+sushi.avocado::after {
+    background-image: none;
+    background-color: #6b8c21;
+    box-shadow: inset 0 0 2px 8px #F1EEDA;
+}
+
+plate.salmon {
+    background-color: #ec645a;
+    border-color: #e7a8a3;
+}
+
+plate.egg {
+    background-color: #ffd963;
+    border-color: #fdf3bb;
+}
+
+plate.avocado {
+    background-color: #6b8c21;
+    border-color: #958d54;
+}
+
+/* ITEMS STACKING */
 
 bento orange,
 bento apple,
@@ -290,15 +368,6 @@ bento > pickle.small:only-child {
     z-index: 99999;
 }
 
-plate > sushi:only-child,
-bento > sushi:only-child {
-    top: calc(50% - 5px);
-    left: calc(50% - 27px);
-    z-index: 99999;
-    margin: 0;
-    position: absolute;
-}
-
 plate > toast:only-child,
 bento > toast:only-child {
     top: 20%;
@@ -308,7 +377,6 @@ bento > toast:only-child {
     position: absolute;
 }
 
-/* Fancy orange stacking */
 plate apple,
 plate orange {
     position: absolute;
@@ -339,59 +407,6 @@ plate orange:nth-last-child(4)
     z-index: 600;
 }
 
-sushi {
-    display: inline-block;
+bento sushi {
     margin: 0 10px;
-    width: 56px;
-    height: 34px;
-    position: relative;
-    border: 4px solid #2C3527;
-    background: #2C3527;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
-
-}
-sushi::after {
-    content: "";
-    display: block;
-    background-color: #FA8072;
-    background-image:  linear-gradient(135deg, #ec645a 25%, transparent 25%), linear-gradient(225deg, #ec645a 25%, transparent 25%), linear-gradient(45deg, #ec645a 25%, transparent 25%), linear-gradient(315deg, #ec645a 25%, #FA8072 25%);
-    background-position: 5px 0, 5px 0, 0 0, 0 0;
-    background-size: 10px 10px;
-    background-repeat: repeat;
-    box-shadow: inset 0 0 2px 5px #F1EEDA;
-    width: 48px;
-    height: 44px;
-    border-radius: 24px;
-    border: 4px solid #2C3527;
-    position: absolute;
-    top: -36px;
-    left: -4px;
-}
-
-sushi.egg::after {
-    background-image: radial-gradient(#ffd963 35%, #fffcec 36%);
-    background-position: 0 0;
-    background-size: 100% 100%;
-}
-
-sushi.avocado::after {
-    background-image: none;
-    background-color: #6b8c21;
-    box-shadow: inset 0 0 2px 8px #F1EEDA;
-}
-
-plate.salmon {
-    background-color: #ec645a;
-    border-color: #e7a8a3;
-}
-
-plate.egg {
-    background-color: #ffd963;
-    border-color: #fdf3bb;
-}
-
-plate.avocado {
-    background-color: #6b8c21;
-    border-color: #958d54;
 }

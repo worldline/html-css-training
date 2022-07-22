@@ -38,7 +38,7 @@ const inputElement: Ref<HTMLTextAreaElement | null> = ref(null)
 const level = computed(() => state.level)
 
 const inputStyle = computed(() => ({
-  height: (state.level.inputLinesNumber ?? 1) * 1.4 + "em"
+  height: (state.level.inputLinesNumber ?? 1) * 1.5 + "em"
 }))
 
 //Animate the enter button
@@ -77,14 +77,16 @@ function onInputKeyup(){
   background: #ddd;
   display: inline-block;
   border-radius: 2px;
-  padding: 2px 7px 2px 7px;
+  padding: 0 7px 0 7px;
   color: #666;
   border: solid 1px #999;
-  border-bottom-width: 6px;
+  border-bottom-width: 5px;
   position: relative;
   font-size: 9px;
   cursor: pointer;
-  z-index: 999;
+  line-height: 16px;
+  z-index: 2;
+  vertical-align: middle;
 }
 
 .enterhit {
@@ -110,6 +112,7 @@ function onInputKeyup(){
   resize: none;
   overflow: auto;
   height: 1.4em;
+  vertical-align: middle;
 }
 
 #editor-input.input-strobe {

@@ -45,16 +45,20 @@ export default {
 
 .hint-content {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
 }
 
 .hint-content ::v-deep(.hint-wrapper){
   display: flex; 
-  margin: 24px 26px; 
-  height: calc(100% - 52px); 
+  margin: 20px 10px 0 10px; 
+  position: absolute;
+  top: 0;
+  bottom: 2px;
+  left: 0;
+  right: 0;
 }
 
 .table-surface {

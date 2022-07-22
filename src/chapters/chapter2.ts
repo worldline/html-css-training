@@ -107,8 +107,8 @@ export const chapter2Levels: Chapter2Level[] = [
   },
   {
     name: "Type Selector",
-    doThis: "Select the bento boxes",
-    selector: "bento",
+    doThis: "Select the plates",
+    selector: "plate",
     syntax: "tagname",
     helpTitle: "Select elements by their type",
     help: "Selects all elements of a type. Type refers to the type of tag, so <tag>div</tag>, <tag>p</tag> and <tag>ul</tag> are all different element types.",
@@ -117,11 +117,12 @@ export const chapter2Levels: Chapter2Level[] = [
       "<strong>p</strong> selects all <tag>p</tag> elements.",
     ],
     markup: `
-    <bento></bento>
+    <plate></plate>
+    <bento><plate></plate></bento>
     <bento><sushi/></bento>
-    <plate>
-        <bento></bento>
-    </plate>
+    <bento>
+    <plate><sushi /></plate>
+    </bento>
     `,
   },
   {

@@ -20,7 +20,7 @@ export function applyStyle(selector: string, rules: string) {
 
   targets.forEach(el => el.setAttribute("style", [
     el.getAttribute("data-existing-style") ?? "",
-    level.existingStyles ?? "",
+    ...level.cssRules[level.selector] ?? [],
     rules
   ].join(";")))
 
@@ -58,7 +58,7 @@ export interface Chapter4Level extends Level {
   help?: string;
   helpTitle?: string;
   examples?: string[];
-  existingStyles?: string;
+  cssRules: { [selector:string]: string[] };
   tableStyles?: string;
   check: [string, string][];
   hintMarkup?: string;
@@ -69,7 +69,8 @@ export const chapter4Levels: Chapter4Level[] = [
     name: "Block display and line breaking",
     doThis: "Put the bentos vertically on top of each other",
     selector: "bento",
-    tableStyles: `width: 600px; height: 600px`,
+    tableStyles: `width: 800px; height: 360px`,
+    cssRules: {},
     syntax: "display: block",
     help: `<p>Block is the default display mode of paragraphs and sectionning elements like <tag>div</tag>, <tag>main</tag>, <tag>article</tag> etc.</p>
     <p>If an element has a display type of <code>block</code>, then:
@@ -81,15 +82,15 @@ export const chapter4Levels: Chapter4Level[] = [
     </p>`,
     markup: `
     <bento>
-    <plate></plate>
-  </bento>
-  <bento>
-    <plate></plate>
-    <plate></plate>
-  </bento>
-  <bento>
-    <plate></plate>
-  </bento>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+    </bento>
     `,
     check: [
       ["display","block"]
@@ -99,8 +100,10 @@ export const chapter4Levels: Chapter4Level[] = [
     name: "Box Model: margins",
     doThis: "Add a 20px bottom margin to bentos",
     selector: "bento",
-    tableStyles: `width: 600px; height: 600px`,
-    existingStyles: "  display: block;",
+    tableStyles: `width: 800px; height: 360px`,
+    cssRules: {
+      "bento": ["display: block"]
+    },
     syntax: `margin: <val><unit>
 margin-<dir>: <val><unit>`,
     examples: [
@@ -119,14 +122,14 @@ margin-<dir>: <val><unit>`,
     `,
     markup: `
     <bento>
-      <plate></plate>
+      <sushi></sushi>
     </bento>
     <bento>
-      <plate></plate>
-      <plate></plate>
+      <sushi></sushi>
+      <sushi></sushi>
     </bento>
     <bento>
-      <plate></plate>
+      <sushi></sushi>
     </bento>
     `,
     check: [
@@ -135,12 +138,13 @@ margin-<dir>: <val><unit>`,
   },
   {
     name: "Box Model: padding",
-    doThis: "Add a 20px padding to bentos",
+    doThis: "Add a 10px padding to bentos",
     selector: "bento",
     syntax: "padding: <val><unit>",
-    tableStyles: `width: 600px; height: 600px`,
-    existingStyles: `  display: block;
-  margin-bottom: 20px;`,
+    tableStyles: `width: 800px; height: 360px`,
+    cssRules: {
+      "bento": ["display: block", "margin-bottom: 20px"]
+    },
     examples: [
       `<code>padding: 1em</code> adds a 1em padding on all sides of the element`,      
       `<code>padding: 0 20px</code> adds a 20px horizontal padding and zero vertical padding`,
@@ -150,18 +154,18 @@ margin-<dir>: <val><unit>`,
     <p>Padding is used to add internal margins and have space between the border of the element and its content.</p>`,
     markup: `
     <bento>
-      <plate></plate>
+      <sushi></sushi>
     </bento>
     <bento>
-      <plate></plate>
-      <plate></plate>
+      <sushi></sushi>
+      <sushi></sushi>
     </bento>
     <bento>
-      <plate></plate>
+      <sushi></sushi>
     </bento>
     `,
     check: [
-      ["padding","20px"]
+      ["padding","10px"]
     ]
   },
   {
@@ -169,10 +173,10 @@ margin-<dir>: <val><unit>`,
     doThis: "Extend the border width of bentos to 10px",
     selector: "bento",
     syntax: "border-width: <val><unit>",
-    tableStyles: `width: 600px; height: 600px`,
-    existingStyles: `  display: block;
-  margin-bottom: 20px;
-  padding: 20px;`,
+    tableStyles: `width: 800px; height: 360px`,
+    cssRules: {
+      "bento": ["display: block", "margin-bottom: 20px", "padding: 10px"]
+    },
     examples: [
       `<code>border: 1px solid black</code> adds a 1 pixel width black solid border`,
       `<code>border-width: 20px</code> sets the border width to 20px while preserving existing border styles`
@@ -182,14 +186,14 @@ margin-<dir>: <val><unit>`,
     <img src="img/boxmodel.png" alt="Box Model" />`,
     markup: `
     <bento>
-      <plate></plate>
+      <sushi></sushi>
     </bento>
     <bento>
-      <plate></plate>
-      <plate></plate>
+      <sushi></sushi>
+      <sushi></sushi>
     </bento>
     <bento>
-      <plate></plate>
+      <sushi></sushi>
     </bento>
     `,
     check: [
@@ -199,13 +203,12 @@ margin-<dir>: <val><unit>`,
   {
     name: "Width and height",
     helpTitle: "Dimensioning a block element",
-    doThis: "Make all the bentos 300px wide",
+    doThis: "Make all the bentos 250px wide",
     selector: "bento",    
-    tableStyles: `width: 600px; height: 600px`,
-    existingStyles: `  display: block;
-  margin-bottom: 20px;
-  padding: 20px;
-  border-width: 10px;`,
+    tableStyles: `width: 800px; height: 360px`,
+    cssRules: {
+      "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-width: 10px"]
+    },
     syntax: "width: <value><unit>;",
     help: `<p>If an element has a display type of <code>block</code>, then:
     <ul>
@@ -216,45 +219,43 @@ margin-<dir>: <val><unit>`,
     </p>`,
     markup: `
     <bento>
-    <plate></plate>
-  </bento>
-  <bento>
-    <plate></plate>
-    <plate></plate>
-  </bento>
-  <bento>
-    <plate></plate>
-  </bento>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+    </bento>
     `,
     check: [
-      ["width","300px"]
+      ["width","250px"]
     ]
   },
   {
     name: "Auto margins",    
     doThis: "Set all margins to auto",
     selector: "bento",    
-    tableStyles: `width: 600px; height: 600px`,
-    existingStyles: `  display: block;
-  margin-bottom: 20px;
-  padding: 20px;
-  border-width: 10px;
-  width: 300px;`,
+    tableStyles: `width: 800px; height: 360px`,
+    cssRules: {
+      "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-width: 10px", "width: 250px"]
+    },
     syntax: "margin: auto;",
     help: `<p>For <b>block</b> elements, margins with <code>auto</code> value are computed differently between top/bottom and left/right.</p>
     <p>For <b>left and right margins</b>, auto makes the margin <b>fill all the available space</b>. This only works if the element has a specified width lower than its parent container width, so that there is space for margins.</p>
     <p>For <b>top and bottom margins</b>, auto is resolved as <b>zero</b>. In fact, the nature of document flow and element height calculation algorithms make it impossible to use margins for centering an element vertically inside its parent. Whenever a vertical margin's value is changed, it will trigger a parent element height re-calculation (re-flow), which would in turn trigger a re-center of the original element... making it an infinite loop.`,
     markup: `
     <bento>
-    <plate></plate>
-  </bento>
-  <bento>
-    <plate></plate>
-    <plate></plate>
-  </bento>
-  <bento>
-    <plate></plate>
-  </bento>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+    </bento>
     `,
     check: [
       ["margin","auto"]
@@ -262,13 +263,12 @@ margin-<dir>: <val><unit>`,
   },
   {
     name: "Margins with block elements",    
-    doThis: "Add a 20px vertical margin between bentos and center them horizontally on the table",
+    doThis: "Add a 20px vertical margin between bentos and center them horizontally",
     selector: "bento",
-    tableStyles: `width: 600px; height: 600px`,
-    existingStyles: `  display: block;
-  padding: 20px;
-  border-width: 10px;
-  width: 300px;`,
+    tableStyles: `width: 800px; height: 360px`,
+    cssRules: {
+      "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-width: 10px", "width: 250px"]
+    },
     syntax: `margin: <top and bottom> 
         <right and left>`,
     help: `<p>If an element has a display type of <code>block</code>, then:
@@ -284,15 +284,15 @@ margin-<dir>: <val><unit>`,
     ],
     markup: `
     <bento>
-    <plate></plate>
-  </bento>
-  <bento>
-    <plate></plate>
-    <plate></plate>
-  </bento>
-  <bento>
-    <plate></plate>
-  </bento>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+    </bento>
     `,
     check: [
       ["margin","20px auto"]
@@ -300,20 +300,48 @@ margin-<dir>: <val><unit>`,
   },
   {
     name: "Inline block display",    
-    doThis: "Align the bentos at the top side of the table",
-    selector: "plate",
-    tableStyles: `width: 600px; height: 300px`,
-    existingStyles: `  display: block;
-  height: 100px;
-  width: 100px;`,
+    doThis: "Line up the bentos horizontally",
+    selector: "bento",
+    tableStyles: `width: 800px; height: 360px`,
+    wrapperClass: "va-initial",
+    cssRules: {
+      "bento": ["display: block", "padding: 10px", "border-width: 10px", "width: 250px", "margin: 20px auto"]
+    },
     syntax: `display: inline-block;`,
     help: `<p>If an element has a display type of <code>inline-block</code>, then it has a behavior in between <code>inline</code> and <code>block</code>:
 <ul>
   <li>The box does <b>not</b> break onto a new line, it will try to fit on the same line than its siblings elements.</li>
   <li>Padding, margin and border will cause other elements to be pushed away from the box.</li>
   <li>You can set fixed <code>width</code> and <code>height</code> properties. If not specified, the box will extend to be <b>as large as its content</b>.</li>
-  <li>By default, the box will be vertically aligned according to the <b>baseline</b>.</li>
-</ul>
+</ul>`,
+    markup: `
+    <bento>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+    </bento>
+    `,
+    check: [
+      ["display","inline-block"]
+    ]
+  },
+  {
+    name: "Inline block display",    
+    doThis: "Align the bentos on the top edge",
+    selector: "plate",
+    wrapperClass: "va-initial",
+    tableStyles: `width: 600px; height: 300px`,
+    cssRules: {
+      "bento": ["display: inline-block"],    
+      "plate": ["display: block", "width: 100px", "height: 100px", "margin-bottom: 20px"]
+    },
+    syntax: `display: inline-block;`,
+    help: `<p>By default, an <code>inline-block</code> box will be vertically aligned according to the current <b>baseline</b>.</p>
 </p>
 <img src="img/baseline1.png" alt="Baseline with inline-block elements with text" />
 <p>When the element has no text or other inline content, the baseline is set to its bottom edge:</p>
@@ -335,8 +363,11 @@ margin-<dir>: <val><unit>`,
     name: "Inline block vertical align",    
     doThis: "Align vertically the bentos at the middle of the table",
     selector: "bento",
+    wrapperClass: "va-initial",
     tableStyles: `width: 600px; height: 300px`,
-    existingStyles: `  display: inline-block;`,
+    cssRules: {
+      "bento": ["display: inline-block"]
+    },
     syntax: `vertical-align: <align>;`,
     help: `<p>The <code>vertical-align</code> changes the way an inline-block element is vertically aligned relatively to the baseline. It can take the following values:</p>    
 <ul>
@@ -366,6 +397,8 @@ margin-<dir>: <val><unit>`,
     doThis: "Put the sushis on the plates",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
+    wrapperClass: "flex-game",
+    cssRules: {},
     syntax: `display: flex;`,
     help: `<p><code>flex</code> is another display mode for elements that is more powerful than <b>block</b>. Flex is used to specify <b>how the children of an element should occupy the space </b> they have in that element.</p>
     <p>Flex layouts should be used when you want to distribute elements along one axis, be it horizontal or vertical.</p>
@@ -395,7 +428,10 @@ margin-<dir>: <val><unit>`,
     doThis: "Put the sushis on the plates",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `justify-content: <value>;`,
     help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
     <p>It can take the following values:
@@ -425,7 +461,10 @@ margin-<dir>: <val><unit>`,
     doThis: "Put the sushis on the plates",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `justify-content: <value>;`,
     help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
     <p>It can take the following values:
@@ -455,7 +494,10 @@ margin-<dir>: <val><unit>`,
     doThis: "Put the sushis on the plates",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `justify-content: <value>;`,
     help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
     <p>It can take the following values:
@@ -485,7 +527,10 @@ margin-<dir>: <val><unit>`,
     doThis: "Put the sushis on the plates",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `justify-content: <value>;`,
     help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
     <p>It can take the following values:
@@ -515,7 +560,10 @@ margin-<dir>: <val><unit>`,
     doThis: "Put the sushis on the plates",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `align-items: <value>;`,
     help: `<p><code>align-items</code> let you choose how items are aligned relatively to the cross axis (the vertical axis by default in English language)</p>
     <p>It can take the following values:
@@ -545,7 +593,10 @@ margin-<dir>: <val><unit>`,
     doThis: "Put the sushis on the plates",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `justify-content: <value>;
 align-items: <value>;`,
     help: `<p>Combine <code>justify-content</code> and <code>align-items</code> properties to position your items !</p>`,
@@ -570,7 +621,10 @@ align-items: <value>;`,
     doThis: "Put the sushis on the plates",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `justify-content: <value>;
 align-items: <value>;`,
     help: `<p>Combine <code>justify-content</code> and <code>align-items</code> properties to position your items !</p>`,
@@ -586,8 +640,8 @@ align-items: <value>;`,
     </div>`,
     inputLinesNumber: 2,
     check: [
-      ["justifyContent", "center"],
-      ["alignItems", "center"]
+      ["justifyContent", "space-between"],
+      ["alignItems", "flex-end"]
     ]
   },
   {
@@ -595,7 +649,10 @@ align-items: <value>;`,
     doThis: "Put the sushis on the plates according to their color",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `flex-direction: <value>;`,
     help: `<p><code>flex-direction</code> let you change the main axis of the flex layout, and its direction (left to right by default in English language)</p>
     <p>It can take the following values:
@@ -626,7 +683,10 @@ align-items: <value>;`,
     doThis: "Put the sushis on the plates according to their color",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `flex-direction: <value>;`,
     help: `<p><code>flex-direction</code> let you change the main axis of the flex layout, and its direction (left to right by default in English language)</p>
     <p>It can take the following values:
@@ -657,7 +717,10 @@ align-items: <value>;`,
     doThis: "Put the sushis on the plates according to their color",
     selector: "bento",
     tableStyles: `width: 720px; height: 360px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `flex-direction
 justify-content`,
     help: `<p>Combine what you learned with <code>flex-direction</code> and <code>justify-content</code> to position the items !</p>`,
@@ -684,7 +747,10 @@ justify-content`,
     doThis: "Put the sushis on the plates according to their color",
     selector: "bento",
     tableStyles: `width: 720px; height: 400px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `flex-direction
 justify-content
 align-items`,
@@ -713,7 +779,10 @@ align-items`,
     doThis: "Put the sushis on the plates according to their color",
     selector: "bento",
     tableStyles: `width: 720px; height: 400px`,
-    existingStyles: "  display: flex;",
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
     syntax: `flex-direction
 justify-content
 align-items`,
@@ -737,6 +806,33 @@ align-items`,
       ["alignItems","flex-end"],
     ]
   },
+  /*{
+    name: "Flex order",    
+    doThis: "Put the sushis on the plates according to their color",
+    selector: "sushi.egg",
+    tableStyles: `width: 720px; height: 400px`,
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
+    syntax: `order: <number>`,
+    help: `<p></p>`,    
+    markup: `
+    <bento style="width: 700px; height: 400px">
+      <sushi class="salmon"></sushi>
+      <sushi class="egg"></sushi>
+      <sushi class="avocado"></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper">
+      <plate class="salmon"></plate>
+      <plate class="egg" style="order:3"></plate>
+      <plate class="avocado"></plate>
+    </div>`,
+    check: [
+      ["order", val => val > 0],
+    ]
+  },*/
 ];
 
 export const chapter4: Chapter = {
@@ -752,17 +848,20 @@ export const chapter4: Chapter = {
     nextTick(() => {
       addBoardElementsTooltips()
 
-      const editorInput = document.querySelector(".editor input");
+      const editorInput = document.querySelector(".editor textarea");
       if(editorInput instanceof HTMLTextAreaElement) editorInput.value = "";
 
       const table = document.querySelector('.table-board');
       if(!table) return;
       table.setAttribute("style", level.tableStyles ?? "")
-      const targets: HTMLElement[] = Array.from(table.querySelectorAll(level.selector));
-      targets.forEach(el => {
-        el.setAttribute("data-existing-style", el.getAttribute("style") ?? "")
-        el.setAttribute("style", [el.getAttribute("style"), level.existingStyles ?? ""].join(";"))
-      })
+
+      const selectors = new Set([level.selector, ...Object.keys(level.cssRules)])
+      for(let selector of selectors){
+        table.querySelectorAll(selector).forEach(el => {
+          el.setAttribute("data-existing-style", el.getAttribute("style") ?? "")
+          el.setAttribute("style", [el.getAttribute("style"), ...(level.cssRules[selector] ?? [])].join(";"))
+        })
+      }
     })
   }
 }
