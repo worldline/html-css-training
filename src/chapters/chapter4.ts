@@ -44,9 +44,11 @@ export function applyStyle(selector: string, rules: string) {
 
 function checkResults(elementsToCheck: HTMLElement[], level: Chapter4Level) {
   if(!level.check) return true
-  return level.check.every(([prop,value]) => elementsToCheck.every(el => {
-    if(el.style[prop] === value) return true;
-    console.log(`Expected ${prop} to be ${value}, got ${el.style[prop]}`);
+  return level.check.every(([prop, expected]) => elementsToCheck.every((el: HTMLElement) => {
+    const value = el.style.getPropertyValue(prop);
+    if(typeof value === "string" && value === expected) return true;
+    else if(typeof expected === "function" && expected(value)) return true;
+    console.log(`Expected ${prop} to be ${expected}, got ${value}`);
     return false;
   }))
 }
@@ -60,7 +62,7 @@ export interface Chapter4Level extends Level {
   examples?: string[];
   cssRules: { [selector:string]: string[] };
   tableStyles?: string;
-  check: [string, string][];
+  check: [string, string | ((val: string) => boolean)][];
   hintMarkup?: string;
 }
 
@@ -133,7 +135,7 @@ margin-<dir>: <val><unit>`,
     </bento>
     `,
     check: [
-      ["marginBottom","20px"]
+      ["margin-bottom","20px"]
     ]
   },
   {
@@ -197,7 +199,7 @@ margin-<dir>: <val><unit>`,
     </bento>
     `,
     check: [
-      ["borderWidth","10px"]
+      ["border-width","10px"]
     ]
   },  
   {
@@ -389,7 +391,7 @@ margin-<dir>: <val><unit>`,
     <bento style="height: 200px;"><plate></plate></bento>
     `,
     check: [
-      ["verticalAlign","middle"]
+      ["vertical-align","middle"]
     ]
   },
   {
@@ -453,7 +455,7 @@ margin-<dir>: <val><unit>`,
       <plate></plate><plate></plate><plate></plate>
     </div>`,
     check: [
-      ["justifyContent","flex-end"]
+      ["justify-content","flex-end"]
     ]
   },
   {
@@ -486,7 +488,7 @@ margin-<dir>: <val><unit>`,
       <plate></plate><plate></plate><plate></plate>
     </div>`,
     check: [
-      ["justifyContent","center"]
+      ["justify-content","center"]
     ]
   },
   {
@@ -519,7 +521,7 @@ margin-<dir>: <val><unit>`,
       <plate></plate><plate></plate><plate></plate>
     </div>`,
     check: [
-      ["justifyContent","space-around"]
+      ["justify-content","space-around"]
     ]
   },
   {
@@ -552,7 +554,7 @@ margin-<dir>: <val><unit>`,
       <plate></plate><plate></plate><plate></plate>
     </div>`,
     check: [
-      ["justifyContent","space-between"]
+      ["justify-content","space-between"]
     ]
   },
   {
@@ -585,7 +587,7 @@ margin-<dir>: <val><unit>`,
       <plate></plate><plate></plate><plate></plate>
     </div>`,
     check: [
-      ["alignItems","flex-end"]
+      ["align-items","flex-end"]
     ]
   },
   {
@@ -612,8 +614,8 @@ align-items: <value>;`,
     </div>`,
     inputLinesNumber: 2,
     check: [
-      ["justifyContent", "center"],
-      ["alignItems", "center"]
+      ["justify-content", "center"],
+      ["align-items", "center"]
     ]
   },
   {
@@ -640,8 +642,8 @@ align-items: <value>;`,
     </div>`,
     inputLinesNumber: 2,
     check: [
-      ["justifyContent", "space-between"],
-      ["alignItems", "flex-end"]
+      ["justify-content", "space-between"],
+      ["align-items", "flex-end"]
     ]
   },
   {
@@ -675,7 +677,7 @@ align-items: <value>;`,
       <plate class="avocado"></plate>
     </div>`,
     check: [
-      ["flexDirection","row-reverse"]
+      ["flex-direction","row-reverse"]
     ]
   },
   {
@@ -709,7 +711,7 @@ align-items: <value>;`,
       <plate class="avocado"></plate>
     </div>`,
     check: [
-      ["flexDirection","column"]
+      ["flex-direction","column"]
     ]
   },
   {
@@ -738,8 +740,8 @@ justify-content`,
       <plate class="avocado"></plate>
     </div>`,
     check: [
-      ["flexDirection","row-reverse"],
-      ["justifyContent","flex-end"],
+      ["flex-direction","row-reverse"],
+      ["justify-content","flex-end"],
     ]
   },
   {
@@ -769,9 +771,9 @@ align-items`,
       <plate class="avocado"></plate>
     </div>`,
     check: [
-      ["flexDirection","column-reverse"],
-      ["justifyContent","space-between"],
-      ["alignItems","center"],
+      ["flex-direction","column-reverse"],
+      ["justify-content","space-between"],
+      ["align-items","center"],
     ]
   },
   {
@@ -801,13 +803,13 @@ align-items`,
       <plate class="avocado"></plate>
     </div>`,
     check: [
-      ["flexDirection","row-reverse"],
-      ["justifyContent","center"],
-      ["alignItems","flex-end"],
+      ["flex-direction","row-reverse"],
+      ["justify-content","center"],
+      ["align-items","flex-end"],
     ]
   },
-  /*{
-    name: "Flex order",    
+  {
+    name: "Flex order 1/4",    
     doThis: "Put the sushis on the plates according to their color",
     selector: "sushi.egg",
     tableStyles: `width: 720px; height: 400px`,
@@ -816,7 +818,8 @@ align-items`,
       "bento": ["display: flex"]
     },
     syntax: `order: <number>`,
-    help: `<p></p>`,    
+    help: `<p>You can change the order of distribution of items in a flex layout by specifying the <code>order</code> property on a direct child element.</p>
+    <p>Value must be an <b> integer number</b>, positive or negative. Items will then be distributed in ascending order.</p>`,
     markup: `
     <bento style="width: 700px; height: 400px">
       <sushi class="salmon"></sushi>
@@ -830,9 +833,41 @@ align-items`,
       <plate class="avocado"></plate>
     </div>`,
     check: [
-      ["order", val => val > 0],
+      ["order", val => Number(val) > 0],
     ]
-  },*/
+  },
+  {
+    name: "Flex order 2/4",    
+    doThis: "Put the sushis on the plates according to their color",
+    selector: "sushi.salmon",
+    tableStyles: `width: 720px; height: 400px`,
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex"]
+    },
+    syntax: `order: <number>`,
+    help: `<p>You can change the order of distribution of items in a flex layout by specifying the <code>order</code> property on a direct child element.</p>
+    <p>Value must be an <b> integer number</b>, positive or negative. Items will then be distributed in ascending order.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 400px">
+      <sushi class="avocado"></sushi>
+      <sushi class="avocado"></sushi>
+      <sushi class="avocado"></sushi>
+      <sushi class="salmon"></sushi>
+      <sushi class="avocado"></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper">
+      <plate class="salmon"></plate>
+      <plate class="avocado"></plate>
+      <plate class="avocado"></plate>
+      <plate class="avocado"></plate>
+      <plate class="avocado"></plate>
+    </div>`,
+    check: [
+      ["order", val => Number(val) < 0],
+    ]
+  }
 ];
 
 export const chapter4: Chapter = {

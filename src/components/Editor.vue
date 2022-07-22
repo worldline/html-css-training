@@ -43,13 +43,18 @@ const inputStyle = computed(() => ({
 
 //Animate the enter button
 function enterHit(event: Event){
-  if(getInputValue().split("\n").length >= (level.value.inputLinesNumber ?? 1)){
+  const inputValue = getInputValue()
+  const lines = inputValue.split('\n')
+    .map(l => l.trim())
+    .map(l => l.endsWith(';') ? l : l+';')
+  if(lines.length >= (level.value.inputLinesNumber ?? 1)){
     event.preventDefault()
     const button = enterButton.value as HTMLElement;
     button.classList.remove("enterhit")
     setTimeout(() => button.classList.add("enterhit"), 0)    
   }
-  emit("input", getInputValue())
+  if(inputElement.value) inputElement.value.value = lines.join('\n')
+  emit("input", lines.join('\n'))
 }
 
 function onInputKeyup(){
