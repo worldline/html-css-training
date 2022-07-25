@@ -809,7 +809,7 @@ align-items`,
     ]
   },
   {
-    name: "Flex order 1/4",    
+    name: "Flex order 1/2",    
     doThis: "Put the sushis on the plates according to their color",
     selector: "sushi.egg",
     tableStyles: `width: 720px; height: 400px`,
@@ -837,7 +837,7 @@ align-items`,
     ]
   },
   {
-    name: "Flex order 2/4",    
+    name: "Flex order 2/2",    
     doThis: "Put the sushis on the plates according to their color",
     selector: "sushi.salmon",
     tableStyles: `width: 720px; height: 400px`,
@@ -867,7 +867,73 @@ align-items`,
     check: [
       ["order", val => Number(val) < 0],
     ]
-  }
+  },
+  {
+    name: "Flex: self alignment",    
+    doThis: "Put the sushis on the plates according to their color",
+    selector: "sushi.egg",
+    tableStyles: `width: 720px; height: 400px`,
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex", "justify-content: space-between"]
+    },
+    syntax: `align-self: <value>`,
+help: `<p>You can change the alignment on cross axis for specific child elements too, by using the <code>align-self</code> property on the child element. It receive the same values than <code>align-items</code>.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 400px">
+      <sushi class="avocado"></sushi>
+      <sushi class="avocado"></sushi>
+      <sushi class="egg"></sushi>
+      <sushi class="avocado"></sushi>
+      <sushi class="avocado"></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper">
+      <plate class="avocado"></plate>
+      <plate class="avocado"></plate>
+      <plate class="egg" style="align-self: flex-end"></plate>
+      <plate class="avocado"></plate>
+      <plate class="avocado"></plate>
+    </div>`,
+    check: [
+      ["align-self", "flex-end"],
+    ]
+  },
+  {
+    name: "Flex: self align and order",    
+    doThis: "Put the sushis on the plates according to their color",
+    selector: "sushi.salmon",
+    tableStyles: `width: 720px; height: 400px`,
+    wrapperClass: "flex-game",
+    cssRules: {
+      "bento": ["display: flex", "justify-content: space-around"]
+    },
+    syntax: `align-self: <value>;
+order: <number>;`,
+    help: `<p>You can change the alignment on cross axis for specific child elements too, by using the <code>align-self</code> property on the child element. It receive the same values than <code>align-items</code>.</p>
+    <p>Combine <code>order</code> and <code>align-self</code> properties to correctly place the items on their plate.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 400px">
+      <sushi class="salmon"></sushi>
+      <sushi class="avocado"></sushi>
+      <sushi class="salmon"></sushi>
+      <sushi class="avocado"></sushi>
+      <sushi class="avocado"></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper">
+      <plate class="salmon" style="align-self: center; order: 2"></plate>
+      <plate class="avocado"></plate>
+      <plate class="salmon" style="align-self: center; order: 2"></plate>
+      <plate class="avocado"></plate>
+      <plate class="avocado"></plate>
+    </div>`,
+    inputLinesNumber: 2,
+    check: [
+      ["align-self", "center"],
+      ["order", val => Number(val) > 0]
+    ]
+  },
 ];
 
 export const chapter4: Chapter = {
@@ -889,6 +955,9 @@ export const chapter4: Chapter = {
       const table = document.querySelector('.table-board');
       if(!table) return;
       table.setAttribute("style", level.tableStyles ?? "")
+
+      const hintWrapper = document.querySelector(".hint-wrapper");
+      hintWrapper?.setAttribute("style", (level.cssRules["bento"] ?? []).join(";"))
 
       const selectors = new Set([level.selector, ...Object.keys(level.cssRules)])
       for(let selector of selectors){
