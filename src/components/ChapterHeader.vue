@@ -13,6 +13,7 @@ const chapter = computed(() => chapters[state.progress.currentChapter-1])
 <style scoped>
 .chapter-header {
   font-size: 16px;
+  max-width: calc(100% - 100px);
   margin: 0;
   padding: 0 0 10px 0;
   color: #777;

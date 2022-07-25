@@ -26,7 +26,8 @@ import Editor from "./Editor.vue";
 import {state} from "../game";
 import Table from "./Table.vue"
 import { computed } from "vue";
-import { Chapter4Level, applyStyle } from "../chapters/chapter4";
+import { Chapter4Level } from "../chapters/chapter4";
+import { applyStyle } from "../css-editor";
 
 const level = computed(() => state.level as Chapter4Level)
 const otherRules = computed(() => Object.fromEntries(Object.entries(level.value.cssRules).filter(([key]) => key !== level.value.selector)))

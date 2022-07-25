@@ -20,7 +20,8 @@ import Editor from "./Editor.vue";
 import {state} from "../game";
 import Table from "./Table.vue"
 import { computed } from "vue";
-import { Chapter2Level, fireRule } from "../chapters/chapter2";
+import { Chapter2Level } from "../chapters/chapter2";
+import { fireRule } from "../css-editor";
 
 const level = computed(() => state.level as Chapter2Level)
 </script>

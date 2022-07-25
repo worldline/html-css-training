@@ -1,57 +1,11 @@
-import {state, completeLevel} from "../game";
-import { cleanupEffects, shake } from "../utils";
+import {state} from "../game";
 import { Level } from "./level";
 
 import LayoutGame from "../components/LayoutGame.vue";
-import Chapter2LevelInstructions from "../components/Chapter2LevelInstructions.vue";
+import Chapter2LevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
-
-
-export function applyStyle(selector: string, rules: string) {
-  const level = state.level as Chapter4Level;
-
-  cleanupEffects();
-
-  // var baseTable = $('.table-wrapper > .table, .table-wrapper > .nametags, .table-wrapper > .table-surface');
-  const baseTable = document.querySelector('.table-board')!;
-  const targets: HTMLElement[] = Array.from(baseTable.querySelectorAll(selector));
-
-  targets.forEach(el => el.setAttribute("style", [
-    el.getAttribute("data-existing-style") ?? "",
-    ...level.cssRules[level.selector] ?? [],
-    rules
-  ].join(";")))
-
-  let win = checkResults(targets, level);
-
-  if (win) {
-    targets.forEach((el) => {
-      el.classList.remove("strobe");      
-    });
-
-    setTimeout(function () {
-      completeLevel();
-    }, 1500);
-  } else {
-    targets.forEach((el) => {
-      el.classList.remove("strobe");
-      shake(document.querySelector(".table")!)
-    });
-  }
-}
-
-function checkResults(elementsToCheck: HTMLElement[], level: Chapter4Level) {
-  if(!level.check) return true
-  return level.check.every(([prop, expected]) => elementsToCheck.every((el: HTMLElement) => {
-    const value = el.style.getPropertyValue(prop);
-    if(typeof value === "string" && value === expected) return true;
-    else if(typeof expected === "function" && expected(value)) return true;
-    console.log(`Expected ${prop} to be ${expected}, got ${value}`);
-    return false;
-  }))
-}
 
 export interface Chapter4Level extends Level {
   doThis: string;
@@ -69,7 +23,7 @@ export interface Chapter4Level extends Level {
 export const chapter4Levels: Chapter4Level[] = [
   {
     name: "Block display and line breaking",
-    doThis: "Put the bentos vertically on top of each other",
+    doThis: "Display the bentos vertically",
     selector: "bento",
     tableStyles: `width: 800px; height: 360px`,
     cssRules: {},
@@ -172,16 +126,18 @@ margin-<dir>: <val><unit>`,
   },
   {
     name: "Box Model: borders",
-    doThis: "Extend the border width of bentos to 10px",
+    doThis: "Set the top border width of bentos to 10px",
     selector: "bento",
-    syntax: "border-width: <val><unit>",
+    syntax: `border-width: <dimension>
+border-<dir>-width: <dim>`,
     tableStyles: `width: 800px; height: 360px`,
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px", "padding: 10px"]
     },
     examples: [
       `<code>border: 1px solid black</code> adds a 1 pixel width black solid border`,
-      `<code>border-width: 20px</code> sets the border width to 20px while preserving existing border styles`
+      `<code>border-width: 20px</code> sets the border width to 20px while preserving existing border styles`,
+      `<code>border-right-width: 1em</code> sets the right border width to 1em</code>`
     ],
     help: `<p>Borders are the visual boundaries of an element's box. They can be styled in many ways.</p>
     <p>By default, the width and height of an element does not count the border width, but only the size of the content box. This behavior can be changed with the property <code>box-sizing: border-box</code> (initially <code>content-box</code>).</p>
@@ -199,17 +155,17 @@ margin-<dir>: <val><unit>`,
     </bento>
     `,
     check: [
-      ["border-width","10px"]
+      ["border-top-width","10px"]
     ]
   },  
   {
     name: "Width and height",
     helpTitle: "Dimensioning a block element",
-    doThis: "Make all the bentos 250px wide",
+    doThis: "Make all the bentos 200px wide",
     selector: "bento",    
     tableStyles: `width: 800px; height: 360px`,
     cssRules: {
-      "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-width: 10px"]
+      "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-top-width: 10px"]
     },
     syntax: "width: <value><unit>;",
     help: `<p>If an element has a display type of <code>block</code>, then:
@@ -232,7 +188,7 @@ margin-<dir>: <val><unit>`,
     </bento>
     `,
     check: [
-      ["width","250px"]
+      ["width","200px"]
     ]
   },
   {
@@ -241,7 +197,7 @@ margin-<dir>: <val><unit>`,
     selector: "bento",    
     tableStyles: `width: 800px; height: 360px`,
     cssRules: {
-      "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-width: 10px", "width: 250px"]
+      "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-top-width: 10px", "width: 200px"]
     },
     syntax: "margin: auto;",
     help: `<p>For <b>block</b> elements, margins with <code>auto</code> value are computed differently between top/bottom and left/right.</p>
@@ -269,7 +225,7 @@ margin-<dir>: <val><unit>`,
     selector: "bento",
     tableStyles: `width: 800px; height: 360px`,
     cssRules: {
-      "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-width: 10px", "width: 250px"]
+      "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-top-width: 10px", "width: 200px"]
     },
     syntax: `margin: <top and bottom> 
         <right and left>`,
@@ -307,7 +263,7 @@ margin-<dir>: <val><unit>`,
     tableStyles: `width: 800px; height: 360px`,
     wrapperClass: "va-initial",
     cssRules: {
-      "bento": ["display: block", "padding: 10px", "border-width: 10px", "width: 250px", "margin: 20px auto"]
+      "bento": ["display: block", "padding: 10px", "border-top-width: 10px", "width: 200px", "margin: 20px auto"]
     },
     syntax: `display: inline-block;`,
     help: `<p>If an element has a display type of <code>inline-block</code>, then it has a behavior in between <code>inline</code> and <code>block</code>:
@@ -351,7 +307,7 @@ margin-<dir>: <val><unit>`,
 <p>In this example, <tag>bento</tag> elements are already <code>inline-block</code>, but plates being <code>block</code> change the baseline to the bottom edge.`,
     markup: `
     <bento style="height: 150px;"><plate></plate></bento>
-    <bento style="height: 300px;">
+    <bento style="height: 280px;">
       <plate></plate>
       <plate></plate>
     </bento>
@@ -384,7 +340,7 @@ margin-<dir>: <val><unit>`,
 `,
     markup: `
     <bento style="height: 150px;"><plate></plate></bento>
-    <bento style="height: 300px;">
+    <bento style="height: 280px;">
       <plate></plate>
       <plate></plate>
     </bento>
@@ -393,571 +349,29 @@ margin-<dir>: <val><unit>`,
     check: [
       ["vertical-align","middle"]
     ]
-  },
-  {
-    name: "Flex display",    
-    doThis: "Put the sushis on the plates",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {},
-    syntax: `display: flex;`,
-    help: `<p><code>flex</code> is another display mode for elements that is more powerful than <b>block</b>. Flex is used to specify <b>how the children of an element should occupy the space </b> they have in that element.</p>
-    <p>Flex layouts should be used when you want to distribute elements along one axis, be it horizontal or vertical.</p>
-    <p>By default, flex elements have this behavior:
-    <ul>
-    <li>The items display in a row: <code>flex-direction: row</code></li>
-    <li>The items start from the start edge of the main axis: <code>justify-content: flex-start</code></li>
-    <li>The items do not stretch on the main axis by default, but can shrink if necessary: <code>flex: 1 0 auto</code></li>
-    <li>The items will, by default, stretch to fill the size of the cross axis: <code>align-items: stretch</code></li>
-    </ul></p>`,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi></sushi>
-      <sushi></sushi>
-      <sushi></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper">
-      <plate></plate><plate></plate><plate></plate>
-    </div>`,
-    check: [
-      ["display","flex"]
-    ]
-  },
-  {
-    name: "Flex: justify-content 1/4",    
-    doThis: "Put the sushis on the plates",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `justify-content: <value>;`,
-    help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
-    <p>It can take the following values:
-    <ul>
-    <li><code>flex-start</code> : items align on the start of the flex axis (left by default)</li>
-    <li><code>flex-end</code> : items align on the end of the flex axis (right by default)</li>
-    <li><code>center</code> : items align on the center of the container</li>
-    <li><code>space-between</code> : items are displayed with equal space between them</li>
-    <li><code>space-around</code> : items are displayed with equal space between <b>and around</b> them.</li>
-    </ul></p>`,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi></sushi>
-      <sushi></sushi>
-      <sushi></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="justify-content: flex-end">
-      <plate></plate><plate></plate><plate></plate>
-    </div>`,
-    check: [
-      ["justify-content","flex-end"]
-    ]
-  },
-  {
-    name: "Flex: justify-content 2/4",    
-    doThis: "Put the sushis on the plates",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `justify-content: <value>;`,
-    help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
-    <p>It can take the following values:
-    <ul>
-    <li><code>flex-start</code> : items align on the start of the flex axis (left by default)</li>
-    <li><code>flex-end</code> : items align on the end of the flex axis (right by default)</li>
-    <li><code>center</code> : items align on the center of the container</li>
-    <li><code>space-between</code> : items are displayed with equal space between them</li>
-    <li><code>space-around</code> : items are displayed with equal space between <b>and around</b> them.</li>
-    </ul></p>`,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi></sushi>
-      <sushi></sushi>
-      <sushi></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="justify-content: center">
-      <plate></plate><plate></plate><plate></plate>
-    </div>`,
-    check: [
-      ["justify-content","center"]
-    ]
-  },
-  {
-    name: "Flex: justify-content 3/4",    
-    doThis: "Put the sushis on the plates",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `justify-content: <value>;`,
-    help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
-    <p>It can take the following values:
-    <ul>
-    <li><code>flex-start</code> : items align on the start of the flex axis (left by default)</li>
-    <li><code>flex-end</code> : items align on the end of the flex axis (right by default)</li>
-    <li><code>center</code> : items align on the center of the container</li>
-    <li><code>space-between</code> : items are displayed with equal space between them</li>
-    <li><code>space-around</code> : items are displayed with equal space between <b>and around</b> them.</li>
-    </ul></p>`,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi></sushi>
-      <sushi></sushi>
-      <sushi></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="justify-content: space-around">
-      <plate></plate><plate></plate><plate></plate>
-    </div>`,
-    check: [
-      ["justify-content","space-around"]
-    ]
-  },
-  {
-    name: "Flex: justify-content 4/4",    
-    doThis: "Put the sushis on the plates",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `justify-content: <value>;`,
-    help: `<p><code>justify-content</code> let you choose how items should be spread on the main axis (the horizontal axis by default in English language)</p>
-    <p>It can take the following values:
-    <ul>
-    <li><code>flex-start</code> : items align on the start of the flex axis (left by default)</li>
-    <li><code>flex-end</code> : items align on the end of the flex axis (right by default)</li>
-    <li><code>center</code> : items align on the center of the container</li>
-    <li><code>space-between</code> : items are displayed with equal space between them</li>
-    <li><code>space-around</code> : items are displayed with equal space between <b>and around</b> them.</li>
-    </ul></p>`,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi></sushi>
-      <sushi></sushi>
-      <sushi></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="justify-content: space-between">
-      <plate></plate><plate></plate><plate></plate>
-    </div>`,
-    check: [
-      ["justify-content","space-between"]
-    ]
-  },
-  {
-    name: "Flex: align-items",    
-    doThis: "Put the sushis on the plates",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `align-items: <value>;`,
-    help: `<p><code>align-items</code> let you choose how items are aligned relatively to the cross axis (the vertical axis by default in English language)</p>
-    <p>It can take the following values:
-    <ul>
-    <li><code>flex-start</code> : items align on the start of the cross axis (top by default)</li>
-    <li><code>flex-end</code> : items align on the end of the cross axis (bottom by default)</li>
-    <li><code>center</code> : items align on the center of the container</li>
-    <li><code>space-between</code> : items are displayed with equal space between them</li>
-    <li><code>space-around</code> : items are displayed with equal space between <b>and around</b> them.</li>
-    </ul></p>`,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi></sushi>
-      <sushi></sushi>
-      <sushi></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="align-items: flex-end">
-      <plate></plate><plate></plate><plate></plate>
-    </div>`,
-    check: [
-      ["align-items","flex-end"]
-    ]
-  },
-  {
-    name: "Flex positionning 1/2",    
-    doThis: "Put the sushis on the plates",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `justify-content: <value>;
-align-items: <value>;`,
-    help: `<p>Combine <code>justify-content</code> and <code>align-items</code> properties to position your items !</p>`,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi></sushi>
-      <sushi></sushi>
-      <sushi></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="justify-content: center; align-items: center;">
-      <plate></plate><plate></plate><plate></plate>
-    </div>`,
-    inputLinesNumber: 2,
-    check: [
-      ["justify-content", "center"],
-      ["align-items", "center"]
-    ]
-  },
-  {
-    name: "Flex positionning 2/2",    
-    doThis: "Put the sushis on the plates",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `justify-content: <value>;
-align-items: <value>;`,
-    help: `<p>Combine <code>justify-content</code> and <code>align-items</code> properties to position your items !</p>`,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi></sushi>
-      <sushi></sushi>
-      <sushi></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="justify-content: space-between; align-items: flex-end;">
-      <plate></plate><plate></plate><plate></plate>
-    </div>`,
-    inputLinesNumber: 2,
-    check: [
-      ["justify-content", "space-between"],
-      ["align-items", "flex-end"]
-    ]
-  },
-  {
-    name: "Flex direction 1/5",    
-    doThis: "Put the sushis on the plates according to their color",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `flex-direction: <value>;`,
-    help: `<p><code>flex-direction</code> let you change the main axis of the flex layout, and its direction (left to right by default in English language)</p>
-    <p>It can take the following values:
-    <ul>
-    <li><code>row</code> : same direction than text in the user language</li>
-    <li><code>row-reverse</code> : opposite direction than text in the user language</li>
-    <li><code>column</code> : perpendicular to text direction, following the reading direction</li>
-    <li><code>column-reverse</code> : perpendicular to text direction, opposite to the reading direction</li>
-    </ul></p>`,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi class="salmon"></sushi>
-      <sushi class="egg"></sushi>
-      <sushi class="avocado"></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="flex-direction: row-reverse">
-      <plate class="salmon"></plate>
-      <plate class="egg"></plate>
-      <plate class="avocado"></plate>
-    </div>`,
-    check: [
-      ["flex-direction","row-reverse"]
-    ]
-  },
-  {
-    name: "Flex direction 2/5",    
-    doThis: "Put the sushis on the plates according to their color",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `flex-direction: <value>;`,
-    help: `<p><code>flex-direction</code> let you change the main axis of the flex layout, and its direction (left to right by default in English language)</p>
-    <p>It can take the following values:
-    <ul>
-    <li><code>row</code> : same direction than text in the user language</li>
-    <li><code>row-reverse</code> : opposite direction than text in the user language</li>
-    <li><code>column</code> : perpendicular to text direction, following the reading direction</li>
-    <li><code>column-reverse</code> : perpendicular to text direction, opposite to the reading direction</li>
-    </ul></p>`,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi class="salmon"></sushi>
-      <sushi class="egg"></sushi>
-      <sushi class="avocado"></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="flex-direction: column">
-      <plate class="salmon"></plate>
-      <plate class="egg"></plate>
-      <plate class="avocado"></plate>
-    </div>`,
-    check: [
-      ["flex-direction","column"]
-    ]
-  },
-  {
-    name: "Flex direction 3/5",    
-    doThis: "Put the sushis on the plates according to their color",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 360px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `flex-direction
-justify-content`,
-    help: `<p>Combine what you learned with <code>flex-direction</code> and <code>justify-content</code> to position the items !</p>`,
-    inputLinesNumber: 2,
-    markup: `
-    <bento style="width: 700px; height: 360px">
-      <sushi class="salmon"></sushi>
-      <sushi class="egg"></sushi>
-      <sushi class="avocado"></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="flex-direction: row-reverse; justify-content: flex-end;">
-      <plate class="salmon"></plate>
-      <plate class="egg"></plate>
-      <plate class="avocado"></plate>
-    </div>`,
-    check: [
-      ["flex-direction","row-reverse"],
-      ["justify-content","flex-end"],
-    ]
-  },
-  {
-    name: "Flex direction 4/5",    
-    doThis: "Put the sushis on the plates according to their color",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 400px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `flex-direction
-justify-content
-align-items`,
-    help: `<p>Combine what you learned with <code>flex-direction</code>, <code>justify-content</code> and <code>align-items</code> to position the items !</p>`,
-    inputLinesNumber: 3,
-    markup: `
-    <bento style="width: 700px; height: 400px">
-      <sushi class="salmon"></sushi>
-      <sushi class="egg"></sushi>
-      <sushi class="avocado"></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="flex-direction: column-reverse; justify-content: space-between; align-items: center;">
-      <plate class="salmon"></plate>
-      <plate class="egg"></plate>
-      <plate class="avocado"></plate>
-    </div>`,
-    check: [
-      ["flex-direction","column-reverse"],
-      ["justify-content","space-between"],
-      ["align-items","center"],
-    ]
-  },
-  {
-    name: "Flex direction 5/5",    
-    doThis: "Put the sushis on the plates according to their color",
-    selector: "bento",
-    tableStyles: `width: 720px; height: 400px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `flex-direction
-justify-content
-align-items`,
-    help: `<p>Combine what you learned with <code>flex-direction</code>, <code>justify-content</code> and <code>align-items</code> to position the items !</p>`,
-    inputLinesNumber: 3,
-    markup: `
-    <bento style="width: 700px; height: 400px">
-      <sushi class="salmon"></sushi>
-      <sushi class="egg"></sushi>
-      <sushi class="avocado"></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style="flex-direction: row-reverse; justify-content: center; align-items: flex-end;">
-      <plate class="salmon"></plate>
-      <plate class="egg"></plate>
-      <plate class="avocado"></plate>
-    </div>`,
-    check: [
-      ["flex-direction","row-reverse"],
-      ["justify-content","center"],
-      ["align-items","flex-end"],
-    ]
-  },
-  {
-    name: "Flex order 1/2",    
-    doThis: "Put the sushis on the plates according to their color",
-    selector: "sushi.egg",
-    tableStyles: `width: 720px; height: 400px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `order: <number>`,
-    help: `<p>You can change the order of distribution of items in a flex layout by specifying the <code>order</code> property on a direct child element.</p>
-    <p>Value must be an <b> integer number</b>, positive or negative. Items will then be distributed in ascending order.</p>`,
-    markup: `
-    <bento style="width: 700px; height: 400px">
-      <sushi class="salmon"></sushi>
-      <sushi class="egg"></sushi>
-      <sushi class="avocado"></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper">
-      <plate class="salmon"></plate>
-      <plate class="egg" style="order:3"></plate>
-      <plate class="avocado"></plate>
-    </div>`,
-    check: [
-      ["order", val => Number(val) > 0],
-    ]
-  },
-  {
-    name: "Flex order 2/2",    
-    doThis: "Put the sushis on the plates according to their color",
-    selector: "sushi.salmon",
-    tableStyles: `width: 720px; height: 400px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex"]
-    },
-    syntax: `order: <number>`,
-    help: `<p>You can change the order of distribution of items in a flex layout by specifying the <code>order</code> property on a direct child element.</p>
-    <p>Value must be an <b> integer number</b>, positive or negative. Items will then be distributed in ascending order.</p>`,
-    markup: `
-    <bento style="width: 700px; height: 400px">
-      <sushi class="avocado"></sushi>
-      <sushi class="avocado"></sushi>
-      <sushi class="avocado"></sushi>
-      <sushi class="salmon"></sushi>
-      <sushi class="avocado"></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper">
-      <plate class="salmon"></plate>
-      <plate class="avocado"></plate>
-      <plate class="avocado"></plate>
-      <plate class="avocado"></plate>
-      <plate class="avocado"></plate>
-    </div>`,
-    check: [
-      ["order", val => Number(val) < 0],
-    ]
-  },
-  {
-    name: "Flex: self alignment",    
-    doThis: "Put the sushis on the plates according to their color",
-    selector: "sushi.egg",
-    tableStyles: `width: 720px; height: 400px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex", "justify-content: space-between"]
-    },
-    syntax: `align-self: <value>`,
-help: `<p>You can change the alignment on cross axis for specific child elements too, by using the <code>align-self</code> property on the child element. It receive the same values than <code>align-items</code>.</p>`,
-    markup: `
-    <bento style="width: 700px; height: 400px">
-      <sushi class="avocado"></sushi>
-      <sushi class="avocado"></sushi>
-      <sushi class="egg"></sushi>
-      <sushi class="avocado"></sushi>
-      <sushi class="avocado"></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper">
-      <plate class="avocado"></plate>
-      <plate class="avocado"></plate>
-      <plate class="egg" style="align-self: flex-end"></plate>
-      <plate class="avocado"></plate>
-      <plate class="avocado"></plate>
-    </div>`,
-    check: [
-      ["align-self", "flex-end"],
-    ]
-  },
-  {
-    name: "Flex: self align and order",    
-    doThis: "Put the sushis on the plates according to their color",
-    selector: "sushi.salmon",
-    tableStyles: `width: 720px; height: 400px`,
-    wrapperClass: "flex-game",
-    cssRules: {
-      "bento": ["display: flex", "justify-content: space-around"]
-    },
-    syntax: `align-self: <value>;
-order: <number>;`,
-    help: `<p>You can change the alignment on cross axis for specific child elements too, by using the <code>align-self</code> property on the child element. It receive the same values than <code>align-items</code>.</p>
-    <p>Combine <code>order</code> and <code>align-self</code> properties to correctly place the items on their plate.</p>`,
-    markup: `
-    <bento style="width: 700px; height: 400px">
-      <sushi class="salmon"></sushi>
-      <sushi class="avocado"></sushi>
-      <sushi class="salmon"></sushi>
-      <sushi class="avocado"></sushi>
-      <sushi class="avocado"></sushi>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper">
-      <plate class="salmon" style="align-self: center; order: 2"></plate>
-      <plate class="avocado"></plate>
-      <plate class="salmon" style="align-self: center; order: 2"></plate>
-      <plate class="avocado"></plate>
-      <plate class="avocado"></plate>
-    </div>`,
-    inputLinesNumber: 2,
-    check: [
-      ["align-self", "center"],
-      ["order", val => Number(val) > 0]
-    ]
-  },
+  }
 ];
 
 export const chapter4: Chapter = {
-  name: "CSS - Layout",
+  name: "CSS - Inline & Block Layout",
   levels: chapter4Levels,
   leftPanelComponent: LayoutGame,
-  rightPanelComponent: Chapter2LevelInstructions,
-  credits: `Credits: <a href="https://github.com/thomaspark">Thomas Park</a> for its inspiring <a target="_blank" href="https://flexboxfroggy.com/">Flexbox Froggy</a> game.`,
+  rightPanelComponent: Chapter2LevelInstructions,  
   intro: `<p>Let's learn the different ways to position elements in CSS !</p>`,
   onLevelStart(){
-    const level = state.level as Chapter4Level    
-    document.querySelector("input")?.focus();
+    const level = state.level as Chapter4Level
     nextTick(() => {
       addBoardElementsTooltips()
 
       const editorInput = document.querySelector(".editor textarea");
-      if(editorInput instanceof HTMLTextAreaElement) editorInput.value = "";
+      if(editorInput instanceof HTMLTextAreaElement){
+        editorInput.value = "";
+        editorInput.focus()
+      }
 
       const table = document.querySelector('.table-board');
       if(!table) return;
       table.setAttribute("style", level.tableStyles ?? "")
-
-      const hintWrapper = document.querySelector(".hint-wrapper");
-      hintWrapper?.setAttribute("style", (level.cssRules["bento"] ?? []).join(";"))
 
       const selectors = new Set([level.selector, ...Object.keys(level.cssRules)])
       for(let selector of selectors){
@@ -969,5 +383,3 @@ export const chapter4: Chapter = {
     })
   }
 }
-
-
