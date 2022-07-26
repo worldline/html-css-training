@@ -1,10 +1,10 @@
 <template>
   <div class="table-wrapper">
     <div class="table-surface" ref="surface"></div>
-    <div class="table">
+    <div class="table-content">
       <div class="hint-content" v-if="hintContent" v-html="hintContent"></div>
-      <div v-if="content" v-html="content" ref="board" class="table-board"></div>
-      <div v-else ref="board" class="table-board"><slot /></div>
+      <div v-if="content" v-html="content" ref="board" class="table"></div>
+      <div v-else ref="board" class="table"><slot /></div>
     </div>
     <div class="table-edge" ref="edge">
       <div class="table-leg"></div>
@@ -32,9 +32,8 @@ export default {
   width: auto;
 }
 
-.table {
+.table-content {
   transform-style: preserve-3d;
-  outline: solid 1px transparent;
   margin: 0 auto;
   padding: 15px;
   display: inline-block;
@@ -51,16 +50,6 @@ export default {
   bottom: 15px;
 }
 
-.hint-content ::v-deep(.hint-wrapper){
-  display: flex; 
-  margin: 20px 10px 0 10px; 
-  position: absolute;
-  top: 0;
-  bottom: 2px;
-  left: 0;
-  right: 0;
-}
-
 .table-surface {
   box-shadow: 0 40px 10px rgba(0,0,0,.2);
   background: #dd992d;
@@ -72,7 +61,7 @@ export default {
   width: 100%;
 }
 
-.table-board ::v-deep(sushi) {
+.table ::v-deep(sushi) {
   z-index: 100;
 }
 

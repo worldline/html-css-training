@@ -1,7 +1,7 @@
 import { Level } from "./level";
 
 import SelectorGame from "../components/SelectorGame.vue";
-import Chapter2LevelInstructions from "../components/SyntaxLevelInstructions.vue";
+import SyntaxLevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
@@ -752,7 +752,7 @@ export const chapter2: Chapter = {
   name: "CSS - Selectors",
   levels: chapter2Levels,
   leftPanelComponent: SelectorGame,
-  rightPanelComponent: Chapter2LevelInstructions,
+  rightPanelComponent: SyntaxLevelInstructions,
   credits: `Credits: <a href="http://www.twitter.com/flukeout">@flukeout</a> for his work on <a href="https://flukeout.github.io/" target="_blank">CSS diner</a> that served as the foundation for this website`,
   intro: `
     <p>To apply CSS to an element you need to select this element with a <b>selector</b>.</p>

@@ -24,22 +24,28 @@ function updateMarkup(){
   }
 }
 
-function getMarkup(el: Element, ignoreRoot: boolean){
-  const elName = el.tagName.toLowerCase();
-  const wrapperEl = document.createElement("div")
-  const attributeString = el.getAttributeNames()
-      .map(attr => `${attr}="${el.getAttribute(attr)}"`)
-      .join(" ")
+function getMarkup(el: Node, ignoreRoot: boolean): HTMLElement {  
+  if(el instanceof HTMLElement){
+    const wrapperEl = document.createElement("div")
+    const elName = el.tagName.toLowerCase();
+    const attributeString = el.getAttributeNames()
+        .map(attr => `${attr}="${el.getAttribute(attr)}"`)
+        .join(" ")
 
-  const children = Array.from(el.children)
-  if(children.length > 0) {
-    if(!ignoreRoot) wrapperEl.textContent = `<${elName}${attributeString?" "+attributeString:''}>`;
-    children.forEach(child => wrapperEl.appendChild(getMarkup(child, false)));
-    if(!ignoreRoot)  wrapperEl.appendChild(document.createTextNode(`</${elName}>`))
+    const children = Array.from(el.childNodes)
+    if(children.length > 0) {
+      if(!ignoreRoot) wrapperEl.textContent = `<${elName}${attributeString?" "+attributeString:''}>`;
+      children.forEach(child => wrapperEl.appendChild(getMarkup(child, false)));
+      if(!ignoreRoot)  wrapperEl.appendChild(document.createTextNode(`</${elName}>`))
+    } else {
+      wrapperEl.textContent = `<${elName}${attributeString?" "+attributeString:''} />`;
+    }
+    return wrapperEl;
   } else {
-    wrapperEl.textContent = `<${elName}${attributeString?" "+attributeString:''} />`;
+    const textEl = document.createElement("span")
+    textEl.textContent = el.textContent
+    return textEl
   }
-  return wrapperEl;
 }
 
 </script>

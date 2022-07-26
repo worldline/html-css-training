@@ -18,10 +18,5 @@ loadLevel();
 </template>
 
 <style>
-@import "../node_modules/floating-vue/dist/style.css";
 @import "styles/global.pcss";
-@import "styles/items.pcss";
-@import "styles/animations.pcss";
-@import "styles/scrollbars.pcss";
-@import "styles/tag.pcss";
 </style>

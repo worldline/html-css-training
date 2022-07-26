@@ -24,7 +24,7 @@ export function trySolution(items: string[]) {
   
     cleanupEffects();
   
-    const plates = document.querySelectorAll('.table-board plate')!;
+    const plates = document.querySelectorAll('.table-content plate')!;
   
     let win = items.length === level.solution.length && level.solution.every((item, i) => items[i] === item);
   

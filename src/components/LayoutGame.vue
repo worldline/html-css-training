@@ -48,7 +48,7 @@ pre {
   margin: 0;
 }
 
-.game-wrapper.va-initial ::v-deep(.table-board > *) {
+.game-wrapper.va-initial ::v-deep(.table > *) {
   vertical-align: initial;
 }
 

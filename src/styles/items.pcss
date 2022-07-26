@@ -1,8 +1,9 @@
-.table-board * {
+.table * {
     transition: transform ease-out .2s;
+    color: black;
 }
 
-.table-board > * {
+.table > * {
     vertical-align: middle;
     margin: 0 10px;
 }
@@ -412,4 +413,26 @@ plate orange:nth-last-child(4)
 
 bento sushi {
     margin: 0 10px;
+}
+
+/* TILES */
+
+.tile {
+    display: inline-block;
+    min-width: 100px;
+    min-height: 100px;
+    background-size: 100px 100px;
+    background-repeat: repeat;
+}
+
+.tile.rice {
+    background-image: url('img/rice.jpg');
+}
+
+.tile.broccoli {
+    background-image: url('img/broccoli.jpg');
+}
+
+.tile.fruits {
+    background-image: url('img/fruits.png');
 }

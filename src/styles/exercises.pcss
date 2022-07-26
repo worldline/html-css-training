@@ -1,0 +1,52 @@
+.inline-layout .table {
+  white-space: normal;
+  text-align: left;
+}
+
+.inline-layout p {
+  color: black;
+  font-size: 24px;
+}
+
+.inline-layout apple {
+  padding: 15px;
+}
+
+.inline-layout apple.small {
+  padding: 5px;
+}
+
+.hint-wrapper {
+  display: flex; 
+  margin: 20px 10px 0 10px; 
+  position: absolute;
+  top: 0;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+}
+
+.flex-game .hint-wrapper {
+  display: flex;
+}
+
+.grid-game .hint-wrapper {
+  display: grid;
+  z-index: 2;
+}
+
+.grid-game .hint-wrapper > div {
+    border: 5px solid #812c22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-weight: bold;
+    font-size: 32px;
+    text-shadow: 1px 1px 0 white, -1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white;
+    box-shadow: inset 0 0 40px rgb(0 0 0 / 75%);
+}
+
+.grid-game .tile {
+  box-shadow: inset 0 0 10px rgb(0 0 0 / 75%);
+}

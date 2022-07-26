@@ -1,7 +1,7 @@
 import { createTooltip, hideAllPoppers } from "floating-vue";
 
 export function addBoardElementsTooltips() {
-    const elements = Array.from(document.querySelectorAll(".table-board *"))
+    const elements = Array.from(document.querySelectorAll(".table *"))
     elements.forEach(el => {
         createTooltip(el, {
             triggers: ["hover"],

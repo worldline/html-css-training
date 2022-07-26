@@ -9,8 +9,7 @@ export function fireRule(rule: string) {
 
   cleanupEffects();
 
-  // var baseTable = $('.table-wrapper > .table, .table-wrapper > .nametags, .table-wrapper > .table-surface');
-  const baseTable = document.querySelector(".table-board")!;
+  const baseTable = document.querySelector(".table-content")!;
 
   // Check if selector will throw an error trying the mystery rule
   // If it errors out, change the rule to null so the wrong-guess animation will work
@@ -79,8 +78,7 @@ export function applyStyle(selector: string, rules: string) {
 
   cleanupEffects();
 
-  // var baseTable = $('.table-wrapper > .table, .table-wrapper > .nametags, .table-wrapper > .table-surface');
-  const baseTable = document.querySelector(".table-board")!;
+  const baseTable = document.querySelector(".table-content")!;
   const targets: HTMLElement[] = Array.from(
     baseTable.querySelectorAll(selector)
   );
@@ -109,7 +107,7 @@ export function applyStyle(selector: string, rules: string) {
   } else {
     targets.forEach((el) => {
       el.classList.remove("strobe");
-      shake(document.querySelector(".table")!);
+      shake(document.querySelector(".table-content")!);
     });
   }
 }

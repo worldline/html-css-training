@@ -2,7 +2,7 @@ import {state} from "../game";
 import { Level } from "./level";
 
 import LayoutGame from "../components/LayoutGame.vue";
-import Chapter2LevelInstructions from "../components/SyntaxLevelInstructions.vue";
+import SyntaxLevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
@@ -28,7 +28,7 @@ export const chapter5Levels: Chapter5Level[] = [
     wrapperClass: "flex-game",
     cssRules: {},
     syntax: `display: flex;`,
-    help: `<p>By default, flex elements have this behavior:
+    help: `<p>Flex layout lets you control the sizing and positioning of its direct child elements, that we will refer to as <b>items</b>. By default, flex layout has this behavior:
     <ul>
     <li>The items display in a row: <code>flex-direction: row</code></li>
     <li>The items start from the start edge of the main axis: <code>justify-content: flex-start</code></li>
@@ -769,9 +769,10 @@ align-content: <value>`,
 
 export const chapter5: Chapter = {
   name: "CSS - Flex Layout",
+  description: "One-directional content flow",
   levels: chapter5Levels,
   leftPanelComponent: LayoutGame,
-  rightPanelComponent: Chapter2LevelInstructions,
+  rightPanelComponent: SyntaxLevelInstructions,
   credits: `Credits: <a href="https://github.com/thomaspark">Thomas Park</a> for its inspiring <a target="_blank" href="https://flexboxfroggy.com/">Flexbox Froggy</a> game.`,
   intro: `<p>Let's learn the different ways to position elements in CSS !</p>
   <p><code>flex</code> is another display mode for elements that is more powerful than <b>block</b>. Flex is used to specify <b>how the children of an element should occupy the space </b> they have in that element.</p>
@@ -787,7 +788,7 @@ export const chapter5: Chapter = {
         editorInput.focus()
       }
 
-      const table = document.querySelector('.table-board');
+      const table = document.querySelector('.table-content');
       if(!table) return;
       table.setAttribute("style", level.tableStyles ?? "")
 
