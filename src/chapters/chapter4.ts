@@ -22,10 +22,69 @@ export interface Chapter4Level extends Level {
 
 export const chapter4Levels: Chapter4Level[] = [
   {
-    name: "Block display and line breaking",
+    name: "Inline display",
+    doThis: "Set the display mode of bentos to inline",
+    selector: "apple",
+    tableStyles: `width: 800px; min-height: 360px`,
+    cssRules: {
+      "apple": ["display: block"]
+    },
+    wrapperClass: "inline-layout",
+    syntax: "display: inline",
+    help: `<p>The <code>display</code> property does two things. The first thing it does is determine if the box it is applied to acts as <b>inline</b> or <b>block</b>. The second is to determine how the element's children should behave.</p>
+    <p>Inline elements behave like words in a sentence. They sit next to each other in the inline direction (horizontal in plain English). Elements such as <tag>span</tag> or <tag>a</tag>, which typically contain text, are inline by default. They also preserve surrounding whitespace.</p>
+    <p>Another property of inline elements if that you can't fix their dimensions with properties like <code>width</code> or <code>height</code>. Their size will be adjusted to fit the text and inline content they contain.</p>`,
+    markup: `
+    <p style="border: 2px solid red">
+    This is a line of text including elements that we want to become inline. Here is an apple containing the letter "A":
+    <apple>A</apple>
+     ; here is another apple, but smaller, with the letter "B":
+    <apple class="small">B</apple>.
+    When changing display mode to inline, you shall notice that the elements vertically align so that their text content is aligned with the parent text line.
+    Also, their size will match the size of their text content, directly related to the current font size.</p>
+    `,
+    check: [
+      ["display","inline"]
+    ]
+  },
+
+  {
+    name: "Inline: text-align",
+    doThis: "Align the content on the right",
+    selector: "p",
+    tableStyles: `width: 800px; min-height: 360px`,
+    cssRules: { "apple": ["display: inline"] },
+    syntax: "text-align: <dir>",
+    wrapperClass: "inline-layout",
+    help: `<p><code>text-align</code> change the inline text alignment for all the inline child elements or text content.</p>
+    <p>It does not apply to block elements or other non-inline display modes.</p>
+    <p>Accepted values are:</p>
+    <ul>
+    <li><b>left</b> (or <b>start</b>)</li>
+    <li><b>right</b> (or <b>end</b>)</li>
+    <li><b>center</b></li>
+    <li><b>justify</b></li>
+    <li><b>justify-all</b> (also justify the last line)</li>
+    </ul>`,
+    markup: `
+    <p style="border: 2px solid red">
+    This is a line of text including elements that we want to become inline. Here is an apple containing the letter "A":
+    <apple>A</apple>
+     ; here is another apple, but smaller, with the letter "B":
+    <apple class="small">B</apple>.
+    When changing display mode to inline, you shall notice that the elements vertically align so that their text content is aligned with the parent text line.
+    Also, their size will match the size of their text content, directly related to the current font size.</p>
+    `,
+    check: [
+      ["text-align","right"]
+    ]
+  },
+
+  {
+    name: "Block display",
     doThis: "Display the bentos vertically",
     selector: "bento",
-    tableStyles: `width: 800px; height: 360px`,
+    tableStyles: `width: 800px; min-height: 360px`,
     cssRules: {},
     syntax: "display: block",
     help: `<p>Block is the default display mode of paragraphs and sectionning elements like <tag>div</tag>, <tag>main</tag>, <tag>article</tag> etc.</p>
@@ -56,7 +115,7 @@ export const chapter4Levels: Chapter4Level[] = [
     name: "Box Model: margins",
     doThis: "Add a 20px bottom margin to bentos",
     selector: "bento",
-    tableStyles: `width: 800px; height: 360px`,
+    tableStyles: `width: 800px; min-height: 360px`,
     cssRules: {
       "bento": ["display: block"]
     },
@@ -97,7 +156,7 @@ margin-<dir>: <val><unit>`,
     doThis: "Add a 10px padding to bentos",
     selector: "bento",
     syntax: "padding: <val><unit>",
-    tableStyles: `width: 800px; height: 360px`,
+    tableStyles: `width: 800px; min-height: 360px`,
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px"]
     },
@@ -130,7 +189,7 @@ margin-<dir>: <val><unit>`,
     selector: "bento",
     syntax: `border-width: <dimension>
 border-<dir>-width: <dim>`,
-    tableStyles: `width: 800px; height: 360px`,
+    tableStyles: `width: 800px; min-height: 360px`,
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px", "padding: 10px"]
     },
@@ -163,7 +222,7 @@ border-<dir>-width: <dim>`,
     helpTitle: "Dimensioning a block element",
     doThis: "Make all the bentos 200px wide",
     selector: "bento",    
-    tableStyles: `width: 800px; height: 360px`,
+    tableStyles: `width: 800px; min-height: 360px`,
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-top-width: 10px"]
     },
@@ -195,7 +254,7 @@ border-<dir>-width: <dim>`,
     name: "Auto margins",    
     doThis: "Set all margins to auto",
     selector: "bento",    
-    tableStyles: `width: 800px; height: 360px`,
+    tableStyles: `width: 800px; min-height: 360px`,
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-top-width: 10px", "width: 200px"]
     },
@@ -223,7 +282,7 @@ border-<dir>-width: <dim>`,
     name: "Margins with block elements",    
     doThis: "Add a 20px vertical margin between bentos and center them horizontally",
     selector: "bento",
-    tableStyles: `width: 800px; height: 360px`,
+    tableStyles: `width: 800px; min-height: 360px`,
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-top-width: 10px", "width: 200px"]
     },
@@ -260,7 +319,7 @@ border-<dir>-width: <dim>`,
     name: "Inline block display",    
     doThis: "Line up the bentos horizontally",
     selector: "bento",
-    tableStyles: `width: 800px; height: 360px`,
+    tableStyles: `width: 800px; min-height: 360px`,
     wrapperClass: "va-initial",
     cssRules: {
       "bento": ["display: block", "padding: 10px", "border-top-width: 10px", "width: 200px", "margin: 20px auto"]
@@ -288,12 +347,43 @@ border-<dir>-width: <dim>`,
       ["display","inline-block"]
     ]
   },
+
   {
-    name: "Inline block display",    
+    name: "Inline block horizontal align",    
+    doThis: "Change the text alignment of the table to the right",
+    selector: ".table",
+    tableStyles: `width: 800px; min-height: 360px`,
+    wrapperClass: "va-initial",
+    cssRules: {
+      "bento": ["display: inline-block", "padding: 10px", "border-top-width: 10px", "width: 200px", "margin: 20px auto"]
+    },
+    syntax: `text-align: <value>`,
+    help: `<p>Inline-block elements are affected by <code>text-align</code> as well.</p>
+    <p>Note that text-align is an <b>inherited</b> property, and so affects the child elements as well.</p>`,
+    markup: `
+    <bento>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+      <sushi></sushi>
+    </bento>
+    <bento>
+      <sushi></sushi>
+    </bento>
+    `,
+    check: [
+      ["text-align","right"]
+    ]
+  },
+
+
+  {
+    name: "Inline block: baseline",
     doThis: "Align the bentos on the top edge",
     selector: "plate",
     wrapperClass: "va-initial",
-    tableStyles: `width: 600px; height: 300px`,
+    tableStyles: `width: 600px; min-height: 360px`,
     cssRules: {
       "bento": ["display: inline-block"],    
       "plate": ["display: block", "width: 100px", "height: 100px", "margin-bottom: 20px"]
@@ -317,12 +407,13 @@ border-<dir>-width: <dim>`,
       ["display","inline-block"]
     ]
   },
+ 
   {
     name: "Inline block vertical align",    
     doThis: "Align vertically the bentos at the middle of the table",
     selector: "bento",
     wrapperClass: "va-initial",
-    tableStyles: `width: 600px; height: 300px`,
+    tableStyles: `width: 600px; min-height: 360px`,
     cssRules: {
       "bento": ["display: inline-block"]
     },
@@ -354,6 +445,7 @@ border-<dir>-width: <dim>`,
 
 export const chapter4: Chapter = {
   name: "CSS - Inline & Block Layout",
+  description: "Basic display modes of HTML content",
   levels: chapter4Levels,
   leftPanelComponent: LayoutGame,
   rightPanelComponent: Chapter2LevelInstructions,  
@@ -369,7 +461,7 @@ export const chapter4: Chapter = {
         editorInput.focus()
       }
 
-      const table = document.querySelector('.table-board');
+      const table = document.querySelector('.table-content');
       if(!table) return;
       table.setAttribute("style", level.tableStyles ?? "")
 
