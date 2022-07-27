@@ -23,7 +23,7 @@ export interface Chapter4Level extends Level {
 export const chapter4Levels: Chapter4Level[] = [
   {
     name: "Inline display",
-    doThis: "Set the display mode of bentos to inline",
+    doThis: "Set the display mode of apples to inline",
     selector: "apple",
     tableStyles: `width: 800px; min-height: 360px`,
     cssRules: {
