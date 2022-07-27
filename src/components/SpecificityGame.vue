@@ -69,7 +69,7 @@ function submitSolution(){
   position: absolute;
   background: white;
   padding: 10px 15px 12px 15px;
-  z-index: 1000;
+  z-index: 30;
   font-size: 18px;
   color: #666;
   border-bottom: solid 2px #BBB;

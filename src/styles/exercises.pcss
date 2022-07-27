@@ -31,22 +31,61 @@
 }
 
 .grid-game .hint-wrapper {
-  display: grid;
-  z-index: 2;
+  display: grid;  
+}
+
+.grid-game .table {
+  z-index: 10;
+}
+.grid-game .hint-content {
+  z-index: 20;
+}
+.grid-game sushi {
+  z-index: 21;
 }
 
 .grid-game .hint-wrapper > div {
-    border: 5px solid #812c22;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: black;
-    font-weight: bold;
-    font-size: 32px;
+    position: relative;
+    border: 10px ridge brown;
     text-shadow: 1px 1px 0 white, -1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white;
     box-shadow: inset 0 0 40px rgb(0 0 0 / 75%);
+    
+    &:nth-child(1){
+      --section-color: rgba(255,255,255,0.5);      
+    }
+    &:nth-child(2){
+      --section-color: rgba(0,255,0,0.5);
+    }
+    &:nth-child(3){
+      --section-color: rgba(255,255,0,0.5);  
+    }
+
+    &:hover {
+      background-color: var(--section-color);
+      background: repeating-linear-gradient( 45deg, var(--section-color), var(--section-color) 10px, transparent 10px, transparent 25px );
+    }
+
+    &::after {
+      content: attr(title);
+      display: block;
+      position: absolute;
+      bottom: 0; right: 0;
+      background: rgba(255,255,255,0.8);
+      color: black;
+      padding: 0 2px;
+      font-size: 16px;
+      font-weight: bold;      
+      z-index: 22;
+    }
 }
 
 .grid-game .tile {
   box-shadow: inset 0 0 10px rgb(0 0 0 / 75%);
+}
+
+.grid-game .sushis {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }

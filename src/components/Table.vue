@@ -26,7 +26,7 @@ export default {
   transform: rotateX(20deg);
   min-height: 120px;
   transform-origin: bottom;
-  z-index: 9999;
+  z-index: 5;
   position: relative;
   margin: 10px 20px 30px 20px;
   width: auto;
@@ -37,9 +37,8 @@ export default {
   margin: 0 auto;
   padding: 15px;
   display: inline-block;
-  z-index: 999;
+  z-index: 6;
   position:relative;
-  white-space: nowrap;
 }
 
 .hint-content {
@@ -59,10 +58,6 @@ export default {
   height: 100%;
   bottom: 0;
   width: 100%;
-}
-
-.table ::v-deep(sushi) {
-  z-index: 100;
 }
 
 .table .hint-content ::v-deep(plate, sushi){
