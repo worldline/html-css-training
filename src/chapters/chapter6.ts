@@ -28,6 +28,12 @@ grid-template-columns
 grid-template-rows
 grid-template
 grid-template + repeat()
+
+grid items alignment: justify-items
+justify-items + align-items
+justify-self
+align-self
+
 grid-gap
 grid-row-gap
 grid-column-gap
@@ -49,10 +55,7 @@ implicit grid (or Auto grids) + grid-auto-rows
 grid-auto-flow: column
 grid-auto-flow + grid-auto-columns
 
-grid items alignment: justify-items
-justify-items + align-items
-justify-self
-align-self
+
 
 grid alignment: justify-content
 justify-content + align-content
@@ -227,6 +230,114 @@ grid-template-columns`,
     inputLinesNumber: 1,
     check: [
       ["grid", "1fr 100px / 2fr 1fr"]
+    ]
+  },
+
+  {
+    name: "Grid template: repeat()",
+    doThis: "Distribute the sushis in all the areas of the bento",
+    selector: "bento",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid"]
+    },
+    syntax: `repeat(<number>, <dimension>)`,
+    help: `<p>The <code>repeat()</code> keyword is a utility to repeat the same dimension a certain number of times in a grid template declaration.</p>
+    <p>Try to use it to declare a 4x4 grid layout with equal size areas.</p>`,
+    examples: [
+      `<code>grid-template-rows: repeat(5, 50px)</code> is equivalent to <code>grid-template-rows: 50px 50px 50px 50px 50px</code>`
+    ],
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
+      <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
+      <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
+      <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(4, 1fr) / repeat(4, 1fr);">
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+    </div>`,
+    inputLinesNumber: 1,
+    check: [
+      ["grid", "repeat(4, 1fr) / repeat(4, 1fr)"]
+    ]
+  },
+
+  {
+    name: "Grid: items alignment",
+    doThis: "Center the sushis in the areas of the bento",
+    selector: "bento",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid: repeat(4, 1fr) / repeat(4, 1fr)"]
+    },
+    syntax: `justify-items: <value>
+align-items: <value>`,
+    help: `<p>After items are spread in the different areas of your grid layout, you can also change the way they are aligned in their area with the <code>justify-items</code> and <code>align-items</code> properties.</p>
+    <p>These properties can take <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items">many different values</a>, notably:</p>
+    <ul>
+    <li><code>stretch</code>: stretch to fill the whole height/width of the area</li>
+    <li><code>start</code>: pack near the starting edge of the area</li>
+    <li><code>end</code>: pack near the end edge of the area</li>
+    <li><code>center</code>: pack around the vertical/horizontal center of the area</li>
+    <li><code>baseline</code>: align so that all the items share the same baseline</li>
+    </ul>`,
+    examples: [
+      `<code>justify-items: end</code> will align the items content on the right edge of the area</code>`,
+      `<code>align-items: stretch</code> will stretch the items content so they fill the entire height of their area</code>`
+    ],
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
+      <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
+      <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
+      <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(4, 1fr) / repeat(4, 1fr);">
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+    </div>`,
+    inputLinesNumber: 2,
+    check: [
+      ["justify-items", "center"],
+      ["align-items", "center"],
+    ]
+  },
+
+  {
+    name: "Grid: items alignment",
+    doThis: "Stretch the tiles to fill their area of the bento",
+    selector: ".tile",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid: 150px 1fr / 1fr 1fr 1fr", "align-items: center", "justify-items: center"]
+    },
+    syntax: `justify-self: <value>
+align-self: <value>`,
+    help: `<p>You can also change the alignment of specific items by setting the <code>justify-self</code> and <code>align-self</code> properties of the item element.</p>`,    
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <sushi></sushi><sushi></sushi><sushi></sushi>
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="grid: 150px 1fr / 1fr 1fr 1fr">
+      <div></div><div></div><div></div>
+      <div></div><div></div><div></div>
+    </div>`,
+    inputLinesNumber: 2,
+    check: [
+      ["justify-self", "stretch"],
+      ["align-self", "stretch"],
     ]
   },
  

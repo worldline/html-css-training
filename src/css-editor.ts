@@ -112,6 +112,11 @@ export function applyStyle(selector: string, rules: string) {
   }
 }
 
+function normalizePropValue(val: any){
+  if(typeof val !== "string") return val
+  return val.replaceAll(/,\s+/g, ",").trim()
+}
+
 function checkStyleProperties(
   elementsToCheck: HTMLElement[],
   level: (Chapter4Level | Chapter5Level)
@@ -119,7 +124,8 @@ function checkStyleProperties(
   if (!level.check) return true;
   return level.check.every(([prop, expected]) =>
     elementsToCheck.every((el: HTMLElement) => {
-      const value = el.style.getPropertyValue(prop);
+      expected = normalizePropValue(expected)
+      const value = normalizePropValue(el.style.getPropertyValue(prop));
       if (typeof value === "string" && value === expected) return true;
       else if (typeof expected === "function" && expected(value)) return true;
       console.log(`Expected ${prop} to be ${expected}, got ${value}`);
