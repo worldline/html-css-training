@@ -114,7 +114,10 @@ export function applyStyle(selector: string, rules: string) {
 
 function normalizePropValue(val: any){
   if(typeof val !== "string") return val
-  return val.replaceAll(/,\s+/g, ",").trim()
+  return val
+    .replaceAll(/,\s+/g, ",")
+    .replaceAll(/\s*\/\s*/g, "/")
+    .trim()
 }
 
 function checkStyleProperties(
@@ -122,14 +125,14 @@ function checkStyleProperties(
   level: (Chapter4Level | Chapter5Level)
 ) {
   if (!level.check) return true;
-  return level.check.every(([prop, expected]) =>
-    elementsToCheck.every((el: HTMLElement) => {
+  return level.check.every(([prop, ...possibleValues]) =>
+    elementsToCheck.every((el: HTMLElement) => possibleValues.some(expected => {
       expected = normalizePropValue(expected)
       const value = normalizePropValue(el.style.getPropertyValue(prop));
       if (typeof value === "string" && value === expected) return true;
       else if (typeof expected === "function" && expected(value)) return true;
       console.log(`Expected ${prop} to be ${expected}, got ${value}`);
       return false;
-    })
-  );
+    }))
+  )
 }

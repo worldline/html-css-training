@@ -16,35 +16,17 @@ export interface Chapter6Level extends Level {
   examples?: string[];
   cssRules: { [selector:string]: string[] };
   tableStyles?: string;
-  check: [string, string | ((val: string) => boolean)][];
+  check: [string, ...(string | ((val: string) => boolean))[] ][];
   hintMarkup?: string;
 }
 
 /*
 make a bento:
 
-display: grid
-grid-template-columns
-grid-template-rows
-grid-template
-grid-template + repeat()
-
-grid items alignment: justify-items
-justify-items + align-items
-justify-self
-align-self
-
 grid-gap
 grid-row-gap
 grid-column-gap
-grid-column-start
-grid-column-end
-grid-row-start
-grid-row-end
-grid-column
-grid-column + grid-row
-grid-column + grid-row + span keyword
-grid-area
+
 order
 named rows/columns
 named areas + grid-template-areas + grid-column/grid-row
@@ -340,6 +322,239 @@ align-self: <value>`,
       ["align-self", "stretch"],
     ]
   },
+
+  {
+    name: "grid-column-start",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: ".rice",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"]
+    },
+    syntax: `grid-column-start: <num>`,
+    help: `<p><code>grid-column-start</code> specifies the position of the starting edge of the item within the grid columns. If required, it can add a span or a new line.</p>
+    <p>The first column starts at 1. If a negative integer is given, it counts in reverse, starting from the end edge.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
+      <div title="rice" style="grid-column-start: 2"></div>      
+      <div title="broccoli"></div>
+      <div title="fruits"></div>
+    </div>`,
+    check: [
+      ["grid-column-start", "2"]
+    ]
+  },
+
+  {
+    name: "grid-column-end",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: ".rice",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
+      ".rice": ["grid-column-start: 2"]
+    },
+    syntax: `grid-column-end: <num>`,
+    help: `<p><code>grid-column-end</code> specifies the position of the end edge of the item within the grid columns.</p>
+    <p>The left edge of the first column has number 1, so the item will actually stop at column <code>num - 1</code>.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
+      <div title="rice" style="grid-column-start: 2; grid-column-end: 4"></div>      
+      <div title="broccoli"></div>
+      <div title="fruits"></div>
+    </div>`,
+    check: [
+      ["grid-column-end", "4"],
+    ]
+  },
+
+  {
+    name: "grid-row-start",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: ".broccoli",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
+      ".rice": ["grid-column-start: 2", "grid-column-end: 4"]
+    },
+    syntax: `grid-row-start: <num>`,
+    help: `<p><code>grid-row-start</code> specifies the position of the start edge of the item within the grid rows.</p>
+    <p>Note how the fruits tile fills the remaining space available on first row.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
+      <div title="rice" style="grid-column-start: 2; grid-column-end: 4"></div>      
+      <div title="broccoli" style="grid-row-start: 2"></div>
+      <div title="fruits"></div>
+    </div>`,
+    check: [
+      ["grid-row-start", "2"]
+    ]
+  },
+
+  {
+    name: "grid-row-end",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: ".broccoli",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
+      ".rice": ["grid-column-start: 2", "grid-column-end: 4"],
+      ".broccoli": ["grid-row-start: 2"]
+    },
+    syntax: `grid-row-end: <num>`,
+    help: `<p><code>grid-row-end</code> specifies the position of the end edge of the item within the grid rows.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
+      <div title="rice" style="grid-column-start: 2; grid-column-end: 4"></div>      
+      <div title="broccoli" style="grid-row-start: 2; grid-row-end: 4"></div>
+      <div title="fruits"></div>
+    </div>`,
+    check: [
+      ["grid-row-end", "4"]
+    ]
+  },
+
+  {
+    name: "grid-row & grid-column",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: ".rice",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
+    },
+    syntax: `grid-row: <start>/<end>
+grid-column: <start>/<end>`,
+    help: `<p><code>grid-row</code> and <code>grid-column</code> are shorthands to specify both the start and end positions within the grid rows and columns, separated with <code>/</code>.</p>
+    <p>Items can be spread on multiple rows and columns at the same time. The following items will try to occupy the free spaces left behind.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
+      <div title="rice" style="grid-column: 3/5; grid-row: 1/3;"></div>      
+      <div title="broccoli"></div>
+      <div title="fruits"></div>
+    </div>`,
+    inputLinesNumber: 2,
+    check: [
+      ["grid-row", "1/3"],
+      ["grid-column", "3/5", "3/-1"]
+    ]
+  },
+
+  {
+    name: "grid-area",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: ".broccoli",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
+      ".rice": ["grid-column: 3/5","grid-row: 1/3"]
+    },
+    syntax: `grid-area: <row-start>
+         / <col-start>
+         / <row-end>
+         / <col-end>`,
+    help: `<p><code>grid-area</code> is even shorter because it let you specify the start and end positions for both row and column in a single instruction.</p>
+    <p>The values are passed in this order: y1/x1/y2/x2 ; separated with character <code>/</code></p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
+      <div title="rice" style="grid-column: 3/5; grid-row: 1/3;"></div>      
+      <div title="broccoli" style="grid-area: 3/2/4/4;"></div>
+      <div title="fruits"></div>
+    </div>`,
+    check: [
+      ["grid-area", " 3/2/4/4"]
+    ]
+  },
+
+  {
+    name: "Grid: Named Areas",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: "bento",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid: repeat(2, 1fr) / repeat(3, 1fr)"],
+      ".sushis" : ["grid-area: starter"],
+      ".rice" : ["grid-area: rice"],
+      ".broccoli" : ["grid-area: veggie"],
+      ".fruits" : ["grid-area: dessert"],
+    },
+    syntax: `grid-template-areas:   
+  <string>+`,
+    examples: [
+      `<pre><code>grid-template-areas:
+    "header header"
+    "menu   main"
+    "menu   footer"</code></pre>
+    <img src="img/grid-template-areas-example.png"/>
+    `],
+    help: `<p><code>grid-template-areas</code> let you define custom names for areas in your grid with a handy syntax.</p>
+    <p>Items can then be assigned to these areas by their name using the <code>grid-area</code> property.</p>
+    <p>Each string contains the area names for each column, separated by spaces. These string parts are then listed for each row, separated by spaces as well. Line breaks are not mandatory but can help to visualize the layout.</p>
+    <p>Names can be repeated to spread areas on several rows/columns.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="sushis">
+        <sushi></sushi>
+        <sushi></sushi>
+        <sushi></sushi>
+        <sushi></sushi>
+      </div>
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style='grid: repeat(2, 1fr) / repeat(3, 1fr); grid-template-areas: "starter starter dessert" "rice veggie dessert"'>
+      <div title="sushis" style="grid-area: starter"></div>      
+      <div title="rice" style="grid-area: rice"></div>
+      <div title="broccoli" style="grid-area: veggie"></div>
+      <div title="fruits" style="grid-area: dessert"></div>
+    </div>`,
+    check: [
+      ["grid-template-areas", '"starter starter dessert" "rice veggie dessert"'],
+    ]
+  },
+
+  /*todo:
+  span keyword ?
+  implicit grid-area names with grid-column + grid-row
+ grid gap
+*/
  
 ];
 
