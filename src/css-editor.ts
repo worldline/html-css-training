@@ -78,6 +78,7 @@ export function applyStyle(selector: string, rules: string) {
 
   cleanupEffects();
 
+  const gameWrapper = document.querySelector(".game-wrapper")!;
   const baseTable = document.querySelector(".table-content")!;
   const targets: HTMLElement[] = Array.from(
     baseTable.querySelectorAll(selector)
@@ -97,11 +98,13 @@ export function applyStyle(selector: string, rules: string) {
   let win = checkStyleProperties(targets, level);
 
   if (win) {
+    gameWrapper.classList.add("win");
     targets.forEach((el) => {
       el.classList.remove("strobe");
     });
 
     setTimeout(function () {
+      gameWrapper.classList.remove("win");
       completeLevel();
     }, 1500);
   } else {

@@ -223,9 +223,9 @@ grid-template-columns`,
     cssRules: {
       "bento": ["display: grid"]
     },
-    syntax: `repeat(<number>, <dimension>)`,
+    syntax: `repeat(<number>, <dim>)`,
     help: `<p>The <code>repeat()</code> keyword is a utility to repeat the same dimension a certain number of times in a grid template declaration.</p>
-    <p>Try to use it to declare a 4x4 grid layout with equal size areas.</p>`,
+    <p>Try to use it to declare a 4x3 grid layout with equal size areas.</p>`,
     examples: [
       `<code>grid-template-rows: repeat(5, 50px)</code> is equivalent to <code>grid-template-rows: 50px 50px 50px 50px 50px</code>`
     ],
@@ -234,18 +234,16 @@ grid-template-columns`,
       <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
       <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
       <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
-      <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
     </bento>
     `,
-    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(4, 1fr) / repeat(4, 1fr);">
-      <div></div><div></div><div></div><div></div>
+    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr);">
       <div></div><div></div><div></div><div></div>
       <div></div><div></div><div></div><div></div>
       <div></div><div></div><div></div><div></div>
     </div>`,
     inputLinesNumber: 1,
     check: [
-      ["grid", "repeat(4, 1fr) / repeat(4, 1fr)"]
+      ["grid", "repeat(3, 1fr) / repeat(4, 1fr)"]
     ]
   },
 
@@ -255,7 +253,7 @@ grid-template-columns`,
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: repeat(4, 1fr) / repeat(4, 1fr)"]
+      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"]
     },
     syntax: `justify-items: <value>
 align-items: <value>`,
@@ -277,14 +275,13 @@ align-items: <value>`,
       <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
       <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
       <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
-      <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
     </bento>
     `,
-    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(4, 1fr) / repeat(4, 1fr);">
+    hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr);">
       <div></div><div></div><div></div><div></div>
       <div></div><div></div><div></div><div></div>
       <div></div><div></div><div></div><div></div>
-      <div></div><div></div><div></div><div></div>
+
     </div>`,
     inputLinesNumber: 2,
     check: [
@@ -303,7 +300,15 @@ align-items: <value>`,
     },
     syntax: `justify-self: <value>
 align-self: <value>`,
-    help: `<p>You can also change the alignment of specific items by setting the <code>justify-self</code> and <code>align-self</code> properties of the item element.</p>`,    
+    help: `<p>You can also change the alignment of specific items by setting the <code>justify-self</code> and <code>align-self</code> properties of the item element.</p>
+    <p>Values accepted are the same than for <code>justify-items</code> / <code>align-items</code>:</p>
+    <ul>
+    <li><code>stretch</code>: stretch to fill the whole height/width of the area</li>
+    <li><code>start</code>: pack near the starting edge of the area</li>
+    <li><code>end</code>: pack near the end edge of the area</li>
+    <li><code>center</code>: pack around the vertical/horizontal center of the area</li>
+    <li><code>baseline</code>: align so that all the items share the same baseline</li>
+    </ul>`,    
     markup: `
     <bento style="width: 700px; height: 360px">
       <sushi></sushi><sushi></sushi><sushi></sushi>

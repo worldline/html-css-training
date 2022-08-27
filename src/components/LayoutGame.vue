@@ -2,6 +2,7 @@
   <p class="order">{{ level.doThis }}</p>
   <div class="game-container">
     <div class="game-wrapper" :class="level.wrapperClass">
+      <CorrectAnim />
       <Table :content="level.markup" :hintContent="level.hintMarkup" :key="level.name"></Table>
     </div>
   </div>
@@ -25,6 +26,7 @@
 import Editor from "./Editor.vue";
 import {state} from "../game";
 import Table from "./Table.vue"
+import CorrectAnim from "./CorrectAnim.vue";
 import { computed } from "vue";
 import { Chapter4Level } from "../chapters/chapter4";
 import { applyStyle } from "../css-editor";
