@@ -216,6 +216,40 @@ grid-template-columns`,
   },
 
   {
+    name: "Grid gaps",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: "bento",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid: 1fr 100px / 2fr 1fr;"]
+    },
+    syntax: `gap: <dimension>
+gap: <row> <col>`,
+    help: `<p>To add space between the items of the grid, use the <code>gap</code> property. You can pass two values if you want to specify different gaps between rows and columns.</p>
+    <p style="font-weight: bold">Try to add 50px gaps between the zones of the bento.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="sushis">
+        <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
+      </div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style="grid: 1fr 100px / 2fr 1fr; gap: 50px;">
+      <div style="--section-color: rgba(255,255,255,0.5)" title="rice"></div>
+      <div style="--section-color: rgba(0,255,0,0.5)" title="broccoli"></div>
+      <div style="--section-color: rgba(0,0,0,0.5)" title="sushis"></div>
+      <div style="--section-color: rgba(255,255,0,0.5)" title="fruits"></div>
+    </div>`,
+    inputLinesNumber: 1,
+    check: [
+      ["grid", "1fr 100px / 2fr 1fr"]
+    ]
+  },
+
+  {
     name: "Grid template: repeat()",
     doThis: "Distribute the sushis in all the areas of the bento",
     selector: "bento",
@@ -225,7 +259,7 @@ grid-template-columns`,
     },
     syntax: `repeat(<number>, <dim>)`,
     help: `<p>The <code>repeat()</code> keyword is a utility to repeat the same dimension a certain number of times in a grid template declaration.</p>
-    <p>Try to use it to declare a 4x3 grid layout with equal size areas.</p>`,
+    <p style="font-weight: bold">Try to use it to declare a 4x3 grid layout with equal size areas.</p>`,
     examples: [
       `<code>grid-template-rows: repeat(5, 50px)</code> is equivalent to <code>grid-template-rows: 50px 50px 50px 50px 50px</code>`
     ],
@@ -555,10 +589,127 @@ grid-column: <start>/<end>`,
     ]
   },
 
+  {
+    name: "Implicit Grid",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: "bento",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid", "grid-auto-flow: column", "grid-template-rows: 100%"]
+    },
+    syntax: `grid-auto-rows: <dims>...
+grid-auto-columns: <dims>...`,
+    examples: [
+      `<code>grid-auto-rows: minmax(100px, auto);</code> will automatically create rows at a minimum size of 100px.`,
+      `<code>grid-auto-columns: 100px 200px</code> will automatically create columns alternating between 100px and 200px.`
+    ],
+    help: `<p>When you are not explicitely declaring a grid with <code>grid-template</code> properties, or when the explicit grid is full, the items are placed in new tracks, automatically created. These tracks are referred to as the <strong>implicit grid</strong>.</p>
+    <p>You can change the sizing of these implicit new tracks with the <code>grid-auto-rows</code> and <code>grid-auto-columns</code> property.</p>`,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile rice"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style='grid-auto-flow: column; grid-template-rows: 100%; grid-auto-columns: 100px 1fr'>
+      <div title="rice (100px wide)"></div>
+      <div title="broccoli"></div>
+      <div title="rice (100px wide)"></div>
+      <div title="broccoli"></div>
+      <div title="rice (100px wide)"></div>
+    </div>`,
+    check: [
+      ["grid-auto-columns", val => val === '100px 1fr' || val === '100px auto' || val === '100px 1fr 100px 1fr 100px'],
+    ]
+  },
+
+  {
+    name: "Implicit Grid - auto-fit / auto-fill",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: "bento",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid"]
+    },
+    syntax: `repeat(
+  auto-fit,
+  minmax(100px, 1fr)
+)`,
+    examples: [
+      `<code>grid-template-columns: repeat(auto-fit, minmax(50px, 100px))</code> will make as many columns as needed between 50px and 100px wide, to fill the entire grid container.`],
+    help: `<p>Use the <code>auto-fit</code> keyword in a <code>repeat()</code> instruction to automatically pick the right number of columns or rows that can fit the grid depending on your content.</p>
+    <p>This is especially useful for automatic responsive sizing of your grid, when combining it with variable sizing like <code>minmax(200px, 1fr)</code>.</p>
+    <p><code>auto-fill</code> is a small variation of <code>auto-fit</code> that allows to create empty columns to fill the first row if needed. There is no difference between them once the first track is filled.</p>
+    <p style="font-weight: bold">Find the right declaration for <code>grid-template-columns</code> to fill the whole bento, but each area not more than 200px wide.</p>
+    `,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>      
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+      <div class="tile rice"></div>
+      <div class="tile rice"></div>
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style='grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))'>      
+      <div title="rice (>=200px)"></div>
+      <div title="broccoli (>=200px)"></div>
+      <div title="fruits (>=200px)"></div>      
+      <div title="broccoli (>=200px)"></div>
+      <div title="fruits (>=200px)"></div>
+      <div title="rice (>=200px)"></div>
+      <div title="rice (>=200px)"></div>
+      <div title="broccoli (>=200px)"></div>
+      <div title="fruits (>=200px)"></div>
+    </div>`,
+    check: [
+      ["grid-template-columns", 'repeat(auto-fit, minmax(200px, 1fr))'],
+    ]
+  },
+
+  {
+    name: "Implicit Grid - Dense Packing",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: "bento",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid"],
+      ".rice": ["grid-column: auto / span 2"],
+      ".broccoli": ["grid-row: auto / span 2"],
+    },
+    syntax: `grid-auto-flow: row dense`,    
+    help: `<p>The default behavior of grid layout is to place items along the rows while always progressing forward. The items will be placed according to the order they are in the source, or any modification with the <code>order</code> property. If there is not enough space to fit an item, grid will leave a gap and move to the next track.</p>
+    <p>An auto-placed layout with some items spanning multiple tracks may result in a grid with some unfilled cells. You can change the automatic flow to make fill these gaps. This may mean that the display becomes disconnected from the logical order. This is called <b>dense packing</b>.</p>
+    `,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="tile broccoli"></div>
+      <div class="tile fruits"></div>
+      <div class="tile rice"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style='grid-auto-flow: row dense;'>      
+      <div title="broccoli" style="grid-row: auto / span 2"></div>  
+      <div title="fruits"></div>
+      <div title="rice" style="grid-column: auto / span 2"></div>
+      <div title="fruits"></div>
+    </div>`,
+    check: [
+      ["grid-auto-flow", val => val === 'dense' || val === 'row dense'],
+    ]
+  },
+
   /*todo:
   span keyword ?
-  implicit grid-area names with grid-column + grid-row
- grid gap
+  implicit grid-area names with grid-column + grid-row ?
 */
  
 ];

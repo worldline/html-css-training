@@ -34,9 +34,9 @@ defineProps({
 .editor .input-header {
   text-align: left;
   padding: 10px 15px;
-  background: rgba(0,0,0,.15);
-  border-top: solid 1px rgba(255,255,255,.05);
-  border-bottom: solid 1px rgba(255,255,255,.05);
+  background: rgba(0,0,0,.65);
+  border-top: solid 1px rgba(255,255,255,.15);
+  border-bottom: solid 1px rgba(255,255,255,.15);
   border-radius: 2px 2px 0 0;
   color: rgba(255,255,255,.6);
 }
@@ -48,7 +48,7 @@ defineProps({
 }
 
 .editor .css-view .file-window {
-  background: #efefef;
+  background: rgba(255,255,255,0.9);
   color: #888;
 
 }
@@ -79,6 +79,6 @@ defineProps({
 }
 
 .html-view .file-window {
-  background: rgba(0,0,0,.3);
+  background: rgba(0,0,0,.9);
 }
 </style>
