@@ -1,6 +1,7 @@
 import { Chapter2Level } from "./chapters/chapter2";
 import { Chapter4Level } from "./chapters/chapter4";
 import { Chapter5Level } from "./chapters/chapter5";
+import { Chapter7Level } from "./chapters/chapter7";
 import { state, completeLevel } from "./game";
 import { cleanupEffects, shake } from "./utils";
 
@@ -74,14 +75,13 @@ function checkMatches(matches: Element[], solutionMatches: Element[]) {
 }
 
 export function applyStyle(selector: string, rules: string) {
-  const level = state.level as (Chapter4Level | Chapter5Level);
+  const level = state.level as (Chapter4Level | Chapter5Level | Chapter7Level);
 
   cleanupEffects();
 
   const gameWrapper = document.querySelector(".game-wrapper")!;
-  const baseTable = document.querySelector(".table-content")!;
   const targets: HTMLElement[] = Array.from(
-    baseTable.querySelectorAll(selector)
+    gameWrapper.querySelectorAll(selector)
   );
 
   targets.forEach((el) =>
@@ -90,6 +90,7 @@ export function applyStyle(selector: string, rules: string) {
       [
         el.getAttribute("data-existing-style") ?? "",
         ...(level.cssRules[level.selector] ?? []),
+        ...(level.cssRulesHidden[level.selector] ?? []),
         rules,
       ].join(";")
     )
@@ -125,7 +126,7 @@ function normalizePropValue(val: any){
 
 function checkStyleProperties(
   elementsToCheck: HTMLElement[],
-  level: (Chapter4Level | Chapter5Level)
+  level: (Chapter4Level | Chapter5Level | Chapter7Level)
 ) {
   if (!level.check) return true;
   return level.check.every(([prop, ...possibleValues]) =>

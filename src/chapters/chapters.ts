@@ -8,6 +8,7 @@ import {chapter3} from "./chapter3";
 import {chapter4} from "./chapter4";
 import {chapter5} from "./chapter5";
 import {chapter6} from "./chapter6";
+import {chapter7} from "./chapter7";
 
 export const chapters: Chapter[] = [
     chapter1,
@@ -15,7 +16,8 @@ export const chapters: Chapter[] = [
     chapter3,
     chapter4,
     chapter5,
-    chapter6
+    chapter6,
+    chapter7
 ]
 
 export const currentChapter: Ref<Chapter> = computed(() => chapters[state.progress.currentChapter - 1])

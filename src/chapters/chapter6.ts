@@ -1,5 +1,5 @@
 import {state} from "../game";
-import { Level } from "./level";
+import { applyInitialStyles, CssEditorLevel, resetEditor } from "./level";
 
 import LayoutGame from "../components/LayoutGame.vue";
 import SyntaxLevelInstructions from "../components/SyntaxLevelInstructions.vue";
@@ -7,14 +7,12 @@ import { Chapter } from "./chapter";
 import {nextTick} from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
 
-export interface Chapter6Level extends Level {
+export interface Chapter6Level extends CssEditorLevel {
   doThis: string;
-  selector: string;
   syntax?: string;
   help?: string;
   helpTitle?: string;
   examples?: string[];
-  cssRules: { [selector:string]: string[] };
   tableStyles?: string;
   check: [string, ...(string | ((val: string) => boolean))[] ][];
   hintMarkup?: string;
@@ -725,27 +723,10 @@ export const chapter6: Chapter = {
   <p>While flexbox is a great layout tool for <b>one-directional</b> flow, we still need a solution for complex 2D placement.</p>
   <p>CSS Grid is this solution. It consists of around 24 new CSS properties that provides a powerful way to create two-dimensional layouts. Let's dig in !</p>`,
   onLevelStart(){
-    const level = state.level as Chapter6Level
     nextTick(() => {
       addBoardElementsTooltips()
-
-      const editorInput = document.querySelector(".editor textarea");
-      if(editorInput instanceof HTMLTextAreaElement){
-        editorInput.value = "";
-        editorInput.focus()
-      }
-
-      const table = document.querySelector('.table-content');
-      if(!table) return;
-      table.setAttribute("style", level.tableStyles ?? "")
-
-      const selectors = new Set([level.selector, ...Object.keys(level.cssRules)])
-      for(let selector of selectors){
-        table.querySelectorAll(selector).forEach(el => {
-          el.setAttribute("data-existing-style", el.getAttribute("style") ?? "")
-          el.setAttribute("style", [el.getAttribute("style"), ...(level.cssRules[selector] ?? [])].join(";"))
-        })
-      }
+      resetEditor();
+      applyInitialStyles('.table-content')
     })
   }
 }
