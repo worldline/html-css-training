@@ -66,7 +66,7 @@ function toggleLevelMenu(){
   bottom: 0;
   overflow-y: hidden;
   transition: all .15s ease-in-out;
-  background: #1b1813;
+  background: rgb(20,0,0);
   left: 500px;
   padding: 0;
   width: 100%;
@@ -88,7 +88,7 @@ function toggleLevelMenu(){
   left: 0;
   right: 0;
   height: 48px;
-  background: linear-gradient(to top, rgba(27,24,19,1), rgba(0,0,0,0));
+  background: linear-gradient(to top, rgba(30,4,4,1), rgba(0,0,0,0));
 }
 
 ul, li {
@@ -125,7 +125,7 @@ ul, li {
 
 .chapter-name {
   display: block;
-  background-color: #2e2a23;
+  background-color: #360505;
   font-size: 120%;
   border-top: 1px solid #3e392f;
   position: relative;
@@ -133,7 +133,7 @@ ul, li {
 }
 
 .chapter-name:hover {
-  background-color: #3e392f;
+  background-color: #380a0a;
 }
 
 .levels a.current {

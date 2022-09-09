@@ -31,7 +31,7 @@ const rightPanelComponent = computed(() => {
   right: 0;
   top: 0;
   bottom: 0;
-  background: #221e18;
+  background: #200505;
   z-index: 1;
 }
 
@@ -42,7 +42,7 @@ const rightPanelComponent = computed(() => {
 .right-col .doc-wrapper {
   padding: 20px;
   height: 100%;
-  background: rgba(0,0,0,.2);
+  background: rgba(0,0,0,.5);
   display: flex;
   flex-direction: column;
 }

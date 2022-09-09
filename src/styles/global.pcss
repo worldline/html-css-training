@@ -15,12 +15,13 @@ html,body {
     margin: 0;
     padding: 0;
 
-    --bg-primary: #2e2a23;
-    --bg-secondary: #221e18;
+    --bg-primary: #200505;
+    --bg-secondary: #501515;
 }
 
 body {
-    background: var(--bg-secondary) radial-gradient(20% 40%, #3e392f, #221e17) no-repeat;
+    background: var(--bg-secondary) radial-gradient(20% 50%, var(--bg-secondary), var(--bg-primary));
+    background-position: calc(50% - 125px) 50%;
     position: relative;
     color: #888;
     font-family: "Exo 2", "Lato", "Helvetica Neue", sans-serif;
