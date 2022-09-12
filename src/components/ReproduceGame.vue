@@ -36,7 +36,7 @@
 import Editor from "./Editor.vue";
 import {state} from "../game";
 import CorrectAnim from "./CorrectAnim.vue";
-import { computed } from "vue";
+import { computed, nextTick, ref, watch } from "vue";
 import { applyStyle } from "../css-editor";
 import { Chapter7Level } from "../chapters/chapter7";
 
@@ -45,12 +45,19 @@ const otherRules = computed(() => Object.fromEntries(Object.entries(level.value.
 const imports = computed(() => level.value.cssImports)
 const hiddenImports = computed(() => level.value.cssImportsHidden)
 
+const markup = ref("")
+watch(() => level, () => {
+  // force rerendering HTML when changing level to cleanup styles
+  markup.value = ""
+  nextTick(() => { markup.value = level.value.markup ?? "" })
+})
 </script>
 
 <style scoped>
 .game-wrapper {
   position: relative;
   display: flex;
+  justify-content: center;
 }
 
 pre {
@@ -58,7 +65,7 @@ pre {
 }
 
 .menu-wrapper {
-  width: 600px;
+  width: 520px;
   min-height: 200px;
   margin: 2rem;
   background: antiquewhite;
@@ -71,7 +78,7 @@ pre {
 .menu-wrapper ::v-deep(h1),
 .menu-wrapper ::v-deep(h2) {
   color: #202020;
-  margin: 0.25em 0;
+  margin: 0.25em;
 }
 
 .expected-result {

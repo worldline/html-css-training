@@ -89,8 +89,8 @@ export function applyStyle(selector: string, rules: string) {
       "style",
       [
         el.getAttribute("data-existing-style") ?? "",
-        ...(level.cssRules[level.selector] ?? []),
-        ...(level.cssRulesHidden[level.selector] ?? []),
+        ...(level.cssRules ? level.cssRules[level.selector] ?? [] : []),
+        ...(level.cssRulesHidden ? level.cssRulesHidden[level.selector] ?? [] : []),
         rules,
       ].join(";")
     )

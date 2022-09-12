@@ -22,7 +22,7 @@ const markup = `
     <ul>
         <li>
             <span class="dish-name">Izumidai</span>
-            <span class="dish-info">(tilapfish)</span>
+            <span class="dish-info">(tilapfish, seaweed)</span>
             <span class="price">$1.25</span>
         </li>
         <li>
@@ -31,7 +31,7 @@ const markup = `
         </li>
         <li>
             <span class="dish-name">Unagi</span>
-            <span class="dish-info">(eel)</span>
+            <span class="dish-info">(eel, wasabi)</span>
             <span class="price">$1.50</span>
         </li>
         <li>
@@ -39,6 +39,7 @@ const markup = `
             <span class="price">$1.25</span>
         </li>
     </ul>
+    <p class="information">All our sushis are served with cooked rice and soy sauce served at will. 6 pieces minimum for deliveries and takeout orders. Allergens: fish, peanut</p>
 </main>
 `
 
@@ -65,17 +66,17 @@ export const chapter7Levels: Chapter7Level[] = [
 
   {
     name: "Italic / Oblique",
-    selector: ".dish-info",
+    selector: "p.information",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
     cssRulesHidden: { "h1": ["font-family: 'Reggae One', serif"]},
-    cssRules: { ".dish-info": ["color: gray"] },
+    cssRules: { "p.information": ["color: gray"] },
     syntax: `font-style: normal;
 font-style: italic;
 font-style: oblique;`,
     help: `<p>Fonts can have 3 styles: <code>normal</code>, <code>italic</code> or <code>oblique</code></p>
     <p>For fonts that support it, <code>oblique</code> shows a slanted version of the regular typeface without turning it into a cursive version like <code>italic</code> does.</p>`,
     markup,
-    doThis: `Put dish information in italic`,
+    doThis: `Put the information paragraph in italic`,
     expectedScreenshot: "img/reproduce/font-family.png",
     check: [
       ["font-style", `italic`]
@@ -88,7 +89,7 @@ font-style: oblique;`,
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
-      ".dish-info": ["font-style: italic", "color: gray"]
+      "p.information": ["font-style: italic", "color: gray"]
     },
     cssRules: {},
     syntax: `font-weight: normal;
@@ -111,7 +112,7 @@ font-weight: 100;`,
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
-      ".dish-info": ["font-style: italic", "color: gray"],
+      "p.information": ["font-style: italic", "color: gray"],
       ".price": ["font-weight: bold"]
     },
     cssRules: {},
@@ -133,7 +134,7 @@ font-weight: 100;`,
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
       "h2": ["font-size: 36px"],
-      ".dish-info": ["font-style: italic", "color: gray"],
+      "p.information": ["font-style: italic", "color: gray"],
       ".price": ["font-weight: bold"]
     },
     cssRules: {},
@@ -157,7 +158,7 @@ text-transform: capitalize;`,
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
       "h2": ["font-size: 36px", "text-transform: uppercase"],
-      ".dish-info": ["font-style: italic", "color: gray"],
+      "p.information": ["font-style: italic", "color: gray"],
       ".price": ["font-weight: bold"]
     },
     cssRules: {},
@@ -180,7 +181,7 @@ text-transform: capitalize;`,
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
       "h2": ["font-size: 36px", "text-transform: uppercase"],
-      ".dish-info": ["font-style: italic", "color: gray"],
+      "p.information": ["font-style: italic", "color: gray"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold"]
     },
@@ -206,7 +207,7 @@ list-style: url('star.svg');`,
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
       "h2": ["font-size: 36px", "text-transform: uppercase"],
-      ".dish-info": ["font-style: italic", "color: gray"],
+      "p.information": ["font-style: italic", "color: gray"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold"],
     },
@@ -233,7 +234,7 @@ line-height: normal;`,
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
       "h2": ["font-size: 36px", "text-transform: uppercase"],
-      ".dish-info": ["font-style: italic", "color: gray"],
+      "p.information": ["font-style: italic", "color: gray"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold"],
       "li": ["list-style: upper-roman", "line-height: 200%"]
@@ -244,7 +245,8 @@ line-height: normal;`,
     syntax: `letter-spacing: 150%;
 letter-spacing: -2px;
 letter-spacing: normal;`,
-    help: `<p>Add or reduce space between letters with <code>letter-spacing</code> controls the space between each line of text in an element. This does not apply to space between paragraphs.</p>`,
+    help: `<p>Add or reduce space between letters with <code>letter-spacing</code>.</p>
+    <p>This property controls the space between each line of text in an element. This does not apply to space between paragraphs.</p>`,
     markup,
     doThis: `Set letter-spacing for h2 to 1em`,
     expectedScreenshot: "img/reproduce/font-family.png",
@@ -253,8 +255,163 @@ letter-spacing: normal;`,
     ]
   },
 
+  {
+    name: "Word Spacing",
+    selector: ".dish-info",
+    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
+    cssRulesHidden: { 
+      "h1": ["font-family: 'Reggae One', serif"],
+      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em"],
+      "p.information": ["font-style: italic", "color: gray"],
+      ".dish-name": ["font-variant: small-caps"],
+      ".price": ["font-weight: bold"],
+      "li": ["list-style: upper-roman", "line-height: 200%"]
+    },
+    syntax: `word-spacing: <dim>;
+word-spacing: normal;`,
+    help: `<p>Add or reduce space between words with <code>word-spacing</code>.</p>`,
+    markup,
+    doThis: `Set word-spacing for dish details to 5 pixels`,
+    expectedScreenshot: "img/reproduce/font-family.png",
+    check: [
+      ["word-spacing", "5px"]
+    ]
+  },
 
+  {
+    name: "Underlines and overlines",
+    selector: "h2",
+    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
+    cssRulesHidden: { 
+      "h1": ["font-family: 'Reggae One', serif"],
+      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em"],
+      "p.information": ["font-style: italic", "color: gray"],
+      ".dish-info": ["word-spacing: 5px"],
+      ".dish-name": ["font-variant: small-caps"],
+      ".price": ["font-weight: bold"],
+      "li": ["list-style: upper-roman", "line-height: 200%"]
+    },
+    syntax: `text-decoration: underline;
+text-decoration: line-through;
+text-decoration: overline;`,
+    help: `<p>Use <code>text-decoration</code> to add lines to your text.</p>
+    <p>Underlines with <code>underline</code> keyword are most commonly used, but it’s possible to add lines above your text with <code>overline</code> or right through it with <code>line-through</code>. You can also specify multiple keywords for multiple lines.</p>`,
+    markup,
+    doThis: `Add an underline to SUSHIS`,
+    expectedScreenshot: "img/reproduce/font-family.png",
+    check: [
+      ["text-decoration", "underline"]
+    ]
+  },
 
+  {
+    name: "Floating elements",
+    selector: ".price",
+    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
+    cssRulesHidden: { 
+      "h1": ["font-family: 'Reggae One', serif"],
+      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
+      "p.information": ["font-style: italic", "color: gray"],
+      ".dish-info": [ "word-spacing: 5px"],
+      ".dish-name": ["font-variant: small-caps"],
+      ".price": ["font-weight: bold"],
+      "li": ["list-style: upper-roman", "line-height: 200%"]
+    },
+    syntax: `float: <dir>;`,
+    help: `<p>Use <code>float</code> property to make an element floating to a specific direction: <code>left</code> or <code>right</code></p>
+    <p>Floating elements will no longer follow the classic inline layout. Instead, sibling elements will wrap around it. This is useful for displaying text that matches the outline of an image for example.</p>`,
+    markup,
+    doThis: `Align the prices with the right edge of the menu`,
+    expectedScreenshot: "img/reproduce/font-family.png",
+    check: [
+      ["float", "right"]
+    ]
+  },
+
+  {
+    name: "Text Indentation",
+    selector: "li",
+    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
+    cssRulesHidden: { 
+      "h1": ["font-family: 'Reggae One', serif"],
+      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
+      "p.information": ["font-style: italic", "color: gray"],
+      ".dish-info": ["word-spacing: 5px"],
+      ".dish-name": ["font-variant: small-caps"],
+      ".price": ["font-weight: bold", "float: right"],
+      "li": ["list-style: upper-roman", "line-height: 200%"]
+    },
+    syntax: `text-indent: <dim>;`,
+    help: `<p>Use <code>text-indent</code> to add an indent to your blocks of text. This property takes either a length (for example, 10px, 2em) or a percentage of the containing block’s width.</p>`,
+    markup,
+    doThis: `Add a 20px indent and a 40px left margin for each item`,
+    expectedScreenshot: "img/reproduce/font-family.png",
+    inputLinesNumber: 2,
+    check: [
+      ["text-indent", "20px"],
+      ["margin-left", "40px"]
+    ]
+  },
+
+  {
+    name: "Text Direction",
+    selector: "h2",
+    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
+    cssRulesHidden: { 
+      "h1": ["font-family: 'Reggae One', serif"],
+      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
+      "p.information": ["font-style: italic", "color: gray"],
+      ".dish-info": [ "word-spacing: 5px"],
+      ".dish-name": ["font-variant: small-caps"],
+      ".price": ["font-weight: bold", "float: right"],
+      "li": ["list-style: upper-roman", "line-height: 200%", "text-indent: 20px", "margin-left: 40px"]      
+    },
+    syntax: `writing-mode: <mode>;`,
+    help: `<p>By default, in Western languages, text is read from left to right. Some languages like Arabic, Hebrew, or Persian are written right to left, and some like Japanese are written vertically.</p>
+    <p>You can change the direction of text with <code>writing-mode</code> property. Values accepted are <code>ltr</code> (left to right), <code>rtl</code> (right to left), <code>vertical-lr</code> (top to bottom) and <code>vertical-rl</code> (bottom to top).</p>`,
+    markup,
+    doThis: `Display SUSHIS floating vertically on the left`,
+    expectedScreenshot: "img/reproduce/font-family.png",
+    inputLinesNumber: 2,
+    check: [
+      ["writing-mode", "vertical-lr"],      
+      ["float", "left"]
+    ]
+  },
+
+  {
+    name: "Text Orientation",
+    selector: "h2",
+    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
+    cssRulesHidden: { 
+      "h1": ["font-family: 'Reggae One', serif"],
+      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
+      "p.information": ["font-style: italic", "color: gray"],
+      ".dish-info": ["word-spacing: 5px"],
+      ".dish-name": ["font-variant: small-caps"],
+      ".price": ["font-weight: bold", "float: right"],
+      "li": ["list-style: upper-roman", "line-height: 200%", "text-indent: 20px", "margin-left: 40px"]
+    },
+    cssRules: {
+      "h2": [ "float: left", "writing-mode: vertical-lr" ],
+    },
+    syntax: `text-orientation: <mode>;`,
+    help: `<p>After changing the direction, you can also change the orientation of individual characters for styling purposes, with the <code>text-orientation</code> property. Values accepted are <code>mixed</code> (default), <code>upright</code> (rotate 90° characters of vertical text) or <code>sideways</code> (rotate 90° all characters)</p>`,
+    markup,
+    doThis: `Change the characters orientation and line decoration of SUSHIS`,
+    expectedScreenshot: "img/reproduce/font-family.png",
+    inputLinesNumber: 2,
+    check: [
+      ["text-orientation","upright"],
+      ["text-decoration", "overline"]
+    ]
+  },
+
+  /* 
+  text-overflow
+  text-align
+  ::after content: ".........."
+  */
 
 ];
 
