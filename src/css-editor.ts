@@ -25,10 +25,9 @@ ${[
 
   if(userRules && userRules.length > 0){
     styles += `
-    ${level.selector} {
-      ${userRules.join("\n")}
-    }
-    `
+${rootSelector} ${level.selector} {
+  ${userRules.join("\n")}
+}`
   }
 
   const stylesheet = document.getElementById("css-editor-stylesheet")!

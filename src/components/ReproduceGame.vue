@@ -89,14 +89,14 @@ pre {
 }
 
 .expected-result img {
-  height: 250px;
-  transform: rotateY(20deg) rotateX(25deg) scale(0.75) translateY(-25px);
+  width: 600px;
+  transform: rotateY(-10deg) rotateX(15deg) scale(0.9) translateY(-20px);
   box-shadow: 0 0 25px rgba(255,255,255,0.5);
   transition: transform 0.3s ease-in-out;
 }
 
 .expected-result img:hover {
-  transform: rotateY(10deg) rotateX(15deg) scale(0.8) translateY(-35px);  
+  transform: translateY(0px);  
 }
 
 .game-wrapper ::v-deep(h1) {

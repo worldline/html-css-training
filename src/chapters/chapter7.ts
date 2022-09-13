@@ -58,7 +58,7 @@ export const chapter7Levels: Chapter7Level[] = [
     ],
     markup,
     doThis: `Set h1 font to "Reggae One", or serif by default`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-1.jpg",
     check: [
       ["font-family", `"Reggae One", serif`]
     ]
@@ -68,12 +68,12 @@ export const chapter7Levels: Chapter7Level[] = [
     name: "Text Color",
     selector: "p.information",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRules: {},
+    cssRulesHidden: { "h1": ["font-family: 'Reggae One', serif"]},
     syntax: `color: <color>;"`,
     help: `<p>Text color is changed with the <code>color</code> property</p>`,
     markup,
     doThis: `Change information paragraph color to gray`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-2.jpg",
     check: [
       ["color", "gray"]
     ]
@@ -92,7 +92,7 @@ font-style: oblique;`,
     <p>For fonts that support it, <code>oblique</code> shows a slanted version of the regular typeface without turning it into a cursive version like <code>italic</code> does.</p>`,
     markup,
     doThis: `Put the information paragraph in italic`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-3.jpg",
     check: [
       ["font-style", `italic`]
     ]
@@ -115,7 +115,7 @@ font-weight: 100;`,
     <p><a href="https://web.dev/learn/css/typography/#variable-fonts" target="_blank" rel="external">Variable fonts</a> are a specific kind of dynamic font that can handle any value between 0 and 900.</p>`,
     markup,
     doThis: `Put the prices in bold`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-4.jpg",
     check: [
       ["font-weight", `bold`]
     ]
@@ -136,7 +136,7 @@ font-weight: 100;`,
     <p>The relative values are always relative to the parent element's <code>font-size</code>, as this property is inherited by children elements.</p>`,
     markup,
     doThis: `Set font size of h2 to 36px`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-5.jpg",
     check: [
       ["font-size", `36px`]
     ]
@@ -160,7 +160,7 @@ text-transform: capitalize;`,
     <p>Note that the casing in the HTML code will be the one that will be indexed by search engines, so use this property only if it is a visual change specific to this web page.</p>`,
     markup,
     doThis: `Put the h2 in uppercase`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-6.jpg",
     check: [
       ["text-transform", `uppercase`]
     ]
@@ -183,7 +183,7 @@ text-transform: capitalize;`,
     <p>You can find the complete list of variants on <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant" target="_blank" rel="external">MDN</a>.</p>`,
     markup,
     doThis: `Use the small-caps variant for dish names`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-7.jpg",
     check: [
       ["font-variant", `small-caps`]
     ]
@@ -209,7 +209,7 @@ list-style: url('star.svg');`,
     <p>You can even add custom images or define your own counters.</p>`,
     markup,
     doThis: `Use "upper-roman" style for the dishes list`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-8.jpg",
     check: [
       ["list-style", "upper-roman"]
     ]
@@ -236,7 +236,7 @@ line-height: normal;`,
     help: `<p><code>line-height</code> controls the space between each line of text in an element. This does not apply to space between paragraphs.</p>`,
     markup,
     doThis: `Set line height between dishes to 200%`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-9.jpg",
     check: [
       ["line-height", val => val == "200%" || val == "2"]
     ]
@@ -254,9 +254,6 @@ line-height: normal;`,
       ".price": ["font-weight: bold"],
       "li": ["list-style: upper-roman", "line-height: 200%"]
     },
-    cssRules: {
-      
-    },
     syntax: `letter-spacing: 150%;
 letter-spacing: -2px;
 letter-spacing: normal;`,
@@ -264,7 +261,7 @@ letter-spacing: normal;`,
     <p>This property controls the space between each line of text in an element. This does not apply to space between paragraphs.</p>`,
     markup,
     doThis: `Set letter-spacing for h2 to 1em`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-10.jpg",
     check: [
       ["letter-spacing", "1em"]
     ]
@@ -287,7 +284,7 @@ word-spacing: normal;`,
     help: `<p>Add or reduce space between words with <code>word-spacing</code>.</p>`,
     markup,
     doThis: `Set word-spacing for dish details to 5 pixels`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-11.jpg",
     check: [
       ["word-spacing", "5px"]
     ]
@@ -313,7 +310,7 @@ text-decoration: overline;`,
     <p>Underlines with <code>underline</code> keyword are most commonly used, but it’s possible to add lines above your text with <code>overline</code> or right through it with <code>line-through</code>. You can also specify multiple keywords for multiple lines.</p>`,
     markup,
     doThis: `Add an underline to SUSHIS`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-12.jpg",
     check: [
       ["text-decoration", "underline"]
     ]
@@ -340,7 +337,7 @@ text-align: justify;`,
     <p>Values accepted: <code>left</code> (or <code>start</code>), <code>right</code> (or <code>end</code>), <code>justify</code></p>`,
     markup,
     doThis: `Align text of information paragraph to the right`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-13.jpg",
     check: [
       ["text-align", "right"]
     ]
@@ -364,7 +361,7 @@ text-align: justify;`,
     <p>Floating elements will no longer follow the classic inline layout. Instead, sibling elements will wrap around it. This is useful for displaying text that matches the outline of an image for example.</p>`,
     markup,
     doThis: `Align the prices with the right edge of the menu`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-14.jpg",
     check: [
       ["float", "right"]
     ]
@@ -386,12 +383,12 @@ text-align: justify;`,
     syntax: `text-indent: <dim>;`,
     help: `<p>Use <code>text-indent</code> to add an indent to your blocks of text. This property takes either a length (for example, 10px, 2em) or a percentage of the containing block’s width.</p>`,
     markup,
-    doThis: `Add a 20px indent and a 40px left margin for each item`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    doThis: `Add a 20px indent and a 50px left margin for each item`,
+    expectedScreenshot: "img/reproduce/7-15.jpg",
     inputLinesNumber: 2,
     check: [
       ["text-indent", "20px"],
-      ["margin-left", "40px"]
+      ["margin-left", "50px"]
     ]
   },
 
@@ -406,14 +403,14 @@ text-align: justify;`,
       ".dish-info": [ "word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold", "float: right"],
-      "li": ["list-style: upper-roman", "line-height: 200%", "text-indent: 20px", "margin-left: 40px"]      
+      "li": ["list-style: upper-roman", "line-height: 200%", "text-indent: 20px", "margin-left: 50px"]      
     },
     syntax: `writing-mode: <mode>;`,
     help: `<p>By default, in Western languages, text is read from left to right. Some languages like Arabic, Hebrew, or Persian are written right to left, and some like Japanese are written vertically.</p>
     <p>You can change the direction of text with <code>writing-mode</code> property. Values accepted are <code>ltr</code> (left to right), <code>rtl</code> (right to left), <code>vertical-lr</code> (top to bottom) and <code>vertical-rl</code> (bottom to top).</p>`,
     markup,
     doThis: `Display SUSHIS floating vertically on the left`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-16.jpg",
     inputLinesNumber: 2,
     check: [
       ["writing-mode", "vertical-lr"],      
@@ -432,7 +429,7 @@ text-align: justify;`,
       ".dish-info": ["word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold", "float: right"],
-      "li": ["list-style: upper-roman", "line-height: 200%", "text-indent: 20px", "margin-left: 40px"]
+      "li": ["list-style: upper-roman", "line-height: 200%", "text-indent: 20px", "margin-left: 50px"]
     },
     cssRules: {
       "h2": [ "float: left", "writing-mode: vertical-lr" ],
@@ -441,46 +438,13 @@ text-align: justify;`,
     help: `<p>After changing the direction, you can also change the orientation of individual characters for styling purposes, with the <code>text-orientation</code> property. Values accepted are <code>mixed</code> (default), <code>upright</code> (rotate 90° characters of vertical text) or <code>sideways</code> (rotate 90° all characters)</p>`,
     markup,
     doThis: `Change the characters orientation and line decoration of SUSHIS`,
-    expectedScreenshot: "img/reproduce/font-family.png",
+    expectedScreenshot: "img/reproduce/7-17.jpg",
     inputLinesNumber: 2,
     check: [
       ["text-orientation","upright"],
       ["text-decoration", "overline"]
     ]
-  },
-
-  {
-    name: "Pseudo elements ::before and ::after",
-    selector: ".price::before",
-    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline", "float: left", "writing-mode: vertical-lr", "text-orientation: upright", "text-decoration: overline"],
-      "p.information": ["font-style: italic", "color: gray", "text-align: right"],
-      ".dish-info": ["word-spacing: 5px"],
-      ".dish-name": ["font-variant: small-caps"],
-      ".price": ["font-weight: bold", "float: right"],
-      "li": ["list-style: upper-roman", "line-height: 200%", "text-indent: 20px", "margin-left: 40px"]
-    },
-    cssRules: {
-      ".price::before": [ `content: "........................"` ],
-    },
-    syntax: `text-orientation: <mode>;`,
-    help: `<p>After changing the direction, you can also change the orientation of individual characters for styling purposes, with the <code>text-orientation</code> property. Values accepted are <code>mixed</code> (default), <code>upright</code> (rotate 90° characters of vertical text) or <code>sideways</code> (rotate 90° all characters)</p>`,
-    markup,
-    doThis: `Change the characters orientation and line decoration of SUSHIS`,
-    expectedScreenshot: "img/reproduce/font-family.png",
-    inputLinesNumber: 2,
-    check: [
-      ["cont","upright"],
-      ["text-decoration", "overline"]
-    ]
-  },
-
-  /* 
-  text-overflow
-  ::after content: ".........."
-  */
+  }
 
 ];
 
