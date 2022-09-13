@@ -1,11 +1,10 @@
-import {state} from "../game";
-import { applyInitialStyles, CssEditorLevel, resetEditor } from "./level";
-
+import { CssEditorLevel, resetEditor } from "./level";
 import LayoutGame from "../components/LayoutGame.vue";
 import SyntaxLevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
-import {nextTick} from "vue";
+import { nextTick } from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
+import { applyStyles } from "../css-editor";
 
 export interface Chapter6Level extends CssEditorLevel {
   doThis: string;
@@ -726,7 +725,7 @@ export const chapter6: Chapter = {
     nextTick(() => {
       addBoardElementsTooltips()
       resetEditor();
-      applyInitialStyles('.table-content')
+      applyStyles()
     })
   }
 }

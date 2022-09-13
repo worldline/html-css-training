@@ -1,11 +1,10 @@
-import {state} from "../game";
-import { applyInitialStyles, CssEditorLevel, resetEditor } from "./level";
-
+import { CssEditorLevel, resetEditor } from "./level";
 import LayoutGame from "../components/LayoutGame.vue";
 import Chapter2LevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
+import { applyStyles } from "../css-editor";
 
 export interface Chapter4Level extends CssEditorLevel {
   doThis: string;
@@ -22,7 +21,9 @@ export const chapter4Levels: Chapter4Level[] = [
     name: "Inline display",
     doThis: "Set the display mode of apples to inline",
     selector: "apple",
-    containerStyles: `width: 800px; min-height: 360px`,
+    cssRulesHidden: {
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     cssRules: {
       "apple": ["display: block"]
     },
@@ -49,7 +50,9 @@ export const chapter4Levels: Chapter4Level[] = [
     name: "Inline: text-align",
     doThis: "Align the content on the right",
     selector: "p",
-    containerStyles: `width: 800px; min-height: 360px`,
+    cssRulesHidden:{
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     cssRules: { "apple": ["display: inline"] },
     syntax: "text-align: <dir>",
     wrapperClass: "inline-layout",
@@ -80,9 +83,10 @@ export const chapter4Levels: Chapter4Level[] = [
   {
     name: "Block display",
     doThis: "Display the bentos vertically",
-    selector: "bento",
-    containerStyles: `width: 800px; min-height: 360px`,
-    cssRules: {},
+    selector: "bento",    
+    cssRulesHidden:{
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     syntax: "display: block",
     help: `<p>Block is the default display mode of paragraphs and sectionning elements like <tag>div</tag>, <tag>main</tag>, <tag>article</tag> etc.</p>
     <p>If an element has a display type of <code>block</code>, then:
@@ -111,8 +115,10 @@ export const chapter4Levels: Chapter4Level[] = [
   {
     name: "Box Model: margins",
     doThis: "Add a 20px bottom margin to bentos",
-    selector: "bento",
-    containerStyles: `width: 800px; min-height: 360px`,
+    selector: "bento",    
+    cssRulesHidden:{
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     cssRules: {
       "bento": ["display: block"]
     },
@@ -152,8 +158,10 @@ margin-<dir>: <val><unit>`,
     name: "Box Model: padding",
     doThis: "Add a 10px padding to bentos",
     selector: "bento",
-    syntax: "padding: <val><unit>",
-    containerStyles: `width: 800px; min-height: 360px`,
+    syntax: "padding: <val><unit>",    
+    cssRulesHidden:{
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px"]
     },
@@ -185,8 +193,10 @@ margin-<dir>: <val><unit>`,
     doThis: "Set the top border width of bentos to 10px",
     selector: "bento",
     syntax: `border-width: <dimension>
-border-<dir>-width: <dim>`,
-    containerStyles: `width: 800px; min-height: 360px`,
+border-<dir>-width: <dim>`,    
+    cssRulesHidden:{
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px", "padding: 10px"]
     },
@@ -219,7 +229,9 @@ border-<dir>-width: <dim>`,
     helpTitle: "Dimensioning a block element",
     doThis: "Make all the bentos 200px wide",
     selector: "bento",    
-    containerStyles: `width: 800px; min-height: 360px`,
+    cssRulesHidden:{
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-top-width: 10px"]
     },
@@ -250,8 +262,10 @@ border-<dir>-width: <dim>`,
   {
     name: "Auto margins",    
     doThis: "Set all margins to auto",
-    selector: "bento",    
-    containerStyles: `width: 800px; min-height: 360px`,
+    selector: "bento",        
+    cssRulesHidden:{
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-top-width: 10px", "width: 200px"]
     },
@@ -278,8 +292,10 @@ border-<dir>-width: <dim>`,
   {
     name: "Margins with block elements",    
     doThis: "Add a 20px vertical margin between bentos and center them horizontally",
-    selector: "bento",
-    containerStyles: `width: 800px; min-height: 360px`,
+    selector: "bento",    
+    cssRulesHidden:{
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     cssRules: {
       "bento": ["display: block", "margin-bottom: 20px", "padding: 10px", "border-top-width: 10px", "width: 200px"]
     },
@@ -316,8 +332,10 @@ border-<dir>-width: <dim>`,
     name: "Inline block display",    
     doThis: "Line up the bentos horizontally",
     selector: "bento",
-    containerStyles: `width: 800px; min-height: 360px`,
     wrapperClass: "va-initial",
+    cssRulesHidden:{
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     cssRules: {
       "bento": ["display: block", "padding: 10px", "border-top-width: 10px", "width: 200px", "margin: 20px auto"]
     },
@@ -349,7 +367,9 @@ border-<dir>-width: <dim>`,
     name: "Inline block horizontal align",    
     doThis: "Change the text alignment of the table to the right",
     selector: ".table",
-    containerStyles: `width: 800px; min-height: 360px`,
+    cssRulesHidden:{
+      ".table-content": ["width: 800px", "min-height: 360px"]
+    },
     wrapperClass: "va-initial",
     cssRules: {
       "bento": ["display: inline-block", "padding: 10px", "border-top-width: 10px", "width: 200px", "margin: 20px auto"]
@@ -380,7 +400,9 @@ border-<dir>-width: <dim>`,
     doThis: "Align the bentos on the top edge",
     selector: "plate",
     wrapperClass: "va-initial",
-    containerStyles: `width: 600px; min-height: 360px`,
+    cssRulesHidden:{
+      ".table-content": ["width: 600px", "min-height: 360px"]
+    },
     cssRules: {
       "bento": ["display: inline-block"],    
       "plate": ["display: block", "width: 100px", "height: 100px", "margin-bottom: 20px"]
@@ -410,7 +432,9 @@ border-<dir>-width: <dim>`,
     doThis: "Align vertically the bentos at the middle of the table",
     selector: "bento",
     wrapperClass: "va-initial",
-    containerStyles: `width: 600px; min-height: 360px`,
+    cssRulesHidden:{
+      ".table-content": ["width: 600px", "min-height: 360px"]
+    },
     cssRules: {
       "bento": ["display: inline-block"]
     },
@@ -451,7 +475,7 @@ export const chapter4: Chapter = {
     nextTick(() => {
       addBoardElementsTooltips()
       resetEditor()
-      applyInitialStyles('.table-content')
+      applyStyles();
     })
   }
 }

@@ -1,103 +1,54 @@
-import { Chapter2Level } from "./chapters/chapter2";
 import { Chapter4Level } from "./chapters/chapter4";
 import { Chapter5Level } from "./chapters/chapter5";
 import { Chapter7Level } from "./chapters/chapter7";
+import { currentChapter } from "./chapters/chapters";
+import { CssEditorLevel } from "./chapters/level";
 import { state, completeLevel } from "./game";
 import { cleanupEffects, shake } from "./utils";
 
-export function fireRule(rule: string) {
-  const level = state.level as Chapter2Level;
-
-  cleanupEffects();
-
-  const baseTable = document.querySelector(".table-content")!;
-
-  // Check if selector will throw an error trying the mystery rule
-  // If it errors out, change the rule to null so the wrong-guess animation will work
-  try {
-    baseTable.querySelectorAll(rule);
-  } catch (err) {
-    rule = "";
+export function applyStyles(userRules?: string[]){
+  const level = state.level as CssEditorLevel;
+  if(!level) return;
+  const rootSelector = currentChapter.value.gameContainerSelector ?? ""
+  const selectors = new Set([level.selector, ...Object.keys(level.cssRules ?? {}), ...Object.keys(level.cssRulesHidden ?? {})])
+  
+  let styles = "";
+  for(let selector of selectors){
+    styles += `
+${rootSelector} ${selector} {
+${[      
+    ...(level.cssRules ? level.cssRules[selector] ?? [] : []),
+    ...(level.cssRulesHidden ? level.cssRulesHidden[selector] ?? [] : [])
+  ].map(rule => `  ${rule};`).join("\n")}
+}`
   }
 
-  const matches = rule
-    ? (Array.from(baseTable.querySelectorAll(rule)) as HTMLElement[])
-    : []; // What the person finds
-  const solutionMatches = Array.from(
-    baseTable.querySelectorAll(level.selector)
-  ); // What the correct rule finds
-
-  let win = false;
-
-  // If nothing is selected
-  if (matches.length == 0) {
-    shake(document.querySelector(".editor")!);
+  if(userRules && userRules.length > 0){
+    styles += `
+    ${level.selector} {
+      ${userRules.join("\n")}
+    }
+    `
   }
 
-  if (matches.length === solutionMatches.length && matches.length > 0) {
-    win = checkMatches(matches, solutionMatches);
-  }
-
-  if (win) {
-    matches.forEach((el) => {
-      el.classList.remove("strobe");
-      el.classList.add("clean");
-    });
-    const editorInput = document.querySelector(
-      ".editor input"
-    ) as HTMLInputElement;
-    editorInput.value = "";
-
-    //$(".input-wrapper").css("opacity",.2);
-    setTimeout(function () {
-      completeLevel();
-    }, 1000);
-  } else {
-    matches.forEach((el) => {
-      el.classList.remove("strobe");
-      shake(el);
-    });
-
-    setTimeout(function () {
-      cleanupEffects();
-      solutionMatches.forEach((el) => {
-        el.classList.add("strobe");
-      });
-    }, 500);
-  }
+  const stylesheet = document.getElementById("css-editor-stylesheet")!
+  stylesheet.innerHTML = styles
+ 
 }
 
-function checkMatches(matches: Element[], solutionMatches: Element[]) {
-  return (
-    matches.length === solutionMatches.length &&
-    matches.every((el) => solutionMatches.includes(el))
-  );
-}
-
-export function applyStyle(selector: string, rules: string) {
+export function applyUserRules(rules: string[]) {
   const level = state.level as (Chapter4Level | Chapter5Level | Chapter7Level);
 
   cleanupEffects();
 
   const gameWrapper = document.querySelector(".game-wrapper")!;
   const targets: HTMLElement[] = Array.from(
-    gameWrapper.querySelectorAll(selector)
+    gameWrapper.querySelectorAll(level.selector)
   );
 
-  targets.forEach((el) =>
-    el.setAttribute(
-      "style",
-      [
-        el.getAttribute("data-existing-style") ?? "",
-        ...(level.cssRules ? level.cssRules[level.selector] ?? [] : []),
-        ...(level.cssRulesHidden ? level.cssRulesHidden[level.selector] ?? [] : []),
-        rules,
-      ].join(";")
-    )
-  );
+  applyStyles(rules)
 
-  let win = checkStyleProperties(targets, level);
-
+  let win = checkStyleProperties(rules, level);
   if (win) {
     gameWrapper.classList.add("win");
     targets.forEach((el) => {
@@ -121,22 +72,27 @@ function normalizePropValue(val: any){
   return val
     .replaceAll(/,\s+/g, ",")
     .replaceAll(/\s*\/\s*/g, "/")
+    .replace(/;$/, "")
     .trim()
 }
 
 function checkStyleProperties(
-  elementsToCheck: HTMLElement[],
+  rules: string[],
   level: (Chapter4Level | Chapter5Level | Chapter7Level)
 ) {
   if (!level.check) return true;
-  return level.check.every(([prop, ...possibleValues]) =>
-    elementsToCheck.every((el: HTMLElement) => possibleValues.some(expected => {
+  const props = Object.fromEntries(rules
+    .map(rule => [rule.split(":")[0], rule.split(":")[1]])
+    .map(([prop, value]) => [prop.trim(), normalizePropValue(value)])
+  )
+  return level.check.every(([prop, ...possibleValues]) => {
+    const value = props[prop]
+    return possibleValues.some(expected => {
       expected = normalizePropValue(expected)
-      const value = normalizePropValue(el.style.getPropertyValue(prop));
       if (typeof value === "string" && value === expected) return true;
       else if (typeof expected === "function" && expected(value)) return true;
       console.log(`Expected ${prop} to be ${expected}, got ${value}`);
       return false;
-    }))
-  )
+    })
+  })
 }

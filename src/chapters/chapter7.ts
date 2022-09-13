@@ -1,9 +1,9 @@
-import { applyInitialStyles, CssEditorLevel, resetEditor } from "./level";
-
+import { CssEditorLevel, resetEditor } from "./level";
 import ReproduceGame from "../components/ReproduceGame.vue";
 import SyntaxLevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
+import { applyStyles } from "../css-editor";
 
 export interface Chapter7Level extends CssEditorLevel {
   doThis?: string;
@@ -61,6 +61,21 @@ export const chapter7Levels: Chapter7Level[] = [
     expectedScreenshot: "img/reproduce/font-family.png",
     check: [
       ["font-family", `"Reggae One", serif`]
+    ]
+  },
+
+  {
+    name: "Text Color",
+    selector: "p.information",
+    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
+    cssRules: {},
+    syntax: `color: <color>;"`,
+    help: `<p>Text color is changed with the <code>color</code> property</p>`,
+    markup,
+    doThis: `Change information paragraph color to gray`,
+    expectedScreenshot: "img/reproduce/font-family.png",
+    check: [
+      ["color", "gray"]
     ]
   },
 
@@ -305,13 +320,40 @@ text-decoration: overline;`,
   },
 
   {
+    name: "Text Alignment",
+    selector: "p.information",
+    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
+    cssRulesHidden: { 
+      "h1": ["font-family: 'Reggae One', serif"],
+      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em","text-decoration: underline"],
+      "p.information": ["font-style: italic", "color: gray"],
+      ".dish-info": ["word-spacing: 5px"],
+      ".dish-name": ["font-variant: small-caps"],
+      ".price": ["font-weight: bold"],
+      "li": ["list-style: upper-roman", "line-height: 200%"]
+    },
+    cssRules: {},
+    syntax: `text-align: left;
+text-align: right;
+text-align: justify;`,
+    help: `<p>Change the text alignment within a paragraph with the <code>text-align</code> property.</p>
+    <p>Values accepted: <code>left</code> (or <code>start</code>), <code>right</code> (or <code>end</code>), <code>justify</code></p>`,
+    markup,
+    doThis: `Align text of information paragraph to the right`,
+    expectedScreenshot: "img/reproduce/font-family.png",
+    check: [
+      ["text-align", "right"]
+    ]
+  },
+
+  {
     name: "Floating elements",
     selector: ".price",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
       "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
-      "p.information": ["font-style: italic", "color: gray"],
+      "p.information": ["font-style: italic", "color: gray", "text-align: right"],
       ".dish-info": [ "word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold"],
@@ -335,7 +377,7 @@ text-decoration: overline;`,
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
       "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
-      "p.information": ["font-style: italic", "color: gray"],
+      "p.information": ["font-style: italic", "color: gray", "text-align: right"],
       ".dish-info": ["word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold", "float: right"],
@@ -360,7 +402,7 @@ text-decoration: overline;`,
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
       "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
-      "p.information": ["font-style: italic", "color: gray"],
+      "p.information": ["font-style: italic", "color: gray", "text-align: right"],
       ".dish-info": [ "word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold", "float: right"],
@@ -386,7 +428,7 @@ text-decoration: overline;`,
     cssRulesHidden: { 
       "h1": ["font-family: 'Reggae One', serif"],
       "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
-      "p.information": ["font-style: italic", "color: gray"],
+      "p.information": ["font-style: italic", "color: gray", "text-align: right"],
       ".dish-info": ["word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold", "float: right"],
@@ -407,9 +449,36 @@ text-decoration: overline;`,
     ]
   },
 
+  {
+    name: "Pseudo elements ::before and ::after",
+    selector: ".price::before",
+    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
+    cssRulesHidden: { 
+      "h1": ["font-family: 'Reggae One', serif"],
+      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline", "float: left", "writing-mode: vertical-lr", "text-orientation: upright", "text-decoration: overline"],
+      "p.information": ["font-style: italic", "color: gray", "text-align: right"],
+      ".dish-info": ["word-spacing: 5px"],
+      ".dish-name": ["font-variant: small-caps"],
+      ".price": ["font-weight: bold", "float: right"],
+      "li": ["list-style: upper-roman", "line-height: 200%", "text-indent: 20px", "margin-left: 40px"]
+    },
+    cssRules: {
+      ".price::before": [ `content: "........................"` ],
+    },
+    syntax: `text-orientation: <mode>;`,
+    help: `<p>After changing the direction, you can also change the orientation of individual characters for styling purposes, with the <code>text-orientation</code> property. Values accepted are <code>mixed</code> (default), <code>upright</code> (rotate 90° characters of vertical text) or <code>sideways</code> (rotate 90° all characters)</p>`,
+    markup,
+    doThis: `Change the characters orientation and line decoration of SUSHIS`,
+    expectedScreenshot: "img/reproduce/font-family.png",
+    inputLinesNumber: 2,
+    check: [
+      ["cont","upright"],
+      ["text-decoration", "overline"]
+    ]
+  },
+
   /* 
   text-overflow
-  text-align
   ::after content: ".........."
   */
 
@@ -421,13 +490,14 @@ export const chapter7: Chapter = {
   levels: chapter7Levels,
   leftPanelComponent: ReproduceGame,
   rightPanelComponent: SyntaxLevelInstructions,  
+  gameContainerSelector: ".menu-wrapper",
   intro: `<p>Time to work on the restaurant menu !</p>
-  <img src="img/menu-logo.png" height="120" style="display:block; height: 120px; margin: 0 auto"/ />
+  <img src="img/menu-logo.png" height="120" style="display:block; height: 120px; margin: 0 auto" />
   <p>Everyone knows that best restaurants all have nice fonts on their menu. Let's see how we can make beautiful text displays with CSS !</p>`,
   onLevelStart(){
     nextTick(() => {
       resetEditor();
-      applyInitialStyles(".menu-wrapper")
+      applyStyles()
     })
   }
 }
