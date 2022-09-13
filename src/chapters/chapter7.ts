@@ -449,7 +449,7 @@ text-align: justify;`,
 ];
 
 export const chapter7: Chapter = {
-  name: "CSS - Typography",
+  name: "Typography",
   description: "The art of displaying text",
   levels: chapter7Levels,
   leftPanelComponent: ReproduceGame,

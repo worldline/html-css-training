@@ -465,7 +465,7 @@ border-<dir>-width: <dim>`,
 ];
 
 export const chapter4: Chapter = {
-  name: "CSS - Inline & Block Layout",
+  name: "Inline & Block Layout",
   description: "Basic display modes of HTML content",
   levels: chapter4Levels,
   leftPanelComponent: LayoutGame,

@@ -211,7 +211,7 @@ export const chapter3Levels: Chapter3Level[] = [
 ]
 
 export const chapter3: Chapter = {
-    name: "CSS - Specificity",
+    name: "CSS Specificity",
     description: "When two properties override each other, the more specific selector wins",
     intro: `
     <p>Each selector in CSS has a certain level of specificity. For example, <code>div</code> has a low specificity because it targets any <tag>div</tag> in the document, while <code>#login-box</code> has a higher specificity because it only targets a element with a specific ID.</p>

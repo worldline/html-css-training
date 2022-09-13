@@ -764,7 +764,7 @@ align-content: <value>`,
 ];
 
 export const chapter5: Chapter = {
-  name: "CSS - Flex Layout",
+  name: "Flex Layout",
   description: "One-directional content flow",
   levels: chapter5Levels,
   leftPanelComponent: LayoutGame,

@@ -749,7 +749,7 @@ export const chapter2Levels: Chapter2Level[] = [
 ];
 
 export const chapter2: Chapter = {
-  name: "CSS - Selectors",
+  name: "CSS Selectors",
   levels: chapter2Levels,
   leftPanelComponent: SelectorGame,
   rightPanelComponent: SyntaxLevelInstructions,

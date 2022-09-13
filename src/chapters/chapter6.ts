@@ -712,7 +712,7 @@ grid-auto-columns: <dims>...`,
 ];
 
 export const chapter6: Chapter = {
-  name: "CSS - Grid Layout",
+  name: "Grid Layout",
   description: "Powerful 2D layouts",
   levels: chapter6Levels,
   leftPanelComponent: LayoutGame,
