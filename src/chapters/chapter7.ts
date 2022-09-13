@@ -454,7 +454,7 @@ export const chapter7: Chapter = {
   levels: chapter7Levels,
   leftPanelComponent: ReproduceGame,
   rightPanelComponent: SyntaxLevelInstructions,  
-  gameContainerSelector: ".menu-wrapper",
+  wrapperClass: "menu-wrapper",
   intro: `<p>Time to work on the restaurant menu !</p>
   <img src="img/menu-logo.png" height="120" style="display:block; height: 120px; margin: 0 auto" />
   <p>Everyone knows that best restaurants all have nice fonts on their menu. Let's see how we can make beautiful text displays with CSS !</p>`,

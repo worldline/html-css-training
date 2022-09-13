@@ -9,7 +9,7 @@ export interface Chapter {
     levels: Level[];
     rightPanelComponent: Component
     leftPanelComponent: Component
-    gameContainerSelector?: string;
+    wrapperClass?: string;
     credits?: string;
     onLevelStart?: Function;
 }

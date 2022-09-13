@@ -1,9 +1,9 @@
 <template>
   <p class="order">{{ level.doThis }}</p>
   <div class="game-container">
-    <div class="game-wrapper" :class="level.wrapperClass">
+    <div class="game-wrapper">
       <CorrectAnim />
-      <div class="menu-wrapper" v-html="level.markup">
+      <div class="game-content" v-html="level.markup" :class="level.wrapperClass || currentChapter.wrapperClass">
 
       </div>
       <div class="expected-result">
@@ -39,6 +39,7 @@ import CorrectAnim from "./CorrectAnim.vue";
 import { computed, nextTick, ref, watch } from "vue";
 import { applyUserRules } from "../css-editor";
 import { Chapter7Level } from "../chapters/chapter7";
+import { currentChapter } from "../chapters/chapters";
 
 const level = computed(() => state.level as Chapter7Level)
 const otherRules = computed(() => Object.fromEntries(Object.entries(level.value.cssRules ?? {}).filter(([key]) => key !== level.value.selector)))

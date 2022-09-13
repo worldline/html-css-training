@@ -1,9 +1,10 @@
 <template>
   <p class="order">{{ level.doThis }}</p>
   <div class="game-container">
-    <div class="game-wrapper" :class="level.wrapperClass">
+    <div class="game-wrapper">
       <CorrectAnim />
-      <Table :content="level.markup" :hintContent="level.hintMarkup" :key="level.name"></Table>
+      <Table :content="level.markup" :hintContent="level.hintMarkup" :key="level.name"
+        :class="level.wrapperClass || currentChapter.wrapperClass"></Table>
     </div>
   </div>
   <Editor placeholder="Type styles here" @input="applyUserRules($event)">
@@ -30,6 +31,7 @@ import CorrectAnim from "./CorrectAnim.vue";
 import { computed, Ref } from "vue";
 import { Chapter4Level } from "../chapters/chapter4";
 import { applyUserRules} from "../css-editor";
+import { currentChapter } from "../chapters/chapters";
 
 const level: Ref<Chapter4Level> = computed(() => state.level as Chapter4Level)
 const otherRules = computed(() => Object.fromEntries(Object.entries(level.value.cssRules ?? {}).filter(([key]) => key !== level.value.selector)))
