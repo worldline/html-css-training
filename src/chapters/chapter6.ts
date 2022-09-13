@@ -717,7 +717,7 @@ export const chapter6: Chapter = {
   levels: chapter6Levels,
   leftPanelComponent: LayoutGame,
   rightPanelComponent: SyntaxLevelInstructions,
-  credits: `Credits: `,
+  credits: `Credits: inspired from <a href="https://cssgridgarden.com/" target="_blank">CSS Grid Garden</a> by <a href="https://codepip.com" target="_blank">Codepip</a>`,
   intro: `<p>Let's learn the different ways to position elements in CSS !</p>
   <p>While flexbox is a great layout tool for <b>one-directional</b> flow, we still need a solution for complex 2D placement.</p>
   <p>CSS Grid is this solution. It consists of around 24 new CSS properties that provides a powerful way to create two-dimensional layouts. Let's dig in !</p>`,
