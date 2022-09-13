@@ -12,7 +12,7 @@
       </div>
     </div>
   </div>
-  <Editor placeholder="Type styles here" @input="applyStyle(level.selector, $event)">
+  <Editor placeholder="Type styles here" @input="applyUserRules($event)">
     <template v-slot:code-before>
       <link v-for="url in hiddenImports" rel="stylesheet" :href="url" />
       <link v-for="url in imports" rel="stylesheet" :href="url" />
@@ -37,7 +37,7 @@ import Editor from "./Editor.vue";
 import {state} from "../game";
 import CorrectAnim from "./CorrectAnim.vue";
 import { computed, nextTick, ref, watch } from "vue";
-import { applyStyle } from "../css-editor";
+import { applyUserRules } from "../css-editor";
 import { Chapter7Level } from "../chapters/chapter7";
 
 const level = computed(() => state.level as Chapter7Level)

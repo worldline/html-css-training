@@ -56,7 +56,7 @@ function enterHit(event: Event){
     setTimeout(() => button.classList.add("enterhit"), 0)    
   }
   if(inputElement.value) inputElement.value.value = lines.join('\n')
-  emit("input", lines.join('\n'))
+  emit("input", lines)
 }
 
 function onInputKeyup(){

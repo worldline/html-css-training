@@ -6,7 +6,7 @@
       <Table :content="level.markup"></Table>
     </div>
   </div>
-  <Editor placeholder="Type in a CSS selector" @input="fireRule">
+  <Editor placeholder="Type in a CSS selector" @input="trySelector($event[0])">
     <template v-slot:code-after>
         <br/>{<br/>
         /* Styles would go here. */<br/>
@@ -28,7 +28,7 @@ import { resetEditor } from "../chapters/level";
 
 const level = computed(() => state.level as Chapter2Level)
 
-function fireRule(rule: string) {
+function trySelector(rule: string) {
   const level = state.level as Chapter2Level;
 
   cleanupEffects();
