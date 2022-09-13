@@ -1,0 +1,140 @@
+body {
+  font-family: sans-serif;
+  background-color: #eff3f4;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+header {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0 2em;
+}
+
+header nav ul li {
+  display: inline-block;
+  font-size: 15px;
+  margin: 0 .5em;
+  padding: .5em 1.5em;
+  border-radius: .25rem;
+  cursor: pointer;
+  transition: all .2s;
+  -moz-transition: all .2s;
+  -webkit-transition: all .2s;
+}
+
+header nav ul li:hover,
+header nav ul li.active {
+  background-color: #ec7444;
+  color: white;
+}
+
+.banner {
+  background-color: #ec7444;
+  background-size: cover;
+  height: 50px;
+  width: 100%;
+  border-radius: .25rem .25rem 0 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.card1 {
+  background-image: url('./img/img1.jpg');
+}
+
+.card2 {
+  background-image: url('./img/img2.jpg');
+}
+
+.card3 {
+  background-image: url('./img/img3.jpg');
+}
+
+.card4 {
+  background-image: url('./img/img4.jpg');
+}
+
+.card5 {
+  background-image: url('./img/img5.jpg');
+}
+
+main {
+  margin: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5em;
+}
+
+.box {
+  width: 100%;
+  display: inline-block;
+  background-color: #fff;
+  font-size: .9rem;
+  box-shadow: 0 2px 2px rgb(0 0 0 / 22%);
+  border-radius: .25rem;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+
+.box:hover {
+  transform: scale(1.05);
+}
+
+.box .banner {
+  background-color: rgb(142, 221, 142);
+  height: 100px;
+  width: 100%;
+}
+
+.box h2 {
+  font-size: 1.25em;
+  width: 100%;
+  text-align: center;
+  padding: 0 0 .5em;
+  border-bottom: 2px solid #ddd;
+}
+
+.box table {
+  width: 100%;
+  padding: 0 1em 1em;
+  border-spacing:0;
+}
+
+.box table thead {
+  text-align: center;
+  font-size: 15px;
+  color: #757575;
+}
+
+.box table tbody td {
+  padding: .75em 0;
+  border-bottom: 1px dashed rgb(224, 136, 136);
+}
+
+.box table tbody tr:last-child td {
+  border: none;
+}
+
+.box table tbody tr td:last-child {
+  text-align: center;
+  font-weight: 600;
+  color: #ec7444;
+  font-size: 15px;
+  min-width: 80px;
+  vertical-align: baseline;
+}
+
+.box table tbody tr td p {
+  margin: .25em 0;
+  font-size: 14px;
+  font-style: italic;
+  color: #787878;
+}
