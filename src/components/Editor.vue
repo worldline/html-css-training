@@ -24,6 +24,8 @@ import HTMLMarkup from "./HTMLMarkup.vue";
 import {computed, ref, Ref} from "vue"
 
 import {state} from "../game";
+import { currentChapter } from "../chapters/chapters";
+import { chapter2 } from "../chapters/chapter2";
 
 defineProps({
   placeholder: String
@@ -46,7 +48,7 @@ function enterHit(event: Event){
   const inputValue = getInputValue()
   const lines = inputValue.split('\n')
     .map(l => l.trim())
-    .map(l => l.endsWith(';') ? l : l+';')
+    .map(l => currentChapter.value === chapter2 || l.endsWith(';') ? l : l+';')
   if(lines.length >= (level.value.inputLinesNumber ?? 1)){
     event.preventDefault()
     const button = enterButton.value as HTMLElement;
@@ -54,7 +56,7 @@ function enterHit(event: Event){
     setTimeout(() => button.classList.add("enterhit"), 0)    
   }
   if(inputElement.value) inputElement.value.value = lines.join('\n')
-  emit("input", lines.join('\n'))
+  emit("input", lines)
 }
 
 function onInputKeyup(){

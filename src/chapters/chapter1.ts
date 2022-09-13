@@ -26,7 +26,7 @@ export const chapter1Levels: Chapter1Level[] = [
     {
         name: "HTML and the DOM",
         skippable: true,
-        instructions: `<img src="img/chef.png" style="width: 88px; margin-right: 0 auto"/>
+        instructions: `<img src="img/chef.png" style="width: 88px; margin: 0 auto"/>
         <p>During this training, we will be working on the website of Chef Nakamura's brand new restaurant.</p>
         <p>You can see the homepage on the left. It's basic, but it's a start !</p>
         <p>All the content on this page is actually composed of HTML elements grouped in a tree structure called the <strong>DOM</strong>, for Document Object Model</p>

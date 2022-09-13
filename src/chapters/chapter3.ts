@@ -21,6 +21,7 @@ export interface Chapter3Level extends Level {
 
 export function trySolution(items: string[]) {
     const level = state.level as Chapter3Level;
+    const gameWrapper = document.querySelector(".game-wrapper")!;
   
     cleanupEffects();
   
@@ -29,11 +30,13 @@ export function trySolution(items: string[]) {
     let win = items.length === level.solution.length && level.solution.every((item, i) => items[i] === item);
   
     if (win) {
+        gameWrapper.classList.add("win");
         plates.forEach((el) => { 
             el.classList.add("clean");
         });
 
       setTimeout(function () {
+        gameWrapper.classList.remove("win");
         completeLevel();
       }, 1000);
     } else {

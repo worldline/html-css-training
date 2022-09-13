@@ -34,7 +34,7 @@ const level = computed(() => state.level as Chapter2Level)
 }
 
 .display-help .syntax {
-  font-size: 24px;
+  font-size: 20px;
   margin: 0 0 18px 0;
   font-weight: 200;
   background: rgba(255,255,255,.05);

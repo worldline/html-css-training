@@ -1,4 +1,4 @@
-import { Level } from "./level";
+import { Level, resetEditor } from "./level";
 
 import SelectorGame from "../components/SelectorGame.vue";
 import SyntaxLevelInstructions from "../components/SyntaxLevelInstructions.vue";
@@ -758,12 +758,7 @@ export const chapter2: Chapter = {
     <p>To apply CSS to an element you need to select this element with a <b>selector</b>.</p>
     <p>CSS provides you with a number of different ways to do this, and you can explore them in this chapter.</p>`,
   onLevelStart(){
-    const editorInput = document.querySelector(".editor textarea");
-    if(editorInput instanceof HTMLTextAreaElement){
-      editorInput.value = "";
-      editorInput.focus()
-    }
-
+    resetEditor()
     nextTick(() => addBoardElementsTooltips())
   }
 }

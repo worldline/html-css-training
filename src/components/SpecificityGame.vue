@@ -1,6 +1,7 @@
 <template>
   <div class="game-container">
     <div class="game-wrapper">
+      <CorrectAnim />
       <Table :content="level.markup" @click="onTableClick" ref="table"></Table>
       <div class="actions">
         <button @click="submitSolution" id="submit-button">Validate</button>
@@ -19,6 +20,7 @@
 
 <script setup lang="ts">
 import Table from "./Table.vue";
+import CorrectAnim from "./CorrectAnim.vue";
 import HTMLMarkup from "./HTMLMarkup.vue";
 import EditorPane from "./EditorPane.vue";
 import Customer from "./Customer.vue";

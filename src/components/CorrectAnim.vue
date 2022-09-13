@@ -25,9 +25,10 @@
     animation: correct 1500ms linear;
     animation-fill-mode: forwards;
     position: absolute;
-    left: 90%;
+    left: 75%;
     font-size: 5rem;
     color: lime;
+    text-shadow: 2px 2px 3px black, -2px 2px 3px black, 2px -2px 3px black, -2px -2px 3px black;
     z-index: 10;
     display: none;
 }

@@ -7,6 +7,7 @@ export function cleanupEffects(){
 }
 
 export const shake = (el: HTMLElement) => {
+    if(!el) return;
     el.classList.add("shake");
     setTimeout(() => {
         el.classList.remove("shake");

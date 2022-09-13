@@ -1,21 +1,17 @@
-import {state} from "../game";
-import { Level } from "./level";
-
+import { CssEditorLevel, resetEditor } from "./level";
 import LayoutGame from "../components/LayoutGame.vue";
 import SyntaxLevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
+import { applyStyles } from "../css-editor";
 
-export interface Chapter5Level extends Level {
+export interface Chapter5Level extends CssEditorLevel {
   doThis: string;
-  selector: string;
   syntax?: string;
   help?: string;
   helpTitle?: string;
-  examples?: string[];
-  cssRules: { [selector:string]: string[] };
-  tableStyles?: string;
+  examples?: string[];  
   check: [string, string | ((val: string) => boolean)][];
   hintMarkup?: string;
 }
@@ -79,7 +75,7 @@ export const chapter5Levels: Chapter5Level[] = [
       <plate></plate><plate></plate><plate></plate>
     </div>`,
     check: [
-      ["justify-content","flex-end"]
+      ["justify-content", val => val === "flex-end" || val === "right" || val === "end"]
     ]
   },
   {
@@ -778,27 +774,10 @@ export const chapter5: Chapter = {
   <p><code>flex</code> is another display mode for elements that is more powerful than <b>block</b>. Flex is used to specify <b>how the children of an element should occupy the space </b> they have in that element.</p>
     <p>Flex layouts should be used when you want to distribute elements along one axis, be it horizontal or vertical.</p>`,
   onLevelStart(){
-    const level = state.level as Chapter5Level
     nextTick(() => {
       addBoardElementsTooltips()
-
-      const editorInput = document.querySelector(".editor textarea");
-      if(editorInput instanceof HTMLTextAreaElement){
-        editorInput.value = "";
-        editorInput.focus()
-      }
-
-      const table = document.querySelector('.table-content');
-      if(!table) return;
-      table.setAttribute("style", level.tableStyles ?? "")
-
-      const selectors = new Set([level.selector, ...Object.keys(level.cssRules)])
-      for(let selector of selectors){
-        table.querySelectorAll(selector).forEach(el => {
-          el.setAttribute("data-existing-style", el.getAttribute("style") ?? "")
-          el.setAttribute("style", [el.getAttribute("style"), ...(level.cssRules[selector] ?? [])].join(";"))
-        })
-      }
+      resetEditor()
+      applyStyles()
     })
   }
 }
