@@ -102,39 +102,39 @@ main {
   border-bottom: 2px solid #ddd;
 }
 
-.box table {
-  width: 100%;
-  padding: 0 1em 1em;
-  border-spacing:0;
+.box ul {
+  list-style: none;
+  padding: 0;
+  margin: 2em;
 }
 
-.box table thead {
-  text-align: center;
-  font-size: 15px;
-  color: #757575;
-}
-
-.box table tbody td {
+.box ul li {
   padding: .75em 0;
   border-bottom: 1px dashed rgb(224, 136, 136);
+  display: flex;
+  justify-content: space-between;
 }
 
-.box table tbody tr:last-child td {
+.box ul li:last-child {
   border: none;
 }
 
-.box table tbody tr td:last-child {
+.box ul li .price {
   text-align: center;
   font-weight: 600;
   color: #ec7444;
   font-size: 15px;
-  min-width: 80px;
-  vertical-align: baseline;
+  min-width: 70px;
 }
 
-.box table tbody tr td p {
+.box ul li .menu-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.box ul li .menu-info .info {
   margin: .25em 0;
-  font-size: 14px;
+  font-size: 13px;
   font-style: italic;
   color: #787878;
 }
