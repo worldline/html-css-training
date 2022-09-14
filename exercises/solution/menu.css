@@ -17,6 +17,12 @@ header {
   padding: 0 2em;
 }
 
+header nav ul {
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
 header nav ul li {
   display: inline-block;
   font-size: 15px;
@@ -33,6 +39,38 @@ header nav ul li:hover,
 header nav ul li.active {
   background-color: #ec7444;
   color: white;
+}
+
+header nav .menu {
+  position: relative;
+  display: none;
+  width: 20px;
+  height: 25px;
+  margin: 1em;
+}
+
+header nav .menu span {
+  position: absolute;
+  width: 35px;
+  height: 2px;
+  background-color: black;
+  display: block;
+}
+
+header nav .menu span:nth-child(1) {
+  top: 0;
+}
+
+header nav .menu span:nth-child(2) {
+  top: calc(50% - 2px);
+}
+
+header nav .menu span:nth-child(3) {
+  top: calc(100% - 4px);
+}
+
+header nav:hover ul {
+  display: block;
 }
 
 .banner {
@@ -137,4 +175,28 @@ main {
   font-size: 13px;
   font-style: italic;
   color: #787878;
+}
+
+@media screen and (max-width: 997px) {
+  header nav ul {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    right: 1em;
+    top: 60px;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 22%);
+    z-index: 5;
+  }
+
+  header nav ul li {
+    display: block;
+    border-radius: 0;
+    margin: 0;
+    padding: 1em;
+  }
+
+  header nav .menu {
+    display: block;
+  }
 }
