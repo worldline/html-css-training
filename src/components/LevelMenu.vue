@@ -18,7 +18,7 @@
               <a
                  :class="{
                    current: (li+1) === state.progress.currentLevel,
-                   completed: state.progress.hasCompleted(ci+1, li+1)
+                   completed: hasCompleted(ci+1, li+1)
                  }"
                  @click="changeLevel(ci+1, li+1)"
               >
@@ -42,7 +42,9 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {chapters} from "../chapters/chapters";
-import {changeLevel, state, resetProgress} from "../game";
+import {changeLevel} from "../game";
+import { hasCompleted, resetProgress } from "../progress";
+import { state } from "../state";
 
 const openedChapter = ref(state.progress.currentChapter)
 

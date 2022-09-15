@@ -18,13 +18,14 @@
 
 <script setup lang="ts">
 import Editor from "./Editor.vue";
-import {completeLevel, state} from "../game";
+import {completeLevel} from "../game";
 import Table from "./Table.vue";
 import CorrectAnim from "./CorrectAnim.vue";
 import { computed } from "vue";
 import { Chapter2Level } from "../chapters/chapter2";
 import { cleanupEffects, shake } from "../utils";
 import { resetEditor } from "../chapters/level";
+import { state } from "../state";
 
 const level = computed(() => state.level as Chapter2Level)
 
@@ -73,7 +74,7 @@ function trySelector(rule: string) {
     //$(".input-wrapper").css("opacity",.2);
     setTimeout(function () {
       gameWrapper.classList.remove("win");
-      completeLevel();
+      completeLevelAndGoNext();
     }, 1000);
   } else {
     matches.forEach((el) => {

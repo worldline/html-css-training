@@ -1,18 +1,9 @@
-import {clamp} from "./utils";
 import {hideAllPoppers} from "floating-vue";
-import {reactive} from "vue";
-import progress from "./progress";
-import {chapters, currentChapter} from "./chapters/chapters";
+import {clamp} from "./utils";
+import {chapters} from "./chapters/chapters";
 import {Level} from "./chapters/level";
-import {chapter1Levels} from "./chapters/chapter1";
-
-export const state = reactive({
-    progress: progress,
-    level: chapter1Levels[0] as Level, // Holds current level info
-    menuOpened: false
-})
-
-state.progress.load()
+import { state, currentChapter } from "./state";
+import { completeLevel, saveProgress } from "./progress";
 
 export function closeMenu(){
     state.menuOpened = false;
@@ -25,14 +16,14 @@ export function closeMenu(){
 
 export function resetProgress(){
     if(confirm("Do you really want to reset your progress ?")){
-        state.progress.reset();
+        resetProgress();
         loadLevel();
         closeMenu();
     }
 }
 
-export function completeLevel(){
-    state.progress.completeLevel();
+export function completeLevelAndGoNext(){
+    completeLevel();
     changeLevel(state.progress.currentChapter, state.progress.currentLevel+1)        
 }
 
@@ -63,6 +54,6 @@ export function loadLevel(){
     // Make sure we don't load a level we don't    
     state.progress.currentLevel = clamp(state.progress.currentLevel, 0, levels.length)
     state.level = levels[state.progress.currentLevel-1] as Level;
-    state.progress.save()
+    saveProgress()
     if(chapter.onLevelStart) chapter.onLevelStart(state.level)
 }

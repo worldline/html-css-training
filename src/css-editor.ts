@@ -1,9 +1,10 @@
 import { Chapter4Level } from "./chapters/chapter4";
 import { Chapter5Level } from "./chapters/chapter5";
 import { Chapter7Level } from "./chapters/chapter7";
-import { currentChapter } from "./chapters/chapters";
 import { CssEditorLevel } from "./chapters/level";
-import { state, completeLevel } from "./game";
+import { completeLevelAndGoNext } from "./game";
+import { completeLevel } from "./progress";
+import { state, currentChapter } from "./state";
 import { cleanupEffects, shake } from "./utils";
 
 export function applyStyles(userRules?: string[]){
@@ -56,7 +57,7 @@ export function applyUserRules(rules: string[]) {
 
     setTimeout(function () {
       gameWrapper.classList.remove("win");
-      completeLevel();
+      completeLevelAndGoNext();
     }, 1500);
   } else {
     targets.forEach((el) => {

@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { Chapter2Level } from "../chapters/chapter2";
-import { state } from "../game"
+import { state } from "../state"
 
 const level = computed(() => state.level as Chapter2Level)
 </script>

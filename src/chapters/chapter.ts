@@ -7,8 +7,6 @@ export interface Chapter {
     intro: string;
     instructions?: string;
     levels: Level[];
-    rightPanelComponent: Component
-    leftPanelComponent: Component
     wrapperClass?: string;
     credits?: string;
     onLevelStart?: Function;

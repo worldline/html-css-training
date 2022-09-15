@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import { currentChapter } from "../chapters/chapters";
-import { changeLevel, state } from "../game";
+import { changeLevel } from "../game";
+import { state, currentChapter } from "../state";
 
 function nextLevel(){
   changeLevel(state.progress.currentChapter, 1)

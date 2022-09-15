@@ -1,10 +1,10 @@
 <template>
-  <h2 class="level-header" :class="{ completed: state.progress.hasCompleted(state.progress.currentChapter, state.progress.currentLevel) }"
+  <h2 class="level-header" :class="{ completed }"
       v-if="state.progress.currentLevel > 0" >
         <span class="level-text">
           Level {{ state.progress.currentLevel }} of {{ levels.length }}
         </span>
-    <span class="checkmark" v-if="state.progress.hasCompleted(state.progress.currentChapter, state.progress.currentLevel)">✔️</span>
+    <span class="checkmark" v-if="completed">✔️</span>
   </h2>
 
   <div class="level-nav">
@@ -13,17 +13,18 @@
   </div>
 
   <div class="level-progress" v-if="state.progress.currentLevel > 0" >
-    <div class="progress" :style="{ width: state.progress.getPercentCompleted(state.progress.currentChapter)+'%' }"></div>
+    <div class="progress" :style="{ width: getPercentCompleted(state.progress.currentChapter)+'%' }"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { currentChapter } from "../chapters/chapters";
-import {changeLevel, state} from "../game";
+import {changeLevel} from "../game";
+import { hasCompleted, getPercentCompleted } from "../progress";
+import { currentChapter, state } from "../state";
 
 const levels = computed(() => currentChapter.value.levels)
-const completed = computed(() => state.progress.hasCompleted(state.progress.currentChapter, state.progress.currentLevel))
+const completed = computed(() => hasCompleted(state.progress.currentChapter, state.progress.currentLevel))
 
 function navigateLevel(direction="next", event: Event){
   const el = event.target as HTMLElement;

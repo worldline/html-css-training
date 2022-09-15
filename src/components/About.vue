@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { currentChapter } from '../chapters/chapters';
+import { currentChapter } from '../state';
 
 const credits = computed(() => currentChapter.value.credits)
 </script>

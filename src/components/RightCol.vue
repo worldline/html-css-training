@@ -11,16 +11,20 @@
 
 <script setup lang="ts">
 import {computed} from "vue";
-import {state} from "../game";
+import {state} from "../state";
 import ChapterHeader from "./ChapterHeader.vue";
 import LevelHeader from "./LevelHeader.vue";
 import LevelMenu from "./LevelMenu.vue";
 import ChapterInstructions from "./ChapterInstructions.vue";
-import {currentChapter} from "../chapters/chapters";
+import LevelInstructions from "./LevelInstructions.vue";
+import SyntaxLevelInstructions from "./SyntaxLevelInstructions.vue";
 
 const rightPanelComponent = computed(() => {
   if(state.progress.currentLevel === 0) return ChapterInstructions
-  else return currentChapter.value.rightPanelComponent
+  switch(state.progress.currentChapter){    
+    case 2: case 4: case 5: case 6: case 7: case 8: return SyntaxLevelInstructions
+    case 1: case 3: default: return LevelInstructions
+  }
 })
 </script>
 

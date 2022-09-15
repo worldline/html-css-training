@@ -25,7 +25,7 @@ import HTMLMarkup from "./HTMLMarkup.vue";
 import EditorPane from "./EditorPane.vue";
 import Customer from "./Customer.vue";
 
-import {state} from "../game";
+import {state} from "../state";
 import { Chapter3Level, trySolution } from "../chapters/chapter3";
 import { computed, ref } from "vue";
 

@@ -25,13 +25,12 @@
 
 <script setup lang="ts">
 import Editor from "./Editor.vue";
-import {state} from "../game";
+import {state, currentChapter} from "../state";
 import Table from "./Table.vue"
 import CorrectAnim from "./CorrectAnim.vue";
 import { computed, Ref } from "vue";
 import { Chapter4Level } from "../chapters/chapter4";
 import { applyUserRules} from "../css-editor";
-import { currentChapter } from "../chapters/chapters";
 
 const level: Ref<Chapter4Level> = computed(() => state.level as Chapter4Level)
 const otherRules = computed(() => Object.fromEntries(Object.entries(level.value.cssRules ?? {}).filter(([key]) => key !== level.value.selector)))

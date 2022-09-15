@@ -1,11 +1,12 @@
-import SpecificityGame from "../components/SpecificityGame.vue";
-import LevelInstructions from "../components/LevelInstructions.vue";
+import { nextTick } from "vue";
+
 import {Level} from "./level";
 import { Chapter } from "./chapter";
 import { cleanupEffects, shake } from "../utils";
-import { completeLevel, state } from "../game";
-import { nextTick } from "vue";
+import { completeLevelAndGoNext } from "../game";
+
 import { addBoardElementsTooltips } from "../tooltip";
+import { state } from "../state";
 
 interface Customer {
     selector: string;
@@ -37,7 +38,7 @@ export function trySolution(items: string[]) {
 
       setTimeout(function () {
         gameWrapper.classList.remove("win");
-        completeLevel();
+        completeLevelAndGoNext();
       }, 1000);
     } else {
         items.forEach((item,i) => {
@@ -222,8 +223,6 @@ export const chapter3: Chapter = {
     <p>Select the appropriate meal for each customer. You can change the meal by clicking on the plate.</p>
     <p>To help you, here is a <a target="_blank" href="img/specifishity.png">cheat sheet on specificity explained with fish</a>.</p>`,
     levels: chapter3Levels,
-    leftPanelComponent: SpecificityGame,
-    rightPanelComponent: LevelInstructions,
     onLevelStart(){
         nextTick(() => addBoardElementsTooltips())
     }

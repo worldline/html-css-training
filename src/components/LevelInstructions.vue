@@ -12,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import {completeLevel, state} from "../game"
-import { currentChapter } from "../chapters/chapters";
 import { computed } from "vue";
+import { completeLevel } from "../progress";
+import { state, currentChapter } from "../state";
 import { Level } from "../chapters/level";
 
 const level = computed(() => state.level as Level)

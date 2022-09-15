@@ -9,8 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { currentChapter } from '../chapters/chapters';
-import { state } from "../game"
+import { state, currentChapter } from "../state"
 </script>
 
 <style scoped>

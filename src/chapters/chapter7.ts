@@ -1,6 +1,4 @@
 import { CssEditorLevel, resetEditor } from "./level";
-import ReproduceGame from "../components/ReproduceGame.vue";
-import SyntaxLevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
 import { applyStyles } from "../css-editor";
@@ -452,8 +450,6 @@ export const chapter7: Chapter = {
   name: "Typography",
   description: "The art of displaying text",
   levels: chapter7Levels,
-  leftPanelComponent: ReproduceGame,
-  rightPanelComponent: SyntaxLevelInstructions,  
   wrapperClass: "menu-wrapper",
   intro: `<p>Time to work on the restaurant menu !</p>
   <img src="img/menu-logo.png" height="120" style="display:block; height: 120px; margin: 0 auto" />

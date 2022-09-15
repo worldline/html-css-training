@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import {state} from "../game";
+import {state} from "../state";
 import {computed} from "vue";
 import {chapters} from "../chapters/chapters";
 

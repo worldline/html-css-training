@@ -1,6 +1,4 @@
 import { CssEditorLevel, resetEditor } from "./level";
-import LayoutGame from "../components/LayoutGame.vue";
-import SyntaxLevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
 import { nextTick } from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
@@ -715,8 +713,6 @@ export const chapter6: Chapter = {
   name: "Grid Layout",
   description: "Powerful 2D layouts",
   levels: chapter6Levels,
-  leftPanelComponent: LayoutGame,
-  rightPanelComponent: SyntaxLevelInstructions,
   credits: `Credits: inspired from <a href="https://cssgridgarden.com/" target="_blank">CSS Grid Garden</a> by <a href="https://codepip.com" target="_blank">Codepip</a>`,
   intro: `<p>Let's learn the different ways to position elements in CSS !</p>
   <p>While flexbox is a great layout tool for <b>one-directional</b> flow, we still need a solution for complex 2D placement.</p>

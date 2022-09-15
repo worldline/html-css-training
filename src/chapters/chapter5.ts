@@ -1,6 +1,4 @@
 import { CssEditorLevel, resetEditor } from "./level";
-import LayoutGame from "../components/LayoutGame.vue";
-import SyntaxLevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
@@ -767,8 +765,6 @@ export const chapter5: Chapter = {
   name: "Flex Layout",
   description: "One-directional content flow",
   levels: chapter5Levels,
-  leftPanelComponent: LayoutGame,
-  rightPanelComponent: SyntaxLevelInstructions,
   credits: `Credits: <a href="https://github.com/thomaspark">Thomas Park</a> for its inspiring <a target="_blank" href="https://flexboxfroggy.com/">Flexbox Froggy</a> game.`,
   intro: `<p>Let's learn the different ways to position elements in CSS !</p>
   <p><code>flex</code> is another display mode for elements that is more powerful than <b>block</b>. Flex is used to specify <b>how the children of an element should occupy the space </b> they have in that element.</p>

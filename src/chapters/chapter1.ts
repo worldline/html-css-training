@@ -1,5 +1,3 @@
-import InteractiveDOM from "../components/InteractiveDOM.vue";
-import LevelInstructions from "../components/LevelInstructions.vue";
 import {Level} from "./level";
 import { Chapter } from "./chapter";
 
@@ -314,7 +312,5 @@ export const chapter1: Chapter = {
     intro: `
     <p>HTML is the markup language that describes the <strong>content</strong> of web pages.</p>
     <p>In this chapter, we will look at the different elements available in HTML and why understanding the purpose of each of them is important for you and your visitors.</p>`,
-    levels: chapter1Levels,
-    leftPanelComponent: InteractiveDOM,
-    rightPanelComponent: LevelInstructions
+    levels: chapter1Levels
 }

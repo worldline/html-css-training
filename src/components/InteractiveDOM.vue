@@ -7,11 +7,12 @@
 
 <script setup lang="ts">
 import { Chapter1Level, checkElementClicked, ElementClickedData } from "../chapters/chapter1";
-import {completeLevel, state} from "../game";
 import { toggle3D } from "../dom-viewer";
 import {computed, ref} from "vue";
 import { useEventListener } from "@vueuse/core";
 import { shake } from "../utils";
+import { completeLevel } from "../progress";
+import { state } from "../state";
 
 const level = computed(() => state.level as Chapter1Level);
 const is3D = ref(false)
@@ -41,7 +42,7 @@ useEventListener("message", message => {
       hasWon.value = true;
       setTimeout(() => {
         hasWon.value = false;
-        completeLevel()
+        completeLevelAndGoNext()
       }, 600) 
     } 
     else shake(document.querySelector("iframe")!)

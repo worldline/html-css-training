@@ -22,10 +22,8 @@
 import EditorPane from "./EditorPane.vue";
 import HTMLMarkup from "./HTMLMarkup.vue";
 import {computed, ref, Ref} from "vue"
-
-import {state} from "../game";
-import { currentChapter } from "../chapters/chapters";
 import { chapter2 } from "../chapters/chapter2";
+import { currentChapter, state } from "../state";
 
 defineProps({
   placeholder: String

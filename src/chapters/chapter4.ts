@@ -1,6 +1,4 @@
 import { CssEditorLevel, resetEditor } from "./level";
-import LayoutGame from "../components/LayoutGame.vue";
-import Chapter2LevelInstructions from "../components/SyntaxLevelInstructions.vue";
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
@@ -468,8 +466,6 @@ export const chapter4: Chapter = {
   name: "Inline & Block Layout",
   description: "Basic display modes of HTML content",
   levels: chapter4Levels,
-  leftPanelComponent: LayoutGame,
-  rightPanelComponent: Chapter2LevelInstructions,  
   intro: `<p>Let's learn the different ways to position elements in CSS !</p>`,
   onLevelStart(){
     nextTick(() => {
