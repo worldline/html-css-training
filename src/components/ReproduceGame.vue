@@ -58,27 +58,13 @@ watch(() => level, () => {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  color: #202020;
 }
 
 pre {
   margin: 0;
-}
-
-.menu-wrapper {
-  width: 520px;
-  min-height: 200px;
-  margin: 2rem;
-  background: antiquewhite;
-  color: #202020;
-  padding: 0.5rem 1rem;
-  text-align: left;
-  box-shadow: 0 0 10px black;
-}
-
-.menu-wrapper ::v-deep(h1),
-.menu-wrapper ::v-deep(h2) {
-  color: #202020;
-  margin: 0.25em;
 }
 
 .expected-result {
@@ -99,8 +85,43 @@ pre {
   transform: translateY(0px);  
 }
 
-.game-wrapper ::v-deep(h1) {
-  margin: 0.25em 0;
+.menu-wrapper {
+  width: 520px;
+  min-height: 200px;
+  margin: 2rem;
+  background: antiquewhite;
+  color: #202020;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  box-shadow: 0 0 10px black;
+}
+
+.menu-wrapper ::v-deep(h1){
+  margin: 0
+}
+.menu-wrapper ::v-deep(h2) {
+  margin: 0.25em;
+}
+
+.menu-wrapper-part2 {
+  width: 520px;
+  min-height: 200px;
+  margin: 0;
+  background: antiquewhite;
+  color: #202020;
+  padding: 0;
+  text-align: left;
+  box-shadow: 0 0 10px black;
+}
+
+.menu-wrapper-part2 ::v-deep(li) {
+  list-style: none;
+}
+
+.menu-wrapper-part2 ::v-deep(h1),
+.menu-wrapper-part2 ::v-deep(h2) {
+  margin: 0;
+  padding: 0.25em;
 }
 
 </style>

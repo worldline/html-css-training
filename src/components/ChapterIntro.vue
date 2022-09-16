@@ -17,7 +17,9 @@ import { state, currentChapter } from "../state"
     height: calc(100vh - 150px);
     display: flex;
     flex-direction: column;
-    justify-content: center;    
+    justify-content: center;
+    color: #e0e0e0;
+    text-shadow: 0 0 1em black;
 }
 .chapter-name {
     margin: 0.25em 0;

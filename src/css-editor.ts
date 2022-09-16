@@ -72,8 +72,10 @@ function normalizePropValue(val: any){
   return val
     .replaceAll(/,\s+/g, ",")
     .replaceAll(/\s*\/\s*/g, "/")
+    .replaceAll(/'/g, '"')
     .replace(/;$/, "")
-    .trim()
+    .toLowerCase()
+    .trim()    
 }
 
 function checkStyleProperties(
