@@ -9,7 +9,6 @@ export interface Chapter7Level extends CssEditorLevel {
   help?: string;
   helpTitle?: string;
   examples?: string[];
-  check: [string, string | ((val: string) => boolean)][];
   expectedScreenshot: string;
 }
 
@@ -236,7 +235,7 @@ line-height: normal;`,
     doThis: `Set line height between dishes to 200%`,
     expectedScreenshot: "img/reproduce/7-9.jpg",
     check: [
-      ["line-height", val => val == "200%" || val == "2"]
+      ["line-height", "200%", "2"]
     ]
   },
 

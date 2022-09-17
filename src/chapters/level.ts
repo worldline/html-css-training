@@ -13,6 +13,7 @@ export interface CssEditorLevel extends Level {
     cssImports?: string[];
     cssImportsHidden?: string[];
     selector: string;
+    check: [string, ...(string | ((val: string) => boolean))[]][];
 }
 
 export function resetEditor(){

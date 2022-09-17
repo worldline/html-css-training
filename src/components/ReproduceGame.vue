@@ -70,8 +70,11 @@ pre {
 .expected-result {
   perspective: 1000px;
 }
-.expected-result p{  
+.expected-result p {
+  color: white;
   font-style: italic;
+  height: 1em;
+  margin: 0 0 1em 0;
 }
 
 .expected-result img {
@@ -82,7 +85,7 @@ pre {
 }
 
 .expected-result img:hover {
-  transform: translateY(0px);  
+  transform: translateY(-2em);  
 }
 
 .menu-wrapper {
@@ -114,8 +117,16 @@ pre {
   box-shadow: 0 0 10px black;
 }
 
-.menu-wrapper-part2 ::v-deep(li) {
+.menu-wrapper-part2 ::v-deep(main) {
+  display: inline-block;
+  width: 100%
+}
+
+
+.menu-wrapper-part2 ::v-deep(ul) {
   list-style: none;
+  margin: 0.5em;
+  padding: 0;
 }
 
 .menu-wrapper-part2 ::v-deep(h1),

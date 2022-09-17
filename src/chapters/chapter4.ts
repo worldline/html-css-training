@@ -10,7 +10,6 @@ export interface Chapter4Level extends CssEditorLevel {
   help?: string;
   helpTitle?: string;
   examples?: string[];
-  check: [string, string | ((val: string) => boolean)][];
   hintMarkup?: string;
 }
 

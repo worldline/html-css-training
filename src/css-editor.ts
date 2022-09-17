@@ -3,7 +3,6 @@ import { Chapter5Level } from "./chapters/chapter5";
 import { Chapter7Level } from "./chapters/chapter7";
 import { CssEditorLevel } from "./chapters/level";
 import { completeLevelAndGoNext } from "./game";
-import { completeLevel } from "./progress";
 import { state, currentChapter } from "./state";
 import { cleanupEffects, shake } from "./utils";
 
@@ -80,7 +79,7 @@ function normalizePropValue(val: any){
 
 function checkStyleProperties(
   rules: string[],
-  level: (Chapter4Level | Chapter5Level | Chapter7Level)
+  level: CssEditorLevel
 ) {
   if (!level.check) return true;
   const props = Object.fromEntries(rules

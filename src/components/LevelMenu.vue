@@ -234,7 +234,7 @@ ul, li {
   text-decoration: none;
   border: solid 2px rgba(255,255,255,.2);
   box-sizing: border-box;
-  width: calc(100% - 40px);
+  width: 100%;
   color: rgba(255,255,255,.4);
   margin:  0 auto;
   padding: 0.5em;

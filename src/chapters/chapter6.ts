@@ -11,7 +11,6 @@ export interface Chapter6Level extends CssEditorLevel {
   helpTitle?: string;
   examples?: string[];
   tableStyles?: string;
-  check: [string, ...(string | ((val: string) => boolean))[] ][];
   hintMarkup?: string;
 }
 
@@ -617,7 +616,7 @@ grid-auto-columns: <dims>...`,
       <div title="rice (100px wide)"></div>
     </div>`,
     check: [
-      ["grid-auto-columns", val => val === '100px 1fr' || val === '100px auto' || val === '100px 1fr 100px 1fr 100px'],
+      ["grid-auto-columns", '100px 1fr', '100px auto', '100px 1fr 100px 1fr 100px'],
     ]
   },
 
@@ -698,7 +697,7 @@ grid-auto-columns: <dims>...`,
       <div title="fruits"></div>
     </div>`,
     check: [
-      ["grid-auto-flow", val => val === 'dense' || val === 'row dense'],
+      ["grid-auto-flow", 'dense', 'row dense'],
     ]
   },
 

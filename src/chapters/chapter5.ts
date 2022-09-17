@@ -9,8 +9,7 @@ export interface Chapter5Level extends CssEditorLevel {
   syntax?: string;
   help?: string;
   helpTitle?: string;
-  examples?: string[];  
-  check: [string, string | ((val: string) => boolean)][];
+  examples?: string[];
   hintMarkup?: string;
 }
 
@@ -73,7 +72,7 @@ export const chapter5Levels: Chapter5Level[] = [
       <plate></plate><plate></plate><plate></plate>
     </div>`,
     check: [
-      ["justify-content", val => val === "flex-end" || val === "right" || val === "end"]
+      ["justify-content", "flex-end", "right", "end"]
     ]
   },
   {
@@ -205,7 +204,7 @@ export const chapter5Levels: Chapter5Level[] = [
       <plate></plate><plate></plate><plate></plate>
     </div>`,
     check: [
-      ["align-items","flex-end"]
+      ["align-items","flex-end", "end"]
     ]
   },
   {
@@ -259,7 +258,7 @@ align-items: <value>;`,
     inputLinesNumber: 2,
     check: [
       ["justify-content", "space-between"],
-      ["align-items", "flex-end"]
+      ["align-items", "flex-end", "end"]
     ]
   },
   {
