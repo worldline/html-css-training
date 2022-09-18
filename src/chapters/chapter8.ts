@@ -86,7 +86,7 @@ export const chapter8Levels: Chapter8Level[] = [
     ],
     markup: markup1,
     doThis: `Add a pure red background with 25% opacity for h2`,
-    expectedScreenshot: "img/reproduce/7-1.jpg",
+    expectedScreenshot: "img/reproduce/8-1.jpg",
     check: [
       ["background-color", 
         `rgba(255,0,0,0.25)`,
@@ -120,7 +120,7 @@ export const chapter8Levels: Chapter8Level[] = [
     ],
     markup: markup1,
     doThis: `Use img/waves.svg as background image for h1`,
-    expectedScreenshot: "img/reproduce/7-1.jpg",
+    expectedScreenshot: "img/reproduce/8-2.jpg",
     check: [
       ["background-image", "url('img/waves.svg')"]
     ]
@@ -153,7 +153,7 @@ background-position: <x> <y>
     ],
     markup: markup1,
     doThis: `Set the background size to 400px`,
-    expectedScreenshot: "img/reproduce/7-1.jpg",
+    expectedScreenshot: "img/reproduce/8-3.jpg",
     check: [
       ["background-size", "400px", "400px 400px"]
     ]
@@ -185,7 +185,7 @@ background-position: <x> <y>
     ],
     markup: markup1,
     doThis: `Make a linear gradient for h2, from pink on top to transparent on bottom`,
-    expectedScreenshot: "img/reproduce/7-1.jpg",
+    expectedScreenshot: "img/reproduce/8-4.jpg",
     check: [
       ["background",
         "linear-gradient(to bottom, pink, transparent)",
@@ -226,7 +226,7 @@ background-position: <x> <y>
     ],
     markup: markup1,
     doThis: `Make a radial gradient for main content, from #fff0e0 at center to #ffc0b0 at the edge`,
-    expectedScreenshot: "img/reproduce/7-1.jpg",
+    expectedScreenshot: "img/reproduce/8-5.jpg",
     check: [
       ["background", 
         "radial-gradient(#fff0e0, #ffc0b0)",
@@ -267,7 +267,7 @@ background-position: <x> <y>
     examples: [],
     markup: markup2,
     doThis: `Make the image cover the entire zone without stretching`,
-    expectedScreenshot: "img/reproduce/7-1.jpg",
+    expectedScreenshot: "img/reproduce/8-6.jpg",
     check: [
       ["object-fit", "cover"]
     ]
@@ -292,7 +292,7 @@ background-position: <x> <y>
     examples: [],
     markup: markup2,
     doThis: `Change the picture position so we can see both the boat and the chef face.`,
-    expectedScreenshot: "img/reproduce/7-1.jpg",
+    expectedScreenshot: "img/reproduce/8-7.jpg",
     check: [
       ["object-position", val => {
         if(!val) return false
@@ -301,15 +301,6 @@ background-position: <x> <y>
       }]
     ]
   },
-
-      /*
-  float images around text
-  shape-outside
-  picture filters
-  background-clip: text (gros texte SUSHI avec une photo de sushi clipé sur le texte)
-  mask-image
-
-  */
 
   {
     name: "Image shapes",
@@ -337,7 +328,7 @@ shape-outside: <shape>`,
     ],
     markup: markup2,
     doThis: `Make the platter images float on the right and text follow their shape.`,
-    expectedScreenshot: "img/reproduce/7-1.jpg",
+    expectedScreenshot: "img/reproduce/8-8.jpg",
     inputLinesNumber: 2,
     check: [
       ["float", "right"],
@@ -367,12 +358,66 @@ shape-outside: <shape>`,
     <p>Now, you might want to add a margin to the shape you just defined. Use the <code>shape-margin</code> property to add a custom margin to the shape.</p>`,
     markup: markup2,
     doThis: `Add a 10px margin to platters images shapes.`,
-    expectedScreenshot: "img/reproduce/7-1.jpg",
+    expectedScreenshot: "img/reproduce/8-9.jpg",
     check: [
       ["shape-margin", "10px"]
     ]
   },
 
+  {
+    name: "Image Filters",
+    selector: "img#chef-picture",
+    cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
+    cssRulesHidden: {
+      ...baseStyles,
+      "h1": ["font-family: 'Reggae One', serif", "color: white", "text-shadow: 0 0 0.5em black", "background-image: url('img/waves.svg')", "background-size: 400px"],
+      "h2": ["background: linear-gradient(to bottom, pink, transparent)"],
+      "main": ["background: radial-gradient(#fff0e0, #ffc0b0)"],
+      "img#chef-picture": ["display: block", "width: 100%", "height: 200px", "object-fit: cover", "object-position: 0 -50px"],
+      "li img": ["float: right", "shape-margin: 10px"],
+      "li:nth-child(1) img": ["shape-outside: url('img/sushis/1.png')"],
+      "li:nth-child(2) img": ["shape-outside: url('img/sushis/2.png')"],
+    },
+    cssRules: {
+      
+    },
+    syntax: `filter: ...<filters>
+filter: blur(<dim>)
+filter: brightness(<val>)
+filter: contrast(<val>)
+filter: drop-shadow(<x> <y> <dim> <color>)
+filter: grayscale(<val>)
+filter: hue-rotate(<angle>)
+filter: invert(<val>)
+filter: opacity(<val>)
+filter: saturate(<val>)
+filter: sepia(<val>)`,
+    help: `
+    <p>CSS has built-in functions to apply filters to images, for example to change its brightness, contrast, saturation, hue etc.</p>
+    <p>You can add as many filters as you want in the <code>filter</code> property, separated by whitespaces.</p>`,
+    examples: [
+`<code>filter: blur(5px);</code>`,
+`<code>filter: brightness(0.4);</code>`,
+`<code>filter: contrast(200%);</code>`,
+`<code>filter: drop-shadow(16px 16px 20px blue);</code>`,
+`<code>filter: grayscale(50%);</code>`,
+`<code>filter: hue-rotate(90deg);</code>`,
+`<code>filter: invert(75%);</code>`,
+`<code>filter: opacity(25%);</code>`,
+`<code>filter: saturate(30%);</code>`,
+`<code>filter: sepia(60%);</code>`,
+    ],
+    markup: markup2,
+    doThis: `Change the brightness and saturation of the picture to 120%`,
+    expectedScreenshot: "img/reproduce/8-10.jpg",
+    check: [
+      ["filter", "brightness(120%) saturate(120%)", "brightness(1.2) saturate(1.2)", "saturate(120%) brightness(120%)", "saturate(1.2) brightness(1.2)"]
+    ]
+  },
+
+  /*
+  picture filters
+  */
 
 ];
 

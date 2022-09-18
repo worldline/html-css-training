@@ -77,8 +77,7 @@ pre {
   margin: 0 0 1em 0;
 }
 
-.expected-result img {
-  width: 600px;
+.expected-result img {  
   transform: rotateY(-10deg) rotateX(15deg) scale(0.9) translateY(-20px);
   box-shadow: 0 0 25px rgba(255,255,255,0.5);
   transition: transform 0.3s ease-in-out;
