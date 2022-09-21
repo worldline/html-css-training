@@ -1,0 +1,24 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  --bg-primary: rgb(220,215,200);
+  --bg-secondary: rgb(220,205,175);
+}
+
+body {
+  background: var(--bg-primary) radial-gradient(40% 40%, var(--bg-primary), var(--bg-secondary)) no-repeat;
+  position: relative;
+  display: grid;
+  place-content: center;
+  color: #888;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.sushi {
+  background: #2C3527;
+  width: 200px;
+  height: 200px;
+}

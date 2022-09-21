@@ -18,25 +18,24 @@ body {
 }
 
 .table-content {
-  
+
 }
 
 bento {
-
+  margin: 25px;
 }
 
 .bento-area {
-
+  border: 20px solid darkred;
+  height: 300px;
 }
 
 plate {
-
+  width: 100px;
+  height: 100px;
+  margin: 20px;
 }
 
 plate sushi {
-  
-}
-
-.rice {
-
+  margin-top: 20px;
 }

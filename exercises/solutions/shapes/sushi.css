@@ -1,0 +1,48 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  --bg-primary: rgb(220,215,200);
+  --bg-secondary: rgb(220,205,175);
+}
+
+body {
+  background: var(--bg-primary) radial-gradient(40% 40%, var(--bg-primary), var(--bg-secondary)) no-repeat;
+  position: relative;
+  display: grid;
+  place-content: center;
+  color: #888;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.sushi {
+  background: #2C3527;
+  width: 200px;
+  height: 200px;
+  border-radius: 80px;
+  position: relative;
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+}
+
+.sushi::before {
+  content: "";
+  position: absolute;
+  top: 0; left:0;
+  width: 100%; height: 70%;
+  background: white;
+  border-radius: 80px;
+  border: 10px solid #2C3527;
+  box-sizing: border-box;
+}
+
+.sushi::after {
+  content: "";
+  position: absolute;
+  top: 15%; left: 15%;
+  width: 70%; height: 40%;
+  box-sizing: border-box;
+  border-radius: 80px;
+  background: salmon;
+}
