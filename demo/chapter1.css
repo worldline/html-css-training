@@ -1,7 +1,7 @@
 
 body {
     color: white;
-    font-family: "Exo 2", "Lato", "Helvetica Neue", sans-serif;
+    font-family: "Lato", "Helvetica Neue", sans-serif;
     background-color: #3f0f0a;
     display: grid;
     grid-template-areas: "header header" "main aside";
