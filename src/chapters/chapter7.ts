@@ -255,7 +255,7 @@ line-height: normal;`,
 letter-spacing: -2px;
 letter-spacing: normal;`,
     help: `<p>Add or reduce space between letters with <code>letter-spacing</code>.</p>
-    <p>This property controls the space between each line of text in an element. This does not apply to space between paragraphs.</p>`,
+    <p>This property controls the space between each letter in the text of an element.</p>`,
     markup,
     doThis: `Set letter-spacing for h2 to 1em`,
     expectedScreenshot: "img/reproduce/7-10.jpg",
