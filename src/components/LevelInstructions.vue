@@ -23,6 +23,7 @@ const level = computed(() => state.level as Level)
 <style scoped>
 .instructions {
   flex: 1;
+  overflow: auto;
 }
 
 .instructions ::v-deep(img){
