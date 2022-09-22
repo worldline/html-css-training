@@ -74,6 +74,7 @@ function trySelector(rule: string) {
     //$(".input-wrapper").css("opacity",.2);
     setTimeout(function () {
       gameWrapper.classList.remove("win");
+      cleanupEffects();
       completeLevelAndGoNext();
     }, 1000);
   } else {
