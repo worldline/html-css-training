@@ -7,13 +7,13 @@
       <div v-html="state.level.instructions"></div>
     </div>
     <div class="actions">
-      <button @click="completeLevel" v-if="level.skippable">Next</button>
+      <button @click="completeLevelAndGoNext" v-if="level.skippable">Next</button>
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { completeLevel } from "../progress";
+import { completeLevelAndGoNext } from "../game";
 import { state, currentChapter } from "../state";
 import { Level } from "../chapters/level";
 

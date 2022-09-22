@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import Editor from "./Editor.vue";
-import {completeLevel} from "../game";
+import { completeLevelAndGoNext } from "../game";
 import Table from "./Table.vue";
 import CorrectAnim from "./CorrectAnim.vue";
 import { computed } from "vue";
