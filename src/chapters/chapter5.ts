@@ -713,7 +713,7 @@ flex-direction: <dir>`,
     </div>`,
     inputLinesNumber: 2,
     check: [
-      ["flex-wrap", "wrap"],
+      ["align-content", "center"],
       ["flex-direction", "column-reverse"]
     ]
   },
