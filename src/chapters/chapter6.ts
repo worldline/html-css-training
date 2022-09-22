@@ -239,7 +239,7 @@ gap: <row> <col>`,
     </div>`,
     inputLinesNumber: 1,
     check: [
-      ["grid", "1fr 100px / 2fr 1fr"]
+      ["gap", "50px", "50px 50px"]
     ]
   },
 
