@@ -17,24 +17,6 @@ export interface Chapter2Level extends Level {
 export const chapter2Levels: Chapter2Level[] = [
   {
     name: "Type Selector",
-    helpTitle: "Select elements by their type",
-    doThis: "Select the plates",
-    selector: "plate",
-    syntax: "tagname",
-    help: "Selects all elements of a type. Type refers to the type of tag, so <tag>div</tag>, <tag>p</tag> and <tag>ul</tag> are all different element types.",
-    examples: [
-      "<strong>div</strong> selects all <tag>div</tag> elements.",
-      "<strong>p</strong> selects all <tag>p</tag> elements.",
-    ],
-    markup: `
-<plate></plate>
-<plate></plate>
-<bento></bento>
-<plate></plate>
-    `,
-  },
-  {
-    name: "Type Selector",
     doThis: "Select the plates",
     selector: "plate",
     syntax: "tagname",
