@@ -465,6 +465,7 @@ export const chapter4: Chapter = {
   name: "Inline & Block Layout",
   description: "Basic display modes of HTML content",
   levels: chapter4Levels,
+  wrapperClass: "inline-block-chapter",
   intro: `<p>Let's learn the different ways to position elements in CSS !</p>`,
   onLevelStart(){
     nextTick(() => {
