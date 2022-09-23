@@ -1285,7 +1285,7 @@ grid-column: <start>/<end>`,help:`<p><code>grid-row</code> and <code>grid-column
       <div title="rice" style="grid-column: 3/5; grid-row: 1/3;"></div>      
       <div title="veggies" style="grid-area: 3/2/4/4;"></div>
       <div title="fruits"></div>
-    </div>`,check:[["grid-area"," 3/2/4/4"]]},{name:"Grid: Named Areas",doThis:"Distribute the food in the correct areas of the bento",selector:"bento",wrapperClass:"grid-game",cssRules:{bento:["display: grid","grid: repeat(2, 1fr) / repeat(3, 1fr)"],".sushis":["grid-area: starter"],".rice":["grid-area: rice"],".veggies":["grid-area: veggie"],".fruits":["grid-area: dessert"]},syntax:`grid-template-areas:   
+    </div>`,check:[["grid-area"," 3/2/4/4"]]},{name:"Grid: Named Areas",doThis:"Distribute the food in the correct areas of the bento",selector:"bento",wrapperClass:"grid-game",cssRules:{bento:["display: grid","grid: repeat(2, 1fr) / repeat(3, 1fr)"],".sushis":["grid-area: sushis"],".rice":["grid-area: rice"],".veggies":["grid-area: veggies"],".fruits":["grid-area: fruits"]},syntax:`grid-template-areas:   
   <string>+`,examples:[`<pre><code>grid-template-areas:
     "header header"
     "menu   main"
@@ -1306,12 +1306,12 @@ grid-column: <start>/<end>`,help:`<p><code>grid-row</code> and <code>grid-column
       <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
-    `,hintMarkup:`<div class="hint-wrapper" style='grid: repeat(2, 1fr) / repeat(3, 1fr); grid-template-areas: "starter starter dessert" "rice veggie dessert"'>
-      <div title="sushis" style="grid-area: starter"></div>      
+    `,hintMarkup:`<div class="hint-wrapper" style='grid: repeat(2, 1fr) / repeat(3, 1fr); grid-template-areas: "sushis sushis fruits" "rice veggies fruits"'>
+      <div title="sushis" style="grid-area: sushis"></div>      
       <div title="rice" style="grid-area: rice"></div>
-      <div title="veggies" style="grid-area: veggie"></div>
-      <div title="fruits" style="grid-area: dessert"></div>
-    </div>`,check:[["grid-template-areas",'"starter starter dessert" "rice veggie dessert"']]},{name:"Implicit Grid",doThis:"Distribute the food in the correct areas of the bento",selector:"bento",wrapperClass:"grid-game",cssRules:{bento:["display: grid","grid-auto-flow: column","grid-template-rows: 100%"]},syntax:`grid-auto-rows: <dims>...
+      <div title="veggies" style="grid-area: veggies"></div>
+      <div title="fruits" style="grid-area: fruits"></div>
+    </div>`,check:[["grid-template-areas",'"sushis sushis fruits" "rice veggies fruits"']]},{name:"Implicit Grid",doThis:"Distribute the food in the correct areas of the bento",selector:"bento",wrapperClass:"grid-game",cssRules:{bento:["display: grid","grid-auto-flow: column","grid-template-rows: 100%"]},syntax:`grid-auto-rows: <dims>...
 grid-auto-columns: <dims>...`,examples:["<code>grid-auto-rows: minmax(100px, auto);</code> will automatically create rows at a minimum size of 100px.","<code>grid-auto-columns: 100px 200px</code> will automatically create columns alternating between 100px and 200px."],help:`<p>When you are not explicitely declaring a grid with <code>grid-template</code> properties, or when the explicit grid is full, the items are placed in new tracks, automatically created. These tracks are referred to as the <strong>implicit grid</strong>.</p>
     <p>You can change the sizing of these implicit new tracks with the <code>grid-auto-rows</code> and <code>grid-auto-columns</code> property.</p>`,markup:`
     <bento style="width: 700px; height: 360px">      
@@ -1479,7 +1479,7 @@ text-align: justify;`,help:`<p>Change the text alignment within a paragraph with
     <dt>RGBA</dt><dd>rgb(R,G,B,A) with R, G, B, A be respectively red, green, blue and alpha values between 0 and 255, examples: rgb(255,0,0) for red, rgba(128,128,128,0.5) for semi-opaque gray</dd>
     <dt>HSL</dt><dd>hsl(H,S,L,A) with H, S, L, A be respectively the hue between 0 and 360deg, and the saturation, luminosity and alpha between 0 and 100%</dd>
     </dl>
-    `,examples:["<code>background-color: #FF0000</code> for a red background","<code>background-color: #CCC</code> for a light gray background","<code>background-color: rgb(0,0,128,0.5)</code> for semi-opaque dark blue background","<code>background-color: hsl(180deg, 100%, 100%)</code> for a cyan background"],markup:os,doThis:"Add a pure red background with 25% opacity for h2",expectedScreenshot:"img/reproduce/8-1.jpg",check:[["background-color","rgba(255,0,0,0.25)","rgba(255,0,0,25%)","rgb(255,0,0,0.25)","rgb(255,0,0,25%)","#ff000040","hsl(0,100%,100%,25%)","hsla(0,100%,100%,25%)"]]},{name:"Background images",selector:"h1",cssImportsHidden:["https://fonts.googleapis.com/css?family=Reggae+One"],cssRulesHidden:{...Ue,h2:["background-color: #ff000040"]},cssRules:{h1:["color: white","text-shadow: 0 0 0.5em black"]},syntax:"background-image: <url>",help:`<p>Use <code>background-image</code> to use an image file as the background of an element.</p>
+    `,examples:["<code>background-color: #FF0000</code> for a red background","<code>background-color: #CCC</code> for a light gray background","<code>background-color: rgb(0,0,128,0.5)</code> for semi-opaque dark blue background","<code>background-color: hsl(180deg, 100%, 100%)</code> for a cyan background"],markup:os,doThis:"Add a pure red background with 25% opacity for h2",expectedScreenshot:"img/reproduce/8-1.jpg",check:[["background-color","rgba(255,0,0,0.25)","rgba(255,0,0,.25)","rgba(255,0,0,25%)","rgb(255,0,0,0.25)","rgb(255,0,0,.25)","rgb(255,0,0,25%)","#ff000040","hsl(0,100%,100%,25%)","hsla(0,100%,100%,25%)"]]},{name:"Background images",selector:"h1",cssImportsHidden:["https://fonts.googleapis.com/css?family=Reggae+One"],cssRulesHidden:{...Ue,h2:["background-color: #ff000040"]},cssRules:{h1:["color: white","text-shadow: 0 0 0.5em black"]},syntax:"background-image: <url>",help:`<p>Use <code>background-image</code> to use an image file as the background of an element.</p>
     <p>To specify the image file, use the <code>url()</code> keyword.</p>
     `,examples:['<code>background-image: url("path/to/image.jpg")</code>'],markup:os,doThis:"Use img/waves.svg as background image for h1",expectedScreenshot:"img/reproduce/8-2.jpg",check:[["background-image","url('img/waves.svg')"]]},{name:"Background properties",selector:"h1",cssImportsHidden:["https://fonts.googleapis.com/css?family=Reggae+One"],cssRulesHidden:{...Ue,h1:["font-family: 'Reggae One', serif"],h2:["background-color: #ff000040"]},cssRules:{h1:["color: white","text-shadow: 0 0 0.5em black","background-image: url('img/waves.svg')"]},syntax:`background-size: <size>;
 background-repeat: <mode>;
