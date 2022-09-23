@@ -1,12 +1,9 @@
 <template>
   <header>
     HTML/CSS Training
-    <div class="logo">
-      <img src=""/>
-    </div>
     <span class="share-menu">
       Repository
-      <a class="share-github" type="github" href="#"></a>
+      <a class="share-github" target="_blank" href="https://github.com/worldline/html-css-training"></a>
     </span>
   </header>
 </template>
