@@ -731,6 +731,7 @@ export const chapter2Levels: Chapter2Level[] = [
 export const chapter2: Chapter = {
   name: "CSS Selectors",
   levels: chapter2Levels,
+  wrapperClass: "selectors-chapter",
   credits: `Credits: <a href="http://www.twitter.com/flukeout">@flukeout</a> for his work on <a href="https://flukeout.github.io/" target="_blank">CSS diner</a> that served as the foundation for this website`,
   intro: `
     <p>To apply CSS to an element you need to select this element with a <b>selector</b>.</p>
