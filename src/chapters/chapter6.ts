@@ -540,10 +540,10 @@ grid-column: <start>/<end>`,
     wrapperClass: "grid-game",
     cssRules: {
       "bento": ["display: grid", "grid: repeat(2, 1fr) / repeat(3, 1fr)"],
-      ".sushis" : ["grid-area: starter"],
+      ".sushis" : ["grid-area: sushis"],
       ".rice" : ["grid-area: rice"],
-      ".veggies" : ["grid-area: veggie"],
-      ".fruits" : ["grid-area: dessert"],
+      ".veggies" : ["grid-area: veggies"],
+      ".fruits" : ["grid-area: fruits"],
     },
     syntax: `grid-template-areas:   
   <string>+`,
@@ -571,14 +571,14 @@ grid-column: <start>/<end>`,
       <div class="tile fruits"></div>
     </bento>
     `,
-    hintMarkup: `<div class="hint-wrapper" style='grid: repeat(2, 1fr) / repeat(3, 1fr); grid-template-areas: "starter starter dessert" "rice veggie dessert"'>
-      <div title="sushis" style="grid-area: starter"></div>      
+    hintMarkup: `<div class="hint-wrapper" style='grid: repeat(2, 1fr) / repeat(3, 1fr); grid-template-areas: "sushis sushis fruits" "rice veggies fruits"'>
+      <div title="sushis" style="grid-area: sushis"></div>      
       <div title="rice" style="grid-area: rice"></div>
-      <div title="veggies" style="grid-area: veggie"></div>
-      <div title="fruits" style="grid-area: dessert"></div>
+      <div title="veggies" style="grid-area: veggies"></div>
+      <div title="fruits" style="grid-area: fruits"></div>
     </div>`,
     check: [
-      ["grid-template-areas", '"starter starter dessert" "rice veggie dessert"'],
+      ["grid-template-areas", '"sushis sushis fruits" "rice veggies fruits"'],
     ]
   },
 

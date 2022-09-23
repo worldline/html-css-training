@@ -90,8 +90,10 @@ export const chapter8Levels: Chapter8Level[] = [
     check: [
       ["background-color", 
         `rgba(255,0,0,0.25)`,
+        `rgba(255,0,0,.25)`,
         `rgba(255,0,0,25%)`,
         `rgb(255,0,0,0.25)`,
+        `rgb(255,0,0,.25)`,
         `rgb(255,0,0,25%)`,
         `#ff000040`,
         `hsl(0,100%,100%,25%)`,
