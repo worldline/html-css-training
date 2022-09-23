@@ -244,7 +244,7 @@ gap: <row> <col>`,
 
   {
     name: "Grid template: repeat()",
-    doThis: "Distribute the sushis in all the areas of the bento",
+    doThis: "Use grid: repeat() to declare a 4x3 grid layout with equal size areas",
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
@@ -252,7 +252,7 @@ gap: <row> <col>`,
     },
     syntax: `repeat(<number>, <dim>)`,
     help: `<p>The <code>repeat()</code> keyword is a utility to repeat the same dimension a certain number of times in a grid template declaration.</p>
-    <p style="font-weight: bold">Try to use it to declare a 4x3 grid layout with equal size areas.</p>`,
+    <p style="font-weight: bold">Try to use this keyword with the <code>grid</code> property to fill the bento with a 4x3 grid layout with equal size areas.</p>`,
     examples: [
       `<code>grid-template-rows: repeat(5, 50px)</code> is equivalent to <code>grid-template-rows: 50px 50px 50px 50px 50px</code>`
     ],
@@ -270,7 +270,7 @@ gap: <row> <col>`,
     </div>`,
     inputLinesNumber: 1,
     check: [
-      ["grid", "repeat(3, 1fr) / repeat(4, 1fr)"]
+      ["grid", "repeat(3, 1fr) / repeat(4, 1fr)", "repeat(3, auto) / repeat(4, auto)"]
     ]
   },
 
@@ -502,7 +502,39 @@ grid-column: <start>/<end>`,
   },
 
   {
-    name: "grid-area",
+    name: "Dense Packing",
+    doThis: "Distribute the food in the correct areas of the bento",
+    selector: "bento",
+    wrapperClass: "grid-game",
+    cssRules: {
+      "bento": ["display: grid"],
+      ".rice": ["grid-column: 1 / 3"]
+    },
+    syntax: `grid-auto-flow: row dense`,    
+    help: `<p>The default behavior of grid layout is to place items along the rows while always progressing forward. The items will be placed according to the order they are in the source, or any modification with the <code>order</code> property. If there is not enough space to fit an item, grid will leave a gap and move to the next track.</p>
+    <p>An auto-placed layout with some items spanning multiple tracks may result in a grid with some unfilled cells. You can change the automatic flow to make fill these gaps. This may mean that the display becomes disconnected from the logical order. This is called <b>dense packing</b>.</p>
+    `,
+    markup: `
+    <bento style="width: 700px; height: 360px">      
+      <div class="tile veggies"></div>
+      <div class="tile rice"></div>
+      <div class="tile fruits"></div>
+      <div class="tile fruits"></div>
+    </bento>
+    `,
+    hintMarkup: `<div class="hint-wrapper" style='grid-auto-flow: row dense;'>      
+      <div title="veggies"></div>  
+      <div title="rice" style="grid-column: 1 / 3"></div>
+      <div title="fruits"></div>
+      <div title="fruits"></div>
+    </div>`,
+    check: [
+      ["grid-auto-flow", 'dense', 'row dense'],
+    ]
+  },
+
+  {
+    name: "Grid Areas",
     doThis: "Distribute the food in the correct areas of the bento",
     selector: ".veggies",
     wrapperClass: "grid-game",
@@ -621,7 +653,7 @@ grid-auto-columns: <dims>...`,
 
   {
     name: "Implicit Grid - auto-fit / auto-fill",
-    doThis: "Distribute the food in the correct areas of the bento",
+    doThis: "Fill the whole bento, but each area being not more than 200px wide.",
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
@@ -665,40 +697,7 @@ grid-auto-columns: <dims>...`,
     check: [
       ["grid-template-columns", 'repeat(auto-fit, minmax(200px, 1fr))'],
     ]
-  },
-
-  {
-    name: "Implicit Grid - Dense Packing",
-    doThis: "Distribute the food in the correct areas of the bento",
-    selector: "bento",
-    wrapperClass: "grid-game",
-    cssRules: {
-      "bento": ["display: grid"],
-      ".rice": ["grid-column: auto / span 2"],
-      ".veggies": ["grid-row: auto / span 2"],
-    },
-    syntax: `grid-auto-flow: row dense`,    
-    help: `<p>The default behavior of grid layout is to place items along the rows while always progressing forward. The items will be placed according to the order they are in the source, or any modification with the <code>order</code> property. If there is not enough space to fit an item, grid will leave a gap and move to the next track.</p>
-    <p>An auto-placed layout with some items spanning multiple tracks may result in a grid with some unfilled cells. You can change the automatic flow to make fill these gaps. This may mean that the display becomes disconnected from the logical order. This is called <b>dense packing</b>.</p>
-    `,
-    markup: `
-    <bento style="width: 700px; height: 360px">      
-      <div class="tile veggies"></div>
-      <div class="tile fruits"></div>
-      <div class="tile rice"></div>
-      <div class="tile fruits"></div>
-    </bento>
-    `,
-    hintMarkup: `<div class="hint-wrapper" style='grid-auto-flow: row dense;'>      
-      <div title="veggies" style="grid-row: auto / span 2"></div>  
-      <div title="fruits"></div>
-      <div title="rice" style="grid-column: auto / span 2"></div>
-      <div title="fruits"></div>
-    </div>`,
-    check: [
-      ["grid-auto-flow", 'dense', 'row dense'],
-    ]
-  },
+  }
 
   /*todo:
   span keyword ?
