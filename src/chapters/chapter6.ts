@@ -58,13 +58,13 @@ export const chapter6Levels: Chapter6Level[] = [
     markup: `
     <bento style="width: 700px; height: 360px">
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid-template-rows: repeat(3, 1fr)">
       <div title="rice"></div>
-      <div title="broccoli"></div>
+      <div title="veggies"></div>
       <div title="fruits"></div>
     </div>`,
     check: [
@@ -91,13 +91,13 @@ export const chapter6Levels: Chapter6Level[] = [
         <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
         <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
       </div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid-template-columns: 20% 60% 20%">
       <div style="--section-color: rgba(255,255,255,0.5)" title="rice (20% width)"></div>
       <div style="--section-color: rgba(0,0,0,0.5)" title="sushis (60% width)"></div>
-      <div style="--section-color: rgba(0,255,0,0.5)" title="broccoli (20% width)"></div>
+      <div style="--section-color: rgba(0,255,0,0.5)" title="veggies (20% width)"></div>
     </div>`,
     examples: [
       `<code>grid-template-columns: 300px 300px;</code> defines a 2-column layout with each column being 300px wide`
@@ -125,13 +125,13 @@ export const chapter6Levels: Chapter6Level[] = [
         <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
       </div>
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid-template-rows: 80px 2fr 1fr">
       <div style="--section-color: rgba(0,0,0,0.5)" title="sushis (80px height)"></div>
       <div style="--section-color: rgba(255,255,255,0.5)" title="rice (2/3 of remaining space)"></div>
-      <div style="--section-color: rgba(0,255,0,0.5)" title="broccoli (1/3 of remaining space)"></div>
+      <div style="--section-color: rgba(0,255,0,0.5)" title="veggies (1/3 of remaining space)"></div>
     </div>`,
     examples: [
       `<code>grid-template-rows: 2fr 1fr 1fr</code> defines a 3-rows layout with the first row being twice as wide as the other rows`
@@ -156,7 +156,7 @@ grid-template-columns`,
     markup: `
     <bento style="width: 700px; height: 360px">
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="sushis">
         <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
       </div>
@@ -165,7 +165,7 @@ grid-template-columns`,
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid-template-rows: 1fr 100px; grid-template-columns: 2fr 1fr;">
       <div style="--section-color: rgba(255,255,255,0.5)" title="rice"></div>
-      <div style="--section-color: rgba(0,255,0,0.5)" title="broccoli (1/3 wide)"></div>
+      <div style="--section-color: rgba(0,255,0,0.5)" title="veggies (1/3 wide)"></div>
       <div style="--section-color: rgba(0,0,0,0.5)" title="sushis (100px high)"></div>
       <div style="--section-color: rgba(255,255,0,0.5)" title="fruits"></div>
     </div>`,
@@ -190,7 +190,7 @@ grid-template-columns`,
     markup: `
     <bento style="width: 700px; height: 360px">
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="sushis">
         <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
       </div>
@@ -199,7 +199,7 @@ grid-template-columns`,
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid: 1fr 100px / 2fr 1fr;">
       <div style="--section-color: rgba(255,255,255,0.5)" title="rice"></div>
-      <div style="--section-color: rgba(0,255,0,0.5)" title="broccoli (1/3 wide)"></div>
+      <div style="--section-color: rgba(0,255,0,0.5)" title="veggies (1/3 wide)"></div>
       <div style="--section-color: rgba(0,0,0,0.5)" title="sushis (100px high)"></div>
       <div style="--section-color: rgba(255,255,0,0.5)" title="fruits"></div>
     </div>`,
@@ -211,7 +211,7 @@ grid-template-columns`,
 
   {
     name: "Grid gaps",
-    doThis: "Distribute the food in the correct areas of the bento",
+    doThis: "Add 50px gaps between the zones of the bento",
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
@@ -219,12 +219,11 @@ grid-template-columns`,
     },
     syntax: `gap: <dimension>
 gap: <row> <col>`,
-    help: `<p>To add space between the items of the grid, use the <code>gap</code> property. You can pass two values if you want to specify different gaps between rows and columns.</p>
-    <p style="font-weight: bold">Try to add 50px gaps between the zones of the bento.</p>`,
+    help: `<p>To add space between the items of the grid, use the <code>gap</code> property. You can pass two values if you want to specify different gaps between rows and columns.</p>`,
     markup: `
     <bento style="width: 700px; height: 360px">
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="sushis">
         <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
       </div>
@@ -233,7 +232,7 @@ gap: <row> <col>`,
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid: 1fr 100px / 2fr 1fr; gap: 50px;">
       <div style="--section-color: rgba(255,255,255,0.5)" title="rice"></div>
-      <div style="--section-color: rgba(0,255,0,0.5)" title="broccoli"></div>
+      <div style="--section-color: rgba(0,255,0,0.5)" title="veggies"></div>
       <div style="--section-color: rgba(0,0,0,0.5)" title="sushis"></div>
       <div style="--section-color: rgba(255,255,0,0.5)" title="fruits"></div>
     </div>`,
@@ -341,7 +340,7 @@ align-self: <value>`,
     <bento style="width: 700px; height: 360px">
       <sushi></sushi><sushi></sushi><sushi></sushi>
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
@@ -370,13 +369,13 @@ align-self: <value>`,
     markup: `
     <bento style="width: 700px; height: 360px">      
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
       <div title="rice" style="grid-column-start: 2"></div>      
-      <div title="broccoli"></div>
+      <div title="veggies"></div>
       <div title="fruits"></div>
     </div>`,
     check: [
@@ -399,13 +398,13 @@ align-self: <value>`,
     markup: `
     <bento style="width: 700px; height: 360px">      
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
       <div title="rice" style="grid-column-start: 2; grid-column-end: 4"></div>      
-      <div title="broccoli"></div>
+      <div title="veggies"></div>
       <div title="fruits"></div>
     </div>`,
     check: [
@@ -416,7 +415,7 @@ align-self: <value>`,
   {
     name: "grid-row-start",
     doThis: "Distribute the food in the correct areas of the bento",
-    selector: ".broccoli",
+    selector: ".veggies",
     wrapperClass: "grid-game",
     cssRules: {
       "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
@@ -428,13 +427,13 @@ align-self: <value>`,
     markup: `
     <bento style="width: 700px; height: 360px">      
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
       <div title="rice" style="grid-column-start: 2; grid-column-end: 4"></div>      
-      <div title="broccoli" style="grid-row-start: 2"></div>
+      <div title="veggies" style="grid-row-start: 2"></div>
       <div title="fruits"></div>
     </div>`,
     check: [
@@ -445,25 +444,25 @@ align-self: <value>`,
   {
     name: "grid-row-end",
     doThis: "Distribute the food in the correct areas of the bento",
-    selector: ".broccoli",
+    selector: ".veggies",
     wrapperClass: "grid-game",
     cssRules: {
       "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
       ".rice": ["grid-column-start: 2", "grid-column-end: 4"],
-      ".broccoli": ["grid-row-start: 2"]
+      ".veggies": ["grid-row-start: 2"]
     },
     syntax: `grid-row-end: <num>`,
     help: `<p><code>grid-row-end</code> specifies the position of the end edge of the item within the grid rows.</p>`,
     markup: `
     <bento style="width: 700px; height: 360px">      
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
       <div title="rice" style="grid-column-start: 2; grid-column-end: 4"></div>      
-      <div title="broccoli" style="grid-row-start: 2; grid-row-end: 4"></div>
+      <div title="veggies" style="grid-row-start: 2; grid-row-end: 4"></div>
       <div title="fruits"></div>
     </div>`,
     check: [
@@ -486,13 +485,13 @@ grid-column: <start>/<end>`,
     markup: `
     <bento style="width: 700px; height: 360px">      
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
       <div title="rice" style="grid-column: 3/5; grid-row: 1/3;"></div>      
-      <div title="broccoli"></div>
+      <div title="veggies"></div>
       <div title="fruits"></div>
     </div>`,
     inputLinesNumber: 2,
@@ -505,7 +504,7 @@ grid-column: <start>/<end>`,
   {
     name: "grid-area",
     doThis: "Distribute the food in the correct areas of the bento",
-    selector: ".broccoli",
+    selector: ".veggies",
     wrapperClass: "grid-game",
     cssRules: {
       "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
@@ -520,13 +519,13 @@ grid-column: <start>/<end>`,
     markup: `
     <bento style="width: 700px; height: 360px">      
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style="grid: repeat(3, 1fr) / repeat(4, 1fr)">
       <div title="rice" style="grid-column: 3/5; grid-row: 1/3;"></div>      
-      <div title="broccoli" style="grid-area: 3/2/4/4;"></div>
+      <div title="veggies" style="grid-area: 3/2/4/4;"></div>
       <div title="fruits"></div>
     </div>`,
     check: [
@@ -543,7 +542,7 @@ grid-column: <start>/<end>`,
       "bento": ["display: grid", "grid: repeat(2, 1fr) / repeat(3, 1fr)"],
       ".sushis" : ["grid-area: starter"],
       ".rice" : ["grid-area: rice"],
-      ".broccoli" : ["grid-area: veggie"],
+      ".veggies" : ["grid-area: veggie"],
       ".fruits" : ["grid-area: dessert"],
     },
     syntax: `grid-template-areas:   
@@ -568,14 +567,14 @@ grid-column: <start>/<end>`,
         <sushi></sushi>
       </div>
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style='grid: repeat(2, 1fr) / repeat(3, 1fr); grid-template-areas: "starter starter dessert" "rice veggie dessert"'>
       <div title="sushis" style="grid-area: starter"></div>      
       <div title="rice" style="grid-area: rice"></div>
-      <div title="broccoli" style="grid-area: veggie"></div>
+      <div title="veggies" style="grid-area: veggie"></div>
       <div title="fruits" style="grid-area: dessert"></div>
     </div>`,
     check: [
@@ -602,17 +601,17 @@ grid-auto-columns: <dims>...`,
     markup: `
     <bento style="width: 700px; height: 360px">      
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile rice"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style='grid-auto-flow: column; grid-template-rows: 100%; grid-auto-columns: 100px 1fr'>
       <div title="rice (100px wide)"></div>
-      <div title="broccoli"></div>
+      <div title="veggies"></div>
       <div title="rice (100px wide)"></div>
-      <div title="broccoli"></div>
+      <div title="veggies"></div>
       <div title="rice (100px wide)"></div>
     </div>`,
     check: [
@@ -642,25 +641,25 @@ grid-auto-columns: <dims>...`,
     markup: `
     <bento style="width: 700px; height: 360px">      
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>      
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
       <div class="tile rice"></div>
       <div class="tile rice"></div>
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style='grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))'>      
       <div title="rice (>=200px)"></div>
-      <div title="broccoli (>=200px)"></div>
+      <div title="veggies (>=200px)"></div>
       <div title="fruits (>=200px)"></div>      
-      <div title="broccoli (>=200px)"></div>
+      <div title="veggies (>=200px)"></div>
       <div title="fruits (>=200px)"></div>
       <div title="rice (>=200px)"></div>
       <div title="rice (>=200px)"></div>
-      <div title="broccoli (>=200px)"></div>
+      <div title="veggies (>=200px)"></div>
       <div title="fruits (>=200px)"></div>
     </div>`,
     check: [
@@ -676,7 +675,7 @@ grid-auto-columns: <dims>...`,
     cssRules: {
       "bento": ["display: grid"],
       ".rice": ["grid-column: auto / span 2"],
-      ".broccoli": ["grid-row: auto / span 2"],
+      ".veggies": ["grid-row: auto / span 2"],
     },
     syntax: `grid-auto-flow: row dense`,    
     help: `<p>The default behavior of grid layout is to place items along the rows while always progressing forward. The items will be placed according to the order they are in the source, or any modification with the <code>order</code> property. If there is not enough space to fit an item, grid will leave a gap and move to the next track.</p>
@@ -684,14 +683,14 @@ grid-auto-columns: <dims>...`,
     `,
     markup: `
     <bento style="width: 700px; height: 360px">      
-      <div class="tile broccoli"></div>
+      <div class="tile veggies"></div>
       <div class="tile fruits"></div>
       <div class="tile rice"></div>
       <div class="tile fruits"></div>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style='grid-auto-flow: row dense;'>      
-      <div title="broccoli" style="grid-row: auto / span 2"></div>  
+      <div title="veggies" style="grid-row: auto / span 2"></div>  
       <div title="fruits"></div>
       <div title="rice" style="grid-column: auto / span 2"></div>
       <div title="fruits"></div>
