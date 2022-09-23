@@ -9,7 +9,8 @@ import { cleanupEffects, shake } from "./utils";
 export function applyStyles(userRules?: string[]){
   const level = state.level as CssEditorLevel;
   if(!level) return;
-  const rootSelector = currentChapter.value.wrapperClass ? `.${currentChapter.value.wrapperClass}` : ""
+  const wrapperClass = level.wrapperClass || currentChapter.value.wrapperClass
+  const rootSelector = wrapperClass ? `.${wrapperClass}` : ""
   const selectors = new Set([level.selector, ...Object.keys(level.cssRules ?? {}), ...Object.keys(level.cssRulesHidden ?? {})])
   
   let styles = "";
