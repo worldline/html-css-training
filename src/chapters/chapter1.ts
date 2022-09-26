@@ -215,7 +215,7 @@ export const chapter1Levels: Chapter1Level[] = [
         instructions: `
         <p>Text on a web document can benefit from being placed in appropriate tags that have predefined styles provided by the browser.</p>
 
-        <h3 class="syntax">&lt;dt&gt;</h3>
+        <h3 class="syntax">&lt;dd&gt;</h3>
         <p><tag>dd</tag> stands for <b>description details</b>, and represents the description of the previous term.</p>
         <p><tag>dt</tag> and <tag>dd</tag> must be consecutive tags and direct descendants of a <tag>dl</tag> element.</p>
         `

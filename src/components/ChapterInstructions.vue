@@ -21,6 +21,7 @@ function nextLevel(){
 .instructions {
   flex: 1;
   margin-top: 1em;
+  overflow: auto;
 }
 
 .actions {

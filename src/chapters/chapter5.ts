@@ -353,7 +353,7 @@ justify-content`,
     </div>`,
     check: [
       ["flex-direction","row-reverse"],
-      ["justify-content","flex-end"],
+      ["justify-content","flex-end","end"],
     ]
   },
   {
@@ -415,7 +415,7 @@ align-items`,
     check: [
       ["flex-direction","row-reverse"],
       ["justify-content","center"],
-      ["align-items","flex-end"],
+      ["align-items","flex-end","end"],
     ]
   },
   {
@@ -503,7 +503,7 @@ help: `<p>You can change the alignment on cross axis for specific child elements
       <plate class="avocado"></plate>
     </div>`,
     check: [
-      ["align-self", "flex-end"],
+      ["align-self", "flex-end","end"],
     ]
   },
   {
@@ -658,7 +658,7 @@ flex-direction: <dir>;`,
     inputLinesNumber: 2,
     check: [
       ["flex-wrap", "wrap"],
-      ["align-content", "flex-start"]
+      ["align-content", "flex-start","start"]
     ]
   },
   {
@@ -713,7 +713,7 @@ flex-direction: <dir>`,
     </div>`,
     inputLinesNumber: 2,
     check: [
-      ["flex-wrap", "wrap"],
+      ["align-content", "center"],
       ["flex-direction", "column-reverse"]
     ]
   },

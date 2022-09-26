@@ -22,6 +22,7 @@ const level = computed(() => state.level as Chapter2Level)
 .display-help {
   font-size: 15px;
   color: #999;
+  overflow: auto;
 }
 
 .display-help ::v-deep(img) {

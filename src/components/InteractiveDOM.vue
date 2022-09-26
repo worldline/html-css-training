@@ -1,6 +1,9 @@
 <template>
   <p class="order" :style="{ opacity: level.order && !hasWon ? 1 : 0 }">{{level.order || '&nbsp;'}}</p>
-  <iframe src="demo/chapter1.html" ref="iframe" scrolling="no"></iframe>
+  <div class="game-wrapper" :class="{ win: hasWon }">
+    <CorrectAnim />
+    <iframe src="demo/chapter1.html" ref="iframe" scrolling="no"></iframe>
+  </div>
   <p v-if="level.order && level.tag">Use the <b>3D</b> view and the <b>Ctrl</b> key to select elements in the DOM.</p>
   <button @click="toggleView" id="button-3d">{{is3D ? '2D' : '3D'}}</button>
 </template>
@@ -11,8 +14,9 @@ import { toggle3D } from "../dom-viewer";
 import {computed, ref} from "vue";
 import { useEventListener } from "@vueuse/core";
 import { shake } from "../utils";
-import { completeLevel } from "../progress";
+import { completeLevelAndGoNext } from "../game";
 import { state } from "../state";
+import CorrectAnim from "./CorrectAnim.vue";
 
 const level = computed(() => state.level as Chapter1Level);
 const is3D = ref(false)

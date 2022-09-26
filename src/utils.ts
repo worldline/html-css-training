@@ -2,8 +2,8 @@
 export const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max)
 
 export function cleanupEffects(){
-    Array.from(document.querySelectorAll(".shake, .strobe"))
-      .forEach(el => el.classList.remove("shake","strobe"));
+    Array.from(document.querySelectorAll(".shake, .strobe, .clean"))
+      .forEach(el => el.classList.remove("shake","strobe","clean"));
 }
 
 export const shake = (el: HTMLElement) => {

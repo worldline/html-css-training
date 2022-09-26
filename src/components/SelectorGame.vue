@@ -3,7 +3,7 @@
   <div class="game-container">
     <div class="game-wrapper">
       <CorrectAnim />
-      <Table :content="level.markup"></Table>
+      <Table :content="level.markup" :class="level.wrapperClass || currentChapter.wrapperClass"></Table>
     </div>
   </div>
   <Editor placeholder="Type in a CSS selector" @input="trySelector($event[0])">
@@ -18,14 +18,14 @@
 
 <script setup lang="ts">
 import Editor from "./Editor.vue";
-import {completeLevel} from "../game";
+import { completeLevelAndGoNext } from "../game";
 import Table from "./Table.vue";
 import CorrectAnim from "./CorrectAnim.vue";
 import { computed } from "vue";
 import { Chapter2Level } from "../chapters/chapter2";
 import { cleanupEffects, shake } from "../utils";
 import { resetEditor } from "../chapters/level";
-import { state } from "../state";
+import {state, currentChapter} from "../state";
 
 const level = computed(() => state.level as Chapter2Level)
 
@@ -74,6 +74,7 @@ function trySelector(rule: string) {
     //$(".input-wrapper").css("opacity",.2);
     setTimeout(function () {
       gameWrapper.classList.remove("win");
+      cleanupEffects();
       completeLevelAndGoNext();
     }, 1000);
   } else {
@@ -108,6 +109,11 @@ function checkMatches(matches: Element[], solutionMatches: Element[]) {
   padding-top: 15px;
   margin-bottom: 50px;
   display: inline-block;
+}
+
+.game-wrapper .selectors-chapter ::v-deep(.table > *){
+  margin: 0 10px;
+  vertical-align: middle;
 }
 
 ::v-deep(#editor-input){

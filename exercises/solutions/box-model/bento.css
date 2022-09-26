@@ -1,0 +1,41 @@
+@import "elements.css";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  --bg-primary: #2e2a23;
+  --bg-secondary: #221e18;
+}
+
+body {
+  background: var(--bg-secondary) radial-gradient(40% 40%, #3e392f, #221e17) no-repeat;
+  position: relative;
+  color: #888;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.table-content {
+
+}
+
+bento {
+  margin: 25px;
+}
+
+.bento-area {
+  border: 20px solid darkred;
+  height: 300px;
+}
+
+plate {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+}
+
+plate sushi {
+  margin-top: 20px;
+}

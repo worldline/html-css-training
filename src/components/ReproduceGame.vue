@@ -90,7 +90,7 @@ pre {
 .menu-wrapper {
   width: 520px;
   min-height: 200px;
-  margin: 2rem;
+  margin: 0 2rem;
   background: antiquewhite;
   color: #202020;
   padding: 0.5rem 1rem;
@@ -99,7 +99,7 @@ pre {
 }
 
 .menu-wrapper ::v-deep(h1){
-  margin: 0
+  margin: 0.25em 0;
 }
 .menu-wrapper ::v-deep(h2) {
   margin: 0.25em;

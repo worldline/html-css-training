@@ -1,12 +1,9 @@
 <template>
   <header>
     HTML/CSS Training
-    <div class="logo">
-      <img src=""/>
-    </div>
     <span class="share-menu">
       Repository
-      <a class="share-github" type="github" href="#"></a>
+      <a class="share-github" target="_blank" href="https://github.com/worldline/html-css-training"></a>
     </span>
   </header>
 </template>
@@ -56,19 +53,19 @@ header {
 }
 
 .share-menu .share-github {
-  background-image: url(../assets/images/icon-github.svg);
+  background-image: url(img/icon-github.svg);
 }
 
 .share-menu .share-twitter {
-  background-image: url(../assets/images/icon-twitter.svg);
+  background-image: url(img//icon-twitter.svg);
 }
 
 .share-menu .share-facebook {
-  background-image: url(../assets/images/icon-facebook.svg);
+  background-image: url(img//icon-facebook.svg);
 }
 
 .share-menu .share-email {
-  background-image: url(../assets/images/icon-email.svg);
+  background-image: url(img//icon-email.svg);
 }
 
 .share-menu a:hover {

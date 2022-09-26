@@ -116,7 +116,8 @@ function onInputKeyup(){
   outline: none;
   resize: none;
   overflow: auto;
-  height: 1.4em;
+  height: 1.5em;
+  line-height: 1.5em;
   vertical-align: middle;
 }
 

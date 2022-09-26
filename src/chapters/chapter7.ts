@@ -67,12 +67,19 @@ export const chapter7Levels: Chapter7Level[] = [
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
     cssRulesHidden: { "h1": ["font-family: 'Reggae One', serif"]},
     syntax: `color: <color>;"`,
-    help: `<p>Text color is changed with the <code>color</code> property</p>`,
+    help: `<p>Text color is changed with the <code>color</code> property</p>
+    <p>Colors in CSS can expressed with several notations:</p>
+    <dl>
+    <dt>A color name</dt><dd>red, blue, transparent, or any of the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/named-color" target="_blank">145</a> official color names in CSS.</dd>
+    <dt>Hexadecimal</dt><dd>#RGBA, with R, G, B, A be respectively red, green, blue and alpha values between 00 and FF, examples: #FF0000 for red, #CCC for gray</dd>
+    <dt>RGBA</dt><dd>rgb(R,G,B,A) with R, G, B, A be respectively red, green, blue and alpha values between 0 and 255, examples: rgb(255,0,0) for red, rgba(128,128,128,0.5) for semi-opaque gray</dd>
+    <dt>HSL</dt><dd>hsl(H,S,L,A) with H, S, L, A be respectively the hue between 0 and 360deg, and the saturation, luminosity and alpha between 0 and 100%</dd>
+    </dl>`,
     markup,
     doThis: `Change information paragraph color to gray`,
     expectedScreenshot: "img/reproduce/7-2.jpg",
     check: [
-      ["color", "gray"]
+      ["color", "gray", "grey"]
     ]
   },
 
@@ -255,7 +262,7 @@ line-height: normal;`,
 letter-spacing: -2px;
 letter-spacing: normal;`,
     help: `<p>Add or reduce space between letters with <code>letter-spacing</code>.</p>
-    <p>This property controls the space between each line of text in an element. This does not apply to space between paragraphs.</p>`,
+    <p>This property controls the space between each letter in the text of an element.</p>`,
     markup,
     doThis: `Set letter-spacing for h2 to 1em`,
     expectedScreenshot: "img/reproduce/7-10.jpg",
