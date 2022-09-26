@@ -408,7 +408,7 @@ align-self: <value>`,
       <div title="fruits"></div>
     </div>`,
     check: [
-      ["grid-column-end", "4"],
+      ["grid-column-end", "4", "-2"],
     ]
   },
 
