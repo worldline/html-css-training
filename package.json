@@ -1,7 +1,11 @@
 {
   "name": "html-css-training",
   "author": "Sylvain Pollet-Villard",
-  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/worldline/html-css-training.git"
+  },
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

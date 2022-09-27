@@ -254,7 +254,8 @@ gap: <row> <col>`,
     help: `<p>The <code>repeat()</code> keyword is a utility to repeat the same dimension a certain number of times in a grid template declaration.</p>
     <p style="font-weight: bold">Try to use this keyword with the <code>grid</code> property to fill the bento with a 4x3 grid layout with equal size areas.</p>`,
     examples: [
-      `<code>grid-template-rows: repeat(5, 50px)</code> is equivalent to <code>grid-template-rows: 50px 50px 50px 50px 50px</code>`
+      `<code>grid-template-rows: repeat(5, 50px)</code> is equivalent to <code>grid-template-rows: 50px 50px 50px 50px 50px</code>`,
+      `<code>grid: repeat(3, 100px) / repeat(2, 1fr)</code> is equivalent to <code>grid: 100px 100px 100px / 1fr 1fr</code>, which declares 3 rows of 100px height and 2 columns of equal size.`
     ],
     markup: `
     <bento style="width: 700px; height: 360px">
@@ -408,7 +409,7 @@ align-self: <value>`,
       <div title="fruits"></div>
     </div>`,
     check: [
-      ["grid-column-end", "4"],
+      ["grid-column-end", "4", "-2"],
     ]
   },
 

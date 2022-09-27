@@ -675,9 +675,10 @@ flex-direction: <dir>`,
     <ul>
     <li><code>flex-start</code> : lines are stacked at the start of the cross axis.</li>
     <li><code>flex-end</code>: lines are stacked at the end of the cross axis.</li>
-    <li><code>center</code> : lines are centered in the container.
-    <li><code>space-between</code> : lines are displayed with equal space between them.
-    <li><code>space-around</code> : lines are displayed with equal space between and around them.
+    <li><code>center</code> : lines are centered in the container.</li>
+    <li><code>space-between</code> : lines are displayed with equal space between them.</li>
+    <li><code>space-around</code> : items are displayed with equal margins around them.</li>
+    <li><code>space-evenly</code> : items are displayed with equal space between and around them.</li>
     <li><code>stretch</code> : lines are stretched to fit the container.</li>
     </ul>
     <p>By default, lines are stretched, so two lines will occupy half of the height of the container each.</p>`,
