@@ -192,7 +192,7 @@ background-position: <x> <y>
       ["background",
         "linear-gradient(to bottom, pink, transparent)",
         "linear-gradient(to top, transparent, pink)",
-        "linear-gradient(180deg, transparent, pink)",
+        "linear-gradient(180deg, pink, transparent)",
         "linear-gradient(0deg, transparent, pink)"
       ]
     ]
