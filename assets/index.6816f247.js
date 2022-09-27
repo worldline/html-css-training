@@ -1020,9 +1020,10 @@ flex-direction: <dir>`,help:`<p>When items are wrapped on multiple lines, the al
     <ul>
     <li><code>flex-start</code> : lines are stacked at the start of the cross axis.</li>
     <li><code>flex-end</code>: lines are stacked at the end of the cross axis.</li>
-    <li><code>center</code> : lines are centered in the container.
-    <li><code>space-between</code> : lines are displayed with equal space between them.
-    <li><code>space-around</code> : lines are displayed with equal space between and around them.
+    <li><code>center</code> : lines are centered in the container.</li>
+    <li><code>space-between</code> : lines are displayed with equal space between them.</li>
+    <li><code>space-around</code> : items are displayed with equal margins around them.</li>
+    <li><code>space-evenly</code> : items are displayed with equal space between and around them.</li>
     <li><code>stretch</code> : lines are stretched to fit the container.</li>
     </ul>
     <p>By default, lines are stretched, so two lines will occupy half of the height of the container each.</p>`,markup:`
@@ -1167,7 +1168,7 @@ gap: <row> <col>`,help:"<p>To add space between the items of the grid, use the <
       <div style="--section-color: rgba(0,0,0,0.5)" title="sushis"></div>
       <div style="--section-color: rgba(255,255,0,0.5)" title="fruits"></div>
     </div>`,inputLinesNumber:1,check:[["gap","50px","50px 50px"]]},{name:"Grid template: repeat()",doThis:"Use grid: repeat() to declare a 4x3 grid layout with equal size areas",selector:"bento",wrapperClass:"grid-game",cssRules:{bento:["display: grid"]},syntax:"repeat(<number>, <dim>)",help:`<p>The <code>repeat()</code> keyword is a utility to repeat the same dimension a certain number of times in a grid template declaration.</p>
-    <p style="font-weight: bold">Try to use this keyword with the <code>grid</code> property to fill the bento with a 4x3 grid layout with equal size areas.</p>`,examples:["<code>grid-template-rows: repeat(5, 50px)</code> is equivalent to <code>grid-template-rows: 50px 50px 50px 50px 50px</code>"],markup:`
+    <p style="font-weight: bold">Try to use this keyword with the <code>grid</code> property to fill the bento with a 4x3 grid layout with equal size areas.</p>`,examples:["<code>grid-template-rows: repeat(5, 50px)</code> is equivalent to <code>grid-template-rows: 50px 50px 50px 50px 50px</code>","<code>grid: repeat(3, 100px) / repeat(2, 1fr)</code> is equivalent to <code>grid: 100px 100px 100px / 1fr 1fr</code>, which declares 3 rows of 100px height and 2 columns of equal size."],markup:`
     <bento style="width: 700px; height: 360px">
       <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
       <sushi></sushi><sushi></sushi><sushi></sushi><sushi></sushi>
@@ -1238,7 +1239,7 @@ align-self: <value>`,help:`<p>You can also change the alignment of specific item
       <div title="rice" style="grid-column-start: 2; grid-column-end: 4"></div>      
       <div title="veggies"></div>
       <div title="fruits"></div>
-    </div>`,check:[["grid-column-end","4"]]},{name:"grid-row-start",doThis:"Distribute the food in the correct areas of the bento",selector:".veggies",wrapperClass:"grid-game",cssRules:{bento:["display: grid","grid: repeat(3, 1fr) / repeat(4, 1fr)"],".rice":["grid-column-start: 2","grid-column-end: 4"]},syntax:"grid-row-start: <num>",help:`<p><code>grid-row-start</code> specifies the position of the start edge of the item within the grid rows.</p>
+    </div>`,check:[["grid-column-end","4","-2"]]},{name:"grid-row-start",doThis:"Distribute the food in the correct areas of the bento",selector:".veggies",wrapperClass:"grid-game",cssRules:{bento:["display: grid","grid: repeat(3, 1fr) / repeat(4, 1fr)"],".rice":["grid-column-start: 2","grid-column-end: 4"]},syntax:"grid-row-start: <num>",help:`<p><code>grid-row-start</code> specifies the position of the start edge of the item within the grid rows.</p>
     <p>Note how the fruits tile fills the remaining space available on first row.</p>`,markup:`
     <bento style="width: 700px; height: 360px">      
       <div class="tile rice"></div>
@@ -1500,7 +1501,7 @@ background-position: <x> <y>
   <startColor>,
   <endColor>
 );`,help:`<p>CSS provides useful functions to make color gradients. Color gradients are considered as generated images, to be used with <code>background-image</code> property. To avoid overlapping with existing <code>background-color</code>, we recommend using the <code>background</code> shorthand property to reset everything.</p>
-    <p>For linear gradients, going in any direction, use the <code>linear-gradient()</code> function.</p>`,examples:["<code>background: linear-gradient(45deg, blue, red)</code>","<code>background: linear-gradient(to right, #FFFFFF, transparent)</code>","<code>background: linear-gradient(red 40%, yellow 30%, blue 65%);</code>"],markup:os,doThis:"Make a linear gradient for h2, from pink on top to transparent on bottom",expectedScreenshot:"img/reproduce/8-4.jpg",check:[["background","linear-gradient(to bottom, pink, transparent)","linear-gradient(to top, transparent, pink)","linear-gradient(180deg, transparent, pink)","linear-gradient(0deg, transparent, pink)"]]},{name:"Radial gradients",selector:"main",cssImportsHidden:["https://fonts.googleapis.com/css?family=Reggae+One"],cssRulesHidden:{...Ue,h1:["font-family: 'Reggae One', serif","color: white","text-shadow: 0 0 0.5em black","background-image: url('img/waves.svg')","background-size: 400px"],h2:["background: linear-gradient(to bottom, pink, transparent)"]},cssRules:{},syntax:`background: radial-gradient(
+    <p>For linear gradients, going in any direction, use the <code>linear-gradient()</code> function.</p>`,examples:["<code>background: linear-gradient(45deg, blue, red)</code>","<code>background: linear-gradient(to right, #FFFFFF, transparent)</code>","<code>background: linear-gradient(red 40%, yellow 30%, blue 65%);</code>"],markup:os,doThis:"Make a linear gradient for h2, from pink on top to transparent on bottom",expectedScreenshot:"img/reproduce/8-4.jpg",check:[["background","linear-gradient(to bottom, pink, transparent)","linear-gradient(to top, transparent, pink)","linear-gradient(180deg, pink, transparent)","linear-gradient(0deg, transparent, pink)"]]},{name:"Radial gradients",selector:"main",cssImportsHidden:["https://fonts.googleapis.com/css?family=Reggae+One"],cssRulesHidden:{...Ue,h1:["font-family: 'Reggae One', serif","color: white","text-shadow: 0 0 0.5em black","background-image: url('img/waves.svg')","background-size: 400px"],h2:["background: linear-gradient(to bottom, pink, transparent)"]},cssRules:{},syntax:`background: radial-gradient(
   <shape> / <size> /<position>,
   ...<colors>
 );`,help:`<p>CSS provides useful functions to make color gradients. Color gradients are considered as generated images, to be used with <code>background-image</code> property. To avoid overlapping with existing <code>background-color</code>, we recommend using the <code>background</code> shorthand property to reset everything.</p>
