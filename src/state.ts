@@ -6,6 +6,7 @@ import { Level } from "./chapters/level"
 
 interface Progress {
     completed: { [chapter: number]: number[] },
+    inputs: { [chapter: number]: { [level: number]: string } }
     currentChapter: number,
     currentLevel: number,
 }
@@ -19,6 +20,7 @@ interface AppState {
 export const state = reactive({
     progress: {
         completed: {},
+        inputs: {},
         currentChapter: 1,
         currentLevel: 0
     },

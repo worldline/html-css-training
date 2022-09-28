@@ -37,11 +37,18 @@ export function saveProgress(){
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
 }
 
+export function saveInput(input: string){
+    if(state.progress.currentChapter in state.progress.inputs === false) state.progress.inputs[state.progress.currentChapter] = {}
+    state.progress.inputs[state.progress.currentChapter][state.progress.currentLevel] = input
+    saveProgress();
+}
+
 export function resetProgress(){
     state.progress = {
         currentChapter: 1,
         currentLevel: 0,
-        completed: {}
+        completed: {},
+        inputs: {}
     }
     saveProgress()
 }

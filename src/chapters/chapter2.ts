@@ -1,4 +1,4 @@
-import { Level, resetEditor } from "./level";
+import { Level } from "./level";
 
 import { Chapter } from "./chapter";
 import {nextTick} from "vue";
@@ -737,7 +737,6 @@ export const chapter2: Chapter = {
     <p>To apply CSS to an element you need to select this element with a <b>selector</b>.</p>
     <p>CSS provides you with a number of different ways to do this, and you can explore them in this chapter.</p>`,
   onLevelStart(){
-    resetEditor()
     nextTick(() => addBoardElementsTooltips())
   }
 }

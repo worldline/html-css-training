@@ -1,8 +1,7 @@
-import { CssEditorLevel, resetEditor } from "./level";
+import { CssEditorLevel } from "./level";
 import { Chapter } from "./chapter";
 import { nextTick } from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
-import { applyStyles } from "../css-editor";
 
 export interface Chapter6Level extends CssEditorLevel {
   doThis: string;
@@ -718,8 +717,6 @@ export const chapter6: Chapter = {
   onLevelStart(){
     nextTick(() => {
       addBoardElementsTooltips()
-      resetEditor();
-      applyStyles()
     })
   }
 }

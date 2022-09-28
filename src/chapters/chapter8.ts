@@ -1,7 +1,5 @@
-import { CssEditorLevel, resetEditor } from "./level";
+import { CssEditorLevel } from "./level";
 import { Chapter } from "./chapter";
-import {nextTick} from "vue";
-import { applyStyles } from "../css-editor";
 
 export interface Chapter8Level extends CssEditorLevel {
   doThis?: string;
@@ -433,11 +431,5 @@ export const chapter8: Chapter = {
   <img src="img/sushis/1.png" width="300" />
   <img src="img/sushis/2.png" width="300" />
   <img src="img/sushis/3.png" width="300" />
-  <img src="img/sushis/4.png" width="300" />`,
-  onLevelStart(){
-    nextTick(() => {
-      resetEditor();
-      applyStyles()
-    })
-  }
+  <img src="img/sushis/4.png" width="300" />`
 }

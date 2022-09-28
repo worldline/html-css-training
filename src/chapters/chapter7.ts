@@ -1,7 +1,5 @@
-import { CssEditorLevel, resetEditor } from "./level";
+import { CssEditorLevel } from "./level";
 import { Chapter } from "./chapter";
-import {nextTick} from "vue";
-import { applyStyles } from "../css-editor";
 
 export interface Chapter7Level extends CssEditorLevel {
   doThis?: string;
@@ -459,11 +457,5 @@ export const chapter7: Chapter = {
   wrapperClass: "menu-wrapper",
   intro: `<p>Time to work on the restaurant menu !</p>
   <img src="img/menu-logo.png" height="120" style="display:block; height: 120px; margin: 0 auto" />
-  <p>Everyone knows that best restaurants all have nice fonts on their menu. Let's see how we can make beautiful text displays with CSS !</p>`,
-  onLevelStart(){
-    nextTick(() => {
-      resetEditor();
-      applyStyles()
-    })
-  }
+  <p>Everyone knows that best restaurants all have nice fonts on their menu. Let's see how we can make beautiful text displays with CSS !</p>`
 }

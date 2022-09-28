@@ -15,11 +15,3 @@ export interface CssEditorLevel extends Level {
     selector: string;
     check: [string, ...(string | ((val: string) => boolean))[]][];
 }
-
-export function resetEditor(){
-    const editorInput = document.querySelector(".editor textarea");
-    if(editorInput instanceof HTMLTextAreaElement){
-      editorInput.value = "";
-      editorInput.focus()
-    }
-}

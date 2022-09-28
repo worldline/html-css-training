@@ -7,7 +7,8 @@
                 ref="inputElement"
                 @keydown.enter="enterHit"
                 @keyup.prevent="onInputKeyup"
-                :placeholder="placeholder" />
+                :placeholder="placeholder"
+                v-model="input" />
         <span class="plus">+</span>
         <div class="enter-button" @click="enterHit" ref="enterButton">enter</div>
         <slot name="code-after" />
@@ -22,9 +23,11 @@
 import autosize from "autosize";
 import EditorPane from "./EditorPane.vue";
 import HTMLMarkup from "./HTMLMarkup.vue";
-import {computed, ref, Ref, watch} from "vue"
+import {computed, ref, Ref, watch, nextTick} from "vue"
 import { chapter2 } from "../chapters/chapter2";
 import { currentChapter, state } from "../state";
+import { saveInput } from "../progress";
+import { applyStyles } from "../css-editor";
 
 defineProps({
   placeholder: String
@@ -32,11 +35,17 @@ defineProps({
 
 const emit = defineEmits([ "input" ])
 
-const getInputValue = () => inputElement.value ? inputElement.value.value : "";
 const enterButton: Ref<HTMLElement | null> = ref(null)
 const inputElement: Ref<HTMLTextAreaElement | null> = ref(null)
+const input: Ref<string> = ref("")
 
 const level = computed(() => state.level)
+watch(level, () => {
+  input.value = state.progress.inputs[state.progress.currentChapter]?.[state.progress.currentLevel] ?? ""
+  nextTick(() => inputElement.value?.focus());
+  applyStyles(input.value.split('\n'));
+}, { immediate: true })
+
 const cssEditorTitle = computed(() => {
   if(level.value.inputLinesNumber && level.value.inputLinesNumber > 1) return `CSS Editor (${level.value.inputLinesNumber} properties to set)`
   return "CSS Editor"
@@ -45,9 +54,8 @@ const cssEditorTitle = computed(() => {
 watch(inputElement, () => autosize(inputElement.value));
 
 //Animate the enter button
-function enterHit(event: Event){
-  const inputValue = getInputValue()
-  const lines = inputValue.split('\n')
+function enterHit(event: Event){  
+  const lines = input.value.split('\n')
     .map(l => l.trim())
     .map(l => currentChapter.value === chapter2 || l.endsWith(';') ? l : l+';')
   if(lines.length >= (level.value.inputLinesNumber ?? 1)){
@@ -56,13 +64,13 @@ function enterHit(event: Event){
     button.classList.remove("enterhit")
     setTimeout(() => button.classList.add("enterhit"), 0)    
   }
-  if(inputElement.value) inputElement.value.value = lines.join('\n')
+  if(input.value) input.value = lines.join('\n')
   emit("input", lines)
+  saveInput(input.value);
 }
 
 function onInputKeyup(){
-  const input = inputElement.value as HTMLTextAreaElement;
-  input.classList.toggle("input-strobe", input.value.length > 0)
+  inputElement.value.classList.toggle("input-strobe", input.value.length > 0)
 }
 </script>
 

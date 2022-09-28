@@ -24,7 +24,6 @@ import CorrectAnim from "./CorrectAnim.vue";
 import { computed } from "vue";
 import { Chapter2Level } from "../chapters/chapter2";
 import { cleanupEffects, shake } from "../utils";
-import { resetEditor } from "../chapters/level";
 import {state, currentChapter} from "../state";
 
 const level = computed(() => state.level as Chapter2Level)
@@ -69,7 +68,6 @@ function trySelector(rule: string) {
       el.classList.remove("strobe");
       el.classList.add("clean");
     });
-    resetEditor()
 
     //$(".input-wrapper").css("opacity",.2);
     setTimeout(function () {
