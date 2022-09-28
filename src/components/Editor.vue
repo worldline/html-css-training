@@ -1,13 +1,13 @@
 <template>
   <div class="editor" @click="inputElement?.focus()">
-    <EditorPane title="CSS Editor" fileName="style.css" lang="css">
+    <EditorPane :title="cssEditorTitle" fileName="style.css" lang="css">
       <slot name="code-before" />
-      <textarea id="editor-input" class="input-strobe" type="text"
-               ref="inputElement"
-               @keydown.enter="enterHit"
-               @keyup.prevent="onInputKeyup"
-               :placeholder="placeholder"
-               :style="inputStyle"/>
+      <textarea id="editor-input" 
+                class="input-strobe"
+                ref="inputElement"
+                @keydown.enter="enterHit"
+                @keyup.prevent="onInputKeyup"
+                :placeholder="placeholder" />
         <span class="plus">+</span>
         <div class="enter-button" @click="enterHit" ref="enterButton">enter</div>
         <slot name="code-after" />
@@ -19,9 +19,10 @@
 </template>
 
 <script setup lang="ts">
+import autosize from "autosize";
 import EditorPane from "./EditorPane.vue";
 import HTMLMarkup from "./HTMLMarkup.vue";
-import {computed, ref, Ref} from "vue"
+import {computed, ref, Ref, watch} from "vue"
 import { chapter2 } from "../chapters/chapter2";
 import { currentChapter, state } from "../state";
 
@@ -36,10 +37,12 @@ const enterButton: Ref<HTMLElement | null> = ref(null)
 const inputElement: Ref<HTMLTextAreaElement | null> = ref(null)
 
 const level = computed(() => state.level)
+const cssEditorTitle = computed(() => {
+  if(level.value.inputLinesNumber && level.value.inputLinesNumber > 1) return `CSS Editor (${level.value.inputLinesNumber} properties to set)`
+  return "CSS Editor"
+})
 
-const inputStyle = computed(() => ({
-  height: (state.level.inputLinesNumber ?? 1) * 1.5 + "em"
-}))
+watch(inputElement, () => autosize(inputElement.value));
 
 //Animate the enter button
 function enterHit(event: Event){
@@ -111,13 +114,12 @@ function onInputKeyup(){
   color: #333;
   border: none;
   width: calc(100% - 64px);
+  height: 1.5em;
   background: none;
   margin-left: 1em;
   outline: none;
   resize: none;
   overflow: auto;
-  height: 1.5em;
-  line-height: 1.5em;
   vertical-align: middle;
 }
 
