@@ -41,7 +41,7 @@ export function goToNextLevel(){
 export function goToPreviousLevel(){
     const { currentChapter, currentLevel } = state.progress
     if(currentChapter < 1) return;
-    else if(currentLevel < 1) goToLevel(currentChapter-1, chapters[currentChapter-1].levels.length)
+    else if(currentLevel < 1) goToLevel(currentChapter-1, currentChapter === 1 ? 0 : chapters[currentChapter-2].levels.length)
     else goToLevel(currentChapter, currentLevel-1)
 }
 
