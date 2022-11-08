@@ -53,19 +53,19 @@ header {
 }
 
 .share-menu .share-github {
-  background-image: url(img/icon-github.svg);
+  background-image: url("../assets/icon-github.svg");
 }
 
 .share-menu .share-twitter {
-  background-image: url(img//icon-twitter.svg);
+  background-image: url("../assets/icon-twitter.svg");
 }
 
 .share-menu .share-facebook {
-  background-image: url(img//icon-facebook.svg);
+  background-image: url("../assets/icon-facebook.svg");
 }
 
 .share-menu .share-email {
-  background-image: url(img//icon-email.svg);
+  background-image: url("../assets/icon-email.svg");
 }
 
 .share-menu a:hover {
