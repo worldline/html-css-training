@@ -1,7 +1,7 @@
 import { reactive, Ref, computed } from "vue"
 import { Chapter } from "./chapters/chapter"
 import { chapter1Levels } from "./chapters/chapter1"
-import { chapters } from "./chapters/chapters"
+import { chapters, IntroChapter } from "./chapters/chapters"
 import { Level } from "./chapters/level"
 
 interface Progress {
@@ -21,7 +21,7 @@ export const state = reactive({
     progress: {
         completed: {},
         inputs: {},
-        currentChapter: 1,
+        currentChapter: 0,
         currentLevel: 0
     },
     level: chapter1Levels[0],
@@ -30,4 +30,7 @@ export const state = reactive({
 
 window.state = state
 
-export const currentChapter: Ref<Chapter> = computed(() => chapters[state.progress.currentChapter - 1])
+export const currentChapter: Ref<Chapter> = computed(() => {
+    if(state.progress.currentChapter === 0) return IntroChapter
+    else return chapters[state.progress.currentChapter - 1]
+})

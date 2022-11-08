@@ -1,4 +1,3 @@
-import { Component } from "vue";
 import { Level } from "./level";
 
 export interface Chapter {

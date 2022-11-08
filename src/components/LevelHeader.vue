@@ -8,8 +8,8 @@
   </h2>
 
   <div class="level-nav">
-    <a class="previous" href="#" @click.prevent="navigateLevel('previous', $event)"></a>
-    <a class="next" href="#" @click.prevent="navigateLevel('next', $event)"></a>
+    <a class="previous" href="#" @click.prevent="goToPreviousLevel"></a>
+    <a class="next" href="#" @click.prevent="goToNextLevel"></a>
   </div>
 
   <div class="level-progress" v-if="state.progress.currentLevel > 0" >
@@ -19,24 +19,12 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import {changeLevel} from "../game";
+import { goToNextLevel, goToPreviousLevel} from "../game";
 import { hasCompleted, getPercentCompleted } from "../progress";
 import { currentChapter, state } from "../state";
 
 const levels = computed(() => currentChapter.value.levels)
 const completed = computed(() => hasCompleted(state.progress.currentChapter, state.progress.currentLevel))
-
-function navigateLevel(direction="next", event: Event){
-  const el = event.target as HTMLElement;
-  el.classList.add("link-jiggle");
-  setTimeout(() => { el.classList.remove("link-jiggle"); }, 1000)
-
-  if(direction === "next") {
-    changeLevel(state.progress.currentChapter, state.progress.currentLevel + 1)
-  } else {
-    changeLevel(state.progress.currentChapter, state.progress.currentLevel - 1)
-  }
-}
 </script>
 
 <style scoped>
@@ -119,23 +107,5 @@ function navigateLevel(direction="next", event: Event){
 .level-nav .next:after {
   transform: rotate(45deg);
   left: 2px;
-}
-
-.level-nav a.link-jiggle {
-  animation: linkJiggle .2s ease-out;
-}
-
-@keyframes linkJiggle {
-  0% {
-    transform: scale(1);
-  }
-  10% {
-    transform: scaleX(.87) scaleY(.8);
-
-  }
-  40% {
-    transform: scale(1.13);
-  }
-
 }
 </style>

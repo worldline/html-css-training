@@ -1,13 +1,12 @@
 <template>
-  <h1 class="chapter-header">Chapter {{state.progress.currentChapter}}: {{chapter.name}}</h1>
+  <h1 class="chapter-header">
+    <span v-if="state.progress.currentChapter > 0">Chapter {{state.progress.currentChapter}}: </span>
+    {{currentChapter.name}}
+  </h1>
 </template>
 
 <script setup lang="ts">
-import {state} from "../state";
-import {computed} from "vue";
-import {chapters} from "../chapters/chapters";
-
-const chapter = computed(() => chapters[state.progress.currentChapter-1])
+import {currentChapter, state} from "../state";
 </script>
 
 <style scoped>

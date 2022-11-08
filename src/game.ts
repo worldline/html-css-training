@@ -1,9 +1,9 @@
 import {hideAllPoppers} from "floating-vue";
 import {clamp} from "./utils";
 import {chapters} from "./chapters/chapters";
-import {Level} from "./chapters/level";
 import { state, currentChapter } from "./state";
 import { completeLevel, saveProgress } from "./progress";
+import { Level } from "./chapters/level";
 
 export function closeMenu(){
     state.menuOpened = false;
@@ -24,21 +24,31 @@ export function resetProgress(){
 
 export function completeLevelAndGoNext(){
     completeLevel();
-    changeLevel(state.progress.currentChapter, state.progress.currentLevel+1)        
+    goToNextLevel();
 }
 
-export function changeLevel(chapterNumber: number, levelNumber: number){
-    const chapter = chapters[chapterNumber-1]
-    if(levelNumber > chapter.levels.length && chapterNumber < chapters.length) {
-        chapterNumber++;
-        levelNumber = 0;
-    } else if(levelNumber < 0 && chapterNumber > 1){
-        chapterNumber = Math.max(1, chapterNumber-1)
-        levelNumber = chapters[chapterNumber-1].levels.length
+export function goToNextLevel(){
+    const { currentChapter, currentLevel } = state.progress
+    if(currentChapter < 1) goToLevel(1,0)
+    else if(currentLevel >= chapters[currentChapter-1].levels.length){
+        if(currentChapter >= chapters.length) return;
+        goToLevel(currentChapter+1, 0)
+    } else {
+        goToLevel(currentChapter, currentLevel+1)
     }
+}
 
-    const newChapter = clamp(chapterNumber, 1, chapters.length)
-    const newLevel = clamp(levelNumber, 0, chapters[chapterNumber-1].levels.length)
+export function goToPreviousLevel(){
+    const { currentChapter, currentLevel } = state.progress
+    if(currentChapter < 1) return;
+    else if(currentLevel < 1) goToLevel(currentChapter-1, chapters[currentChapter-1].levels.length)
+    else goToLevel(currentChapter, currentLevel-1)
+}
+
+export function goToLevel(chapterNumber: number, levelNumber: number){
+    const newChapter = clamp(chapterNumber, 0, chapters.length)
+    const nbLevels = chapterNumber === 0 ? 0 : chapters[chapterNumber-1].levels.length
+    const newLevel = clamp(levelNumber, 0, nbLevels)
     if(newLevel !== state.progress.currentLevel || newChapter !== state.progress.currentChapter){
         state.progress.currentChapter = newChapter
         state.progress.currentLevel = newLevel
@@ -48,12 +58,13 @@ export function changeLevel(chapterNumber: number, levelNumber: number){
     }
 }
 
-export function loadLevel(){
+export function loadLevel(){    
     const chapter = currentChapter.value
-    const levels = chapter.levels
-    // Make sure we don't load a level we don't    
+    const levels = chapter.levels 
     state.progress.currentLevel = clamp(state.progress.currentLevel, 0, levels.length)
-    state.level = levels[state.progress.currentLevel-1] as Level;
     saveProgress()
-    if(chapter.onLevelStart) chapter.onLevelStart(state.level)
+    if((state.progress.currentLevel-1) in levels){
+        state.level = levels[state.progress.currentLevel-1] as Level;
+        if(chapter.onLevelStart) chapter.onLevelStart(state.level)
+    }
 }

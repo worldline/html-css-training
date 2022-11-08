@@ -9,11 +9,11 @@
 </template>
 
 <script setup lang="ts">
-import { changeLevel } from "../game";
-import { state, currentChapter } from "../state";
+import { goToNextLevel } from "../game";
+import { currentChapter } from "../state";
 
 function nextLevel(){
-  changeLevel(state.progress.currentChapter, 1)
+  goToNextLevel()
 }
 </script>
 

@@ -46,6 +46,8 @@ const level = computed(() => state.level as Chapter2Level)
 
 .display-help pre {
   margin: 0;
+  max-width: 315px;
+  overflow-x: auto;
 }
 
 .display-help .hint {

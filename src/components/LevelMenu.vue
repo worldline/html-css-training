@@ -20,7 +20,7 @@
                    current: (li+1) === state.progress.currentLevel,
                    completed: hasCompleted(ci+1, li+1)
                  }"
-                 @click="changeLevel(ci+1, li+1)"
+                 @click="goToLevel(ci+1, li+1)"
               >
                 <span class='checkmark'>✔️</span>
                 <span class='level-number'>{{li+1}}</span>
@@ -40,9 +40,9 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
-import {chapters} from "../chapters/chapters";
-import {changeLevel} from "../game";
+import { ref } from "vue";
+import { chapters } from "../chapters/chapters";
+import { goToLevel } from "../game";
 import { hasCompleted, resetProgress } from "../progress";
 import { state } from "../state";
 

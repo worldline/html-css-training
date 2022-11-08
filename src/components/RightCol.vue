@@ -23,7 +23,7 @@ const rightPanelComponent = computed(() => {
   if(state.progress.currentLevel === 0) return ChapterInstructions
   switch(state.progress.currentChapter){    
     case 2: case 4: case 5: case 6: case 7: case 8: return SyntaxLevelInstructions
-    case 1: case 3: default: return LevelInstructions
+    case 1: case 3: default: return LevelInstructions    
   }
 })
 </script>

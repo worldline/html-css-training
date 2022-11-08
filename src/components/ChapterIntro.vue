@@ -1,6 +1,7 @@
 <template>
 <div class="chapter-intro">
-    <h1>Chapter {{state.progress.currentChapter}}:
+    <h1 v-if="state.progress.currentChapter === 0" class="main-title">HTML/CSS Training</h1>
+    <h1 v-else>Chapter {{state.progress.currentChapter}}:
         <p class="chapter-name">{{currentChapter.name}}</p>
     </h1>
     <hr>
@@ -20,6 +21,11 @@ import { state, currentChapter } from "../state"
     justify-content: center;
     color: #e0e0e0;
     text-shadow: 0 0 1em black;
+}
+
+.main-title {
+    margin: 0.25em 0;
+    font-size: 500%;
 }
 .chapter-name {
     margin: 0.25em 0;
