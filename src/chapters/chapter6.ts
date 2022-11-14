@@ -653,7 +653,7 @@ grid-auto-columns: <dims>...`,
 
   {
     name: "Implicit Grid - auto-fit / auto-fill",
-    doThis: "Fill the whole bento, but each area being not more than 200px wide.",
+    doThis: "Fill the whole bento, each area being at least 200px wide.",
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
