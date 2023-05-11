@@ -695,7 +695,7 @@ grid-auto-columns: <dims>...`,
       <div title="fruits (>=200px)"></div>
     </div>`,
     check: [
-      ["grid-template-columns", 'repeat(auto-fit, minmax(200px, 1fr))', 'repeat(auto-fit, minmax(200px, 1auto))'],
+      ["grid-template-columns", 'repeat(auto-fit, minmax(200px, 1fr))', 'repeat(auto-fit, minmax(200px, auto))'],
     ]
   }
 
