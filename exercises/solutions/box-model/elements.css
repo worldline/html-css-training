@@ -1,8 +1,6 @@
 .table-wrapper {
     display: inline-block;
-    transform: rotateX(20deg);
     min-height: 120px;
-    transform-origin: bottom;
     z-index: 5;
     position: relative;
     margin: 10px 20px 30px 20px;
@@ -10,7 +8,6 @@
 }
 
 .table-content {
-    transform-style: preserve-3d;
     margin: 0 auto;
     display: inline-block;
     z-index: 6;
@@ -85,6 +82,7 @@ bento:before {
 plate {
     display: block;
     border-bottom: solid 5px #ddd;
+    box-sizing: border-box;
     background: white;
     border-radius: 50%;
     z-index: 1;
