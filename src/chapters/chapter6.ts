@@ -204,7 +204,7 @@ grid-template-columns`,
     </div>`,
     inputLinesNumber: 1,
     check: [
-      ["grid", "1fr 100px / 2fr 1fr"]
+      ["grid", "1fr 100px / 2fr 1fr", "auto 100px / 2fr 1fr"]
     ]
   },
 
