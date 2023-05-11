@@ -352,7 +352,7 @@ justify-content`,
     </div>`,
     check: [
       ["flex-direction","row-reverse"],
-      ["justify-content","flex-end","end"],
+      ["justify-content","flex-end","end","left"],
     ]
   },
   {
