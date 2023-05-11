@@ -1363,7 +1363,7 @@ grid-auto-columns: <dims>...`,examples:["<code>grid-auto-rows: minmax(100px, aut
       <div title="rice (>=200px)"></div>
       <div title="veggies (>=200px)"></div>
       <div title="fruits (>=200px)"></div>
-    </div>`,check:[["grid-template-columns","repeat(auto-fit, minmax(200px, 1fr))","repeat(auto-fit, minmax(200px, 1auto))"]]}],_p={name:"Grid Layout",description:"Powerful 2D layouts",levels:xp,credits:'Credits: inspired from <a href="https://cssgridgarden.com/" target="_blank">CSS Grid Garden</a> by <a href="https://codepip.com" target="_blank">Codepip</a>',intro:`<p>Let's learn the different ways to position elements in CSS !</p>
+    </div>`,check:[["grid-template-columns","repeat(auto-fit, minmax(200px, 1fr))","repeat(auto-fit, minmax(200px, auto))"]]}],_p={name:"Grid Layout",description:"Powerful 2D layouts",levels:xp,credits:'Credits: inspired from <a href="https://cssgridgarden.com/" target="_blank">CSS Grid Garden</a> by <a href="https://codepip.com" target="_blank">Codepip</a>',intro:`<p>Let's learn the different ways to position elements in CSS !</p>
   <p>While flexbox is a great layout tool for <b>one-directional</b> flow, we still need a solution for complex 2D placement.</p>
   <p>CSS Grid is this solution. It consists of around 24 new CSS properties that provides a powerful way to create two-dimensional layouts. Let's dig in !</p>`,onLevelStart(){ot(()=>{Ps()})}},me=`
 <h1>Chef Nakamura's Restaurant</h1>
