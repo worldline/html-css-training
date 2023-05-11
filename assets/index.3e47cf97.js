@@ -858,7 +858,7 @@ justify-content`,help:"<p>Combine what you learned with <code>flex-direction</co
       <plate class="salmon"></plate>
       <plate class="egg"></plate>
       <plate class="avocado"></plate>
-    </div>`,check:[["flex-direction","row-reverse"],["justify-content","flex-end","end"]]},{name:"Flex direction 4/5",doThis:"Put the sushis on the plates according to their color",selector:"bento",wrapperClass:"flex-game",cssRules:{bento:["display: flex"]},syntax:`flex-direction
+    </div>`,check:[["flex-direction","row-reverse"],["justify-content","flex-end","end","left"]]},{name:"Flex direction 4/5",doThis:"Put the sushis on the plates according to their color",selector:"bento",wrapperClass:"flex-game",cssRules:{bento:["display: flex"]},syntax:`flex-direction
 justify-content
 align-items`,help:"<p>Combine what you learned with <code>flex-direction</code>, <code>justify-content</code> and <code>align-items</code> to position the items !</p>",inputLinesNumber:3,markup:`
     <bento style="width: 700px; height: 400px">
@@ -1144,7 +1144,7 @@ grid-template-columns`,help:`<p>By combining <code>grid-template-rows</code> and
       <div style="--section-color: rgba(0,255,0,0.5)" title="veggies (1/3 wide)"></div>
       <div style="--section-color: rgba(0,0,0,0.5)" title="sushis (100px high)"></div>
       <div style="--section-color: rgba(255,255,0,0.5)" title="fruits"></div>
-    </div>`,inputLinesNumber:1,check:[["grid","1fr 100px / 2fr 1fr"]]},{name:"Grid gaps",doThis:"Add 50px gaps between the zones of the bento",selector:"bento",wrapperClass:"grid-game",cssRules:{bento:["display: grid","grid: 1fr 100px / 2fr 1fr;"]},syntax:`gap: <dimension>
+    </div>`,inputLinesNumber:1,check:[["grid","1fr 100px / 2fr 1fr","auto 100px / 2fr 1fr"]]},{name:"Grid gaps",doThis:"Add 50px gaps between the zones of the bento",selector:"bento",wrapperClass:"grid-game",cssRules:{bento:["display: grid","grid: 1fr 100px / 2fr 1fr;"]},syntax:`gap: <dimension>
 gap: <row> <col>`,help:"<p>To add space between the items of the grid, use the <code>gap</code> property. You can pass two values if you want to specify different gaps between rows and columns.</p>",markup:`
     <bento style="width: 700px; height: 360px">
       <div class="tile rice"></div>
@@ -1334,7 +1334,7 @@ grid-auto-columns: <dims>...`,examples:["<code>grid-auto-rows: minmax(100px, aut
       <div title="rice (100px wide)"></div>
       <div title="veggies"></div>
       <div title="rice (100px wide)"></div>
-    </div>`,check:[["grid-auto-columns","100px 1fr","100px auto","100px 1fr 100px 1fr 100px"]]},{name:"Implicit Grid - auto-fit / auto-fill",doThis:"Fill the whole bento, but each area being not more than 200px wide.",selector:"bento",wrapperClass:"grid-game",cssRules:{bento:["display: grid"]},syntax:`repeat(
+    </div>`,check:[["grid-auto-columns","100px 1fr","100px auto","100px 1fr 100px 1fr 100px"]]},{name:"Implicit Grid - auto-fit / auto-fill",doThis:"Fill the whole bento, each area being at least 200px wide.",selector:"bento",wrapperClass:"grid-game",cssRules:{bento:["display: grid"]},syntax:`repeat(
   auto-fit,
   minmax(100px, 1fr)
 )`,examples:["<code>grid-template-columns: repeat(auto-fit, minmax(50px, 100px))</code> will make as many columns as needed between 50px and 100px wide, to fill the entire grid container."],help:`<p>Use the <code>auto-fit</code> keyword in a <code>repeat()</code> instruction to automatically pick the right number of columns or rows that can fit the grid depending on your content.</p>
@@ -1363,7 +1363,7 @@ grid-auto-columns: <dims>...`,examples:["<code>grid-auto-rows: minmax(100px, aut
       <div title="rice (>=200px)"></div>
       <div title="veggies (>=200px)"></div>
       <div title="fruits (>=200px)"></div>
-    </div>`,check:[["grid-template-columns","repeat(auto-fit, minmax(200px, 1fr))"]]}],_p={name:"Grid Layout",description:"Powerful 2D layouts",levels:xp,credits:'Credits: inspired from <a href="https://cssgridgarden.com/" target="_blank">CSS Grid Garden</a> by <a href="https://codepip.com" target="_blank">Codepip</a>',intro:`<p>Let's learn the different ways to position elements in CSS !</p>
+    </div>`,check:[["grid-template-columns","repeat(auto-fit, minmax(200px, 1fr))","repeat(auto-fit, minmax(200px, 1auto))"]]}],_p={name:"Grid Layout",description:"Powerful 2D layouts",levels:xp,credits:'Credits: inspired from <a href="https://cssgridgarden.com/" target="_blank">CSS Grid Garden</a> by <a href="https://codepip.com" target="_blank">Codepip</a>',intro:`<p>Let's learn the different ways to position elements in CSS !</p>
   <p>While flexbox is a great layout tool for <b>one-directional</b> flow, we still need a solution for complex 2D placement.</p>
   <p>CSS Grid is this solution. It consists of around 24 new CSS properties that provides a powerful way to create two-dimensional layouts. Let's dig in !</p>`,onLevelStart(){ot(()=>{Ps()})}},me=`
 <h1>Chef Nakamura's Restaurant</h1>
