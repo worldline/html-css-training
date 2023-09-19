@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Sylvain Pollet-Villard" />
+    <title>HTML 5 cheatsheet</title>
+    <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" href="./print.css" media="print" />
+  </head>
+  <body>
+    <header>
+      <h1>HTML 5 Essentials Cheat Sheet</h1>
+      <div>
+        <time datetime="2023-09-19">September 2023</time> - GRS - Worldline
+        <br />
+        Mozilla documentation:
+        <a href="https://awl.li/htmldocs">awl.li/htmldocs</a>
+        <br />
+        <mark>Golden rule: HTML is for semantics, CSS is for style</mark>
+      </div>
+    </header>
+
+    <main>
+      <article id="base">
+        <header>
+          <h2>Base elements</h2>
+        </header>
+
+        <ul>
+          <li>
+            <code class="tag">html</code>
+            <ul>
+              <li>
+                <code class="tag">head</code>
+                <ul>
+                  <li><code class="tag">title</code></li>
+                  <li><code class="tag">meta</code></li>
+                  <li><code class="tag">link</code></li>
+                </ul>
+              </li>
+              <li><code class="tag">body</code></li>
+              <li><code class="tag">script</code></li>
+            </ul>
+          </li>
+        </ul>
+        <dl>
+          <dt><code class="tag">div</code></dt>
+          <dd>generic block element</dd>
+          <dt><code class="tag">span</code></dt>
+          <dd>generic inline element</dd>
+        </dl>
+      </article>
+
+      <article id="sectioning">
+        <header><h2>Sectioning content</h2></header>
+        <dl>
+          <dt><code class="tag">article</code></dt>
+          <dd>an independent part of a the page</dd>
+          <dt><code class="tag">aside</code></dt>
+          <dd>
+            content that is tangentially related to the content around the aside
+            element
+          </dd>
+          <dt><code class="tag">nav</code></dt>
+          <dd>section with navigation links</dd>
+          <dt><code class="tag">section</code></dt>
+          <dd>generic section of an app/document</dd>
+          <dt><code class="tag">header</code></dt>
+          <dd>group of introductory or navigational aids.</dd>
+          <dt><code class="tag">footer</code></dt>
+          <dd>footer for its nearest ancestor sectioning content</dd>
+          <dt><code class="tag">dialog</code></dt>
+          <dd>for pop-ins / modal windows</dd>
+        </dl>
+      </article>
+
+      <article id="text-hierarchy">
+        <header><h2>Text hierarchy</h2></header>
+        <dl>
+          <dt>
+            <code class="tag">h1</code>, <code class="tag">h2</code>,
+            <code class="tag">h3</code>, <code class="tag">h4</code>,
+            <code class="tag">h5</code>,
+            <code class="tag">h6</code>
+          </dt>
+          <dd>headings (<strong>respect hierarchy !</strong>)</dd>
+
+          <dt><code class="tag">p</code></dt>
+          <dd>paragraph block</dd>
+
+          <dt><code class="tag">small</code></dt>
+          <dd>
+            smaller importance, by default has <small>a lower font size</small>
+          </dd>
+
+          <dt><code class="tag">strong</code></dt>
+          <dd>high importance, by default in <strong>bold</strong></dd>
+
+          <dt><code class="tag">em</code></dt>
+          <dd>put emphasis on text, by default in <em>italic</em></dd>
+
+          <dt><code class="tag">del</code></dt>
+          <dd>
+            indicate a deleted content, by default with a
+            <del>line through</del>
+          </dd>
+
+          <dt><code class="tag">mark</code></dt>
+          <dd>highlight text, by default in <mark>yellow</mark></dd>
+        </dl>
+      </article>
+
+      <article id="text-classification">
+        <header>
+          <h2>Text classification</h2>
+        </header>
+        <dl>
+          <dt><code class="tag">a</code></dt>
+          <dd>link, use it with <code>href</code> attribute</dd>
+
+          <dt><code class="tag">abbr</code></dt>
+          <dd>abbreviation, use it with <code>title</code> attribute</dd>
+
+          <dt><code class="tag">time</code></dt>
+          <dd>
+            used with <code>datetime</code> attribute to refer to a date and
+            time
+          </dd>
+
+          <dt><code class="tag">address</code></dt>
+          <dd>used to refer to a postal address</dd>
+
+          <dt>
+            <code class="tag">q</code>, <code class="tag">blockquote</code>
+          </dt>
+          <dd>
+            quotes, either inline or in a block, by default
+            <q>surrounded with quotes</q>
+          </dd>
+
+          <dt><code class="tag">pre</code></dt>
+          <dd>
+            preformatted text, preserve whitespaces, by default in
+            <pre style="display: inline">monospace</pre>
+          </dd>
+
+          <dt><code class="tag">code</code></dt>
+          <dd>
+            snippet of code, by default in <code class="tag">monospace</code>
+          </dd>
+        </dl>
+      </article>
+
+      <article id="lists">
+        <header>
+          <h2>Lists</h2>
+        </header>
+        <dl>
+          <dt><code class="tag">ul</code></dt>
+          <dd>unordered list</dd>
+
+          <dt><code class="tag">ol</code></dt>
+          <dd>ordered list</dd>
+
+          <dt><code class="tag">li</code></dt>
+          <dd>list item</dd>
+
+          <dt><code class="tag">dl</code></dt>
+          <dd>
+            list of terms/definitions. Terms are in
+            <code class="tag">dt</code> followed directly by definitions in
+            <code class="tag">dd</code>
+          </dd>
+
+          <dt><code class="tag">menu</code></dt>
+          <dd>
+            list of menu actions used for navigation or application controls
+          </dd>
+
+          <dt><code class="tag">datalist</code></dt>
+          <dd>
+            list of autocomplete suggestions in
+            <code class="tag">option</code> children to link with
+            <code class="tag">input</code>
+          </dd>
+        </dl>
+      </article>
+
+      <article id="tables">
+        <header>
+          <h2>Tables</h2>
+        </header>
+        <dl>
+          <dt><code class="tag">table</code></dt>
+          <dd><em>use it only for data tables !</em></dd>
+
+          <dt>
+            <code class="tag">thead</code>, <code class="tag">tbody</code>,
+            <code class="tag">tfoot</code>
+          </dt>
+          <dd>
+            header,<br />
+            body and<br />
+            footer of a <code class="tag">table</code>
+          </dd>
+
+          <dt><code class="tag">tr</code></dt>
+          <dd>table row</dd>
+
+          <dt><code class="tag">th</code></dt>
+          <dd>
+            column heading in a <code class="tag">tr</code> in a
+            <code class="tag">thead</code>
+          </dd>
+
+          <dt><code class="tag">td</code></dt>
+          <dd>
+            data cell heading in a <code class="tag">tr</code> in a
+            <code class="tag">tbody</code>
+          </dd>
+        </dl>
+      </article>
+
+      <article id="forms">
+        <header><h2>Forms</h2></header>
+        <ul>
+          <li><code class="tag">form</code></li>
+          <li><code class="tag">search</code>: contains a search form</li>
+          <li><code class="tag">fieldset</code>: group a list of inputs</li>
+          <li>
+            <code class="tag">legend</code>: caption of a
+            <code class="tag">fielset</code>
+          </li>
+          <li>
+            <code class="tag">label</code>: use with <code>for</code> attribute
+          </li>
+          <li><code class="tag">button</code></li>
+          <li><code class="tag">textarea</code></li>
+          <li>
+            <code class="tag">input</code>
+            <ul>
+              <li>
+                types: <code>text</code>, <code>number</code>,
+                <code>range</code>, <code>color</code>, <code>search</code>,
+                <code>tel</code>, <code>email</code>, <code>url</code>,
+                <code>datetime</code>, <code>datetime-local</code>,
+                <code>date</code>, <code>month</code>, <code>week</code>,
+                <code>time</code>, <code>checkbox</code>,
+                <code>range</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <code class="tag">select</code>
+            <ul>
+              <li>
+                <code class="tag">option</code>,
+                <code class="tag">optgroup</code>
+              </li>
+            </ul>
+          </li>
+          <li><code class="tag">output</code>: a computed result</li>
+        </ul>
+      </article>
+
+      <article id="media">
+        <header><h2>Media and other content</h2></header>
+        <dl>
+          <dt><code class="tag">img</code></dt>
+          <dd>
+            if you need several sources for an image, use
+            <code class="tag">picture</code> and
+            <code class="tag">source</code> tags
+          </dd>
+
+          <dt>
+            <code class="tag">audio</code>, <code class="tag">video</code>
+          </dt>
+          <dd>
+            Use either the <code>src</code> attribute or
+            <code class="tag">source</code> children elements.
+          </dd>
+
+          <dt><code class="tag">svg</code></dt>
+          <dd>inline vectorial images</dd>
+
+          <dt><code class="tag">canvas</code></dt>
+          <dd>used for 2D/3D drawing/scenes</dd>
+
+          <dt><code class="tag">figure</code></dt>
+          <dd>
+            wrap around a media or table to link it with a caption inside a
+            <code class="tag">figcaption</code> tag
+          </dd>
+
+          <dt>
+            <code class="tag">progress</code>, <code class="tag">meter</code>
+          </dt>
+          <dd>progress bar and scalar value output</dd>
+        </dl>
+      </article>
+    </main>
+  </body>
+</html>

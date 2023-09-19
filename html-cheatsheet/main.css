@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@500&family=Roboto&display=swap");
+
+body {
+  margin: 0;
+  font-size: 12px;
+  font-family: "Open Sans";
+}
+
+body > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eee;
+  padding: 0 1em;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(auto, 25%));
+}
+
+main article {
+  padding: 0 1em;
+}
+
+code.tag::before {
+  content: "<";
+}
+code.tag::after {
+  content: ">";
+}
+
+article > ul {
+  list-style: none;
+  padding: 0;
+}
+
+main dl {
+  display: grid;
+  grid-template-columns: 10ch 1fr;
+  gap: 0.5em 0;
+}
+
+main dd {
+  margin-left: 1em;
+}

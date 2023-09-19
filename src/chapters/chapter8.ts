@@ -96,6 +96,7 @@ export const chapter8Levels: Chapter8Level[] = [
         `#ff000040`,
         `hsl(0,100%,100%,25%)`,
         `hsla(0,100%,100%,25%)`,
+        `rgb(255 0 0 / 0.25)`
       ]
     ]
   },
