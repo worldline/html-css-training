@@ -42,7 +42,7 @@ final challenge: implicit grid with auto flow and repeat()
 
 export const chapter6Levels: Chapter6Level[] = [
   {
-    name: "Grid display",    
+    name: "Grid display",
     doThis: "Distribute the food in the correct areas of the bento",
     selector: "bento",
     wrapperClass: "grid-game",
@@ -66,9 +66,7 @@ export const chapter6Levels: Chapter6Level[] = [
       <div title="veggies"></div>
       <div title="fruits"></div>
     </div>`,
-    check: [
-      ["display","grid"]
-    ]
+    check: [["display", "grid"]],
   },
 
   {
@@ -77,7 +75,7 @@ export const chapter6Levels: Chapter6Level[] = [
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid"]
+      bento: ["display: grid"],
     },
     syntax: `grid-template-columns:
   <dim1> <dim2> <dim3...>;`,
@@ -99,11 +97,9 @@ export const chapter6Levels: Chapter6Level[] = [
       <div style="--section-color: rgba(0,255,0,0.5)" title="veggies (20% width)"></div>
     </div>`,
     examples: [
-      `<code>grid-template-columns: 300px 300px;</code> defines a 2-column layout with each column being 300px wide`
+      `<code>grid-template-columns: 300px 300px;</code> defines a 2-column layout with each column being 300px wide`,
     ],
-    check: [
-      ["grid-template-columns","20% 60% 20%"]
-    ]
+    check: [["grid-template-columns", "20% 60% 20%"]],
   },
 
   {
@@ -112,7 +108,7 @@ export const chapter6Levels: Chapter6Level[] = [
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid"]
+      bento: ["display: grid"],
     },
     syntax: `grid-template-rows:
   <dim1> <dim2> <dim3...>;`,
@@ -133,11 +129,9 @@ export const chapter6Levels: Chapter6Level[] = [
       <div style="--section-color: rgba(0,255,0,0.5)" title="veggies (1/3 of remaining space)"></div>
     </div>`,
     examples: [
-      `<code>grid-template-rows: 2fr 1fr 1fr</code> defines a 3-rows layout with the first row being twice as wide as the other rows`
+      `<code>grid-template-rows: 2fr 1fr 1fr</code> defines a 3-rows layout with the first row being twice as wide as the other rows`,
     ],
-    check: [
-      ["grid-template-rows","80px 2fr 1fr"]
-    ]
+    check: [["grid-template-rows", "80px 2fr 1fr"]],
   },
 
   {
@@ -146,7 +140,7 @@ export const chapter6Levels: Chapter6Level[] = [
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid"]
+      bento: ["display: grid"],
     },
     syntax: `grid-template-rows
 grid-template-columns`,
@@ -170,9 +164,9 @@ grid-template-columns`,
     </div>`,
     inputLinesNumber: 2,
     check: [
-      ["grid-template-rows", "1fr 100px"],
+      ["grid-template-rows", "1fr 100px", "auto 100px"],
       ["grid-template-columns", "2fr 1fr"],
-    ]
+    ],
   },
 
   {
@@ -181,7 +175,7 @@ grid-template-columns`,
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid"]
+      bento: ["display: grid"],
     },
     syntax: `grid: <rows> / <columns>`,
     help: `<p>The <code>grid</code> property is a <b>shorthand</b> to specify both the columns and the rows in a single instruction. The rows and columns dimensions must be separated with a <code>/</code> character.</p>
@@ -203,9 +197,7 @@ grid-template-columns`,
       <div style="--section-color: rgba(255,255,0,0.5)" title="fruits"></div>
     </div>`,
     inputLinesNumber: 1,
-    check: [
-      ["grid", "1fr 100px / 2fr 1fr", "auto 100px / 2fr 1fr"]
-    ]
+    check: [["grid", "1fr 100px / 2fr 1fr", "auto 100px / 2fr 1fr"]],
   },
 
   {
@@ -214,7 +206,7 @@ grid-template-columns`,
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: 1fr 100px / 2fr 1fr;"]
+      bento: ["display: grid", "grid: 1fr 100px / 2fr 1fr;"],
     },
     syntax: `gap: <dimension>
 gap: <row> <col>`,
@@ -236,25 +228,24 @@ gap: <row> <col>`,
       <div style="--section-color: rgba(255,255,0,0.5)" title="fruits"></div>
     </div>`,
     inputLinesNumber: 1,
-    check: [
-      ["gap", "50px", "50px 50px"]
-    ]
+    check: [["gap", "50px", "50px 50px"]],
   },
 
   {
     name: "Grid template: repeat()",
-    doThis: "Use grid: repeat() to declare a 4x3 grid layout with equal size areas",
+    doThis:
+      "Use grid: repeat() to declare a 4x3 grid layout with equal size areas",
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid"]
+      bento: ["display: grid"],
     },
     syntax: `repeat(<number>, <dim>)`,
     help: `<p>The <code>repeat()</code> keyword is a utility to repeat the same dimension a certain number of times in a grid template declaration.</p>
     <p style="font-weight: bold">Try to use this keyword with the <code>grid</code> property to fill the bento with a 4x3 grid layout with equal size areas.</p>`,
     examples: [
       `<code>grid-template-rows: repeat(5, 50px)</code> is equivalent to <code>grid-template-rows: 50px 50px 50px 50px 50px</code>`,
-      `<code>grid: repeat(3, 100px) / repeat(2, 1fr)</code> is equivalent to <code>grid: 100px 100px 100px / 1fr 1fr</code>, which declares 3 rows of 100px height and 2 columns of equal size.`
+      `<code>grid: repeat(3, 100px) / repeat(2, 1fr)</code> is equivalent to <code>grid: 100px 100px 100px / 1fr 1fr</code>, which declares 3 rows of 100px height and 2 columns of equal size.`,
     ],
     markup: `
     <bento style="width: 700px; height: 360px">
@@ -270,8 +261,12 @@ gap: <row> <col>`,
     </div>`,
     inputLinesNumber: 1,
     check: [
-      ["grid", "repeat(3, 1fr) / repeat(4, 1fr)", "repeat(3, auto) / repeat(4, auto)"]
-    ]
+      [
+        "grid",
+        "repeat(3, 1fr) / repeat(4, 1fr)",
+        "repeat(3, auto) / repeat(4, auto)",
+      ],
+    ],
   },
 
   {
@@ -280,7 +275,7 @@ gap: <row> <col>`,
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"]
+      bento: ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
     },
     syntax: `justify-items: <value>
 align-items: <value>`,
@@ -295,7 +290,7 @@ align-items: <value>`,
     </ul>`,
     examples: [
       `<code>justify-items: end</code> will align the items content on the right edge of the area</code>`,
-      `<code>align-items: stretch</code> will stretch the items content so they fill the entire height of their area</code>`
+      `<code>align-items: stretch</code> will stretch the items content so they fill the entire height of their area</code>`,
     ],
     markup: `
     <bento style="width: 700px; height: 360px">
@@ -314,7 +309,7 @@ align-items: <value>`,
     check: [
       ["justify-items", "center"],
       ["align-items", "center"],
-    ]
+    ],
   },
 
   {
@@ -323,7 +318,12 @@ align-items: <value>`,
     selector: ".tile",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: 150px 1fr / 1fr 1fr 1fr", "align-items: center", "justify-items: center"]
+      bento: [
+        "display: grid",
+        "grid: 150px 1fr / 1fr 1fr 1fr",
+        "align-items: center",
+        "justify-items: center",
+      ],
     },
     syntax: `justify-self: <value>
 align-self: <value>`,
@@ -335,7 +335,7 @@ align-self: <value>`,
     <li><code>end</code>: pack near the end edge of the area</li>
     <li><code>center</code>: pack around the vertical/horizontal center of the area</li>
     <li><code>baseline</code>: align so that all the items share the same baseline</li>
-    </ul>`,    
+    </ul>`,
     markup: `
     <bento style="width: 700px; height: 360px">
       <sushi></sushi><sushi></sushi><sushi></sushi>
@@ -352,7 +352,7 @@ align-self: <value>`,
     check: [
       ["justify-self", "stretch"],
       ["align-self", "stretch"],
-    ]
+    ],
   },
 
   {
@@ -361,7 +361,7 @@ align-self: <value>`,
     selector: ".rice",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"]
+      bento: ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
     },
     syntax: `grid-column-start: <num>`,
     help: `<p><code>grid-column-start</code> specifies the position of the starting edge of the item within the grid columns. If required, it can add a span or a new line.</p>
@@ -378,9 +378,7 @@ align-self: <value>`,
       <div title="veggies"></div>
       <div title="fruits"></div>
     </div>`,
-    check: [
-      ["grid-column-start", "2"]
-    ]
+    check: [["grid-column-start", "2"]],
   },
 
   {
@@ -389,8 +387,8 @@ align-self: <value>`,
     selector: ".rice",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
-      ".rice": ["grid-column-start: 2"]
+      bento: ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
+      ".rice": ["grid-column-start: 2"],
     },
     syntax: `grid-column-end: <num>`,
     help: `<p><code>grid-column-end</code> specifies the position of the end edge of the item within the grid columns.</p>
@@ -407,9 +405,7 @@ align-self: <value>`,
       <div title="veggies"></div>
       <div title="fruits"></div>
     </div>`,
-    check: [
-      ["grid-column-end", "4", "-2"],
-    ]
+    check: [["grid-column-end", "4", "-2"]],
   },
 
   {
@@ -418,8 +414,8 @@ align-self: <value>`,
     selector: ".veggies",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
-      ".rice": ["grid-column-start: 2", "grid-column-end: 4"]
+      bento: ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
+      ".rice": ["grid-column-start: 2", "grid-column-end: 4"],
     },
     syntax: `grid-row-start: <num>`,
     help: `<p><code>grid-row-start</code> specifies the position of the start edge of the item within the grid rows.</p>
@@ -436,9 +432,7 @@ align-self: <value>`,
       <div title="veggies" style="grid-row-start: 2"></div>
       <div title="fruits"></div>
     </div>`,
-    check: [
-      ["grid-row-start", "2"]
-    ]
+    check: [["grid-row-start", "2"]],
   },
 
   {
@@ -447,9 +441,9 @@ align-self: <value>`,
     selector: ".veggies",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
+      bento: ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
       ".rice": ["grid-column-start: 2", "grid-column-end: 4"],
-      ".veggies": ["grid-row-start: 2"]
+      ".veggies": ["grid-row-start: 2"],
     },
     syntax: `grid-row-end: <num>`,
     help: `<p><code>grid-row-end</code> specifies the position of the end edge of the item within the grid rows.</p>`,
@@ -465,9 +459,7 @@ align-self: <value>`,
       <div title="veggies" style="grid-row-start: 2; grid-row-end: 4"></div>
       <div title="fruits"></div>
     </div>`,
-    check: [
-      ["grid-row-end", "4"]
-    ]
+    check: [["grid-row-end", "4"]],
   },
 
   {
@@ -476,7 +468,7 @@ align-self: <value>`,
     selector: ".rice",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
+      bento: ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
     },
     syntax: `grid-row: <start>/<end>
 grid-column: <start>/<end>`,
@@ -497,8 +489,8 @@ grid-column: <start>/<end>`,
     inputLinesNumber: 2,
     check: [
       ["grid-row", "1/3"],
-      ["grid-column", "3/5", "3/-1"]
-    ]
+      ["grid-column", "3/5", "3/-1"],
+    ],
   },
 
   {
@@ -507,10 +499,10 @@ grid-column: <start>/<end>`,
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid"],
-      ".rice": ["grid-column: 1 / 3"]
+      bento: ["display: grid"],
+      ".rice": ["grid-column: 1 / 3"],
     },
-    syntax: `grid-auto-flow: row dense`,    
+    syntax: `grid-auto-flow: row dense`,
     help: `<p>The default behavior of grid layout is to place items along the rows while always progressing forward. The items will be placed according to the order they are in the source, or any modification with the <code>order</code> property. If there is not enough space to fit an item, grid will leave a gap and move to the next track.</p>
     <p>An auto-placed layout with some items spanning multiple tracks may result in a grid with some unfilled cells. You can change the automatic flow to make fill these gaps. This may mean that the display becomes disconnected from the logical order. This is called <b>dense packing</b>.</p>
     `,
@@ -528,9 +520,7 @@ grid-column: <start>/<end>`,
       <div title="fruits"></div>
       <div title="fruits"></div>
     </div>`,
-    check: [
-      ["grid-auto-flow", 'dense', 'row dense'],
-    ]
+    check: [["grid-auto-flow", "dense", "row dense"]],
   },
 
   {
@@ -539,8 +529,8 @@ grid-column: <start>/<end>`,
     selector: ".veggies",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
-      ".rice": ["grid-column: 3/5","grid-row: 1/3"]
+      bento: ["display: grid", "grid: repeat(3, 1fr) / repeat(4, 1fr)"],
+      ".rice": ["grid-column: 3/5", "grid-row: 1/3"],
     },
     syntax: `grid-area: <row-start>
          / <col-start>
@@ -560,9 +550,7 @@ grid-column: <start>/<end>`,
       <div title="veggies" style="grid-area: 3/2/4/4;"></div>
       <div title="fruits"></div>
     </div>`,
-    check: [
-      ["grid-area", " 3/2/4/4"]
-    ]
+    check: [["grid-area", " 3/2/4/4"]],
   },
 
   {
@@ -571,11 +559,11 @@ grid-column: <start>/<end>`,
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid: repeat(2, 1fr) / repeat(3, 1fr)"],
-      ".sushis" : ["grid-area: sushis"],
-      ".rice" : ["grid-area: rice"],
-      ".veggies" : ["grid-area: veggies"],
-      ".fruits" : ["grid-area: fruits"],
+      bento: ["display: grid", "grid: repeat(2, 1fr) / repeat(3, 1fr)"],
+      ".sushis": ["grid-area: sushis"],
+      ".rice": ["grid-area: rice"],
+      ".veggies": ["grid-area: veggies"],
+      ".fruits": ["grid-area: fruits"],
     },
     syntax: `grid-template-areas:   
   <string>+`,
@@ -585,7 +573,8 @@ grid-column: <start>/<end>`,
     "menu   main"
     "menu   footer"</code></pre>
     <img src="img/grid-template-areas-example.png"/>
-    `],
+    `,
+    ],
     help: `<p><code>grid-template-areas</code> let you define custom names for areas in your grid with a handy syntax.</p>
     <p>Items can then be assigned to these areas by their name using the <code>grid-area</code> property.</p>
     <p>Each string contains the area names for each column, separated by spaces. These string parts are then listed for each row, separated by spaces as well. Line breaks are not mandatory but can help to visualize the layout.</p>
@@ -611,7 +600,7 @@ grid-column: <start>/<end>`,
     </div>`,
     check: [
       ["grid-template-areas", '"sushis sushis fruits" "rice veggies fruits"'],
-    ]
+    ],
   },
 
   {
@@ -620,13 +609,17 @@ grid-column: <start>/<end>`,
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid", "grid-auto-flow: column", "grid-template-rows: 100%"]
+      bento: [
+        "display: grid",
+        "grid-auto-flow: column",
+        "grid-template-rows: 100%",
+      ],
     },
     syntax: `grid-auto-rows: <dims>...
 grid-auto-columns: <dims>...`,
     examples: [
       `<code>grid-auto-rows: minmax(100px, auto);</code> will automatically create rows at a minimum size of 100px.`,
-      `<code>grid-auto-columns: 100px 200px</code> will automatically create columns alternating between 100px and 200px.`
+      `<code>grid-auto-columns: 100px 200px</code> will automatically create columns alternating between 100px and 200px.`,
     ],
     help: `<p>When you are not explicitely declaring a grid with <code>grid-template</code> properties, or when the explicit grid is full, the items are placed in new tracks, automatically created. These tracks are referred to as the <strong>implicit grid</strong>.</p>
     <p>You can change the sizing of these implicit new tracks with the <code>grid-auto-rows</code> and <code>grid-auto-columns</code> property.</p>`,
@@ -647,8 +640,13 @@ grid-auto-columns: <dims>...`,
       <div title="rice (100px wide)"></div>
     </div>`,
     check: [
-      ["grid-auto-columns", '100px 1fr', '100px auto', '100px 1fr 100px 1fr 100px'],
-    ]
+      [
+        "grid-auto-columns",
+        "100px 1fr",
+        "100px auto",
+        "100px 1fr 100px 1fr 100px",
+      ],
+    ],
   },
 
   {
@@ -657,14 +655,15 @@ grid-auto-columns: <dims>...`,
     selector: "bento",
     wrapperClass: "grid-game",
     cssRules: {
-      "bento": ["display: grid"]
+      bento: ["display: grid"],
     },
     syntax: `repeat(
   auto-fit,
   minmax(100px, 1fr)
 )`,
     examples: [
-      `<code>grid-template-columns: repeat(auto-fit, minmax(50px, 100px))</code> will make as many columns as needed between 50px and 100px wide, to fill the entire grid container.`],
+      `<code>grid-template-columns: repeat(auto-fit, minmax(50px, 100px))</code> will make as many columns as needed between 50px and 100px wide, to fill the entire grid container.`,
+    ],
     help: `<p>Use the <code>auto-fit</code> keyword in a <code>repeat()</code> instruction to automatically pick the right number of columns or rows that can fit the grid depending on your content.</p>
     <p>This is especially useful for automatic responsive sizing of your grid, when combining it with variable sizing like <code>minmax(200px, 1fr)</code>.</p>
     <p><code>auto-fill</code> is a small variation of <code>auto-fit</code> that allows to create empty columns to fill the first row if needed. There is no difference between them once the first track is filled.</p>
@@ -695,15 +694,18 @@ grid-auto-columns: <dims>...`,
       <div title="fruits (>=200px)"></div>
     </div>`,
     check: [
-      ["grid-template-columns", 'repeat(auto-fit, minmax(200px, 1fr))', 'repeat(auto-fit, minmax(200px, auto))'],
-    ]
-  }
+      [
+        "grid-template-columns",
+        "repeat(auto-fit, minmax(200px, 1fr))",
+        "repeat(auto-fit, minmax(200px, auto))",
+      ],
+    ],
+  },
 
   /*todo:
   span keyword ?
   implicit grid-area names with grid-column + grid-row ?
 */
- 
 ];
 
 export const chapter6: Chapter = {
@@ -714,9 +716,9 @@ export const chapter6: Chapter = {
   intro: `<p>Let's learn the different ways to position elements in CSS !</p>
   <p>While flexbox is a great layout tool for <b>one-directional</b> flow, we still need a solution for complex 2D placement.</p>
   <p>CSS Grid is this solution. It consists of around 24 new CSS properties that provides a powerful way to create two-dimensional layouts. Let's dig in !</p>`,
-  onLevelStart(){
+  onLevelStart() {
     nextTick(() => {
-      addBoardElementsTooltips()
-    })
-  }
-}
+      addBoardElementsTooltips();
+    });
+  },
+};
