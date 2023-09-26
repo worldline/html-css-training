@@ -1,5 +1,5 @@
 body {
-  background: #EFF3F4;
+  background: #eff3f4;
   margin: 0;
   font-family: sans-serif;
 }
@@ -16,7 +16,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 2;
-  box-shadow: 0 0 5px rgba(0,0,0,0.25);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
 }
 
 main {
@@ -30,6 +30,10 @@ main {
 
 h1 {
   margin: 0;
+}
+
+nav label {
+  display: inline;
 }
 
 nav li {
@@ -46,11 +50,11 @@ nav li a {
 
 nav li a.current,
 nav li a:hover {
-  background: #EC7444;
+  background: #ec7444;
   color: white;
 }
 
-nav li a:hover  {
+nav li a:hover {
   text-decoration: revert;
 }
 
@@ -58,7 +62,7 @@ nav li a:hover  {
 
 article {
   background: white;
-  box-shadow: 1px 2px 5px rgba(0,0,0,0.25);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   transition: all 300ms ease-out;
   max-width: 100vw;
@@ -66,11 +70,11 @@ article {
 
 article:hover {
   transform: scale(103%);
-  box-shadow: 2px 3px 10px rgba(0,0,0,0.35);
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.35);
 }
 
 article img {
-  width:100%;
+  width: 100%;
   height: 90px;
   object-fit: cover;
   border-radius: 5px 5px 0 0;
@@ -108,7 +112,7 @@ article li:not(:last-of-type) {
 }
 
 .price {
-  color: #EC7444;
+  color: #ec7444;
   font-weight: bold;
   text-align: center;
 }
@@ -120,25 +124,45 @@ article li:not(:last-of-type) {
 }
 
 /* Responsive Design for mobile resolutions */
-#menu-toggle {
+#menu-toggle,
+label[for="menu-toggle"] {
   display: none;
 }
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1024px) {
+  label[for="menu-toggle"],
   #menu-toggle {
-    display: block;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  #menu-toggle {
     appearance: none;
     cursor: pointer;
     width: 24px;
     height: 24px;
     /* make it look like a hamburger */
-    background: linear-gradient(to bottom, white 0 20%, gray 20% 30%, white 30% 45%, gray 45% 55%, white 55% 70%, gray 70% 80%, white 80% 100%);    
+    background: linear-gradient(
+      to bottom,
+      white 0 20%,
+      gray 20% 30%,
+      white 30% 45%,
+      gray 45% 55%,
+      white 55% 70%,
+      gray 70% 80%,
+      white 80% 100%
+    );
   }
 
   #menu-toggle:checked {
     /* make it look like a cross */
-    background: linear-gradient(45deg, transparent 0 47%, gray 47% 53%, transparent 53%),
-                linear-gradient(-45deg, transparent 0 47%, gray 47% 53%, transparent 53%);
+    background: linear-gradient(
+        45deg,
+        transparent 0 47%,
+        gray 47% 53%,
+        transparent 53%
+      ),
+      linear-gradient(-45deg, transparent 0 47%, gray 47% 53%, transparent 53%);
   }
 
   #menu-toggle:not(:checked) + ul {
@@ -151,7 +175,7 @@ article li:not(:last-of-type) {
     right: 5px;
     padding-left: 0;
     background: white;
-    box-shadow: 0 0 15px rgba(0,0,0,1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 1);
   }
 
   nav li {
@@ -164,7 +188,7 @@ article li:not(:last-of-type) {
   }
 }
 
-@media screen and (max-width: 640px){
+@media screen and (max-width: 640px) {
   main {
     padding: 0;
   }
