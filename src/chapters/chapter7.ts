@@ -36,7 +36,7 @@ const markup = `
     </ul>
     <p class="information">All our sushis are served with cooked rice and soy sauce served at will. 6 pieces minimum for deliveries and takeout orders. Allergens: fish, peanut</p>
 </main>
-`
+`;
 
 export const chapter7Levels: Chapter7Level[] = [
   {
@@ -49,21 +49,19 @@ export const chapter7Levels: Chapter7Level[] = [
     <p>This property accepts a comma-separated list of font names as quoted strings. You can also use generic font names like <code>serif</code>, <code>sans-serif</code> or <code>monospace</code> to display generic fonts specific to the user operating system.</p>
     <p>When passing several values, the first font that can be resolved by the browser will be used. Therefore, it's a good idea to put a generic font keyword after the specific font you want to use.</p>`,
     examples: [
-      `<code>font-family: "Roboto", sans-serif;</code> will try to display Roboto font, or will fallback to the default sans-serif font of user's operating system`
+      `<code>font-family: "Roboto", sans-serif;</code> will try to display Roboto font, or will fallback to the default sans-serif font of user's operating system`,
     ],
     markup,
     doThis: `Set h1 font to "Reggae One", or serif by default`,
     expectedScreenshot: "img/reproduce/7-1.jpg",
-    check: [
-      ["font-family", `"Reggae One", serif`]
-    ]
+    check: [["font-family", `"Reggae One", serif`]],
   },
 
   {
     name: "Text Color",
     selector: "p.information",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { "h1": ["font-family: 'Reggae One', serif"]},
+    cssRulesHidden: { h1: ["font-family: 'Reggae One', serif"] },
     syntax: `color: <color>;"`,
     help: `<p>Text color is changed with the <code>color</code> property</p>
     <p>Colors in CSS can expressed with several notations:</p>
@@ -76,16 +74,14 @@ export const chapter7Levels: Chapter7Level[] = [
     markup,
     doThis: `Change information paragraph color to gray`,
     expectedScreenshot: "img/reproduce/7-2.jpg",
-    check: [
-      ["color", "gray", "grey"]
-    ]
+    check: [["color", "gray", "grey"]],
   },
 
   {
     name: "Italic / Oblique",
     selector: "p.information",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { "h1": ["font-family: 'Reggae One', serif"]},
+    cssRulesHidden: { h1: ["font-family: 'Reggae One', serif"] },
     cssRules: { "p.information": ["color: gray"] },
     syntax: `font-style: normal;
 font-style: italic;
@@ -95,18 +91,16 @@ font-style: oblique;`,
     markup,
     doThis: `Put the information paragraph in italic`,
     expectedScreenshot: "img/reproduce/7-3.jpg",
-    check: [
-      ["font-style", `italic`]
-    ]
+    check: [["font-style", `italic`]],
   },
 
   {
     name: "Font Weight",
     selector: ".price",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "p.information": ["font-style: italic", "color: gray"]
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      "p.information": ["font-style: italic", "color: gray"],
     },
     cssRules: {},
     syntax: `font-weight: normal;
@@ -118,19 +112,17 @@ font-weight: 100;`,
     markup,
     doThis: `Put the prices in bold`,
     expectedScreenshot: "img/reproduce/7-4.jpg",
-    check: [
-      ["font-weight", `bold`]
-    ]
+    check: [["font-weight", `bold`]],
   },
 
   {
     name: "Font Size",
     selector: "h2",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
       "p.information": ["font-style: italic", "color: gray"],
-      ".price": ["font-weight: bold"]
+      ".price": ["font-weight: bold"],
     },
     cssRules: {},
     syntax: `font-size: <dim>;`,
@@ -139,20 +131,18 @@ font-weight: 100;`,
     markup,
     doThis: `Set font size of h2 to 36px`,
     expectedScreenshot: "img/reproduce/7-5.jpg",
-    check: [
-      ["font-size", `36px`]
-    ]
+    check: [["font-size", `36px`]],
   },
 
   {
     name: "Text Casing",
     selector: "h2",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: ["font-size: 36px"],
       "p.information": ["font-style: italic", "color: gray"],
-      ".price": ["font-weight: bold"]
+      ".price": ["font-weight: bold"],
     },
     cssRules: {},
     syntax: `text-transform: lowercase;
@@ -163,20 +153,18 @@ text-transform: capitalize;`,
     markup,
     doThis: `Put the h2 in uppercase`,
     expectedScreenshot: "img/reproduce/7-6.jpg",
-    check: [
-      ["text-transform", `uppercase`]
-    ]
+    check: [["text-transform", `uppercase`]],
   },
 
   {
     name: "Font Variants",
     selector: ".dish-name",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: ["font-size: 36px", "text-transform: uppercase"],
       "p.information": ["font-style: italic", "color: gray"],
-      ".price": ["font-weight: bold"]
+      ".price": ["font-weight: bold"],
     },
     cssRules: {},
     syntax: `font-variant: normal;`,
@@ -186,21 +174,19 @@ text-transform: capitalize;`,
     markup,
     doThis: `Use the small-caps variant for dish names`,
     expectedScreenshot: "img/reproduce/7-7.jpg",
-    check: [
-      ["font-variant", `small-caps`]
-    ]
+    check: [["font-variant", `small-caps`]],
   },
 
   {
     name: "List styles",
     selector: "li",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: ["font-size: 36px", "text-transform: uppercase"],
       "p.information": ["font-style: italic", "color: gray"],
       ".dish-name": ["font-variant: small-caps"],
-      ".price": ["font-weight: bold"]
+      ".price": ["font-weight: bold"],
     },
     cssRules: {},
     syntax: `list-style: none;
@@ -212,24 +198,22 @@ list-style: url('star.svg');`,
     markup,
     doThis: `Use "upper-roman" style for the dishes list`,
     expectedScreenshot: "img/reproduce/7-8.jpg",
-    check: [
-      ["list-style", "upper-roman"]
-    ]
+    check: [["list-style", "upper-roman"]],
   },
 
   {
     name: "Line Height",
     selector: "li",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: ["font-size: 36px", "text-transform: uppercase"],
       "p.information": ["font-style: italic", "color: gray"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold"],
     },
     cssRules: {
-      "li": ["list-style: upper-roman"]
+      li: ["list-style: upper-roman"],
     },
     syntax: `line-height: <dim>;
 line-height: 1.5;
@@ -239,22 +223,20 @@ line-height: normal;`,
     markup,
     doThis: `Set line height between dishes to 200%`,
     expectedScreenshot: "img/reproduce/7-9.jpg",
-    check: [
-      ["line-height", "200%", "2"]
-    ]
+    check: [["line-height", "200%", "2"]],
   },
 
   {
     name: "Letter Spacing",
     selector: "h2",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: ["font-size: 36px", "text-transform: uppercase"],
       "p.information": ["font-style: italic", "color: gray"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold"],
-      "li": ["list-style: upper-roman", "line-height: 200%"]
+      li: ["list-style: upper-roman", "line-height: 200%"],
     },
     syntax: `letter-spacing: 150%;
 letter-spacing: -2px;
@@ -264,22 +246,24 @@ letter-spacing: normal;`,
     markup,
     doThis: `Set letter-spacing for h2 to 1em`,
     expectedScreenshot: "img/reproduce/7-10.jpg",
-    check: [
-      ["letter-spacing", "1em"]
-    ]
+    check: [["letter-spacing", "1em"]],
   },
 
   {
     name: "Word Spacing",
     selector: ".dish-info",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: [
+        "font-size: 36px",
+        "text-transform: uppercase",
+        "letter-spacing: 1em",
+      ],
       "p.information": ["font-style: italic", "color: gray"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold"],
-      "li": ["list-style: upper-roman", "line-height: 200%"]
+      li: ["list-style: upper-roman", "line-height: 200%"],
     },
     syntax: `word-spacing: <dim>;
 word-spacing: normal;`,
@@ -287,23 +271,25 @@ word-spacing: normal;`,
     markup,
     doThis: `Set word-spacing for dish details to 5 pixels`,
     expectedScreenshot: "img/reproduce/7-11.jpg",
-    check: [
-      ["word-spacing", "5px"]
-    ]
+    check: [["word-spacing", "5px"]],
   },
 
   {
     name: "Underlines and overlines",
     selector: "h2",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: [
+        "font-size: 36px",
+        "text-transform: uppercase",
+        "letter-spacing: 1em",
+      ],
       "p.information": ["font-style: italic", "color: gray"],
       ".dish-info": ["word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold"],
-      "li": ["list-style: upper-roman", "line-height: 200%"]
+      li: ["list-style: upper-roman", "line-height: 200%"],
     },
     syntax: `text-decoration: underline;
 text-decoration: line-through;
@@ -313,23 +299,26 @@ text-decoration: overline;`,
     markup,
     doThis: `Add an underline to SUSHIS`,
     expectedScreenshot: "img/reproduce/7-12.jpg",
-    check: [
-      ["text-decoration", "underline"]
-    ]
+    check: [["text-decoration", "underline"]],
   },
 
   {
     name: "Text Alignment",
     selector: "p.information",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em","text-decoration: underline"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: [
+        "font-size: 36px",
+        "text-transform: uppercase",
+        "letter-spacing: 1em",
+        "text-decoration: underline",
+      ],
       "p.information": ["font-style: italic", "color: gray"],
       ".dish-info": ["word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold"],
-      "li": ["list-style: upper-roman", "line-height: 200%"]
+      li: ["list-style: upper-roman", "line-height: 200%"],
     },
     cssRules: {},
     syntax: `text-align: left;
@@ -340,23 +329,30 @@ text-align: justify;`,
     markup,
     doThis: `Align text of information paragraph to the right`,
     expectedScreenshot: "img/reproduce/7-13.jpg",
-    check: [
-      ["text-align", "right"]
-    ]
+    check: [["text-align", "right"]],
   },
 
   {
     name: "Floating elements",
     selector: ".price",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
-      "p.information": ["font-style: italic", "color: gray", "text-align: right"],
-      ".dish-info": [ "word-spacing: 5px"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: [
+        "font-size: 36px",
+        "text-transform: uppercase",
+        "letter-spacing: 1em",
+        "text-decoration: underline",
+      ],
+      "p.information": [
+        "font-style: italic",
+        "color: gray",
+        "text-align: right",
+      ],
+      ".dish-info": ["word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold"],
-      "li": ["list-style: upper-roman", "line-height: 200%"]
+      li: ["list-style: upper-roman", "line-height: 200%"],
     },
     syntax: `float: <dir>;`,
     help: `<p>Use <code>float</code> property to make an element floating to a specific direction: <code>left</code> or <code>right</code></p>
@@ -364,23 +360,30 @@ text-align: justify;`,
     markup,
     doThis: `Align the prices with the right edge of the menu`,
     expectedScreenshot: "img/reproduce/7-14.jpg",
-    check: [
-      ["float", "right"]
-    ]
+    check: [["float", "right"]],
   },
 
   {
     name: "Text Indentation",
     selector: "li",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
-      "p.information": ["font-style: italic", "color: gray", "text-align: right"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: [
+        "font-size: 36px",
+        "text-transform: uppercase",
+        "letter-spacing: 1em",
+        "text-decoration: underline",
+      ],
+      "p.information": [
+        "font-style: italic",
+        "color: gray",
+        "text-align: right",
+      ],
       ".dish-info": ["word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold", "float: right"],
-      "li": ["list-style: upper-roman", "line-height: 200%"]
+      li: ["list-style: upper-roman", "line-height: 200%"],
     },
     syntax: `text-indent: <dim>;`,
     help: `<p>Use <code>text-indent</code> to add an indent to your blocks of text. This property takes either a length (for example, 10px, 2em) or a percentage of the containing block’s width.</p>`,
@@ -390,22 +393,36 @@ text-align: justify;`,
     inputLinesNumber: 2,
     check: [
       ["text-indent", "20px"],
-      ["margin-left", "50px"]
-    ]
+      ["margin-left", "50px"],
+    ],
   },
 
   {
     name: "Text Direction",
     selector: "h2",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
-      "p.information": ["font-style: italic", "color: gray", "text-align: right"],
-      ".dish-info": [ "word-spacing: 5px"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: [
+        "font-size: 36px",
+        "text-transform: uppercase",
+        "letter-spacing: 1em",
+        "text-decoration: underline",
+      ],
+      "p.information": [
+        "font-style: italic",
+        "color: gray",
+        "text-align: right",
+      ],
+      ".dish-info": ["word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold", "float: right"],
-      "li": ["list-style: upper-roman", "line-height: 200%", "text-indent: 20px", "margin-left: 50px"]      
+      li: [
+        "list-style: upper-roman",
+        "line-height: 200%",
+        "text-indent: 20px",
+        "margin-left: 50px",
+      ],
     },
     syntax: `writing-mode: <mode>;`,
     help: `<p>By default, in Western languages, text is read from left to right. Some languages like Arabic, Hebrew, or Persian are written right to left, and some like Japanese are written vertically.</p>
@@ -415,26 +432,40 @@ text-align: justify;`,
     expectedScreenshot: "img/reproduce/7-16.jpg",
     inputLinesNumber: 2,
     check: [
-      ["writing-mode", "vertical-lr"],      
-      ["float", "left"]
-    ]
+      ["writing-mode", "vertical-lr"],
+      ["float", "left"],
+    ],
   },
 
   {
     name: "Text Orientation",
     selector: "h2",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
-      "h1": ["font-family: 'Reggae One', serif"],
-      "h2": ["font-size: 36px", "text-transform: uppercase", "letter-spacing: 1em", "text-decoration: underline"],
-      "p.information": ["font-style: italic", "color: gray", "text-align: right"],
+    cssRulesHidden: {
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: [
+        "font-size: 36px",
+        "text-transform: uppercase",
+        "letter-spacing: 1em",
+        "text-decoration: underline",
+      ],
+      "p.information": [
+        "font-style: italic",
+        "color: gray",
+        "text-align: right",
+      ],
       ".dish-info": ["word-spacing: 5px"],
       ".dish-name": ["font-variant: small-caps"],
       ".price": ["font-weight: bold", "float: right"],
-      "li": ["list-style: upper-roman", "line-height: 200%", "text-indent: 20px", "margin-left: 50px"]
+      li: [
+        "list-style: upper-roman",
+        "line-height: 200%",
+        "text-indent: 20px",
+        "margin-left: 50px",
+      ],
     },
     cssRules: {
-      "h2": [ "float: left", "writing-mode: vertical-lr" ],
+      h2: ["float: left", "writing-mode: vertical-lr"],
     },
     syntax: `text-orientation: <mode>;`,
     help: `<p>After changing the direction, you can also change the orientation of individual characters for styling purposes, with the <code>text-orientation</code> property. Values accepted are <code>mixed</code> (default), <code>upright</code> (rotate 90° characters of vertical text) or <code>sideways</code> (rotate 90° all characters)</p>`,
@@ -443,11 +474,12 @@ text-align: justify;`,
     expectedScreenshot: "img/reproduce/7-17.jpg",
     inputLinesNumber: 2,
     check: [
-      ["text-orientation","upright"],
-      ["text-decoration", "overline"]
-    ]
-  }
+      ["text-orientation", "upright"],
 
+      ["text-decoration", "overline"],
+      // alternative:  ["text-underline-position", "right"]
+    ],
+  },
 ];
 
 export const chapter7: Chapter = {
@@ -457,5 +489,5 @@ export const chapter7: Chapter = {
   wrapperClass: "menu-wrapper",
   intro: `<p>Time to work on the restaurant menu !</p>
   <img src="img/menu-logo.png" height="120" style="display:block; height: 120px; margin: 0 auto" />
-  <p>Everyone knows that best restaurants all have nice fonts on their menu. Let's see how we can make beautiful text displays with CSS !</p>`
-}
+  <p>Everyone knows that best restaurants all have nice fonts on their menu. Let's see how we can make beautiful text displays with CSS !</p>`,
+};

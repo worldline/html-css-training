@@ -6,7 +6,7 @@ export interface Chapter8Level extends CssEditorLevel {
   syntax?: string;
   help?: string;
   helpTitle?: string;
-  examples?: string[];  
+  examples?: string[];
   expectedScreenshot: string;
 }
 
@@ -28,8 +28,7 @@ const markup1 = `
       <p class="dish-details">Served in a traditional wood boat platter, it is composed of 26 pieces of Maki with cooked rice and wasabi. Served with Miso Soup and Cabbage Salad at demand. Quantity recommended for 4 persons.</p>        
     </li>
   </ul>    
-</main>`
-
+</main>`;
 
 const markup2 = `
 <h1>Chef Nakamura's Restaurant</h1>
@@ -50,17 +49,16 @@ const markup2 = `
       <p class="dish-details">Served in a traditional wood boat platter, it is composed of 26 pieces of Maki with cooked rice and wasabi. Served with Miso Soup and Cabbage Salad at demand. Quantity recommended for 4 persons.</p>        
     </li>
   </ul>    
-</main>`
+</main>`;
 
 const baseStyles = {
-  "h1": ["font-family: 'Reggae One', serif"],
+  h1: ["font-family: 'Reggae One', serif"],
   "img#chef-picture": ["display: block", "width: 100%"],
   ".dish-name": ["font-variant: small-caps", "font-size: 140%"],
-  ".price": ["font-weight: bold", "margin-left: 1em"]
-}
+  ".price": ["font-weight: bold", "margin-left: 1em"],
+};
 
 export const chapter8Levels: Chapter8Level[] = [
-
   {
     name: "Background color",
     selector: "h2",
@@ -80,13 +78,14 @@ export const chapter8Levels: Chapter8Level[] = [
       `<code>background-color: #FF0000</code> for a red background`,
       `<code>background-color: #CCC</code> for a light gray background`,
       `<code>background-color: rgb(0,0,128,0.5)</code> for semi-opaque dark blue background`,
-      `<code>background-color: hsl(180deg, 100%, 100%)</code> for a cyan background`
+      `<code>background-color: hsl(180deg, 100%, 100%)</code> for a cyan background`,
     ],
     markup: markup1,
     doThis: `Add a pure red background with 25% opacity for h2`,
     expectedScreenshot: "img/reproduce/8-1.jpg",
     check: [
-      ["background-color", 
+      [
+        "background-color",
         `rgba(255,0,0,0.25)`,
         `rgba(255,0,0,.25)`,
         `rgba(255,0,0,25%)`,
@@ -96,48 +95,48 @@ export const chapter8Levels: Chapter8Level[] = [
         `#ff000040`,
         `hsl(0,100%,100%,25%)`,
         `hsla(0,100%,100%,25%)`,
-        `rgb(255 0 0 / 0.25)`
-      ]
-    ]
+        `rgb(255 0 0 / 0.25)`,
+      ],
+    ],
   },
 
   {
     name: "Background images",
     selector: "h1",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
+    cssRulesHidden: {
       ...baseStyles,
-      "h2": ["background-color: #ff000040"],      
+      h2: ["background-color: #ff000040"],
     },
     cssRules: {
-      "h1": ["color: white", "text-shadow: 0 0 0.5em black"]
+      h1: ["color: white", "text-shadow: 0 0 0.5em black"],
     },
     syntax: `background-image: <url>`,
     help: `<p>Use <code>background-image</code> to use an image file as the background of an element.</p>
     <p>To specify the image file, use the <code>url()</code> keyword.</p>
     `,
-    examples: [
-      `<code>background-image: url("path/to/image.jpg")</code>`
-    ],
+    examples: [`<code>background-image: url("path/to/image.jpg")</code>`],
     markup: markup1,
     doThis: `Use img/waves.svg as background image for h1`,
     expectedScreenshot: "img/reproduce/8-2.jpg",
-    check: [
-      ["background-image", "url('img/waves.svg')"]
-    ]
+    check: [["background-image", "url('img/waves.svg')"]],
   },
 
   {
     name: "Background properties",
     selector: "h1",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
+    cssRulesHidden: {
       ...baseStyles,
-      "h1": ["font-family: 'Reggae One', serif", ],
-      "h2": ["background-color: #ff000040"]
+      h1: ["font-family: 'Reggae One', serif"],
+      h2: ["background-color: #ff000040"],
     },
     cssRules: {
-      "h1": ["color: white", "text-shadow: 0 0 0.5em black", "background-image: url('img/waves.svg')"]
+      h1: [
+        "color: white",
+        "text-shadow: 0 0 0.5em black",
+        "background-image: url('img/waves.svg')",
+      ],
     },
     syntax: `background-size: <size>;
 background-repeat: <mode>;
@@ -150,28 +149,30 @@ background-position: <x> <y>
     `,
     examples: [
       `<code>background: url('image.jpg') cover no-repeat;</code> to stretch and fill the image to cover all the background`,
-      `<code>background: url('pattern.svg') center 100px repeat</code> to repeat a 100x100px pattern`
+      `<code>background: url('pattern.svg') center 100px repeat</code> to repeat a 100x100px pattern`,
     ],
     markup: markup1,
     doThis: `Set the background size to 400px`,
     expectedScreenshot: "img/reproduce/8-3.jpg",
-    check: [
-      ["background-size", "400px", "400px 400px"]
-    ]
+    check: [["background-size", "400px", "400px 400px"]],
   },
 
   {
     name: "Linear gradients",
     selector: "h2",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
+    cssRulesHidden: {
       ...baseStyles,
-      "h1": ["font-family: 'Reggae One', serif", "color: white", "text-shadow: 0 0 0.5em black", "background-image: url('img/waves.svg')", "background-size: 400px"],
-      "h2": ["background-color: #ff000040"]
+      h1: [
+        "font-family: 'Reggae One', serif",
+        "color: white",
+        "text-shadow: 0 0 0.5em black",
+        "background-image: url('img/waves.svg')",
+        "background-size: 400px",
+      ],
+      h2: ["background-color: #ff000040"],
     },
-    cssRules: {
-      
-    },
+    cssRules: {},
     syntax: `background: linear-gradient(
   <angle>, 
   <startColor>,
@@ -182,19 +183,20 @@ background-position: <x> <y>
     examples: [
       `<code>background: linear-gradient(45deg, blue, red)</code>`,
       `<code>background: linear-gradient(to right, #FFFFFF, transparent)</code>`,
-      `<code>background: linear-gradient(red 40%, yellow 30%, blue 65%);</code>`
+      `<code>background: linear-gradient(red 40%, yellow 30%, blue 65%);</code>`,
     ],
     markup: markup1,
     doThis: `Make a linear gradient for h2, from pink on top to transparent on bottom`,
     expectedScreenshot: "img/reproduce/8-4.jpg",
     check: [
-      ["background",
+      [
+        "background",
         "linear-gradient(to bottom, pink, transparent)",
         "linear-gradient(to top, transparent, pink)",
         "linear-gradient(180deg, pink, transparent)",
-        "linear-gradient(0deg, transparent, pink)"
-      ]
-    ]
+        "linear-gradient(0deg, transparent, pink)",
+      ],
+    ],
   },
 
   {
@@ -203,12 +205,16 @@ background-position: <x> <y>
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
     cssRulesHidden: {
       ...baseStyles,
-      "h1": ["font-family: 'Reggae One', serif", "color: white", "text-shadow: 0 0 0.5em black", "background-image: url('img/waves.svg')", "background-size: 400px"],
-      "h2": ["background: linear-gradient(to bottom, pink, transparent)"]
+      h1: [
+        "font-family: 'Reggae One', serif",
+        "color: white",
+        "text-shadow: 0 0 0.5em black",
+        "background-image: url('img/waves.svg')",
+        "background-size: 400px",
+      ],
+      h2: ["background: linear-gradient(to bottom, pink, transparent)"],
     },
-    cssRules: {
-      
-    },
+    cssRules: {},
     syntax: `background: radial-gradient(
   <shape> / <size> /<position>,
   ...<colors>
@@ -223,32 +229,39 @@ background-position: <x> <y>
         farthest-corner at 20% 20%,
         yellow 0%,
         cyan 100%
-      );</code> makes a non centered gradient with a yellow circle at top left`
+      );</code> makes a non centered gradient with a yellow circle at top left`,
     ],
     markup: markup1,
     doThis: `Make a radial gradient for main content, from #fff0e0 at center to #ffc0b0 at the edge`,
     expectedScreenshot: "img/reproduce/8-5.jpg",
     check: [
-      ["background", 
+      [
+        "background",
         "radial-gradient(#fff0e0, #ffc0b0)",
         "radial-gradient(circle, #fff0e0 0, #ffc0b0 100%)",
-        "radial-gradient(circle at center, #fff0e0 0, #ffc0b0 100%)"
-      ]
-    ]
+        "radial-gradient(circle at center, #fff0e0 0, #ffc0b0 100%)",
+      ],
+    ],
   },
 
   {
     name: "Object fit",
     selector: "img#chef-picture",
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
-    cssRulesHidden: { 
+    cssRulesHidden: {
       ...baseStyles,
-      "h1": ["font-family: 'Reggae One', serif", "color: white", "text-shadow: 0 0 0.5em black", "background-image: url('img/waves.svg')", "background-size: 400px"],
-      "h2": ["background: linear-gradient(to bottom, pink, transparent)"],
-      "main": ["background: radial-gradient(#fff0e0, #ffc0b0)"]
+      h1: [
+        "font-family: 'Reggae One', serif",
+        "color: white",
+        "text-shadow: 0 0 0.5em black",
+        "background-image: url('img/waves.svg')",
+        "background-size: 400px",
+      ],
+      h2: ["background: linear-gradient(to bottom, pink, transparent)"],
+      main: ["background: radial-gradient(#fff0e0, #ffc0b0)"],
     },
     cssRules: {
-      "img#chef-picture": ["display: block", "width: 100%", "height: 200px"]
+      "img#chef-picture": ["display: block", "width: 100%", "height: 200px"],
     },
     syntax: `object-fit: <mode>`,
     help: `<p>The <code>object-fit</code> property changes how a media element like <code>&lt;img&gt;</code> or <code>&lt;video&gt;</code> is resized according to its container dimensions.</p>
@@ -269,9 +282,7 @@ background-position: <x> <y>
     markup: markup2,
     doThis: `Make the image cover the entire zone without stretching`,
     expectedScreenshot: "img/reproduce/8-6.jpg",
-    check: [
-      ["object-fit", "cover"]
-    ]
+    check: [["object-fit", "cover"]],
   },
 
   {
@@ -280,12 +291,23 @@ background-position: <x> <y>
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
     cssRulesHidden: {
       ...baseStyles,
-      "h1": ["font-family: 'Reggae One', serif", "color: white", "text-shadow: 0 0 0.5em black", "background-image: url('img/waves.svg')", "background-size: 400px"],
-      "h2": ["background: linear-gradient(to bottom, pink, transparent)"],
-      "main": ["background: radial-gradient(#fff0e0, #ffc0b0)"]
+      h1: [
+        "font-family: 'Reggae One', serif",
+        "color: white",
+        "text-shadow: 0 0 0.5em black",
+        "background-image: url('img/waves.svg')",
+        "background-size: 400px",
+      ],
+      h2: ["background: linear-gradient(to bottom, pink, transparent)"],
+      main: ["background: radial-gradient(#fff0e0, #ffc0b0)"],
     },
     cssRules: {
-      "img#chef-picture": ["display: block", "width: 100%", "height: 200px", "object-fit: cover"]
+      "img#chef-picture": [
+        "display: block",
+        "width: 100%",
+        "height: 200px",
+        "object-fit: cover",
+      ],
     },
     syntax: `object-position: <x> <y>`,
     help: `<p>The <code>object-position</code> property changes how a media element center is aligned with the center of its container box.</p>
@@ -295,12 +317,20 @@ background-position: <x> <y>
     doThis: `Change the picture position so we can see both the boat and the chef face.`,
     expectedScreenshot: "img/reproduce/8-7.jpg",
     check: [
-      ["object-position", val => {
-        if(!val) return false
-        const y = Number((val.split(" ")[1] || "").replace("px",""));
-        return !isNaN(y) && y >= -80 && y <= -20
-      }]
-    ]
+      [
+        "object-position",
+        (val) => {
+          if (!val) return false;
+          if (val.includes("px")) {
+            const y = Number((val.split(" ")[1] || "").replace("px", ""));
+            return !isNaN(y) && y >= -80 && y <= -20;
+          } else if (val.includes("%")) {
+            const y = Number((val.split(" ")[1] || "").replace("%", ""));
+            return !isNaN(y) && y >= -80 && y <= -20;
+          } else return false;
+        },
+      ],
+    ],
   },
 
   {
@@ -309,14 +339,24 @@ background-position: <x> <y>
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
     cssRulesHidden: {
       ...baseStyles,
-      "h1": ["font-family: 'Reggae One', serif", "color: white", "text-shadow: 0 0 0.5em black", "background-image: url('img/waves.svg')", "background-size: 400px"],
-      "h2": ["background: linear-gradient(to bottom, pink, transparent)"],
-      "main": ["background: radial-gradient(#fff0e0, #ffc0b0)"],
-      "img#chef-picture": ["display: block", "width: 100%", "height: 200px", "object-fit: cover", "object-position: 0 -50px"]
+      h1: [
+        "font-family: 'Reggae One', serif",
+        "color: white",
+        "text-shadow: 0 0 0.5em black",
+        "background-image: url('img/waves.svg')",
+        "background-size: 400px",
+      ],
+      h2: ["background: linear-gradient(to bottom, pink, transparent)"],
+      main: ["background: radial-gradient(#fff0e0, #ffc0b0)"],
+      "img#chef-picture": [
+        "display: block",
+        "width: 100%",
+        "height: 200px",
+        "object-fit: cover",
+        "object-position: 0 -50px",
+      ],
     },
-    cssRules: {
-      
-    },
+    cssRules: {},
     syntax: `shape-outside: <url>
 shape-outside: <box>
 shape-outside: <shape>`,
@@ -325,7 +365,7 @@ shape-outside: <shape>`,
       `<code>shape-outside: content-box;</code> will make adjacent inline content ignore the element margins and borders`,
       `<code>shape-outside: circle(50%);</code> will make the shape a circle of 50% radius`,
       `<code>shape-outside: polygon(50% 0, 100% 100%, 0 100%);</code> will make the shape a equilateral triangle`,
-      `<code>shape-outside: url('shape.png');</code> will use the transparent parts of the image to define the shape`
+      `<code>shape-outside: url('shape.png');</code> will use the transparent parts of the image to define the shape`,
     ],
     markup: markup2,
     doThis: `Make the platter images float on the right and text follow their shape.`,
@@ -333,8 +373,8 @@ shape-outside: <shape>`,
     inputLinesNumber: 2,
     check: [
       ["float", "right"],
-      ["shape-outside", "url('img/sushis/1.png')", "url('img/sushis/2.png')"]
-    ]
+      ["shape-outside", "url('img/sushis/1.png')", "url('img/sushis/2.png')"],
+    ],
   },
 
   {
@@ -343,10 +383,22 @@ shape-outside: <shape>`,
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
     cssRulesHidden: {
       ...baseStyles,
-      "h1": ["font-family: 'Reggae One', serif", "color: white", "text-shadow: 0 0 0.5em black", "background-image: url('img/waves.svg')", "background-size: 400px"],
-      "h2": ["background: linear-gradient(to bottom, pink, transparent)"],
-      "main": ["background: radial-gradient(#fff0e0, #ffc0b0)"],
-      "img#chef-picture": ["display: block", "width: 100%", "height: 200px", "object-fit: cover", "object-position: 0 -50px"]
+      h1: [
+        "font-family: 'Reggae One', serif",
+        "color: white",
+        "text-shadow: 0 0 0.5em black",
+        "background-image: url('img/waves.svg')",
+        "background-size: 400px",
+      ],
+      h2: ["background: linear-gradient(to bottom, pink, transparent)"],
+      main: ["background: radial-gradient(#fff0e0, #ffc0b0)"],
+      "img#chef-picture": [
+        "display: block",
+        "width: 100%",
+        "height: 200px",
+        "object-fit: cover",
+        "object-position: 0 -50px",
+      ],
     },
     cssRules: {
       "li img": ["float: right"],
@@ -360,9 +412,7 @@ shape-outside: <shape>`,
     markup: markup2,
     doThis: `Add a 10px margin to platters images shapes.`,
     expectedScreenshot: "img/reproduce/8-9.jpg",
-    check: [
-      ["shape-margin", "10px"]
-    ]
+    check: [["shape-margin", "10px"]],
   },
 
   {
@@ -371,17 +421,27 @@ shape-outside: <shape>`,
     cssImportsHidden: ["https://fonts.googleapis.com/css?family=Reggae+One"],
     cssRulesHidden: {
       ...baseStyles,
-      "h1": ["font-family: 'Reggae One', serif", "color: white", "text-shadow: 0 0 0.5em black", "background-image: url('img/waves.svg')", "background-size: 400px"],
-      "h2": ["background: linear-gradient(to bottom, pink, transparent)"],
-      "main": ["background: radial-gradient(#fff0e0, #ffc0b0)"],
-      "img#chef-picture": ["display: block", "width: 100%", "height: 200px", "object-fit: cover", "object-position: 0 -50px"],
+      h1: [
+        "font-family: 'Reggae One', serif",
+        "color: white",
+        "text-shadow: 0 0 0.5em black",
+        "background-image: url('img/waves.svg')",
+        "background-size: 400px",
+      ],
+      h2: ["background: linear-gradient(to bottom, pink, transparent)"],
+      main: ["background: radial-gradient(#fff0e0, #ffc0b0)"],
+      "img#chef-picture": [
+        "display: block",
+        "width: 100%",
+        "height: 200px",
+        "object-fit: cover",
+        "object-position: 0 -50px",
+      ],
       "li img": ["float: right", "shape-margin: 10px"],
       "li:nth-child(1) img": ["shape-outside: url('img/sushis/1.png')"],
       "li:nth-child(2) img": ["shape-outside: url('img/sushis/2.png')"],
     },
-    cssRules: {
-      
-    },
+    cssRules: {},
     syntax: `filter: ...<filters>
 filter: blur(<dim>)
 filter: brightness(<val>)
@@ -397,34 +457,40 @@ filter: sepia(<val>)`,
     <p>CSS has built-in functions to apply filters to images, for example to change its brightness, contrast, saturation, hue etc.</p>
     <p>You can add as many filters as you want in the <code>filter</code> property, separated by whitespaces.</p>`,
     examples: [
-`<code>filter: blur(5px);</code>`,
-`<code>filter: brightness(0.4);</code>`,
-`<code>filter: contrast(200%);</code>`,
-`<code>filter: drop-shadow(16px 16px 20px blue);</code>`,
-`<code>filter: grayscale(50%);</code>`,
-`<code>filter: hue-rotate(90deg);</code>`,
-`<code>filter: invert(75%);</code>`,
-`<code>filter: opacity(25%);</code>`,
-`<code>filter: saturate(30%);</code>`,
-`<code>filter: sepia(60%);</code>`,
+      `<code>filter: blur(5px);</code>`,
+      `<code>filter: brightness(0.4);</code>`,
+      `<code>filter: contrast(200%);</code>`,
+      `<code>filter: drop-shadow(16px 16px 20px blue);</code>`,
+      `<code>filter: grayscale(50%);</code>`,
+      `<code>filter: hue-rotate(90deg);</code>`,
+      `<code>filter: invert(75%);</code>`,
+      `<code>filter: opacity(25%);</code>`,
+      `<code>filter: saturate(30%);</code>`,
+      `<code>filter: sepia(60%);</code>`,
     ],
     markup: markup2,
     doThis: `Change the brightness and saturation of the picture to 120%`,
     expectedScreenshot: "img/reproduce/8-10.jpg",
     check: [
-      ["filter", "brightness(120%) saturate(120%)", "brightness(1.2) saturate(1.2)", "saturate(120%) brightness(120%)", "saturate(1.2) brightness(1.2)"]
-    ]
+      [
+        "filter",
+        "brightness(120%) saturate(120%)",
+        "brightness(1.2) saturate(1.2)",
+        "saturate(120%) brightness(120%)",
+        "saturate(1.2) brightness(1.2)",
+      ],
+    ],
   },
 
   /*
   picture filters
   */
-
 ];
 
 export const chapter8: Chapter = {
   name: "Background & Images",
-  description: "Illustrating text with pictures, vector graphics or colored backgrounds",
+  description:
+    "Illustrating text with pictures, vector graphics or colored backgrounds",
   levels: chapter8Levels,
   wrapperClass: "menu-wrapper-part2",
   intro: `<p>The menu looks good, but it will be even better with colored backgrounds and images.</p>
@@ -432,5 +498,5 @@ export const chapter8: Chapter = {
   <img src="img/sushis/1.png" width="300" />
   <img src="img/sushis/2.png" width="300" />
   <img src="img/sushis/3.png" width="300" />
-  <img src="img/sushis/4.png" width="300" />`
-}
+  <img src="img/sushis/4.png" width="300" />`,
+};
