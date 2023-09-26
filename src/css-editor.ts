@@ -6,38 +6,43 @@ import { completeLevelAndGoNext } from "./game";
 import { state, currentChapter } from "./state";
 import { cleanupEffects, shake } from "./utils";
 
-export function applyStyles(userRules?: string[]){
+export function applyStyles(userRules?: string[]) {
   const level = state.level as CssEditorLevel;
-  if(!level) return;
-  const wrapperClass = level.wrapperClass || currentChapter.value.wrapperClass
-  const rootSelector = wrapperClass ? `.${wrapperClass}` : ""
-  const selectors = new Set([level.selector, ...Object.keys(level.cssRules ?? {}), ...Object.keys(level.cssRulesHidden ?? {})])
-  
+  if (!level) return;
+  const wrapperClass = level.wrapperClass || currentChapter.value.wrapperClass;
+  const rootSelector = wrapperClass ? `.${wrapperClass}` : "";
+  const selectors = new Set([
+    level.selector,
+    ...Object.keys(level.cssRules ?? {}),
+    ...Object.keys(level.cssRulesHidden ?? {}),
+  ]);
+
   let styles = "";
-  for(let selector of selectors){
+  for (let selector of selectors) {
     styles += `
 ${rootSelector} ${selector} {
-${[      
-    ...(level.cssRules ? level.cssRules[selector] ?? [] : []),
-    ...(level.cssRulesHidden ? level.cssRulesHidden[selector] ?? [] : [])
-  ].map(rule => `  ${rule};`).join("\n")}
-}`
+${[
+  ...(level.cssRules ? level.cssRules[selector] ?? [] : []),
+  ...(level.cssRulesHidden ? level.cssRulesHidden[selector] ?? [] : []),
+]
+  .map((rule) => `  ${rule};`)
+  .join("\n")}
+}`;
   }
 
-  if(userRules && userRules.length > 0){
+  if (userRules && userRules.length > 0) {
     styles += `
 ${rootSelector} ${level.selector} {
   ${userRules.join("\n")}
-}`
+}`;
   }
 
-  const stylesheet = document.getElementById("css-editor-stylesheet")!
-  stylesheet.innerHTML = styles
- 
+  const stylesheet = document.getElementById("css-editor-stylesheet")!;
+  stylesheet.innerHTML = styles;
 }
 
 export function applyUserRules(rules: string[]) {
-  const level = state.level as (Chapter4Level | Chapter5Level | Chapter7Level);
+  const level = state.level as Chapter4Level | Chapter5Level | Chapter7Level;
 
   cleanupEffects();
 
@@ -46,7 +51,7 @@ export function applyUserRules(rules: string[]) {
     gameWrapper.querySelectorAll(level.selector)
   );
 
-  applyStyles(rules)
+  applyStyles(rules);
 
   let win = checkStyleProperties(rules, level);
   if (win) {
@@ -67,34 +72,32 @@ export function applyUserRules(rules: string[]) {
   }
 }
 
-function normalizePropValue(val: any){
-  if(typeof val !== "string") return val
+function normalizePropValue(val: any) {
+  if (typeof val !== "string") return val;
   return val
-    .replaceAll(/,\s+/g, ",")
+    .replaceAll(/\s+,\s+/g, ",")
     .replaceAll(/\s*\/\s*/g, "/")
     .replaceAll(/'/g, '"')
     .replace(/;$/, "")
     .toLowerCase()
-    .trim()    
+    .trim();
 }
 
-function checkStyleProperties(
-  rules: string[],
-  level: CssEditorLevel
-) {
+function checkStyleProperties(rules: string[], level: CssEditorLevel) {
   if (!level.check) return true;
-  const props = Object.fromEntries(rules
-    .map(rule => [rule.split(":")[0], rule.split(":")[1]])
-    .map(([prop, value]) => [prop.trim(), normalizePropValue(value)])
-  )
+  const props = Object.fromEntries(
+    rules
+      .map((rule) => [rule.split(":")[0], rule.split(":")[1]])
+      .map(([prop, value]) => [prop.trim(), normalizePropValue(value)])
+  );
   return level.check.every(([prop, ...possibleValues]) => {
-    const value = props[prop]
-    return possibleValues.some(expected => {
-      expected = normalizePropValue(expected)
+    const value = props[prop];
+    return possibleValues.some((expected) => {
+      expected = normalizePropValue(expected);
       if (typeof value === "string" && value === expected) return true;
       else if (typeof expected === "function" && expected(value)) return true;
       console.log(`Expected ${prop} to be ${expected}, got ${value}`);
       return false;
-    })
-  })
+    });
+  });
 }
