@@ -132,13 +132,13 @@ label[for="menu-toggle"] {
 @media screen and (max-width: 1024px) {
   label[for="menu-toggle"],
   #menu-toggle {
+    cursor: pointer;
     display: inline-block;
     vertical-align: middle;
   }
 
   #menu-toggle {
     appearance: none;
-    cursor: pointer;
     width: 24px;
     height: 24px;
     /* make it look like a hamburger */
