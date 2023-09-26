@@ -131,7 +131,7 @@ export const chapter6Levels: Chapter6Level[] = [
     examples: [
       `<code>grid-template-rows: 2fr 1fr 1fr</code> defines a 3-rows layout with the first row being twice as wide as the other rows`,
     ],
-    check: [["grid-template-rows", "80px 2fr 1fr"]],
+    check: [["grid-template-rows", "80px 2fr 1fr", "80px 4fr 2fr"]],
   },
 
   {
@@ -165,7 +165,7 @@ grid-template-columns`,
     inputLinesNumber: 2,
     check: [
       ["grid-template-rows", "1fr 100px", "auto 100px"],
-      ["grid-template-columns", "2fr 1fr"],
+      ["grid-template-columns", "2fr 1fr", "4fr 2fr"],
     ],
   },
 
