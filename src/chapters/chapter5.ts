@@ -711,18 +711,18 @@ align-content: <value>`,
     markup: `
     <bento style="width: 700px; height: 400px">
       <sushi class="avocado"></sushi>
-      <sushi class="salmon"></sushi>
-      <sushi class="salmon"></sushi>
       <sushi class="avocado"></sushi>
-      <sushi class="egg"></sushi>     
+      <sushi class="salmon"></sushi>
+      <sushi class="salmon"></sushi>
+      <sushi class="egg"></sushi>
       <sushi class="egg"></sushi>
     </bento>
     `,
     hintMarkup: `<div class="hint-wrapper" style="flex-wrap: wrap; flex-direction: column; align-content: space-evenly; justify-content: center;">
     <plate class="avocado"></plate>
-    <plate class="salmon"></plate>
-    <plate class="salmon"></plate>
     <plate class="avocado"></plate>
+    <plate class="salmon"></plate>
+    <plate class="salmon"></plate>
     <plate class="egg"></plate>
     <plate class="egg"></plate>
     </div>`,
