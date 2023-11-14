@@ -570,8 +570,8 @@ flex-direction: <dir>;`,
       <sushi class="salmon"></sushi>
       <sushi class="salmon"></sushi>
       <sushi class="salmon"></sushi>
-      <sushi class="egg"></sushi>
-      <sushi class="egg"></sushi>
+      <sushi class="salmon"></sushi>
+      <sushi class="salmon"></sushi>
       <sushi class="egg"></sushi>
       <sushi class="egg"></sushi>
     </bento>
@@ -585,8 +585,8 @@ flex-direction: <dir>;`,
       <plate class="salmon"></plate>
       <plate class="salmon"></plate>
       <plate class="salmon"></plate>
-      <plate class="egg"></plate>
-      <plate class="egg"></plate>
+      <plate class="salmon"></plate>
+      <plate class="salmon"></plate>
       <plate class="egg"></plate>
       <plate class="egg"></plate>
     </div>`,
