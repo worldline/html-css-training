@@ -16,8 +16,8 @@
 <script lang="ts">
 export default {
   name: "Table",
-  props: ["content", "hintContent"]
-}
+  props: ["content", "hintContent"],
+};
 </script>
 
 <style scoped>
@@ -38,34 +38,33 @@ export default {
   padding: 15px;
   display: inline-block;
   z-index: 6;
-  position:relative;
+  position: relative;
 }
 
 .hint-content {
   position: absolute;
   top: 15px;
-  left: 15px;
-  right: 15px;
+  left: 14px;
+  right: 14px;
   bottom: 15px;
 }
 
 .table-surface {
-  box-shadow: 0 40px 10px rgba(0,0,0,.2);
+  box-shadow: 0 40px 10px rgba(0, 0, 0, 0.2);
   background: #dd992d;
-  background: -webkit-linear-gradient(#dd992d,#cd8c26);
-  background: linear-gradient(#dd992d,#cd8c26);
+  background: -webkit-linear-gradient(#dd992d, #cd8c26);
+  background: linear-gradient(#dd992d, #cd8c26);
   position: absolute;
   height: 100%;
   bottom: 0;
   width: 100%;
 }
 
-.table .hint-content ::v-deep(plate, sushi){
+.table .hint-content ::v-deep(plate, sushi) {
   z-index: 1;
 }
 
-
-.table-edge  {
+.table-edge {
   width: 100%;
   margin: 0 auto 10px auto;
   background: #ac741c;
@@ -92,5 +91,4 @@ export default {
 .table-leg:last-child {
   right: 20px;
 }
-
 </style>
