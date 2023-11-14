@@ -1054,17 +1054,17 @@ flex-wrap: <value>
 align-content: <value>`,help:"<p>Combine all what you learned to place the items correctly !</p>",markup:`
     <bento style="width: 700px; height: 400px">
       <sushi class="avocado"></sushi>
-      <sushi class="salmon"></sushi>
-      <sushi class="salmon"></sushi>
       <sushi class="avocado"></sushi>
-      <sushi class="egg"></sushi>     
+      <sushi class="salmon"></sushi>
+      <sushi class="salmon"></sushi>
+      <sushi class="egg"></sushi>
       <sushi class="egg"></sushi>
     </bento>
     `,hintMarkup:`<div class="hint-wrapper" style="flex-wrap: wrap; flex-direction: column; align-content: space-evenly; justify-content: center;">
     <plate class="avocado"></plate>
-    <plate class="salmon"></plate>
-    <plate class="salmon"></plate>
     <plate class="avocado"></plate>
+    <plate class="salmon"></plate>
+    <plate class="salmon"></plate>
     <plate class="egg"></plate>
     <plate class="egg"></plate>
     </div>`,inputLinesNumber:4,check:[["flex-wrap","wrap"],["flex-direction","column"],["justify-content","center"],["align-content","space-evenly"]]}],wp={name:"Flex Layout",description:"One-directional content flow",levels:vp,credits:'Credits: <a href="https://github.com/thomaspark">Thomas Park</a> for its inspiring <a target="_blank" href="https://flexboxfroggy.com/">Flexbox Froggy</a> game.',intro:`<p>Let's learn the different ways to position elements in CSS !</p>
