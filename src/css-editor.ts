@@ -75,7 +75,7 @@ export function applyUserRules(rules: string[]) {
 function normalizePropValue(val: any) {
   if (typeof val !== "string") return val;
   return val
-    .replaceAll(/\s+,\s+/g, ",")
+    .replaceAll(/\s*,\s*/g, ",")
     .replaceAll(/\s*\/\s*/g, "/")
     .replaceAll(/'/g, '"')
     .replace(/;$/, "")
