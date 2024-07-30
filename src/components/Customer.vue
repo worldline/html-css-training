@@ -3,9 +3,11 @@
     <div class="customer-speech-bubble">{{ request }}</div>
     <div class="customer-body">
       <div class="code">
-        <pre>{{ selector }} {
+        <pre
+          >{{ selector }} {
   meal: {{ meal }};
-}</pre>
+}</pre
+        >
       </div>
     </div>
   </div>
@@ -15,12 +17,12 @@
 defineProps({
   request: String,
   selector: String,
-  meal: String
-})
+  meal: String,
+});
 </script>
 
 <style scoped>
-.customer-wrapper{
+.customer-wrapper {
   position: relative;
   display: inline-block;
   margin: 100px 10px 0 10px;
@@ -72,23 +74,23 @@ defineProps({
 .customer-body::before {
   content: "";
   position: absolute;
-  left: calc(50% - 55px);
-  top: 25px;
+  left: calc(50% - 50px);
+  top: 20px;
   border-radius: 50%;
   background: linear-gradient(135deg, #fff, #ccc);
-  width: 100px;
+  width: 90px;
   height: 100px;
   border: 4px solid black;
   z-index: 2;
 }
 
 .code {
-  font-family: menlo,monospace;
+  font-family: menlo, monospace;
   font-size: 14px;
   text-align: left;
   line-height: 150%;
   padding: 0;
-  margin: .5em;
-  color: #666;
+  margin: 0.5em;
+  color: #333;
 }
 </style>

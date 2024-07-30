@@ -2,18 +2,20 @@
   <div class="editor" @click="inputElement?.focus()">
     <EditorPane :title="cssEditorTitle" fileName="style.css" lang="css">
       <slot name="code-before" />
-      <textarea id="editor-input" 
-                class="input-strobe"
-                ref="inputElement"
-                @keydown.enter="enterHit"
-                @keyup.prevent="onInputKeyup"
-                :placeholder="placeholder"
-                v-model="input" />
-        <span class="plus">+</span>
-        <div class="enter-button" @click="enterHit" ref="enterButton">enter</div>
-        <slot name="code-after" />
+      <textarea
+        id="editor-input"
+        class="input-strobe"
+        ref="inputElement"
+        @keydown.enter="enterHit"
+        @keyup.prevent="onInputKeyup"
+        :placeholder="placeholder"
+        v-model="input"
+      />
+      <span class="plus">+</span>
+      <div class="enter-button" @click="enterHit" ref="enterButton">enter</div>
+      <slot name="code-after" />
     </EditorPane>
-    <EditorPane title="HTML Viewer" fileName="table.html" lang="html"> 
+    <EditorPane title="HTML Viewer" fileName="table.html" lang="html">
       <HTMLMarkup :markup="level.markup" />
     </EditorPane>
   </div>
@@ -23,54 +25,65 @@
 import autosize from "autosize";
 import EditorPane from "./EditorPane.vue";
 import HTMLMarkup from "./HTMLMarkup.vue";
-import {computed, ref, Ref, watch, nextTick} from "vue"
+import { computed, ref, Ref, watch, nextTick } from "vue";
 import { chapter2 } from "../chapters/chapter2";
 import { currentChapter, state } from "../state";
 import { saveInput } from "../progress";
 import { applyStyles } from "../css-editor";
 
 defineProps({
-  placeholder: String
+  placeholder: String,
 });
 
-const emit = defineEmits([ "input" ])
+const emit = defineEmits(["input"]);
 
-const enterButton: Ref<HTMLElement | null> = ref(null)
-const inputElement: Ref<HTMLTextAreaElement | null> = ref(null)
-const input: Ref<string> = ref("")
+const enterButton: Ref<HTMLElement | null> = ref(null);
+const inputElement: Ref<HTMLTextAreaElement | null> = ref(null);
+const input: Ref<string> = ref("");
 
-const level = computed(() => state.level)
-watch(level, () => {
-  input.value = state.progress.inputs[state.progress.currentChapter]?.[state.progress.currentLevel] ?? ""
-  nextTick(() => inputElement.value?.focus());
-  applyStyles(input.value.split('\n'));
-}, { immediate: true })
+const level = computed(() => state.level);
+watch(
+  level,
+  () => {
+    input.value =
+      state.progress.inputs[state.progress.currentChapter]?.[
+        state.progress.currentLevel
+      ] ?? "";
+    nextTick(() => inputElement.value?.focus());
+    applyStyles(input.value.split("\n"));
+  },
+  { immediate: true }
+);
 
 const cssEditorTitle = computed(() => {
-  if(level.value.inputLinesNumber && level.value.inputLinesNumber > 1) return `CSS Editor (${level.value.inputLinesNumber} properties to set)`
-  return "CSS Editor"
-})
+  if (level.value.inputLinesNumber && level.value.inputLinesNumber > 1)
+    return `CSS Editor (${level.value.inputLinesNumber} properties to set)`;
+  return "CSS Editor";
+});
 
 watch(inputElement, () => autosize(inputElement.value));
 
 //Animate the enter button
-function enterHit(event: Event){  
-  const lines = input.value.split('\n')
-    .map(l => l.trim())
-    .map(l => currentChapter.value === chapter2 || l.endsWith(';') ? l : l+';')
-  if(lines.length >= (level.value.inputLinesNumber ?? 1)){
-    event.preventDefault()
+function enterHit(event: Event) {
+  const lines = input.value
+    .split("\n")
+    .map((l) => l.trim())
+    .map((l) =>
+      currentChapter.value === chapter2 || l.endsWith(";") ? l : l + ";"
+    );
+  if (lines.length >= (level.value.inputLinesNumber ?? 1)) {
+    event.preventDefault();
     const button = enterButton.value as HTMLElement;
-    button.classList.remove("enterhit")
-    setTimeout(() => button.classList.add("enterhit"), 0)    
+    button.classList.remove("enterhit");
+    setTimeout(() => button.classList.add("enterhit"), 0);
   }
-  if(input.value) input.value = lines.join('\n')
-  emit("input", lines)
+  if (input.value) input.value = lines.join("\n");
+  emit("input", lines);
   saveInput(input.value);
 }
 
-function onInputKeyup(){
-  inputElement.value.classList.toggle("input-strobe", input.value.length > 0)
+function onInputKeyup() {
+  inputElement.value.classList.toggle("input-strobe", input.value.length > 0);
 }
 </script>
 
@@ -80,11 +93,11 @@ function onInputKeyup(){
   text-align: left;
   width: 90%;
   margin: 0 auto;
-  border: solid 10px rgba(0,0,0,.35);
+  border: solid 10px rgba(0, 0, 0, 0.35);
   border-radius: 4px;
   overflow: hidden;
   display: flex;
-  font-family: menlo,monospace;
+  font-family: menlo, monospace;
   font-size: 14px;
   line-height: 150%;
 }
@@ -106,7 +119,7 @@ function onInputKeyup(){
 }
 
 .enterhit {
-  animation: enterhit .1s 1;
+  animation: enterhit 0.1s 1;
 }
 
 @keyframes enterhit {
@@ -121,7 +134,7 @@ function onInputKeyup(){
   font-size: 14px;
   color: #333;
   border: none;
-  width: calc(100% - 64px);
+  width: calc(100% - 70px);
   height: 1.5em;
   background: none;
   margin-left: 1em;
@@ -132,12 +145,14 @@ function onInputKeyup(){
 }
 
 #editor-input.input-strobe {
-  background: rgba(62,203,255,.3);
-  animation: input .5s infinite;  
+  background: rgba(62, 203, 255, 0.3);
+  animation: input 0.5s infinite;
 }
 
 @keyframes input {
-  50% { background:none ; }
+  50% {
+    background: none;
+  }
 }
 
 input:focus {

@@ -1,9 +1,8 @@
 import { Level } from "./level";
 
 import { Chapter } from "./chapter";
-import {nextTick} from "vue";
+import { nextTick } from "vue";
 import { addBoardElementsTooltips } from "../tooltip";
-
 
 export interface Chapter2Level extends Level {
   doThis: string;
@@ -578,15 +577,15 @@ export const chapter2Levels: Chapter2Level[] = [
     `,
   },
   /* :has is currently experimental, waiting for broader browser support */
-  /*{
+  {
     name: "Has Pseudo-class",
-    helpTitle: "Select all elements that have a child matching the :has selector",
+    helpTitle: "Select all elements that have a child matching a selector",
     doThis: "Select the plates that contain pickles",
     selector: "plate:has(pickle)",
     syntax: ":has(X)",
-    help: 'You can use this to style some elements based on their content.',
+    help: "You can use this to style some elements based on their content. This feature is quite new, please consult <a href='https://caniuse.com/?search=%3Ahas' target='_blank'>browser compatiblity</a>.",
     examples: [
-      '<strong>p:has(img)</strong> selects every <tag>p</tag> that contains an image.',
+      "<strong>p:has(img)</strong> selects every <tag>p</tag> that contains an image.",
       "<strong>form:has(input:invalid)</strong> selects forms that have some inputs in invalid state.",
     ],
     markup: `
@@ -604,7 +603,7 @@ export const chapter2Levels: Chapter2Level[] = [
       <apple></apple>
     </plate>
     `,
-  },*/
+  },
   {
     name: "Attribute Selector",
     helpTitle: "Select all elements that have a specific attribute",
@@ -736,7 +735,7 @@ export const chapter2: Chapter = {
   intro: `
     <p>To apply CSS to an element you need to select this element with a <b>selector</b>.</p>
     <p>CSS provides you with a number of different ways to do this, and you can explore them in this chapter.</p>`,
-  onLevelStart(){
-    nextTick(() => addBoardElementsTooltips())
-  }
-}
+  onLevelStart() {
+    nextTick(() => addBoardElementsTooltips());
+  },
+};
