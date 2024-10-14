@@ -51,7 +51,7 @@ export const chapter4Levels: Chapter4Level[] = [
     <ul>
     <li><b>The box will break onto a new line.</b></li>
     <li>The box will, by default, extend in the inline direction to fill the space available in its container (<b>width: 100%</b>).</li>
-    <li>...</li>
+    <li>The box will follow the <b>box model</b>: <img src="img/boxmodel.png" alt="Box Model" /></li>
     </ul>
     </p>`,
     markup: `
