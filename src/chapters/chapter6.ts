@@ -536,7 +536,7 @@ grid-column: <start>/<end>`,
          / <col-start>
          / <row-end>
          / <col-end>`,
-    help: `<p><code>grid-area</code> is even shorter because it let you specify the start and end positions for both row and column in a single instruction.</p>
+    help: `<p><code>grid-area</code> is even shorter because it lets you specify the start and end positions for both row and column in a single instruction.</p>
     <p>The values are passed in this order: y1/x1/y2/x2 ; separated with character <code>/</code></p>`,
     markup: `
     <bento style="width: 700px; height: 360px">      
