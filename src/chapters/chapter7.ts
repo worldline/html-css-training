@@ -64,7 +64,7 @@ export const chapter7Levels: Chapter7Level[] = [
     cssRulesHidden: { h1: ["font-family: 'Reggae One', serif"] },
     syntax: `color: <color>;"`,
     help: `<p>Text color is changed with the <code>color</code> property</p>
-    <p>Colors in CSS can expressed with several notations:</p>
+    <p>Colors in CSS can be expressed with several notations:</p>
     <dl>
     <dt>A color name</dt><dd>red, blue, transparent, or any of the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/named-color" target="_blank">145</a> official color names in CSS.</dd>
     <dt>Hexadecimal</dt><dd>#RGBA, with R, G, B, A be respectively red, green, blue and alpha values between 00 and FF, examples: #FF0000 for red, #CCC for gray</dd>
