@@ -605,7 +605,7 @@ flex-direction: <dir>;`,
       bento: ["display: flex"],
     },
     syntax: `align-content: <value>`,
-    help: `<p>When items are wrapped on multiple lines, the alignment of the lignes relatively to the flex container can be controlled with the <code>align-content</code> property. It takes the following values:</p>
+    help: `<p>When items are wrapped on multiple lines, the alignment of the lines relatively to the flex container can be controlled with the <code>align-content</code> property. It takes the following values:</p>
     <ul>
     <li><code>flex-start</code> : lines are stacked at the start of the cross axis.</li>
     <li><code>flex-end</code>: lines are stacked at the end of the cross axis.</li>
