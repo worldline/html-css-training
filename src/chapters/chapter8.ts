@@ -360,7 +360,7 @@ background-position: <x> <y>
     syntax: `shape-outside: <url>
 shape-outside: <box>
 shape-outside: <shape>`,
-    help: `<p>The <code>shape-outside</code> property let you change the shape around which the adjacent inline content should wrap. By default, the shape is the rectangular margin box, but you may prefer a circle, a custom polygon or a zone defined by the transparent parts of a PNG file.</p>`,
+    help: `<p>The <code>shape-outside</code> property lets you change the shape around which the adjacent inline content should wrap. By default, the shape is the rectangular margin box, but you may prefer a circle, a custom polygon or a zone defined by the transparent parts of a PNG file.</p>`,
     examples: [
       `<code>shape-outside: content-box;</code> will make adjacent inline content ignore the element margins and borders`,
       `<code>shape-outside: circle(50%);</code> will make the shape a circle of 50% radius`,
